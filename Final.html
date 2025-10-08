@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadoras Financieras</title>
+<style>
+:root {
+  --base:#ccc; /* blanco medio apagado */
+  --gris:#111;
+  --texto:#ddd;
+  --borde:#ccc40; /* brillo sutil */
+}
+
+body {
+  background:#000;
+  color:var(--texto);
+  font-family:'Courier New', monospace;
+  margin:0;
+  padding:20px;
+}
+
+h1 {
+  text-align:center;
+  color:var(--base);
+  font-size:2rem;
+  margin-bottom:20px;
+  text-shadow:0 0 8px rgba(204,204,204,0.6);
+}
+
+.comparador {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  background:#111;
+  border:1px solid #222;
+  padding:15px;
+  margin-bottom:20px;
+  box-shadow:0 0 12px #ccc40 inset;
+}
+
+label {
+  display:block;
+  margin-bottom:5px;
+  color:#aaa;
+  font-size:0.9rem;
+}
+
+input[type=text] {
+  background:#000;
+  color:var(--base);
+  border:1px solid #333;
+  padding:8px;
+  width:100%;
+  font-family:'Courier New', monospace;
+  font-size:1rem;
+  text-align:right;
+  box-sizing:border-box;
+  box-shadow:0 0 4px #ccc40;
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus {
+  border-color:var(--base);
+  outline:none;
+  box-shadow:0 0 8px #ccc40;
+}
+
+.grid-2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.calc {
+  background:#111;
+  border:1px solid #333;
+  padding:15px;
+  box-sizing:border-box;
+  transition: all 0.3s ease;
+  box-shadow:0 0 8px #000 inset;
+}
+
+.calc.conviene {
+  background:rgba(204,204,204,0.15);
+  border-color:var(--base);
+  box-shadow:0 0 15px #ccc40;
+}
+
+.calc.gris {
+  background:#111;
+  border-color:#333;
+  box-shadow:0 0 5px #000 inset;
+}
+
+.resultado {
+  color:var(--base);
+  font-weight:bold;
+  margin-top:10px;
+  font-size:1.4rem; /* más grande */
+  text-shadow:0 0 6px #ccc40;
+}
+
+#gananciaDiaria, #gananciaDias {
+  font-size:1.6rem; /* TNA aún más grande */
+}
+
+.sub {
+  font-size:0.8rem;
+  color:#888;
+  margin-top:6px;
+}
+
+.small {
+  font-size:0.75rem;
+  color:#bbb;
+  margin-top:5px;
+}
+
+.tna-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.calc, .comparador {
+  border-radius:0;
+  position:relative;
+}
+
+.calc::after, .comparador::after {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  pointer-events:none;
+  box-shadow:0 0 20px #ccc40 inset;
+}
+</style>
+</head>
+<body>
+<h1>Comparador de Rulos Financieros</h1>
+
+<div class="comparador">
+  <div>
+    <label>Capital inicial (AR$)</label>
+    <input id="capital" type="text" placeholder="">
+  </div>
+  <div>
+    <label>Precio compra USD (AR$)</label>
+    <input id="precioCompraGlobal" type="text" placeholder="">
+  </div>
+  <div style="grid-column:1/-1">
+    <div id="resultadoConviene" class="small"></div>
+    <div id="vecesPara10" class="small"></div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="calc gris" id="calcUsdt">
+    <h2 style="margin:0 0 8px;">USD → USDT → ARS</h2>
+    <label>Precio venta USDT (US$)</label>
+    <input id="precioVentaUsdt" type="text" placeholder="">
+    <label style="margin-top:8px;">Precio venta ARS (por USDT)</label>
+    <input id="precioVentaArs" type="text" placeholder="">
+    <div class="resultado" id="gananciaUsdt"></div>
+    <div class="sub">Repeticiones para 10%: <span id="repeticionesUsdt"></span></div>
+  </div>
+
+  <div class="calc gris" id="calcUsd">
+    <h2 style="margin:0 0 8px;">USD → USD</h2>
+    <label>Precio venta USD (AR$)</label>
+    <input id="precioVentaUsd" type="text" placeholder="">
+    <div class="resultado" id="gananciaUsd"></div>
+    <div class="sub">Repeticiones para 10%: <span id="repeticionesUsd"></span></div>
+  </div>
+</div>
+
+<div class="calc" id="calcTna">
+  <h2 style="margin:0 0 8px;">Calculadora TNA</h2>
+  <div class="tna-grid">
+    <div>
+      <label>TNA (%)</label>
+      <input id="tna" type="text" placeholder="">
+      <label style="margin-top:8px;">Días</label>
+      <input id="dias" type="text" placeholder="">
+    </div>
+    <div>
+      <div class="small">Ganancia diaria</div>
+      <div class="resultado" id="gananciaDiaria"></div>
+      <div class="small" style="margin-top:10px;">Ganancia en <span id="diasLabel">0</span> días</div>
+      <div class="resultado" id="gananciaDias"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Formateo de dinero de derecha a izquierda
+function formatAR_fromRight(digits) {
+  while (digits.length < 3) digits = "0"+digits;
+  const len = digits.length;
+  const dec = digits.slice(len-2);
+  let intPart = digits.slice(0,len-2).replace(/^0+/,'') || '0';
+  intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  return intPart+','+dec;
+}
+
+// Configurar inputs de dinero
+function setupInput(id){
+  const inp = document.getElementById(id);
+  inp.addEventListener("keydown", function(e){
+    if(e.ctrlKey||e.metaKey||["Backspace","Delete","ArrowLeft","ArrowRight","Tab"].includes(e.key)) return;
+    if(!/[0-9]/.test(e.key)){ e.preventDefault(); return; }
+    e.preventDefault();
+    let current = this.value.replace(/[^\d]/g,'')+e.key;
+    this.value = formatAR_fromRight(current);
+    actualizar();
+  });
+  inp.addEventListener("keydown", function(e){
+    if(e.key==="Backspace"){ e.preventDefault();
+      let current = this.value.replace(/[^\d]/g,'').slice(0,-1);
+      if(current==="") { this.value=''; actualizar(); return; }
+      this.value = formatAR_fromRight(current);
+      actualizar();
+    }
+  });
+}
+
+// Inicializar inputs
+["capital","precioCompraGlobal","precioVentaUsdt","precioVentaArs","precioVentaUsd","tna"].forEach(setupInput);
+// Días TNA sin formato, solo números enteros
+const diasInput = document.getElementById('dias');
+diasInput.addEventListener('input',()=>{diasInput.value=diasInput.value.replace(/[^\d]/g,''); actualizar();});
+
+// Parsear valor
+function getNumber(str){
+  return parseFloat(str.replace(/\./g,'').replace(',','.'))||null;
+}
+
+// Lógica de calculadoras
+function actualizar(){
+  const capital = getNumber(document.getElementById('capital').value);
+  const compra = getNumber(document.getElementById('precioCompraGlobal').value);
+  const ventaUsdt = getNumber(document.getElementById('precioVentaUsdt').value);
+  const ventaArs = getNumber(document.getElementById('precioVentaArs').value);
+  const ventaUsd = getNumber(document.getElementById('precioVentaUsd').value);
+  const tna = getNumber(document.getElementById('tna').value);
+  const dias = parseInt(diasInput.value)||0;
+
+  // USD->USDT->ARS
+  let ganUsdt=null;
+  if(capital && ventaUsdt && ventaArs){
+    ganUsdt = ((ventaArs/(ventaUsdt*compra))-1)*capital;
+    document.getElementById('gananciaUsdt').textContent='AR$ '+ganUsdt.toLocaleString('es-AR',{minimumFractionDigits:2});
+    const repU=(0.1*capital)/ganUsdt;
+    document.getElementById('repeticionesUsdt').textContent=repU>0?repU.toFixed(2):'';
+  }else{document.getElementById('gananciaUsdt').textContent='';document.getElementById('repeticionesUsdt').textContent='';}
+
+  // USD->USD
+  let ganUsd=null;
+  if(capital && ventaUsd){
+    ganUsd=((ventaUsd/compra)-1)*capital;
+    document.getElementById('gananciaUsd').textContent='AR$ '+ganUsd.toLocaleString('es-AR',{minimumFractionDigits:2});
+    const repD=(0.1*capital)/ganUsd;
+    document.getElementById('repeticionesUsd').textContent=repD>0?repD.toFixed(2):'';
+  }else{document.getElementById('gananciaUsd').textContent='';document.getElementById('repeticionesUsd').textContent='';}
+
+  const elUsdt=document.getElementById('calcUsdt');
+  const elUsd=document.getElementById('calcUsd');
+  if(ganUsd!==null && ganUsdt!==null){
+    let conv='';
+    if(ganUsd>ganUsdt){conv='USD→USD';elUsd.className='calc conviene';elUsdt.className='calc gris';}
+    else if(ganUsdt>ganUsd){conv='USD→USDT→ARS';elUsdt.className='calc conviene';elUsd.className='calc gris';}
+    document.getElementById('resultadoConviene').textContent='Conviene: '+conv;
+    const mejor=Math.max(ganUsd,ganUsdt);
+    const veces=(0.1*capital)/mejor;
+    document.getElementById('vecesPara10').textContent='Veces para 10% (mejor): '+veces.toFixed(2);
+  }else{
+    document.getElementById('resultadoConviene').textContent='';
+    document.getElementById('vecesPara10').textContent='';
+    elUsdt.className='calc gris';
+    elUsd.className='calc gris';
+  }
+
+  // TNA independiente
+  if(capital && tna){const diaria=(tna/100)/365; const ganDia=capital*diaria;
+    document.getElementById('gananciaDiaria').textContent='AR$ '+ganDia.toLocaleString('es-AR',{minimumFractionDigits:2});
+    if(dias){const final=capital*Math.pow(1+diaria,dias); const ganTot=final-capital;
+      document.getElementById('gananciaDias').textContent='AR$ '+ganTot.toLocaleString('es-AR',{minimumFractionDigits:2});
+      document.getElementById('diasLabel').textContent=dias;
+    }else{document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}
+  }else{document.getElementById('gananciaDiaria').textContent='';document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}
+}
+
+function limpiar(){
+  ['gananciaUsdt','gananciaUsd','repeticionesUsdt','repeticionesUsd','resultadoConviene','vecesPara10','gananciaDiaria','gananciaDias']
+  .forEach(id=>document.getElementById(id).textContent='');
+  document.getElementById('calcUsdt').className='calc gris';
+  document.getElementById('calcUsd').className='calc gris';
+}
+</script>
+</body>
+</html>
