@@ -6,12 +6,11 @@
 <title>Calculadoras Financieras</title>
 <style>
 :root {
-  --base:#ccc; /* blanco medio apagado */
+  --base:#ccc;
   --gris:#111;
   --texto:#ddd;
-  --borde:#ccc40; /* brillo sutil */
+  --borde:#ccc40;
 }
-
 body {
   background:#000;
   color:var(--texto);
@@ -19,7 +18,6 @@ body {
   margin:0;
   padding:20px;
 }
-
 h1 {
   text-align:center;
   color:var(--base);
@@ -27,7 +25,50 @@ h1 {
   margin-bottom:20px;
   text-shadow:0 0 8px rgba(204,204,204,0.6);
 }
-
+/* --- SECCIÓN COTIZACIONES --- */
+#dolar-section {
+  background:#050505;
+  border:1px solid #111;
+  padding:10px;
+  margin:0 auto 20px auto;
+  max-width:900px;
+  font-size:0.9rem;
+  box-sizing:border-box;
+}
+#dolar-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+#dolar-prices {
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.dolar-item {
+  text-align:center;
+  min-width:100px;
+}
+#reload-btn {
+  background:#111;
+  color:#ccc;
+  border:1px solid #333;
+  padding:4px 8px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
+#reload-btn:hover {
+  background:#222;
+}
+#last-update {
+  font-size:0.75rem;
+  color:#777;
+  text-align:right;
+  margin-top:5px;
+}
+/* --- resto existente --- */
 .comparador {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -38,14 +79,12 @@ h1 {
   margin-bottom:20px;
   box-shadow:0 0 12px #ccc40 inset;
 }
-
 label {
   display:block;
   margin-bottom:5px;
   color:#aaa;
   font-size:0.9rem;
 }
-
 input[type=text] {
   background:#000;
   color:var(--base);
@@ -59,20 +98,17 @@ input[type=text] {
   box-shadow:0 0 4px #ccc40;
   transition: all 0.2s ease-in-out;
 }
-
 input:focus {
   border-color:var(--base);
   outline:none;
   box-shadow:0 0 8px #ccc40;
 }
-
 .grid-2 {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:15px;
   margin-bottom:20px;
 }
-
 .calc {
   background:#111;
   border:1px solid #333;
@@ -81,54 +117,45 @@ input:focus {
   transition: all 0.3s ease;
   box-shadow:0 0 8px #000 inset;
 }
-
 .calc.conviene {
   background:rgba(204,204,204,0.15);
   border-color:var(--base);
   box-shadow:0 0 15px #ccc40;
 }
-
 .calc.gris {
   background:#111;
   border-color:#333;
   box-shadow:0 0 5px #000 inset;
 }
-
 .resultado {
   color:var(--base);
   font-weight:bold;
   margin-top:10px;
-  font-size:1.4rem; /* más grande */
+  font-size:1.4rem;
   text-shadow:0 0 6px #ccc40;
 }
-
 #gananciaDiaria, #gananciaDias {
-  font-size:1.6rem; /* TNA aún más grande */
+  font-size:1.6rem;
 }
-
 .sub {
   font-size:0.8rem;
   color:#888;
   margin-top:6px;
 }
-
 .small {
   font-size:0.75rem;
   color:#bbb;
   margin-top:5px;
 }
-
 .tna-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:15px;
 }
-
 .calc, .comparador {
   border-radius:0;
   position:relative;
 }
-
 .calc::after, .comparador::after {
   content:'';
   position:absolute;
@@ -141,6 +168,23 @@ input:focus {
 <body>
 <h1>Calculadora Financiera</h1>
 
+<!-- SECCIÓN COTIZACIONES -->
+<section id="dolar-section">
+  <div id="dolar-header">
+    <strong>💵 Cotizaciones del dólar</strong>
+    <button id="reload-btn">Recargar</button>
+  </div>
+  <div id="dolar-prices">
+    <div class="dolar-item" id="oficial">Oficial<br><span>--</span></div>
+    <div class="dolar-item" id="blue">Blue<br><span>--</span></div>
+    <div class="dolar-item" id="mep">MEP<br><span>--</span></div>
+    <div class="dolar-item" id="ccl">CCL<br><span>--</span></div>
+    <div class="dolar-item" id="cripto">Cripto<br><span>--</span></div>
+  </div>
+  <div id="last-update">Esperando actualización...</div>
+</section>
+
+<!-- resto del archivo original -->
 <div class="comparador">
   <div>
     <label>Capital inicial (AR$)</label>
@@ -195,103 +239,45 @@ input:focus {
 </div>
 
 <script>
-// Función de formateo de dinero AR$
-function formatAR_fromRight(digits) {
-  while (digits.length < 3) digits = "0"+digits;
-  const len = digits.length;
-  const dec = digits.slice(len-2);
-  let intPart = digits.slice(0,len-2).replace(/^0+/,'') || '0';
-  intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g,'.');
-  return intPart+','+dec;
-}
-
-// Configurar inputs de dinero (compatible móviles)
-function setupInput(id){
-  const inp = document.getElementById(id);
-  inp.addEventListener("input", function(e){
-    let current = this.value.replace(/[^\d]/g,'');
-    if(current==="") { this.value=''; actualizar(); return; }
-    this.value = formatAR_fromRight(current);
-    actualizar();
-  });
-}
-
-// Inicializar inputs
-["capital","precioCompraGlobal","precioVentaUsdt","precioVentaArs","precioVentaUsd","tna"].forEach(setupInput);
-
-// Días TNA sin formato, solo enteros
-const diasInput = document.getElementById('dias');
-diasInput.addEventListener('input',()=>{
-  diasInput.value=diasInput.value.replace(/[^\d]/g,'');
-  actualizar();
-});
-
-// Parsear valor
-function getNumber(str){
-  return parseFloat(str.replace(/\./g,'').replace(',','.'))||null;
-}
-
-// Actualización automática
-function actualizar(){
-  const capital = getNumber(document.getElementById('capital').value);
-  const compra = getNumber(document.getElementById('precioCompraGlobal').value);
-  const ventaUsdt = getNumber(document.getElementById('precioVentaUsdt').value);
-  const ventaArs = getNumber(document.getElementById('precioVentaArs').value);
-  const ventaUsd = getNumber(document.getElementById('precioVentaUsd').value);
-  const tna = getNumber(document.getElementById('tna').value);
-  const dias = parseInt(diasInput.value)||0;
-
-  // USD->USDT->ARS
-  let ganUsdt=null;
-  if(capital && ventaUsdt && ventaArs){
-    ganUsdt = ((ventaArs/(ventaUsdt*compra))-1)*capital;
-    document.getElementById('gananciaUsdt').textContent='AR$ '+ganUsdt.toLocaleString('es-AR',{minimumFractionDigits:2});
-    const repU=(0.1*capital)/ganUsdt;
-    document.getElementById('repeticionesUsdt').textContent=repU>0?repU.toFixed(2):'';
-  }else{document.getElementById('gananciaUsdt').textContent='';document.getElementById('repeticionesUsdt').textContent='';}
-
-  // USD->USD
-  let ganUsd=null;
-  if(capital && ventaUsd){
-    ganUsd=((ventaUsd/compra)-1)*capital;
-    document.getElementById('gananciaUsd').textContent='AR$ '+ganUsd.toLocaleString('es-AR',{minimumFractionDigits:2});
-    const repD=(0.1*capital)/ganUsd;
-    document.getElementById('repeticionesUsd').textContent=repD>0?repD.toFixed(2):'';
-  }else{document.getElementById('gananciaUsd').textContent='';document.getElementById('repeticionesUsd').textContent='';}
-
-  const elUsdt=document.getElementById('calcUsdt');
-  const elUsd=document.getElementById('calcUsd');
-  if(ganUsd!==null && ganUsdt!==null){
-    let conv='';
-    if(ganUsd>ganUsdt){conv='USD→USD';elUsd.className='calc conviene';elUsdt.className='calc gris';}
-    else if(ganUsdt>ganUsd){conv='USD→USDT→ARS';elUsdt.className='calc conviene';elUsd.className='calc gris';}
-    document.getElementById('resultadoConviene').textContent='Conviene: '+conv;
-    const mejor=Math.max(ganUsd,ganUsdt);
-    const veces=(0.1*capital)/mejor;
-    document.getElementById('vecesPara10').textContent='Veces para 10% (mejor): '+veces.toFixed(2);
-  }else{
-    document.getElementById('resultadoConviene').textContent='';
-    document.getElementById('vecesPara10').textContent='';
-    elUsdt.className='calc gris';
-    elUsd.className='calc gris';
+// === COTIZACIONES DEL DÓLAR ===
+async function cargarDolares(){
+  const last=document.getElementById("last-update");
+  try{
+    const res=await fetch("https://dolarapi.com/v1/dolares");
+    const data=await res.json();
+    const map={
+      oficial: data.find(d=>d.nombre.toLowerCase().includes("oficial")),
+      blue: data.find(d=>d.nombre.toLowerCase().includes("blue")),
+      mep: data.find(d=>d.nombre.toLowerCase().includes("bolsa")), // CORREGIDO
+      ccl: data.find(d=>d.nombre.toLowerCase().includes("contado con liqui")),
+      cripto: data.find(d=>d.nombre.toLowerCase().includes("cripto"))
+    };
+    Object.entries(map).forEach(([k,v])=>{
+      const el=document.querySelector(`#${k} span`);
+      if(v && el){
+        el.textContent=`C: ${v.compra.toFixed(2)} | V: ${v.venta.toFixed(2)}`;
+      }else if(el){
+        el.textContent="N/D";
+      }
+    });
+    const now=new Date();
+    last.textContent="Actualizado: "+now.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+  }catch(e){
+    last.textContent="Error al cargar cotizaciones";
   }
-
-  // TNA independiente
-  if(capital && tna){const diaria=(tna/100)/365; const ganDia=capital*diaria;
-    document.getElementById('gananciaDiaria').textContent='AR$ '+ganDia.toLocaleString('es-AR',{minimumFractionDigits:2});
-    if(dias){const final=capital*Math.pow(1+diaria,dias); const ganTot=final-capital;
-      document.getElementById('gananciaDias').textContent='AR$ '+ganTot.toLocaleString('es-AR',{minimumFractionDigits:2});
-      document.getElementById('diasLabel').textContent=dias;
-    }else{document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}
-  }else{document.getElementById('gananciaDiaria').textContent='';document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}
 }
+document.getElementById("reload-btn").addEventListener("click",cargarDolares);
+cargarDolares();
+setInterval(cargarDolares, 5 * 60 * 1000); // auto cada 5 min
 
-function limpiar(){
-  ['gananciaUsdt','gananciaUsd','repeticionesUsdt','repeticionesUsd','resultadoConviene','vecesPara10','gananciaDiaria','gananciaDias']
-  .forEach(id=>document.getElementById(id).textContent='');
-  document.getElementById('calcUsdt').className='calc gris';
-  document.getElementById('calcUsd').className='calc gris';
-}
+/* === resto del JS original === */
+function formatAR_fromRight(digits){while(digits.length<3)digits="0"+digits;const len=digits.length;const dec=digits.slice(len-2);let intPart=digits.slice(0,len-2).replace(/^0+/,'')||'0';intPart=intPart.replace(/\B(?=(\d{3})+(?!\d))/g,'.');return intPart+','+dec;}
+function setupInput(id){const inp=document.getElementById(id);inp.addEventListener("input",function(e){let current=this.value.replace(/[^\d]/g,'');if(current===""){this.value='';actualizar();return;}this.value=formatAR_fromRight(current);actualizar();});}
+["capital","precioCompraGlobal","precioVentaUsdt","precioVentaArs","precioVentaUsd","tna"].forEach(setupInput);
+const diasInput=document.getElementById('dias');diasInput.addEventListener('input',()=>{diasInput.value=diasInput.value.replace(/[^\d]/g,'');actualizar();});
+function getNumber(str){return parseFloat(str.replace(/\./g,'').replace(',','.'))||null;}
+function actualizar(){const capital=getNumber(document.getElementById('capital').value);const compra=getNumber(document.getElementById('precioCompraGlobal').value);const ventaUsdt=getNumber(document.getElementById('precioVentaUsdt').value);const ventaArs=getNumber(document.getElementById('precioVentaArs').value);const ventaUsd=getNumber(document.getElementById('precioVentaUsd').value);const tna=getNumber(document.getElementById('tna').value);const dias=parseInt(diasInput.value)||0;let ganUsdt=null;if(capital&&ventaUsdt&&ventaArs){ganUsdt=((ventaArs/(ventaUsdt*compra))-1)*capital;document.getElementById('gananciaUsdt').textContent='AR$ '+ganUsdt.toLocaleString('es-AR',{minimumFractionDigits:2});const repU=(0.1*capital)/ganUsdt;document.getElementById('repeticionesUsdt').textContent=repU>0?repU.toFixed(2):'';}else{document.getElementById('gananciaUsdt').textContent='';document.getElementById('repeticionesUsdt').textContent='';}let ganUsd=null;if(capital&&ventaUsd){ganUsd=((ventaUsd/compra)-1)*capital;document.getElementById('gananciaUsd').textContent='AR$ '+ganUsd.toLocaleString('es-AR',{minimumFractionDigits:2});const repD=(0.1*capital)/ganUsd;document.getElementById('repeticionesUsd').textContent=repD>0?repD.toFixed(2):'';}else{document.getElementById('gananciaUsd').textContent='';document.getElementById('repeticionesUsd').textContent='';}const elUsdt=document.getElementById('calcUsdt');const elUsd=document.getElementById('calcUsd');if(ganUsd!==null&&ganUsdt!==null){let conv='';if(ganUsd>ganUsdt){conv='USD→USD';elUsd.className='calc conviene';elUsdt.className='calc gris';}else if(ganUsdt>ganUsd){conv='USD→USDT→ARS';elUsdt.className='calc conviene';elUsd.className='calc gris';}document.getElementById('resultadoConviene').textContent='Conviene: '+conv;const mejor=Math.max(ganUsd,ganUsdt);const veces=(0.1*capital)/mejor;document.getElementById('vecesPara10').textContent='Veces para 10% (mejor): '+veces.toFixed(2);}else{document.getElementById('resultadoConviene').textContent='';document.getElementById('vecesPara10').textContent='';elUsdt.className='calc gris';elUsd.className='calc gris';}if(capital&&tna){const diaria=(tna/100)/365;const ganDia=capital*diaria;document.getElementById('gananciaDiaria').textContent='AR$ '+ganDia.toLocaleString('es-AR',{minimumFractionDigits:2});if(dias){const final=capital*Math.pow(1+diaria,dias);const ganTot=final-capital;document.getElementById('gananciaDias').textContent='AR$ '+ganTot.toLocaleString('es-AR',{minimumFractionDigits:2});document.getElementById('diasLabel').textContent=dias;}else{document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}}else{document.getElementById('gananciaDiaria').textContent='';document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}}
+function limpiar(){['gananciaUsdt','gananciaUsd','repeticionesUsdt','repeticionesUsd','resultadoConviene','vecesPara10','gananciaDiaria','gananciaDias'].forEach(id=>document.getElementById(id).textContent='');document.getElementById('calcUsdt').className='calc gris';document.getElementById('calcUsd').className='calc gris';}
 </script>
 </body>
 </html>
