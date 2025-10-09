@@ -139,7 +139,7 @@ input:focus {
 </style>
 </head>
 <body>
-<h1>Calculadoras Financieras</h1>
+<h1>Comparador de Rulos Financieros</h1>
 
 <div class="comparador">
   <div>
@@ -195,7 +195,7 @@ input:focus {
 </div>
 
 <script>
-// Formateo de dinero de derecha a izquierda
+// Función de formateo de dinero AR$
 function formatAR_fromRight(digits) {
   while (digits.length < 3) digits = "0"+digits;
   const len = digits.length;
@@ -205,39 +205,33 @@ function formatAR_fromRight(digits) {
   return intPart+','+dec;
 }
 
-// Configurar inputs de dinero
+// Configurar inputs de dinero (compatible móviles)
 function setupInput(id){
   const inp = document.getElementById(id);
-  inp.addEventListener("keydown", function(e){
-    if(e.ctrlKey||e.metaKey||["Backspace","Delete","ArrowLeft","ArrowRight","Tab"].includes(e.key)) return;
-    if(!/[0-9]/.test(e.key)){ e.preventDefault(); return; }
-    e.preventDefault();
-    let current = this.value.replace(/[^\d]/g,'')+e.key;
+  inp.addEventListener("input", function(e){
+    let current = this.value.replace(/[^\d]/g,'');
+    if(current==="") { this.value=''; actualizar(); return; }
     this.value = formatAR_fromRight(current);
     actualizar();
-  });
-  inp.addEventListener("keydown", function(e){
-    if(e.key==="Backspace"){ e.preventDefault();
-      let current = this.value.replace(/[^\d]/g,'').slice(0,-1);
-      if(current==="") { this.value=''; actualizar(); return; }
-      this.value = formatAR_fromRight(current);
-      actualizar();
-    }
   });
 }
 
 // Inicializar inputs
 ["capital","precioCompraGlobal","precioVentaUsdt","precioVentaArs","precioVentaUsd","tna"].forEach(setupInput);
-// Días TNA sin formato, solo números enteros
+
+// Días TNA sin formato, solo enteros
 const diasInput = document.getElementById('dias');
-diasInput.addEventListener('input',()=>{diasInput.value=diasInput.value.replace(/[^\d]/g,''); actualizar();});
+diasInput.addEventListener('input',()=>{
+  diasInput.value=diasInput.value.replace(/[^\d]/g,'');
+  actualizar();
+});
 
 // Parsear valor
 function getNumber(str){
   return parseFloat(str.replace(/\./g,'').replace(',','.'))||null;
 }
 
-// Lógica de calculadoras
+// Actualización automática
 function actualizar(){
   const capital = getNumber(document.getElementById('capital').value);
   const compra = getNumber(document.getElementById('precioCompraGlobal').value);
