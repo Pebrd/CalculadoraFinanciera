@@ -316,7 +316,7 @@ input:focus {
 
 <div class="grid-2">
   <div class="calc gris" id="calcUsdt">
-    <h2 style="margin:0 0 8px;">USD ➤ USDT ➤  ARS</h2>
+    <h2 style="margin:0 0 8px;">USD ➤ USDT ➤ ARS</h2>
     <label>Precio compra USDT (US$)</label>
     <input id="precioVentaUsdt" type="text" placeholder="">
     <label style="margin-top:8px;">Precio venta ARS (por USDT)</label>
@@ -441,6 +441,7 @@ function getNumber(str){return parseFloat(str.replace(/\./g,'').replace(',','.')
 function actualizar(){const capital=getNumber(document.getElementById('capital').value);const compra=getNumber(document.getElementById('precioCompraGlobal').value);const ventaUsdt=getNumber(document.getElementById('precioVentaUsdt').value);const ventaArs=getNumber(document.getElementById('precioVentaArs').value);const ventaUsd=getNumber(document.getElementById('precioVentaUsd').value);const tna=getNumber(document.getElementById('tna').value);const dias=parseInt(diasInput.value)||0;let ganUsdt=null;if(capital&&ventaUsdt&&ventaArs){ganUsdt=((ventaArs/(ventaUsdt*compra))-1)*capital;document.getElementById('gananciaUsdt').textContent='AR$ '+ganUsdt.toLocaleString('es-AR',{minimumFractionDigits:2});const repU=(0.1*capital)/ganUsdt;document.getElementById('repeticionesUsdt').textContent=repU>0?repU.toFixed(2):'';}else{document.getElementById('gananciaUsdt').textContent='';document.getElementById('repeticionesUsdt').textContent='';}let ganUsd=null;if(capital&&ventaUsd){ganUsd=((ventaUsd/compra)-1)*capital;document.getElementById('gananciaUsd').textContent='AR$ '+ganUsd.toLocaleString('es-AR',{minimumFractionDigits:2});const repD=(0.1*capital)/ganUsd;document.getElementById('repeticionesUsd').textContent=repD>0?repD.toFixed(2):'';}else{document.getElementById('gananciaUsd').textContent='';document.getElementById('repeticionesUsd').textContent='';}const elUsdt=document.getElementById('calcUsdt');const elUsd=document.getElementById('calcUsd');if(ganUsd!==null&&ganUsdt!==null){let conv='';if(ganUsd>ganUsdt){conv='USD→USD';elUsd.className='calc conviene';elUsdt.className='calc gris';}else if(ganUsdt>ganUsd){conv='USD→USDT→ARS';elUsdt.className='calc conviene';elUsd.className='calc gris';}document.getElementById('resultadoConviene').textContent='Conviene: '+conv;const mejor=Math.max(ganUsd,ganUsdt);const veces=(0.1*capital)/mejor;document.getElementById('vecesPara10').textContent='Veces para 10% (mejor): '+veces.toFixed(2);}else{document.getElementById('resultadoConviene').textContent='';document.getElementById('vecesPara10').textContent='';elUsdt.className='calc gris';elUsd.className='calc gris';}if(capital&&tna){const diaria=(tna/100)/365;const ganDia=capital*diaria;document.getElementById('gananciaDiaria').textContent='AR$ '+ganDia.toLocaleString('es-AR',{minimumFractionDigits:2});if(dias){const final=capital*(1+diaria*dias);const ganancia=final-capital;document.getElementById('gananciaDias').textContent='AR$ '+ganancia.toLocaleString('es-AR',{minimumFractionDigits:2});document.getElementById('diasLabel').textContent=dias;}else{document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}}else{document.getElementById('gananciaDiaria').textContent='';document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}}
 </script>
 <div id="noticias" style="font-family: 'Arial', sans-serif; color: #eee;">
+  <h2 style="margin:0 0 15px; text-align:center; color:var(--base);">Noticias</h2>
   <div class="controls" style="display:flex; gap:10px; margin-bottom:15px; align-items:center;">
     <label for="category-select">Filtrar por categoría:</label>
     <select id="category-select" style="padding:6px; background:#111; color:#eee; border:1px solid #333;">
@@ -636,6 +637,7 @@ async function checkApiStatus(url, elementId) {
     const response = await fetch(url);
     const data = await response.json();
 
+    // REVERTIDO a la lógica anterior solicitada por el usuario, que se basa en 'data.status' y 'response.ok'.
     const isUp = (data.status === "ok" || data.status === "available" || response.ok);
 
     if (isUp) {
@@ -648,6 +650,7 @@ async function checkApiStatus(url, elementId) {
       text.style.color = 'var(--error)';
     }
   } catch (e) {
+    // Error de red o al parsear el JSON.
     light.className = 'status-light error';
     text.textContent = 'Error';
     text.style.color = 'var(--error)';
