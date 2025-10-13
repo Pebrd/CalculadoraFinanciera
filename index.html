@@ -27,7 +27,7 @@ h1 {
   text-shadow:0 0 8px rgba(204,204,204,0.6);
 }
 /* --- UNIFICACIÓN DE ANCHO PARA TODOS LOS BLOQUES PRINCIPALES --- */
-.data-container, .comparador, .grid-2, #calcTna, #noticias {
+.data-container, .comparador, .grid-2, #calcTna, #noticias, #calcCaucion {
     max-width: 900px;
     margin: 0 auto 20px auto;
 }
@@ -183,7 +183,7 @@ input:focus {
   font-size:1.4rem;
   text-shadow:0 0 6px #ccc40;
 }
-#gananciaDiaria, #gananciaDias { font-size:1.6rem; }
+#gananciaDiaria, #gananciaDias, #caucionGananciaNeta, #caucionMontoFinal { font-size:1.6rem; }
 .sub { font-size:0.8rem; color:#888; margin-top:6px; }
 .small { font-size:0.75rem; color:#bbb; margin-top:5px; }
 .tna-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
@@ -277,7 +277,7 @@ input:focus {
 
   <div class="right-column">
     <section class="data-section" id="inflacion-section">
-      <div class="data-header"><strong>📈 Inflación</strong></div>
+      <div class="data-header"><strong>📈 Índice de Inflación</strong></div>
       <div class="data-grid">
         <div class="data-item">Mensual<br><span id="inflacion-mensual">--</span></div>
         <div class="data-item">Período<br><span id="inflacion-mes">--</span></div>
@@ -350,6 +350,26 @@ input:focus {
       <div class="resultado" id="gananciaDias"></div>
     </div>
   </div>
+</div>
+
+<div class="calc" id="calcCaucion">
+  <h2 style="margin:0 0 8px;">Calculadora Caución Bursátil</h2>
+  <div class="tna-grid">
+    <div>
+      <label>TNA de la Caución (%)</label>
+      <input id="caucionTasa" type="text" placeholder="">
+      <label style="margin-top:8px;">Días a invertir</label>
+      <input id="caucionDias" type="text" placeholder=""> <label style="margin-top:8px;">Comisión Broker (%)</label>
+      <input id="caucionComision" type="text" placeholder="">
+    </div>
+    <div>
+      <div class="small">Ganancia Neta en <span id="caucionDiasLabel">0</span> días</div>
+      <div class="resultado" id="caucionGananciaNeta"></div>
+      <div class="small" style="margin-top:10px;">Monto Final (Capital + Ganancia)</div>
+      <div class="resultado" id="caucionMontoFinal"></div>
+    </div>
+  </div>
+  <div class="sub">Capital inicial tomado de la sección superior.</div>
 </div>
 
 <script>
@@ -435,10 +455,136 @@ cargarRiesgo();
 /* === FUNCIONES ORIGINALES === */
 function formatAR_fromRight(digits){while(digits.length<3)digits="0"+digits;const len=digits.length;const dec=digits.slice(len-2);let intPart=digits.slice(0,len-2).replace(/^0+/,'')||'0';intPart=intPart.replace(/\B(?=(\d{3})+(?!\d))/g,'.');return intPart+','+dec;}
 function setupInput(id){const inp=document.getElementById(id);inp.addEventListener("input",function(e){let current=this.value.replace(/[^\d]/g,'');if(current===""){this.value='';actualizar();return;}this.value=formatAR_fromRight(current);actualizar();});}
-["capital","precioCompraGlobal","precioVentaUsdt","precioVentaArs","precioVentaUsd","tna"].forEach(setupInput);
-const diasInput=document.getElementById('dias');diasInput.addEventListener('input',()=>{diasInput.value=diasInput.value.replace(/[^\d]/g,'');actualizar();});
+["capital","precioCompraGlobal","precioVentaUsdt","precioVentaArs","precioVentaUsd","tna", "caucionTasa", "caucionComision"].forEach(setupInput);
+
+// Campos de días (enteros)
+const diasInput=document.getElementById('dias');
+if (diasInput) {
+  diasInput.addEventListener('input',()=>{
+    diasInput.value=diasInput.value.replace(/[^\d]/g,'');
+    actualizar();
+  });
+}
+
+const caucionDiasInput=document.getElementById('caucionDias');
+if (caucionDiasInput) {
+  caucionDiasInput.addEventListener('input', () => {
+    caucionDiasInput.value = caucionDiasInput.value.replace(/[^\d]/g,'');
+    actualizar();
+  });
+}
+
 function getNumber(str){return parseFloat(str.replace(/\./g,'').replace(',','.'))||null;}
-function actualizar(){const capital=getNumber(document.getElementById('capital').value);const compra=getNumber(document.getElementById('precioCompraGlobal').value);const ventaUsdt=getNumber(document.getElementById('precioVentaUsdt').value);const ventaArs=getNumber(document.getElementById('precioVentaArs').value);const ventaUsd=getNumber(document.getElementById('precioVentaUsd').value);const tna=getNumber(document.getElementById('tna').value);const dias=parseInt(diasInput.value)||0;let ganUsdt=null;if(capital&&ventaUsdt&&ventaArs){ganUsdt=((ventaArs/(ventaUsdt*compra))-1)*capital;document.getElementById('gananciaUsdt').textContent='AR$ '+ganUsdt.toLocaleString('es-AR',{minimumFractionDigits:2});const repU=(0.1*capital)/ganUsdt;document.getElementById('repeticionesUsdt').textContent=repU>0?repU.toFixed(2):'';}else{document.getElementById('gananciaUsdt').textContent='';document.getElementById('repeticionesUsdt').textContent='';}let ganUsd=null;if(capital&&ventaUsd){ganUsd=((ventaUsd/compra)-1)*capital;document.getElementById('gananciaUsd').textContent='AR$ '+ganUsd.toLocaleString('es-AR',{minimumFractionDigits:2});const repD=(0.1*capital)/ganUsd;document.getElementById('repeticionesUsd').textContent=repD>0?repD.toFixed(2):'';}else{document.getElementById('gananciaUsd').textContent='';document.getElementById('repeticionesUsd').textContent='';}const elUsdt=document.getElementById('calcUsdt');const elUsd=document.getElementById('calcUsd');if(ganUsd!==null&&ganUsdt!==null){let conv='';if(ganUsd>ganUsdt){conv='USD→USD';elUsd.className='calc conviene';elUsdt.className='calc gris';}else if(ganUsdt>ganUsd){conv='USD→USDT→ARS';elUsdt.className='calc conviene';elUsd.className='calc gris';}document.getElementById('resultadoConviene').textContent='Conviene: '+conv;const mejor=Math.max(ganUsd,ganUsdt);const veces=(0.1*capital)/mejor;document.getElementById('vecesPara10').textContent='Veces para 10% (mejor): '+veces.toFixed(2);}else{document.getElementById('resultadoConviene').textContent='';document.getElementById('vecesPara10').textContent='';elUsdt.className='calc gris';elUsd.className='calc gris';}if(capital&&tna){const diaria=(tna/100)/365;const ganDia=capital*diaria;document.getElementById('gananciaDiaria').textContent='AR$ '+ganDia.toLocaleString('es-AR',{minimumFractionDigits:2});if(dias){const final=capital*(1+diaria*dias);const ganancia=final-capital;document.getElementById('gananciaDias').textContent='AR$ '+ganancia.toLocaleString('es-AR',{minimumFractionDigits:2});document.getElementById('diasLabel').textContent=dias;}else{document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}}else{document.getElementById('gananciaDiaria').textContent='';document.getElementById('gananciaDias').textContent='';document.getElementById('diasLabel').textContent='0';}}
+
+function actualizar(){
+  const capital=getNumber(document.getElementById('capital').value);
+  const compra=getNumber(document.getElementById('precioCompraGlobal').value);
+  const ventaUsdt=getNumber(document.getElementById('precioVentaUsdt').value);
+  const ventaArs=getNumber(document.getElementById('precioVentaArs').value);
+  const ventaUsd=getNumber(document.getElementById('precioVentaUsd').value);
+
+  // TNA Calculation variables
+  const tna=getNumber(document.getElementById('tna').value);
+  const dias=parseInt(document.getElementById('dias')?.value)||0; // Días para TNA
+
+  // Caución Calculation variables
+  const caucionTasa=getNumber(document.getElementById('caucionTasa').value);
+  const caucionComision=getNumber(document.getElementById('caucionComision').value);
+  const caucionDiasVal=parseInt(document.getElementById('caucionDias')?.value)||0; // Días para Caución (NUEVO)
+
+  let ganUsdt=null;
+  if(capital&&ventaUsdt&&ventaArs){
+    ganUsdt=((ventaArs/(ventaUsdt*compra))-1)*capital;
+    document.getElementById('gananciaUsdt').textContent='AR$ '+ganUsdt.toLocaleString('es-AR',{minimumFractionDigits:2});
+    const repU=(0.1*capital)/ganUsdt;
+    document.getElementById('repeticionesUsdt').textContent=repU>0?repU.toFixed(2):'';
+  }else{
+    document.getElementById('gananciaUsdt').textContent='';
+    document.getElementById('repeticionesUsdt').textContent='';
+  }
+
+  let ganUsd=null;
+  if(capital&&ventaUsd){
+    ganUsd=((ventaUsd/compra)-1)*capital;
+    document.getElementById('gananciaUsd').textContent='AR$ '+ganUsd.toLocaleString('es-AR',{minimumFractionDigits:2});
+    const repD=(0.1*capital)/ganUsd;
+    document.getElementById('repeticionesUsd').textContent=repD>0?repD.toFixed(2):'';
+  }else{
+    document.getElementById('gananciaUsd').textContent='';
+    document.getElementById('repeticionesUsd').textContent='';
+  }
+
+  const elUsdt=document.getElementById('calcUsdt');
+  const elUsd=document.getElementById('calcUsd');
+
+  if(ganUsd!==null&&ganUsdt!==null){
+    let conv='';
+    if(ganUsd>ganUsdt){
+      conv='USD→USD';
+      elUsd.className='calc conviene';
+      elUsdt.className='calc gris';
+    }else if(ganUsdt>ganUsd){
+      conv='USD→USDT→ARS';
+      elUsdt.className='calc conviene';
+      elUsd.className='calc gris';
+    }
+    document.getElementById('resultadoConviene').textContent='Conviene: '+conv;
+    const mejor=Math.max(ganUsd,ganUsdt);
+    const veces=(0.1*capital)/mejor;
+    document.getElementById('vecesPara10').textContent='Veces para 10% (mejor): '+veces.toFixed(2);
+  }else{
+    document.getElementById('resultadoConviene').textContent='';
+    document.getElementById('vecesPara10').textContent='';
+    elUsdt.className='calc gris';
+    elUsd.className='calc gris';
+  }
+
+  // TNA CALCULATION
+  if(capital&&tna){
+    const diaria=(tna/100)/365;
+    const ganDia=capital*diaria;
+    document.getElementById('gananciaDiaria').textContent='AR$ '+ganDia.toLocaleString('es-AR',{minimumFractionDigits:2});
+    if(dias){
+      const final=capital*(1+diaria*dias);
+      const ganancia=final-capital;
+      document.getElementById('gananciaDias').textContent='AR$ '+ganancia.toLocaleString('es-AR',{minimumFractionDigits:2});
+      document.getElementById('diasLabel').textContent=dias;
+    }else{
+      document.getElementById('gananciaDias').textContent='';
+      document.getElementById('diasLabel').textContent='0';
+    }
+  }else{
+    document.getElementById('gananciaDiaria').textContent='';
+    document.getElementById('gananciaDias').textContent='';
+    document.getElementById('diasLabel').textContent='0';
+  }
+
+  // === CAUCIÓN CALCULATION ===
+  if(capital !== null && caucionTasa !== null && caucionDiasVal > 0 && caucionComision !== null){
+      const tasaAnualDecimal = caucionTasa / 100;
+      const comisionDecimal = caucionComision / 100;
+
+      // Ganancia Bruta (Interés generado)
+      const gananciaBruta = capital * tasaAnualDecimal * (caucionDiasVal / 365);
+
+      // Monto de Comisión (Comisión aplicada sobre la ganancia bruta)
+      const montoComision = gananciaBruta * comisionDecimal;
+
+      // Ganancia Neta
+      const gananciaNeta = gananciaBruta - montoComision;
+
+      // Monto Final
+      const montoFinal = capital + gananciaNeta;
+
+      document.getElementById('caucionGananciaNeta').textContent = 'AR$ ' + gananciaNeta.toLocaleString('es-AR', {minimumFractionDigits: 2});
+      document.getElementById('caucionMontoFinal').textContent = 'AR$ ' + montoFinal.toLocaleString('es-AR', {minimumFractionDigits: 2});
+      document.getElementById('caucionDiasLabel').textContent = caucionDiasVal;
+  } else {
+      document.getElementById('caucionGananciaNeta').textContent = '';
+      document.getElementById('caucionMontoFinal').textContent = '';
+      document.getElementById('caucionDiasLabel').textContent = '0';
+  }
+}
 </script>
 <div id="noticias" style="font-family: 'Arial', sans-serif; color: #eee;">
   <h2 style="margin:0 0 15px; text-align:center; color:var(--base);">Noticias</h2>
@@ -637,7 +783,6 @@ async function checkApiStatus(url, elementId) {
     const response = await fetch(url);
     const data = await response.json();
 
-    // REVERTIDO a la lógica anterior solicitada por el usuario, que se basa en 'data.status' y 'response.ok'.
     const isUp = (data.status === "ok" || data.status === "available" || response.ok);
 
     if (isUp) {
@@ -650,7 +795,6 @@ async function checkApiStatus(url, elementId) {
       text.style.color = 'var(--error)';
     }
   } catch (e) {
-    // Error de red o al parsear el JSON.
     light.className = 'status-light error';
     text.textContent = 'Error';
     text.style.color = 'var(--error)';
