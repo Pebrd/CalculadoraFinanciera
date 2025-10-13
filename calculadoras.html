@@ -27,6 +27,9 @@ nav {
     text-align: center;
     padding: 10px 0;
     border-bottom: 1px solid #222;
+    display: flex; /* MODIFICADO: Usa flex para mejor control */
+    justify-content: center; /* MODIFICADO: Centra los enlaces */
+    flex-wrap: nowrap; /* MODIFICADO: Evita el salto de línea */
 }
 nav a {
     color: var(--base);
@@ -63,7 +66,7 @@ h1 {
 .data-container {
   display: flex;
   gap: 20px;
-  align-items: stretch;
+  align-items: stretch; 
 }
 .data-container > * {
   flex: 1;
@@ -263,16 +266,32 @@ input:focus {
   font-size: 0.8rem;
   vertical-align: middle;
 }
-@media (max-width: 400px) {
-  #api-status {
-    height: auto;
-    flex-direction: column;
-    padding: 8px 10px;
-  }
-  .api-indicator {
-    margin: 3px 0;
-    justify-content: center;
-  }
+/* Media Query para móvil */
+@media (max-width: 600px) {
+    /* 1. Fix: Navegación */
+    nav {
+        justify-content: space-between;
+        padding: 10px;
+    }
+    nav a {
+        padding: 8px 5px;
+        font-size: 0.9rem;
+        margin: 0 2px;
+    }
+    /* 3. Fix: Calculadoras Apiladas (grid-2) */
+    .grid-2 {
+        grid-template-columns: 1fr; /* Cambia a una columna única */
+    }
+    /* Estilos API Status existente */
+    #api-status {
+        height: auto;
+        flex-direction: column;
+        padding: 8px 10px;
+    }
+    .api-indicator {
+        margin: 3px 0;
+        justify-content: center;
+    }
 }
 </style>
 </head>
@@ -506,7 +525,7 @@ function actualizar(){
   const ventaUsd=getNumber(document.getElementById('precioVentaUsd').value);
   const tna=getNumber(document.getElementById('tna').value);
   const dias=parseInt(document.getElementById('dias').value)||0;
-
+  
   const caucionTasa=getNumber(document.getElementById('caucionTasa').value);
   const caucionDias=parseInt(document.getElementById('caucionDias').value)||0;
   const caucionComision=getNumber(document.getElementById('caucionComision').value);
@@ -552,7 +571,7 @@ function actualizar(){
     elUsdt.className='calc gris';
     elUsd.className='calc gris';
   }
-
+  
   // 2. Calculadora TNA
   if(capital&&tna){
     const diaria=(tna/100)/365;
@@ -594,7 +613,7 @@ function actualizar(){
 }
 
 /* ========================================================== */
-/* === SCRIPT 3: MONITOREO DE ESTADO DE APIS (MODIFICADO) === */
+/* === SCRIPT 3: MONITOREO DE ESTADO DE APIS (Sin cambios) === */
 /* ========================================================== */
 async function checkApiStatus(url, elementId) {
   const statusElement = document.getElementById(elementId);
@@ -633,11 +652,11 @@ async function checkApiStatus(url, elementId) {
 function loadApiStatus() {
   checkApiStatus("https://dolarapi.com/v1/estado", "dolarapi-status");
   checkApiStatus("https://api.argentinadatos.com/v1/estado", "argentinadatos-status");
-  checkApiStatus("https://criptoya.com/api/dolar", "criptoya-status");
+  checkApiStatus("https://criptoya.com/api/dolar", "criptoya-status"); 
 }
 
 loadApiStatus();
-setInterval(loadApiStatus, 3600000);
+setInterval(loadApiStatus, 3600000); 
 </script>
 </body>
 </html>
