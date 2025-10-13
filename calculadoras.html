@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadoras y Datos Financieros</title>
+<style>
+/* === ESTILOS GLOBALES === */
+:root {
+  --base:#ccc;
+  --gris:#111;
+  --texto:#ddd;
+  --borde:#ccc40;
+  --error:#f44;
+}
+body {
+  background:#000;
+  color:var(--texto);
+  font-family:'Courier New', monospace;
+  margin:0;
+  padding:20px;
+}
+/* --- Navegación --- */
+nav {
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #222;
+}
+nav a {
+    color: var(--base);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+    border: 1px solid transparent;
+}
+nav a.active {
+    border-color: var(--base);
+    background: rgba(204, 204, 204, 0.1);
+}
+nav a:hover:not(.active) {
+    background: #111;
+}
+
+h1 {
+  text-align:center;
+  color:var(--base);
+  font-size:2rem;
+  margin-bottom:20px;
+  text-shadow:0 0 8px rgba(204,204,204,0.6);
+}
+
+/* --- UNIFICACIÓN DE ANCHO PARA TODOS LOS BLOQUES PRINCIPALES --- */
+.data-container, .comparador, .grid-2, #calcTna, #calcCaucion {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+}
+
+/* --- SECCIONES DE DATOS FINANCIEROS (Cotizaciones Originales) --- */
+.data-container {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+.data-container > * {
+  flex: 1;
+}
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+#inflacion-section, #riesgo-section {
+    flex: 1;
+}
+
+.data-section {
+  background:#050505;
+  border:1px solid #111;
+  padding:10px;
+  margin:0;
+  font-size:0.9rem;
+  box-sizing:border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.data-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.data-grid {
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:10px;
+  flex-grow: 1;
+  align-items: center;
+}
+.data-item {
+  text-align:center;
+  min-width:100px;
+}
+#reload-btn {
+  background:#111;
+  color:#ccc;
+  border:1px solid #333;
+  padding:4px 8px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
+#reload-btn:hover { background:#222; }
+#last-update, #last-inflacion, #last-riesgo {
+  font-size:0.75rem;
+  color:#777;
+  text-align:right;
+  margin-top:5px;
+}
+.fuente {
+  text-align:right;
+  font-size:0.7rem;
+  color:#666;
+  margin-top:4px;
+}
+.error {
+  color:var(--error);
+  font-size:0.8rem;
+  text-align:right;
+  margin-top:4px;
+}
+/* --- Agrandar valores de Inflación y Riesgo País --- */
+#inflacion-section .data-item span,
+#riesgo-section .data-item span {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--base);
+  display: block;
+  margin-top: 5px;
+}
+#dolar-section .data-item span {
+    font-size: 0.9rem;
+}
+
+@media (max-width:700px){
+  .data-container {
+    flex-direction: column;
+  }
+}
+
+/* --- Resto de Estilos para Calculadoras --- */
+.comparador {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  background:#111;
+  border:1px solid #222;
+  padding:15px;
+  box-shadow:0 0 12px #ccc40 inset;
+}
+label { display:block; margin-bottom:5px; color:#aaa; font-size:0.9rem; }
+input[type=text] {
+  background:#000; color:var(--base); border:1px solid #333;
+  padding:8px; width:100%; font-family:'Courier New', monospace;
+  font-size:1rem; text-align:right; box-sizing:border-box;
+  box-shadow:0 0 4px #ccc40; transition:all 0.2s ease-in-out;
+}
+input:focus {
+  border-color:var(--base);
+  outline:none;
+  box-shadow:0 0 8px #ccc40;
+}
+.grid-2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+.calc {
+  background:#111;
+  border:1px solid #333;
+  padding:15px;
+  box-sizing:border-box;
+  transition: all 0.3s ease;
+  box-shadow:0 0 8px #000 inset;
+}
+.calc.conviene {
+  background:rgba(204,204,204,0.15);
+  border-color:var(--base);
+  box-shadow:0 0 15px #ccc40;
+}
+.calc.gris {
+  background:#111;
+  border-color:#333;
+  box-shadow:0 0 5px #000 inset;
+}
+.resultado {
+  color:var(--base);
+  font-weight:bold;
+  margin-top:10px;
+  font-size:1.4rem;
+  text-shadow:0 0 6px #ccc40;
+}
+#gananciaDiaria, #gananciaDias, #caucionGananciaNeta, #caucionMontoFinal { font-size:1.6rem; }
+.sub { font-size:0.8rem; color:#888; margin-top:6px; }
+.small { font-size:0.8rem; color:#bbb; margin-top:6px; }
+.tna-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.calc, .comparador { border-radius:0; position:relative; }
+.calc::after, .comparador::after {
+  content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+  pointer-events:none; box-shadow:0 0 20px #ccc40 inset;
+}
+
+/* --- Estado de APIs --- */
+#api-status {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 5px 20px;
+  background: #050505;
+  border: 1px solid #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  box-sizing: border-box;
+}
+.api-indicator {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+}
+.api-indicator strong {
+  display: inline;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+  color: #777;
+  margin-right: 5px;
+}
+.status-light {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.status-light.funcional {
+  background-color: #4f4;
+  box-shadow: 0 0 8px #4f4;
+}
+.status-light.error {
+  background-color: var(--error);
+  box-shadow: 0 0 8px var(--error);
+}
+.status-text {
+  font-weight: normal;
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
+@media (max-width: 400px) {
+  #api-status {
+    height: auto;
+    flex-direction: column;
+    padding: 8px 10px;
+  }
+  .api-indicator {
+    margin: 3px 0;
+    justify-content: center;
+  }
+}
+</style>
+</head>
+<body>
+<nav>
+    <a href="index.html">Cotizaciones</a>
+    <a href="calculadoras.html" class="active">Calculadoras</a>
+    <a href="noticias.html">Noticias</a>
+</nav>
+
+<h1>Calculadora Financiera</h1>
+
+<div class="data-container">
+  <section class="data-section" id="dolar-section">
+    <div class="data-header">
+      <strong>💵 Cotizaciones del dólar</strong>
+      <button id="reload-btn">Recargar</button>
+    </div>
+    <div class="data-grid">
+      <div class="data-item" id="oficial">Oficial<br><span>--</span></div>
+      <div class="data-item" id="blue">Blue<br><span>--</span></div>
+      <div class="data-item" id="mep">MEP<br><span>--</span></div>
+      <div class="data-item" id="ccl">CCL<br><span>--</span></div>
+      <div class="data-item" id="cripto">Cripto<br><span>--</span></div>
+    </div>
+    <div id="last-update">Esperando actualización...</div>
+    <div class="fuente">Fuente: dolarapi.com</div>
+  </section>
+
+  <div class="right-column">
+    <section class="data-section" id="inflacion-section">
+      <div class="data-header"><strong>📈 Índice de Inflación</strong></div>
+      <div class="data-grid">
+        <div class="data-item">Mensual<br><span id="inflacion-mensual">--</span></div>
+        <div class="data-item">Período<br><span id="inflacion-mes">--</span></div>
+      </div>
+      <div id="last-inflacion">Esperando actualización...</div>
+      <div class="fuente">Fuente: argentinadatos.com</div>
+    </section>
+
+    <section class="data-section" id="riesgo-section">
+      <div class="data-header"><strong>📊 Riesgo País</strong></div>
+      <div class="data-grid">
+        <div class="data-item">Último valor<br><span id="riesgo-valor">--</span></div>
+        <div class="data-item">Fecha<br><span id="riesgo-fecha">--</span></div>
+      </div>
+      <div id="last-riesgo">Esperando actualización...</div>
+      <div class="fuente">Fuente: argentinadatos.com</div>
+    </section>
+  </div>
+</div>
+<div class="comparador">
+  <div>
+    <label>Capital inicial (AR$)</label>
+    <input id="capital" type="text" placeholder="">
+  </div>
+  <div>
+    <label>Precio compra USD (AR$)</label>
+    <input id="precioCompraGlobal" type="text" placeholder="">
+  </div>
+  <div style="grid-column:1/-1">
+    <div id="resultadoConviene" class="small"></div>
+    <div id="vecesPara10" class="small"></div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="calc gris" id="calcUsdt">
+    <h2 style="margin:0 0 8px;">USD ➤ USDT ➤ ARS</h2>
+    <label>Precio compra USDT (US$)</label>
+    <input id="precioVentaUsdt" type="text" placeholder="">
+    <label style="margin-top:8px;">Precio venta ARS (por USDT)</label>
+    <input id="precioVentaArs" type="text" placeholder="">
+    <div class="resultado" id="gananciaUsdt"></div>
+    <div class="sub">Repeticiones para 10%: <span id="repeticionesUsdt"></span></div>
+  </div>
+
+  <div class="calc gris" id="calcUsd">
+    <h2 style="margin:0 0 8px;">USD ➤ USD</h2>
+    <label>Precio venta USD (AR$)</label>
+    <input id="precioVentaUsd" type="text" placeholder="">
+    <div class="resultado" id="gananciaUsd"></div>
+    <div class="sub">Repeticiones para 10%: <span id="repeticionesUsd"></span></div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="calc" id="calcTna">
+    <h2 style="margin:0 0 8px;">Calculadora TNA</h2>
+    <div class="tna-grid">
+      <div>
+        <label>TNA (%)</label>
+        <input id="tna" type="text" placeholder="">
+        <label style="margin-top:8px;">Días</label>
+        <input id="dias" type="text" placeholder="">
+      </div>
+      <div>
+        <div class="small">Ganancia diaria</div>
+        <div class="resultado" id="gananciaDiaria"></div>
+        <div class="small" style="margin-top:10px;">Ganancia en <span id="diasLabel">0</span> días</div>
+        <div class="resultado" id="gananciaDias"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc" id="calcCaucion">
+    <h2 style="margin:0 0 8px;">Calculadora Caución Bursátil</h2>
+    <div class="tna-grid">
+        <div>
+            <label>TNA de la Caución (%)</label>
+            <input id="caucionTasa" type="text" placeholder="">
+            <label style="margin-top:8px;">Días a invertir</label>
+            <input id="caucionDias" type="text" placeholder="">
+            <label style="margin-top:8px;">Comisión Broker (%)</label>
+            <input id="caucionComision" type="text" placeholder="">
+        </div>
+        <div>
+            <div class="small">Ganancia Neta en <span id="caucionDiasLabel">0</span> días</div>
+            <div class="resultado" id="caucionGananciaNeta"></div>
+            <div class="small" style="margin-top:10px;">Monto Final (Capital + Ganancia)</div>
+            <div class="resultado" id="caucionMontoFinal"></div>
+        </div>
+    </div>
+    <div class="sub">Capital inicial tomado de la sección superior.</div>
+  </div>
+</div>
+<div id="api-status">
+  <div class="api-indicator">
+    <strong>DolarAPI.com:</strong>
+    <span id="dolarapi-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+  <div class="api-indicator">
+    <strong>ArgentinaDatos.com:</strong>
+    <span id="argentinadatos-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+  <div class="api-indicator">
+    <strong>CriptoYa.com:</strong>
+    <span id="criptoya-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+</div>
+
+<script>
+/* ========================================================== */
+/* === SCRIPT 1: COTIZACIONES ORIGINALES (Dólar, Inflación, Riesgo) (Sin cambios) === */
+/* ========================================================== */
+async function cargarDolares(){
+  const last=document.getElementById("last-update");
+  try{
+    const res=await fetch("https://dolarapi.com/v1/dolares");
+    const data=await res.json();
+    const map={
+      oficial:data.find(d=>d.nombre.toLowerCase().includes("oficial")),
+      blue:data.find(d=>d.nombre.toLowerCase().includes("blue")),
+      mep:data.find(d=>d.nombre.toLowerCase().includes("bolsa")),
+      ccl:data.find(d=>d.nombre.toLowerCase().includes("contado con liqui")),
+      cripto:data.find(d=>d.nombre.toLowerCase().includes("cripto"))
+    };
+    Object.entries(map).forEach(([k,v])=>{
+      const el=document.querySelector(`#${k} span`);
+      if(v&&el){el.textContent=`C: ${v.compra.toFixed(2)} | V: ${v.venta.toFixed(2)}`;}
+      else if(el){el.textContent="N/D";}
+    });
+    last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
+  }catch(e){last.innerHTML='<span class="error">Error al cargar cotizaciones</span>';}
+}
+document.getElementById("reload-btn").addEventListener("click",cargarDolares);
+cargarDolares();
+
+async function cargarInflacion() {
+  const last = document.getElementById("last-inflacion");
+  try {
+    const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/inflacion");
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) { throw new Error("Sin datos"); }
+
+    const ult = data[data.length - 1];
+    const valor = parseFloat(String(ult.valor).replace(",", "."));
+    const fecha = new Date(ult.fecha);
+    const mes = fecha.toLocaleString("es-AR", { month: "long", year: "numeric" });
+
+    document.getElementById("inflacion-mensual").textContent = isNaN(valor) ? "-" : valor.toFixed(2) + "%";
+    document.getElementById("inflacion-mes").textContent = mes;
+    last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+  } catch (err) {
+    console.error("Error al obtener inflación:", err);
+    last.innerHTML = '<span class="error">Error al cargar inflación</span>';
+    document.getElementById("inflacion-mensual").textContent = "-";
+    document.getElementById("inflacion-mes").textContent = "--";
+  }
+}
+cargarInflacion();
+
+async function cargarRiesgo(){
+  const last=document.getElementById("last-riesgo");
+  try{
+    const res=await fetch("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais/ultimo");
+    const ult=await res.json();
+    document.getElementById("riesgo-valor").textContent=ult.valor+" pts";
+    document.getElementById("riesgo-fecha").textContent=ult.fecha;
+    last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
+  }catch(e){last.innerHTML='<span class="error">Error al cargar riesgo país</span>';}
+}
+cargarRiesgo();
+
+
+/* ========================================================== */
+/* === SCRIPT 2: FUNCIONES ORIGINALES (Calculadoras) (Sin cambios) === */
+/* ========================================================== */
+function formatAR_fromRight(digits){while(digits.length<3)digits="0"+digits;const len=digits.length;const dec=digits.slice(len-2);let intPart=digits.slice(0,len-2).replace(/^0+/,'')||'0';intPart=intPart.replace(/\B(?=(\d{3})+(?!\d))/g,'.');return intPart+','+dec;}
+function setupInput(id){const inp=document.getElementById(id);inp.addEventListener("input",function(e){let current=this.value.replace(/[^\d]/g,'');if(current===""){this.value='';actualizar();return;}this.value=formatAR_fromRight(current);actualizar();});}
+["capital","precioCompraGlobal","precioVentaUsdt","precioVentaArs","precioVentaUsd","tna", "caucionTasa", "caucionComision"].forEach(setupInput);
+const diasInput=document.getElementById('dias');diasInput.addEventListener('input',()=>{diasInput.value=diasInput.value.replace(/[^\d]/g,'');actualizar();});
+const caucionDiasInput=document.getElementById('caucionDias');caucionDiasInput.addEventListener('input',()=>{caucionDiasInput.value=caucionDiasInput.value.replace(/[^\d]/g,'');actualizar();});
+
+function getNumber(str){return parseFloat(str.replace(/\./g,'').replace(',','.'))||null;}
+
+function actualizar(){
+  const capital=getNumber(document.getElementById('capital').value);
+  const compra=getNumber(document.getElementById('precioCompraGlobal').value);
+  const ventaUsdt=getNumber(document.getElementById('precioVentaUsdt').value);
+  const ventaArs=getNumber(document.getElementById('precioVentaArs').value);
+  const ventaUsd=getNumber(document.getElementById('precioVentaUsd').value);
+  const tna=getNumber(document.getElementById('tna').value);
+  const dias=parseInt(document.getElementById('dias').value)||0;
+
+  const caucionTasa=getNumber(document.getElementById('caucionTasa').value);
+  const caucionDias=parseInt(document.getElementById('caucionDias').value)||0;
+  const caucionComision=getNumber(document.getElementById('caucionComision').value);
+
+
+  // 1. Calculadora USD/USDT
+  let ganUsdt=null;
+  if(capital&&ventaUsdt&&ventaArs){
+    ganUsdt=((ventaArs/(ventaUsdt*compra))-1)*capital;
+    document.getElementById('gananciaUsdt').textContent='AR$ '+ganUsdt.toLocaleString('es-AR',{minimumFractionDigits:2});
+    const repU=(0.1*capital)/ganUsdt;
+    document.getElementById('repeticionesUsdt').textContent=repU>0?repU.toFixed(2):'';
+  }else{
+    document.getElementById('gananciaUsdt').textContent='';
+    document.getElementById('repeticionesUsdt').textContent='';
+  }
+
+  let ganUsd=null;
+  if(capital&&ventaUsd){
+    ganUsd=((ventaUsd/compra)-1)*capital;
+    document.getElementById('gananciaUsd').textContent='AR$ '+ganUsd.toLocaleString('es-AR',{minimumFractionDigits:2});
+    const repD=(0.1*capital)/ganUsd;
+    document.getElementById('repeticionesUsd').textContent=repD>0?repD.toFixed(2):'';
+  }else{
+    document.getElementById('gananciaUsd').textContent='';
+    document.getElementById('repeticionesUsd').textContent='';
+  }
+
+  // 1.1 Comparador
+  const elUsdt=document.getElementById('calcUsdt');
+  const elUsd=document.getElementById('calcUsd');
+  if(ganUsd!==null&&ganUsdt!==null){
+    let conv='';
+    if(ganUsd>ganUsdt){conv='USD→USD';elUsd.className='calc conviene';elUsdt.className='calc gris';}
+    else if(ganUsdt>ganUsd){conv='USD→USDT→ARS';elUsdt.className='calc conviene';elUsd.className='calc gris';}
+    document.getElementById('resultadoConviene').textContent='Conviene: '+conv;
+    const mejor=Math.max(ganUsd,ganUsdt);
+    const veces=(0.1*capital)/mejor;
+    document.getElementById('vecesPara10').textContent='Veces para 10% (mejor): '+veces.toFixed(2);
+  }else{
+    document.getElementById('resultadoConviene').textContent='';
+    document.getElementById('vecesPara10').textContent='';
+    elUsdt.className='calc gris';
+    elUsd.className='calc gris';
+  }
+
+  // 2. Calculadora TNA
+  if(capital&&tna){
+    const diaria=(tna/100)/365;
+    const ganDia=capital*diaria;
+    document.getElementById('gananciaDiaria').textContent='AR$ '+ganDia.toLocaleString('es-AR',{minimumFractionDigits:2});
+    if(dias){
+      const ganancia=capital*diaria*dias;
+      document.getElementById('gananciaDias').textContent='AR$ '+ganancia.toLocaleString('es-AR',{minimumFractionDigits:2});
+      document.getElementById('diasLabel').textContent=dias;
+    }else{
+      document.getElementById('gananciaDias').textContent='';
+      document.getElementById('diasLabel').textContent='0';
+    }
+  }else{
+    document.getElementById('gananciaDiaria').textContent='';
+    document.getElementById('gananciaDias').textContent='';
+    document.getElementById('diasLabel').textContent='0';
+  }
+
+  // 3. Calculadora Caución
+  if(capital !== null && caucionTasa !== null && caucionDias > 0 && caucionComision !== null){
+      const tasaAnualDecimal = caucionTasa / 100;
+      const comisionDecimal = caucionComision / 100;
+      // Ganancia bruta
+      const gananciaBruta = capital * tasaAnualDecimal * (caucionDias / 365);
+      // Comisión sobre la Ganancia Bruta (TNA)
+      const montoComision = gananciaBruta * comisionDecimal;
+      const gananciaNeta = gananciaBruta - montoComision;
+      const montoFinal = capital + gananciaNeta;
+
+      document.getElementById('caucionGananciaNeta').textContent = 'AR$ ' + gananciaNeta.toLocaleString('es-AR', {minimumFractionDigits: 2});
+      document.getElementById('caucionMontoFinal').textContent = 'AR$ ' + montoFinal.toLocaleString('es-AR', {minimumFractionDigits: 2});
+      document.getElementById('caucionDiasLabel').textContent = caucionDias;
+  } else {
+      document.getElementById('caucionGananciaNeta').textContent = '';
+      document.getElementById('caucionMontoFinal').textContent = '';
+      document.getElementById('caucionDiasLabel').textContent = '0';
+  }
+}
+
+/* ========================================================== */
+/* === SCRIPT 3: MONITOREO DE ESTADO DE APIS (MODIFICADO) === */
+/* ========================================================== */
+async function checkApiStatus(url, elementId) {
+  const statusElement = document.getElementById(elementId);
+  const light = statusElement.querySelector('.status-light');
+  const text = statusElement.querySelector('.status-text');
+
+  light.className = 'status-light';
+  text.textContent = 'Cargando...';
+  text.style.color = '#ddd';
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Lógica simplificada que el usuario indicó que funciona para DolarAPI y ArgentinaDatos.
+    // Se utiliza para todas las APIs para mantener el código unificado.
+    const isUp = (data.status === "ok" || data.status === "available" || response.ok);
+
+    if (isUp) {
+      light.className = 'status-light funcional';
+      text.textContent = 'Funcional';
+      text.style.color = '#4f4';
+    } else {
+      light.className = 'status-light error';
+      text.textContent = 'Error';
+      text.style.color = 'var(--error)';
+    }
+  } catch (e) {
+    light.className = 'status-light error';
+    text.textContent = 'Error';
+    text.style.color = 'var(--error)';
+    console.error(`Error al verificar estado de API ${elementId}:`, e);
+  }
+}
+
+function loadApiStatus() {
+  checkApiStatus("https://dolarapi.com/v1/estado", "dolarapi-status");
+  checkApiStatus("https://api.argentinadatos.com/v1/estado", "argentinadatos-status");
+  checkApiStatus("https://criptoya.com/api/dolar", "criptoya-status");
+}
+
+loadApiStatus();
+setInterval(loadApiStatus, 3600000);
+</script>
+</body>
+</html>
