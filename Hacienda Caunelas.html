@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacienda Cañuelas</title>
+  <style>
+    /* === VARIABLES GLOBALES (Consistentes con index.html) === */
+    :root {
+      --base:#ccc;
+      --gris:#111;
+      --texto:#ddd;
+      --borde:#ccc40;
+      --error:#f44;
+      --destacado-compra: rgba(40, 167, 69, 0.4);
+      --destacado-venta: rgba(0, 123, 255, 0.4);
+    }
+
+    /* ------------------------------------------- */
+    /* ESTILOS BASE Y RESPONSIVOS */
+    /* ------------------------------------------- */
+    body {
+      background: #000; /* Fondo negro */
+      color: var(--texto); /* Texto gris claro */
+      font-family: 'Courier New', monospace; /* Fuente retro */
+      margin: 0;
+      padding: 0;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    /* === HEADER y TÍTULO === */
+    header {
+        background-color: #111;
+        color: var(--base);
+        padding: 20px 0 10px 0;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      color: var(--base);
+      font-size: 2rem;
+      margin-bottom: 0;
+      text-shadow:0 0 8px rgba(204,204,204,0.6);
+    }
+
+    /* === NAVEGACIÓN === */
+    nav {
+        max-width: 900px;
+        margin: 0 auto 30px auto;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #222;
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+    nav a {
+        color: var(--base);
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 8px 15px;
+        margin: 0 5px;
+        transition: background-color 0.3s;
+        border: 1px solid transparent;
+    }
+    nav a.active {
+        border-color: var(--base);
+        background: rgba(204, 204, 204, 0.1);
+    }
+    nav a:hover:not(.active) {
+        background: #111;
+    }
+
+    /* === MAIN CONTAINER === */
+    main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 10px; /* Padding horizontal para móviles */
+        text-align: left; /* Alineamos el contenido dentro del main */
+    }
+
+
+    /* ------------------------------------------- */
+    /* ESTILOS DE CONTROLES (Botones y Toggle) */
+    /* ------------------------------------------- */
+    .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    /* Estilo del botón de Recarga */
+    #refreshButton {
+        padding: 8px 12px;
+        cursor: pointer;
+        background-color: #000;
+        color: #007bff;
+        border: 1px solid #007bff; /* Borde azul */
+        border-radius: 0; /* Estilo plano */
+        font-weight: bold;
+        flex-grow: 1;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    #refreshButton:hover:not(:disabled) {
+        background-color: #007bff;
+        color: white;
+    }
+
+
+    /* ------------------------------------------- */
+    /* ESTILOS DEL TOGGLE DE MONEDA (Adaptado al tema oscuro) */
+    /* ------------------------------------------- */
+    .currency-toggle-container {
+        display: flex;
+        border: 1px solid #222; /* Borde sutil */
+        border-radius: 0;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .currency-option {
+        padding: 8px 12px;
+        cursor: pointer;
+        background-color: #050505; /* Fondo muy oscuro */
+        color: var(--base);
+        font-weight: bold;
+        transition: background-color 0.2s, color 0.2s;
+        flex-grow: 1;
+        text-align: center;
+        border-left: 1px solid #222;
+    }
+    .currency-option:first-child { border-left: none; }
+
+
+    .currency-option.active {
+        background-color: #2ecc71; /* Verde fuerte para activo */
+        color: white;
+        border-color: #2ecc71;
+    }
+
+    .currency-option:not(.active):hover {
+        background-color: #111;
+    }
+
+    /* ------------------------------------------- */
+    /* ESTILOS DE TABLA Y RESPONSIVIDAD */
+    /* ------------------------------------------- */
+    .table-container {
+      /* Mantiene la capacidad de scroll en móviles, pero no lo fuerza en escritorio */
+      overflow-x: auto;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #111;
+    }
+
+    #priceTable {
+      width: 100%;
+      /* Eliminamos min-width aquí para que se ajuste 100% en escritorio */
+      border-collapse: collapse;
+      font-size: 0.9em; /* Ligero aumento en la fuente base de la tabla */
+      background-color: #000;
+    }
+
+    #priceTable th, #priceTable td {
+      border: 1px solid #111;
+      padding: 8px 6px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Aumento de tamaño específico para los números (datos) */
+    #priceTable td {
+        font-size: 1em;
+    }
+
+    #priceTable th {
+      background-color: #111;
+      text-align: left;
+      font-weight: bold;
+      padding: 10px 6px;
+      color: var(--base);
+    }
+
+    .categoria {
+      text-align: left;
+      font-weight: 500;
+      min-width: 140px;
+      padding-left: 8px;
+    }
+
+    #error {
+        color: var(--error);
+        margin-top: 5px;
+        text-align: left;
+    }
+
+    /* ------------------------------------------- */
+    /* ESTILOS DE VARICIÓN */
+    /* ------------------------------------------- */
+    .positive { color: #27ae60; }
+    .negative { color: #e74c3c; }
+    .neutral { color: #95a5a6; }
+    .variacion::before { content: "▲ "; }
+    .negative.variacion::before { content: "▼ "; }
+    .neutral.variacion::before { content: "▬ "; }
+
+    /* === OPTIMIZACIÓN MÓVIL (Max-width: 600px) === */
+    @media (max-width: 600px) {
+
+        /* 1. Navegación: Permite que salte de línea */
+        nav {
+            flex-wrap: wrap;
+            padding: 5px 0;
+            margin-bottom: 10px;
+        }
+        nav a {
+            flex: 1 1 auto;
+            padding: 8px 5px;
+            font-size: 0.9rem;
+            margin: 5px 2px;
+        }
+
+        /* 2. Controles: Apilar y estirar */
+        .controls {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        .currency-toggle-container, #refreshButton {
+             width: 100%;
+        }
+
+        /* 3. Tabla: Forzamos ancho mínimo en móviles para que haya scroll horizontal */
+        #priceTable {
+            min-width: 550px;
+            font-size: 0.85em; /* Reducimos la fuente para que quepan más datos */
+        }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <h1>Listado de Precios Cañuelas</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Cotizaciones</a>
+        <a href="calculadoras.html">Calculadoras</a>
+        <a href="noticias.html">Noticias</a>
+        <a href="Graficos historicos.html">Gráficos</a>
+        <a href="Hacienda Caunelas.html" class="active">Hacienda</a>
+    </nav>
+
+    <main>
+      <div class="controls">
+        <div class="currency-toggle-container">
+            <div id="toggleARS" class="currency-option active">ARS</div>
+            <div id="toggleUSD" class="currency-option">USD</div>
+        </div>
+        <button id="refreshButton">🔄 Refrescar Ahora</button>
+      </div>
+
+      <div id="error"></div>
+
+      <div class="table-container">
+        <table id="priceTable">
+          <thead>
+            <tr>
+              <th class="categoria">Categoría</th>
+              <th id="headerCurrentPrice">Precio (Último Cierre)</th>
+              <th>Cantidad Operada</th>
+              <th>Precio (Semana Anterior)</th>
+              <th>Cantidad Operada Anterior</th>
+              <th>Tendencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+        <p style="text-align:center; color:#999; padding: 15px 0; background-color: #111; margin-top: 30px;">
+            Datos de Mercado de Cañuelas.
+        </p>
+    </footer>
+
+  <script>
+    // URL de la API con proxy (para evitar CORS)
+    const API_URL = 'https://corsproxy.io/?https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo';
+    const REFRESH_INTERVAL_MS = 15 * 60 * 1000; // 15 minutos en milisegundos
+
+    let isUSD = false;
+    let dataCache = null; // Cache para guardar los datos y solo re-renderizar al cambiar la moneda
+
+    const toggleARS = document.getElementById('toggleARS');
+    const toggleUSD = document.getElementById('toggleUSD');
+    const refreshButton = document.getElementById('refreshButton');
+    const tableBody = document.querySelector('#priceTable tbody');
+    const headerCurrentPrice = document.getElementById('headerCurrentPrice');
+    const errorDiv = document.getElementById('error');
+
+    // Almacena el texto original del encabezado para poder modificarlo
+    const originalHeaderCurrentPriceText = headerCurrentPrice.textContent;
+
+    // Función de ayuda para formatear números como moneda
+    const formatCurrency = (value, currency) => {
+      if (value === null || value === undefined) return '-';
+
+      // Reemplazar comas por puntos solo si es una cadena y es necesario
+      const numValue = typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+
+      const options = {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      };
+
+      if (currency === 'ARS') {
+        return numValue.toLocaleString('es-AR', options);
+      } else if (currency === 'USD') {
+        return numValue.toLocaleString('en-US', options);
+      }
+      return numValue.toFixed(2);
+    };
+
+    // Función para renderizar la tabla con los datos
+    const renderTable = (data) => {
+      tableBody.innerHTML = ''; // Limpiar la tabla
+
+      dataCache = data; // Actualizar el caché de datos
+
+      data.forEach(item => {
+        // Seleccionar los campos basados en la moneda actual
+        const currentPriceKey = isUSD ? 'precio_semana_1_usd' : 'precio_semana_1';
+        const previousPriceKey = isUSD ? 'precio_semana_2_usd' : 'precio_semana_2';
+        const variationKey = isUSD ? 'variacion_precio_semana_1_usd' : 'variacion_precio_semana_1';
+
+        const currentPrice = item[currentPriceKey];
+        const previousPrice = item[previousPriceKey];
+        const variationValue = parseFloat(item[variationKey] || 0);
+
+        // Clases de CSS para variación
+        let variationClass = 'neutral';
+        if (variationValue > 0) variationClass = 'positive';
+        if (variationValue < 0) variationClass = 'negative';
+
+        const row = tableBody.insertRow();
+
+        row.insertCell().innerHTML = `<span class="categoria">${item.categoria}</span>`;
+
+        row.insertCell().textContent = formatCurrency(currentPrice, isUSD ? 'USD' : 'ARS');
+
+        row.insertCell().textContent = item.cantidad_semana_1 ? item.cantidad_semana_1.toLocaleString('es-AR') : '-';
+
+        row.insertCell().textContent = formatCurrency(previousPrice, isUSD ? 'USD' : 'ARS');
+
+        row.insertCell().textContent = item.cantidad_semana_2 ? item.cantidad_semana_2.toLocaleString('es-AR') : '-';
+
+        const variationCell = row.insertCell();
+        variationCell.className = `${variationClass} variacion`;
+
+        // Formatear la variación
+        const formattedVariation = (variationValue > 0 ? '+' : '') + formatCurrency(variationValue, isUSD ? 'USD' : 'ARS');
+
+        variationCell.textContent = formattedVariation;
+      });
+
+      // Actualizar el encabezado del precio y mensaje. Se le añade el sufijo de moneda al texto original.
+      headerCurrentPrice.textContent = `${originalHeaderCurrentPriceText} (${isUSD ? 'USD' : 'ARS'})`;
+      errorDiv.textContent = `Datos actualizados. Moneda: ${isUSD ? 'USD' : 'ARS'}.`;
+    };
+
+    // Función para actualizar el estado del toggle
+    const updateToggleState = () => {
+        if (isUSD) {
+            toggleUSD.classList.add('active');
+            toggleARS.classList.remove('active');
+        } else {
+            toggleARS.classList.add('active');
+            toggleUSD.classList.remove('active');
+        }
+    }
+
+
+    // Función principal para obtener datos de la API
+    const fetchData = async () => {
+      refreshButton.disabled = true; // Desactivar durante la carga
+      refreshButton.textContent = 'Cargando...';
+      errorDiv.textContent = 'Cargando datos...';
+
+      try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.data && Array.isArray(data.data)) {
+          // Si la carga fue exitosa, renderizar con los datos nuevos
+          renderTable(data.data);
+        } else {
+          throw new Error('Estructura de datos inesperada de la API.');
+        }
+
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+        errorDiv.textContent = `❌ Error al cargar los datos. (${error.message})`;
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No se pudo cargar la información.</td></tr>';
+      } finally {
+        refreshButton.disabled = false;
+        refreshButton.textContent = '🔄 Recargar';
+      }
+    };
+
+    // --- MANEJO DE EVENTOS Y REFRESH ---
+
+    // Alternar Moneda y renderizar
+    const handleCurrencyToggle = (currency) => {
+        const wasUSD = isUSD;
+        isUSD = currency === 'USD';
+
+        // Solo re-renderizar si la moneda cambió O si ya tenemos datos en caché
+        if (wasUSD !== isUSD || dataCache) {
+            updateToggleState();
+            if (dataCache) {
+                renderTable(dataCache); // Re-renderizar con datos en caché
+            } else {
+                fetchData(); // Si no hay datos, cargar desde API
+            }
+        }
+    };
+
+    toggleARS.addEventListener('click', () => handleCurrencyToggle('ARS'));
+    toggleUSD.addEventListener('click', () => handleCurrencyToggle('USD'));
+
+    // Refresco manual
+    refreshButton.addEventListener('click', fetchData);
+
+    // Refresco automático cada 15 minutos
+    setInterval(fetchData, REFRESH_INTERVAL_MS);
+
+    // Iniciar la carga de datos y estado inicial
+    updateToggleState();
+    fetchData();
+  </script>
+</body>
+</html>
