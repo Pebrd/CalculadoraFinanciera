@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores Financieros de Argentina - Gráficos Históricos</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        /* === ESTILOS GLOBALES (Consistentes con index.html) === */
+        :root {
+            --base:#ccc;
+            --gris:#111;
+            --texto:#ddd;
+            --borde:#ccc40;
+            --error:#f44;
+            --destacado-compra: rgba(40, 167, 69, 0.4);
+            --destacado-venta: rgba(0, 123, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Courier New', monospace; /* Usando Courier New para consistencia */
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: var(--texto);
+            text-align: center;
+        }
+
+        header {
+            background-color: #111;
+            color: var(--base);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: var(--base);
+            text-shadow:0 0 8px rgba(204,204,204,0.6);
+        }
+
+        /* --- Estilos de Navegación --- */
+        nav {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+        }
+        nav a {
+            color: var(--base);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+            border: 1px solid transparent;
+        }
+        nav a.active {
+            border-color: var(--base);
+            background: rgba(204, 204, 204, 0.1);
+        }
+        nav a:hover:not(.active) {
+            background: #111;
+        }
+        /* --- FIN Estilos de Navegación --- */
+
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        section {
+            /* Corregido para igualar el estilo de sección de index.html */
+            background-color: #050505;
+            padding: 20px;
+            border-radius: 0;
+            box-shadow: none;
+            border: 1px solid #111;
+        }
+
+        h2 {
+            color: var(--base); /* Cambiado a --base para un contraste más suave */
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Estilos para los botones de filtro */
+        .filter-buttons {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .filter-buttons button {
+            padding: 8px 15px;
+            border: 1px solid #007bff;
+            background-color: #000;
+            color: #007bff;
+            /* Corregido: Eliminado el radio para consistencia */
+            border-radius: 0;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .filter-buttons button:hover,
+        .filter-buttons button.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        footer {
+            padding: 15px;
+            background-color: #111;
+            color: #999;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Cotizaciones</a>
+        <a href="calculadoras.html">Calculadoras</a>
+        <a href="noticias.html">Noticias</a>
+        <a href="Graficos historicos.html" class="active">Gráficos</a>
+    </nav>
+
+    <header>
+        <h1>Indicadores Financieros de Argentina 🚀</h1>
+        <p>Visualización de Inflación Mensual, Interanual y Riesgo País.</p>
+    </header>
+
+    <main>
+        <section id="interanual-section">
+            <h2>Inflación Interanual (%) - Últimos 12 meses</h2>
+            <div class="chart-container">
+                <canvas id="chartInflacionAnual"></canvas>
+            </div>
+        </section>
+
+        <section>
+            <h2>Inflación Mensual - Nivel General (%)</h2>
+            <div class="filter-buttons" data-chart-id="chartInflacionMensual" data-raw-data-key="inflacionMensual">
+                <button class="active" data-period="1">Último Año</button>
+                <button data-period="5">Últimos 5 Años</button>
+                <button data-period="0">Total</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="chartInflacionMensual"></canvas>
+            </div>
+        </section>
+
+        <section>
+            <h2>Riesgo País (Puntos Básicos)</h2>
+            <div class="filter-buttons" data-chart-id="chartRiesgoPais" data-raw-data-key="riesgoPais">
+                <button class="active" data-period="1">Último Año</button>
+                <button data-period="5">Últimos 5 Años</button>
+                <button data-period="0">Total</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="chartRiesgoPais"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Datos obtenidos de ArgentinaDatos API.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Se eliminó el registro explícito del plugin de zoom.
+
+            const BASE_URL = 'https://api.argentinadatos.com/v1/finanzas/indices/';
+            const RAW_DATA_STORE = {};
+            const CHART_INSTANCES = {};
+
+            // --- Funciones Auxiliares ---
+
+            function parseDateForChart(dateString) {
+                if (!dateString) return null;
+                if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                    return dateString;
+                }
+                return null;
+            }
+
+            async function fetchData(endpoint) {
+                try {
+                    const url = `${BASE_URL}${endpoint}`;
+                    const response = await axios.get(url);
+                    return response.data || [];
+                } catch (error) {
+                    console.error(`ERROR al obtener datos de ${endpoint}:`, error);
+                    return [];
+                }
+            }
+
+            function filterDataByPeriod(data, years) {
+                if (years === 0) {
+                    return data;
+                }
+
+                const currentDate = new Date();
+                const targetDate = new Date();
+                targetDate.setFullYear(currentDate.getFullYear() - years);
+
+                let startIndex = 0;
+                for (let i = 0; i < data.length; i++) {
+                    if (new Date(data[i].x) >= targetDate) {
+                        startIndex = i;
+                        break;
+                    }
+                }
+
+                return data.slice(startIndex);
+            }
+
+            function createOrUpdateChart(canvasId, title, data, borderColor, dateUnit) {
+                let canvas = document.getElementById(canvasId);
+
+                if (data.length === 0) {
+                    if (CHART_INSTANCES[canvasId]) {
+                        CHART_INSTANCES[canvasId].destroy();
+                        delete CHART_INSTANCES[canvasId];
+                    }
+                    console.log(`No hay datos para el gráfico: ${title}`);
+                    return;
+                }
+
+                if (!canvas || !canvas.getContext) {
+                    const targetContainer = document.querySelector(`#${canvasId}`).parentNode;
+                    targetContainer.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+                    canvas = document.getElementById(canvasId);
+                }
+
+                const ctx = canvas.getContext('2d');
+                const yAxisTitle = (canvasId === 'chartRiesgoPais' ? 'Valor' : 'Valor (%)');
+                const pointRadiusValue = (canvasId === 'chartInflacionAnual' ? 2 : 0);
+
+                // Se eliminó la configuración del Zoom (zoomConfig)
+
+                if (CHART_INSTANCES[canvasId]) {
+                    // 1. Actualizar gráfico existente
+                    CHART_INSTANCES[canvasId].data.datasets[0].data = data;
+                    CHART_INSTANCES[canvasId].options.scales.y.title.text = yAxisTitle;
+                    CHART_INSTANCES[canvasId].data.datasets[0].label = title;
+                    CHART_INSTANCES[canvasId].data.datasets[0].pointRadius = pointRadiusValue;
+                    CHART_INSTANCES[canvasId].update();
+                } else {
+                    // 2. Crear nuevo gráfico
+                    const newChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            datasets: [{
+                                label: title,
+                                data: data,
+                                borderColor: borderColor,
+                                backgroundColor: `${borderColor}30`,
+                                tension: 0.2,
+                                fill: false,
+                                pointRadius: pointRadiusValue,
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: true },
+                                tooltip: { mode: 'index', intersect: false },
+                                decimation: { enabled: true, algorithm: 'min-max' }
+                                // Se eliminó la inyección de zoomConfig
+                            },
+                            scales: {
+                                x: {
+                                    type: 'time',
+                                    time: {
+                                        unit: dateUnit,
+                                        tooltipFormat: dateUnit === 'day' ? 'dd/MM/yyyy' : 'MM/yyyy'
+                                    },
+                                    title: { display: true, text: 'Fecha' }
+                                },
+                                y: {
+                                    beginAtZero: false,
+                                    title: { display: true, text: yAxisTitle },
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' } // Grillas claras
+                                }
+                            }
+                        }
+                    });
+                    CHART_INSTANCES[canvasId] = newChart;
+                }
+            }
+
+            // Se eliminó la función window.resetZoom
+
+            // ----------------------------------------------------------------------
+            // --- GRÁFICO 1: Inflación Interanual ---
+            // ----------------------------------------------------------------------
+
+            async function plotInflacionInteranual() {
+                const dataRaw = await fetchData('inflacionInteranual');
+                if (dataRaw.length === 0) return;
+
+                const annualDataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (annualDataChart.length === 0) return;
+
+                RAW_DATA_STORE.inflacionInteranual = annualDataChart;
+                const annualFinalData = annualDataChart.slice(-12);
+
+                createOrUpdateChart(
+                    'chartInflacionAnual',
+                    'Inflación Interanual (%)',
+                    annualFinalData,
+                    'rgb(255, 99, 132)',
+                    'month'
+                );
+            }
+
+            // ----------------------------------------------------------------------
+            // --- GRÁFICO 2: Inflación Mensual ---
+            // ----------------------------------------------------------------------
+
+            async function plotInflacionMensual() {
+                const dataRaw = await fetchData('inflacion');
+                if (dataRaw.length === 0) return;
+
+                const monthlyDataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (monthlyDataChart.length === 0) return;
+
+                RAW_DATA_STORE.inflacionMensual = monthlyDataChart;
+                const monthlyFinalData = filterDataByPeriod(monthlyDataChart, 1);
+
+                createOrUpdateChart(
+                    'chartInflacionMensual',
+                    'Inflación Mensual - Nivel General (%)',
+                    monthlyFinalData,
+                    'rgb(54, 162, 235)',
+                    'month'
+                );
+            }
+
+            // ----------------------------------------------------------------------
+            // --- GRÁFICO 3: Riesgo País ---
+            // ----------------------------------------------------------------------
+
+            async function plotRiesgoPais() {
+                const dataRaw = await fetchData('riesgo-pais');
+                if (dataRaw.length === 0) return;
+
+                const dataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (dataChart.length === 0) return;
+
+                RAW_DATA_STORE.riesgoPais = dataChart;
+                const finalData = filterDataByPeriod(dataChart, 1);
+
+                createOrUpdateChart(
+                    'chartRiesgoPais',
+                    'Riesgo País (Puntos Básicos)',
+                    finalData,
+                    'rgb(75, 192, 192)',
+                    'day'
+                );
+            }
+
+            // ----------------------------------------------------------------------
+            // --- Lógica de Interacción de Botones ---
+            // ----------------------------------------------------------------------
+
+            function handleFilterClick(event) {
+                const button = event.target;
+                if (button.tagName !== 'BUTTON') return;
+
+                const container = button.closest('.filter-buttons');
+                const chartId = container.dataset.chartId;
+                const rawDataKey = container.dataset.rawDataKey;
+                const period = parseInt(button.dataset.period);
+
+                container.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const rawData = RAW_DATA_STORE[rawDataKey];
+                if (!rawData) return;
+
+                // Se eliminó la llamada a resetZoom
+
+                const filteredData = filterDataByPeriod(rawData, period);
+
+                let title, borderColor, dateUnit;
+                if (chartId === 'chartInflacionMensual') {
+                    title = 'Inflación Mensual - Nivel General (%)';
+                    borderColor = 'rgb(54, 162, 235)';
+                    dateUnit = 'month';
+                } else if (chartId === 'chartRiesgoPais') {
+                    title = 'Riesgo País (Puntos Básicos)';
+                    borderColor = 'rgb(75, 192, 192)';
+                    dateUnit = 'day';
+                } else {
+                    return;
+                }
+
+                createOrUpdateChart(
+                    chartId,
+                    title,
+                    filteredData,
+                    borderColor,
+                    dateUnit
+                );
+            }
+
+            document.querySelectorAll('.filter-buttons').forEach(container => {
+                container.addEventListener('click', handleFilterClick);
+            });
+
+            // Ejecutar la carga de datos y gráficos iniciales
+            plotInflacionInteranual();
+            plotInflacionMensual();
+            plotRiesgoPais();
+        });
+    </script>
+</body>
+</html>
