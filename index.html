@@ -36,9 +36,9 @@ nav {
     text-align: center;
     padding: 10px 0;
     border-bottom: 1px solid #222;
-    display: flex; /* MODIFICADO: Usa flex para mejor control */
-    justify-content: center; /* MODIFICADO: Centra los enlaces */
-    flex-wrap: nowrap; /* MODIFICADO: Evita el salto de línea */
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap; /* CAMBIO CLAVE: Permite que los links salten de línea en móvil */
 }
 nav a {
     color: var(--base);
@@ -57,7 +57,8 @@ nav a:hover:not(.active) {
     background: #111;
 }
 
-/* --- SECCIONES DE TABLAS NUEVAS (Bancos y USDT) --- */
+/* --- SECCIONES DE TABLAS NUEVAS (Bancos y USDT) Y EL NUEVO BLOQUE DE DÓLAR --- */
+/* Esta clase define el ancho y el centrado (900px max-width, margin: 0 auto) */
 .table-block-container {
     max-width: 900px;
     margin: 0 auto 40px auto;
@@ -206,31 +207,97 @@ nav a:hover:not(.active) {
   font-size: 0.8rem;
   vertical-align: middle;
 }
-/* Media Query para móvil */
+
+/* === ESTILOS ESPECÍFICOS DEL NUEVO BLOQUE DE COTIZACIONES DÓLAR === */
+/* Se unificó el contenedor principal con .table-block-container */
+.data-section {
+  background:#050505;
+  border:1px solid #111;
+  padding:10px;
+  margin:0;
+  font-size:0.9rem;
+  box-sizing:border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.data-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.data-grid {
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:10px;
+  flex-grow: 1;
+  align-items: center;
+}
+.data-item {
+  text-align:center;
+  min-width:100px;
+}
+#reload-btn {
+  background:#111;
+  color:#ccc;
+  border:1px solid #333;
+  padding:4px 8px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
+#reload-btn:hover { background:#222; }
+#last-update { 
+  font-size:0.75rem;
+  color:#777;
+  text-align:right;
+  margin-top:5px;
+}
+.fuente {
+  text-align:right;
+  font-size:0.7rem;
+  color:#666;
+  margin-top:4px;
+}
+.error {
+  color:var(--error);
+  font-size:0.8rem;
+  text-align:right;
+  margin-top:4px;
+}
+/* --- Estilo específico para los valores del dólar --- */
+#dolar-section .data-item span {
+  font-size: 0.9rem;
+}
+
+/* Media Query para móvil (Existente y modificado) */
 @media (max-width: 600px) {
     /* 1. Fix: Navegación */
     nav {
-        justify-content: space-between;
+        justify-content: space-around; /* Mejor distribución para elementos que saltan de línea */
         padding: 10px;
     }
     nav a {
         padding: 8px 5px;
         font-size: 0.9rem;
-        margin: 0 2px;
+        margin: 4px 2px; /* Separación vertical y horizontal */
+        flex-basis: 45%; /* Dos elementos por línea, usando casi la mitad del espacio */
+        box-sizing: border-box; 
     }
     /* 2. Fix: Botones de Actualización y Hora */
     .table-block-container .controls {
-        flex-direction: column; /* Apila el botón y la hora */
+        flex-direction: column; 
         align-items: flex-start;
         gap: 5px;
     }
     .table-block-container .controls button {
-        width: 100%; /* Botón al 100% del ancho para mejor toque */
+        width: 100%; 
         padding: 8px !important; 
         font-size: 1rem;
     }
     #last-updated-usd, #last-update-time-usdt {
-        align-self: flex-start; /* Alinea el texto de hora a la izquierda */
+        align-self: flex-start; 
         font-size: 0.8em;
     }
     /* Estilos API Status existente */
@@ -242,6 +309,20 @@ nav a:hover:not(.active) {
     .api-indicator {
         margin: 3px 0;
         justify-content: center;
+    }
+    /* Asegurar que el botón de recarga del nuevo bloque se vea bien en móvil */
+    #dolar-section .data-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    #dolar-section #reload-btn {
+        width: 100%;
+        padding: 8px !important; 
+        font-size: 1rem;
+    }
+    #dolar-section strong {
+        font-size: 1.1rem;
     }
 }
 </style>
@@ -257,6 +338,23 @@ nav a:hover:not(.active) {
 </nav>
 <h1>Cotizaciones Bancarias y Cripto</h1>
 
+<div class="table-block-container new-table-container">
+  <section class="data-section" id="dolar-section">
+    <div class="data-header">
+      <strong>💵 Cotizaciones del dólar</strong>
+      <button id="reload-btn">Recargar</button>
+    </div>
+    <div class="data-grid">
+      <div class="data-item" id="oficial">Oficial<br><span>--</span></div>
+      <div class="data-item" id="blue">Blue<br><span>--</span></div>
+      <div class="data-item" id="mep">MEP<br><span>--</span></div>
+      <div class="data-item" id="ccl">CCL<br><span>--</span></div>
+      <div class="data-item" id="cripto">Cripto<br><span>--</span></div>
+    </div>
+    <div id="last-update">Esperando actualización...</div>
+    <div class="fuente">Fuente: dolarapi.com</div>
+  </section>
+</div>
 <div class="table-block-container new-table-container">
     <h2>📊 Dólar (USD/ARS) Bancos</h2>
 
@@ -354,6 +452,52 @@ nav a:hover:not(.active) {
 </div>
 
 <script>
+/* ========================================================== */
+/* === SCRIPT para cargar solo las cotizaciones del Dólar (MODIFICADO) === */
+async function cargarDolares(){
+  const last=document.getElementById("last-update");
+  const reloadBtn = document.getElementById("reload-btn");
+  if (reloadBtn) {
+    reloadBtn.disabled = true;
+    reloadBtn.textContent = 'Cargando...';
+  }
+  
+  try{
+    const res=await fetch("https://dolarapi.com/v1/dolares");
+    const data=await res.json();
+    const map={
+      oficial:data.find(d=>d.nombre.toLowerCase().includes("oficial")),
+      blue:data.find(d=>d.nombre.toLowerCase().includes("blue")),
+      mep:data.find(d=>d.nombre.toLowerCase().includes("bolsa")),
+      ccl:data.find(d=>d.nombre.toLowerCase().includes("contado con liqui")),
+      cripto:data.find(d=>d.nombre.toLowerCase().includes("cripto"))
+    };
+    Object.entries(map).forEach(([k,v])=>{
+      const el=document.querySelector(`#${k} span`);
+      if(v&&el){el.textContent=`C: ${v.compra.toFixed(2)} | V: ${v.venta.toFixed(2)}`;}
+      else if(el){el.textContent="N/D";}
+    });
+    last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
+  }catch(e){
+    last.innerHTML='<span class="error">Error al cargar cotizaciones</span>';
+    console.error("Error al cargar cotizaciones de DolarAPI:", e);
+  } finally {
+      if (reloadBtn) {
+          reloadBtn.disabled = false;
+          reloadBtn.textContent = 'Recargar';
+      }
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+    // Solo si el elemento existe (el nuevo bloque fue insertado)
+    const reloadBtn = document.getElementById("reload-btn");
+    if (reloadBtn) {
+        reloadBtn.addEventListener("click", cargarDolares);
+        cargarDolares();
+    }
+});
+/* Se quitan las funciones cargarInflacion() y cargarRiesgo() */
+
 /* ========================================================== */
 /* === SCRIPT 1: TABLA BANCOS USD/ARS (Sin cambios) === */
 /* ========================================================== */
