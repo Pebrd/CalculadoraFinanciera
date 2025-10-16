@@ -27,18 +27,20 @@ nav {
     text-align: center;
     padding: 10px 0;
     border-bottom: 1px solid #222;
-    display: flex; /* MODIFICADO: Usa flex para mejor control */
-    justify-content: center; /* MODIFICADO: Centra los enlaces */
-    flex-wrap: nowrap; /* MODIFICADO: Evita el salto de línea */
+    display: flex;
+    justify-content: center;
+    /* MODIFICACIÓN CLAVE: Permitir que los ítems salten de línea */
+    flex-wrap: wrap;
 }
 nav a {
     color: var(--base);
     text-decoration: none;
     font-size: 1.1rem;
     padding: 8px 15px;
-    margin: 0 5px;
+    margin: 5px 5px; /* MODIFICACIÓN: Añado margen vertical para separar las filas */
     transition: background-color 0.3s;
     border: 1px solid transparent;
+    display: block; /* Asegura que padding y margen funcionen bien */
 }
 nav a.active {
     border-color: var(--base);
@@ -57,106 +59,12 @@ h1 {
 }
 
 /* --- UNIFICACIÓN DE ANCHO PARA TODOS LOS BLOQUES PRINCIPALES --- */
-.data-container, .comparador, .grid-2, #calcTna, #calcCaucion {
+.comparador, .grid-2 {
     max-width: 900px;
     margin: 0 auto 20px auto;
 }
 
-/* --- SECCIONES DE DATOS FINANCIEROS (Cotizaciones Originales) --- */
-.data-container {
-  display: flex;
-  gap: 20px;
-  align-items: stretch; 
-}
-.data-container > * {
-  flex: 1;
-}
-.right-column {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
-}
-#inflacion-section, #riesgo-section {
-    flex: 1;
-}
-
-.data-section {
-  background:#050505;
-  border:1px solid #111;
-  padding:10px;
-  margin:0;
-  font-size:0.9rem;
-  box-sizing:border-box;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.data-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:8px;
-}
-.data-grid {
-  display:flex;
-  justify-content:space-around;
-  flex-wrap:wrap;
-  gap:10px;
-  flex-grow: 1;
-  align-items: center;
-}
-.data-item {
-  text-align:center;
-  min-width:100px;
-}
-#reload-btn {
-  background:#111;
-  color:#ccc;
-  border:1px solid #333;
-  padding:4px 8px;
-  cursor:pointer;
-  font-size:0.8rem;
-}
-#reload-btn:hover { background:#222; }
-#last-update, #last-inflacion, #last-riesgo {
-  font-size:0.75rem;
-  color:#777;
-  text-align:right;
-  margin-top:5px;
-}
-.fuente {
-  text-align:right;
-  font-size:0.7rem;
-  color:#666;
-  margin-top:4px;
-}
-.error {
-  color:var(--error);
-  font-size:0.8rem;
-  text-align:right;
-  margin-top:4px;
-}
-/* --- Agrandar valores de Inflación y Riesgo País --- */
-#inflacion-section .data-item span,
-#riesgo-section .data-item span {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: var(--base);
-  display: block;
-  margin-top: 5px;
-}
-#dolar-section .data-item span {
-    font-size: 0.9rem;
-}
-
-@media (max-width:700px){
-  .data-container {
-    flex-direction: column;
-  }
-}
-
-/* --- Resto de Estilos para Calculadoras --- */
+/* --- Estilos para Calculadoras --- */
 .comparador {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -266,17 +174,19 @@ input:focus {
   font-size: 0.8rem;
   vertical-align: middle;
 }
-/* Media Query para móvil */
+/* Media Query para móvil (Optimización) */
 @media (max-width: 600px) {
     /* 1. Fix: Navegación */
     nav {
-        justify-content: space-between;
+        /* Se quita justify-content: space-between para que flex-wrap funcione mejor con center */
+        justify-content: center;
         padding: 10px;
     }
     nav a {
         padding: 8px 5px;
         font-size: 0.9rem;
-        margin: 0 2px;
+        /* Aumentamos un poco el margen horizontal para evitar que se peguen */
+        margin: 5px 5px;
     }
     /* 3. Fix: Calculadoras Apiladas (grid-2) */
     .grid-2 {
@@ -307,45 +217,6 @@ input:focus {
 
 <h1>Calculadora Financiera</h1>
 
-<div class="data-container">
-  <section class="data-section" id="dolar-section">
-    <div class="data-header">
-      <strong>💵 Cotizaciones del dólar</strong>
-      <button id="reload-btn">Recargar</button>
-    </div>
-    <div class="data-grid">
-      <div class="data-item" id="oficial">Oficial<br><span>--</span></div>
-      <div class="data-item" id="blue">Blue<br><span>--</span></div>
-      <div class="data-item" id="mep">MEP<br><span>--</span></div>
-      <div class="data-item" id="ccl">CCL<br><span>--</span></div>
-      <div class="data-item" id="cripto">Cripto<br><span>--</span></div>
-    </div>
-    <div id="last-update">Esperando actualización...</div>
-    <div class="fuente">Fuente: dolarapi.com</div>
-  </section>
-
-  <div class="right-column">
-    <section class="data-section" id="inflacion-section">
-      <div class="data-header"><strong>📈 IPC </strong></div>
-      <div class="data-grid">
-        <div class="data-item">Mensual<br><span id="inflacion-mensual">--</span></div>
-        <div class="data-item">Período<br><span id="inflacion-mes">--</span></div>
-      </div>
-      <div id="last-inflacion">Esperando actualización...</div>
-      <div class="fuente">Fuente: argentinadatos.com</div>
-    </section>
-
-    <section class="data-section" id="riesgo-section">
-      <div class="data-header"><strong>📊 Riesgo País</strong></div>
-      <div class="data-grid">
-        <div class="data-item">Último valor<br><span id="riesgo-valor">--</span></div>
-        <div class="data-item">Fecha<br><span id="riesgo-fecha">--</span></div>
-      </div>
-      <div id="last-riesgo">Esperando actualización...</div>
-      <div class="fuente">Fuente: argentinadatos.com</div>
-    </section>
-  </div>
-</div>
 <div class="comparador">
   <div>
     <label>Capital inicial (AR$)</label>
@@ -423,20 +294,6 @@ input:focus {
 </div>
 <div id="api-status">
   <div class="api-indicator">
-    <strong>DolarAPI.com:</strong>
-    <span id="dolarapi-status">
-      <span class="status-light"></span>
-      <span class="status-text">Cargando...</span>
-    </span>
-  </div>
-  <div class="api-indicator">
-    <strong>ArgentinaDatos.com:</strong>
-    <span id="argentinadatos-status">
-      <span class="status-light"></span>
-      <span class="status-text">Cargando...</span>
-    </span>
-  </div>
-  <div class="api-indicator">
     <strong>CriptoYa.com:</strong>
     <span id="criptoya-status">
       <span class="status-light"></span>
@@ -447,67 +304,8 @@ input:focus {
 
 <script>
 /* ========================================================== */
-/* === SCRIPT 1: COTIZACIONES ORIGINALES (Dólar, Inflación, Riesgo) (Sin cambios) === */
+/* === SCRIPT 1: SE ELIMINARON LAS FUNCIONES DE COTIZACIONES === */
 /* ========================================================== */
-async function cargarDolares(){
-  const last=document.getElementById("last-update");
-  try{
-    const res=await fetch("https://dolarapi.com/v1/dolares");
-    const data=await res.json();
-    const map={
-      oficial:data.find(d=>d.nombre.toLowerCase().includes("oficial")),
-      blue:data.find(d=>d.nombre.toLowerCase().includes("blue")),
-      mep:data.find(d=>d.nombre.toLowerCase().includes("bolsa")),
-      ccl:data.find(d=>d.nombre.toLowerCase().includes("contado con liqui")),
-      cripto:data.find(d=>d.nombre.toLowerCase().includes("cripto"))
-    };
-    Object.entries(map).forEach(([k,v])=>{
-      const el=document.querySelector(`#${k} span`);
-      if(v&&el){el.textContent=`C: ${v.compra.toFixed(2)} | V: ${v.venta.toFixed(2)}`;}
-      else if(el){el.textContent="N/D";}
-    });
-    last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
-  }catch(e){last.innerHTML='<span class="error">Error al cargar cotizaciones</span>';}
-}
-document.getElementById("reload-btn").addEventListener("click",cargarDolares);
-cargarDolares();
-
-async function cargarInflacion() {
-  const last = document.getElementById("last-inflacion");
-  try {
-    const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/inflacion");
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) { throw new Error("Sin datos"); }
-
-    const ult = data[data.length - 1];
-    const valor = parseFloat(String(ult.valor).replace(",", "."));
-    const fecha = new Date(ult.fecha);
-    const mes = fecha.toLocaleString("es-AR", { month: "long", year: "numeric" });
-
-    document.getElementById("inflacion-mensual").textContent = isNaN(valor) ? "-" : valor.toFixed(2) + "%";
-    document.getElementById("inflacion-mes").textContent = mes;
-    last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
-  } catch (err) {
-    console.error("Error al obtener inflación:", err);
-    last.innerHTML = '<span class="error">Error al cargar inflación</span>';
-    document.getElementById("inflacion-mensual").textContent = "-";
-    document.getElementById("inflacion-mes").textContent = "--";
-  }
-}
-cargarInflacion();
-
-async function cargarRiesgo(){
-  const last=document.getElementById("last-riesgo");
-  try{
-    const res=await fetch("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais/ultimo");
-    const ult=await res.json();
-    document.getElementById("riesgo-valor").textContent=ult.valor+" pts";
-    document.getElementById("riesgo-fecha").textContent=ult.fecha;
-    last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
-  }catch(e){last.innerHTML='<span class="error">Error al cargar riesgo país</span>';}
-}
-cargarRiesgo();
-
 
 /* ========================================================== */
 /* === SCRIPT 2: FUNCIONES ORIGINALES (Calculadoras) (Sin cambios) === */
@@ -528,7 +326,7 @@ function actualizar(){
   const ventaUsd=getNumber(document.getElementById('precioVentaUsd').value);
   const tna=getNumber(document.getElementById('tna').value);
   const dias=parseInt(document.getElementById('dias').value)||0;
-  
+
   const caucionTasa=getNumber(document.getElementById('caucionTasa').value);
   const caucionDias=parseInt(document.getElementById('caucionDias').value)||0;
   const caucionComision=getNumber(document.getElementById('caucionComision').value);
@@ -574,7 +372,7 @@ function actualizar(){
     elUsdt.className='calc gris';
     elUsd.className='calc gris';
   }
-  
+
   // 2. Calculadora TNA
   if(capital&&tna){
     const diaria=(tna/100)/365;
@@ -616,7 +414,7 @@ function actualizar(){
 }
 
 /* ========================================================== */
-/* === SCRIPT 3: MONITOREO DE ESTADO DE APIS (Sin cambios) === */
+/* === SCRIPT 3: MONITOREO DE ESTADO DE APIS (Solo CriptoYa) === */
 /* ========================================================== */
 async function checkApiStatus(url, elementId) {
   const statusElement = document.getElementById(elementId);
@@ -631,8 +429,7 @@ async function checkApiStatus(url, elementId) {
     const response = await fetch(url);
     const data = await response.json();
 
-    // Lógica simplificada que el usuario indicó que funciona para DolarAPI y ArgentinaDatos.
-    // Se utiliza para todas las APIs para mantener el código unificado.
+    // Lógica simplificada que el usuario indicó que funciona.
     const isUp = (data.status === "ok" || data.status === "available" || response.ok);
 
     if (isUp) {
@@ -653,13 +450,12 @@ async function checkApiStatus(url, elementId) {
 }
 
 function loadApiStatus() {
-  checkApiStatus("https://dolarapi.com/v1/estado", "dolarapi-status");
-  checkApiStatus("https://api.argentinadatos.com/v1/estado", "argentinadatos-status");
-  checkApiStatus("https://criptoya.com/api/dolar", "criptoya-status"); 
+  // Solo se mantiene la verificación de CriptoYa
+  checkApiStatus("https://criptoya.com/api/dolar", "criptoya-status");
 }
 
 loadApiStatus();
-setInterval(loadApiStatus, 3600000); 
+setInterval(loadApiStatus, 3600000);
 </script>
 </body>
 </html>
