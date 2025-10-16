@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hacienda Cañuelas</title>
+  <title>Agro</title>
   <style>
     /* === VARIABLES GLOBALES (Consistentes con index.html) === */
     :root {
@@ -42,11 +42,13 @@
       font-size: 2rem;
       margin-bottom: 0;
       text-shadow:0 0 8px rgba(204,204,204,0.6);
+      /* Margen inferior para separarlo de los controles */
+      margin-bottom: 15px;
     }
 
     /* === NAVEGACIÓN === */
     nav {
-        max-width: 900px;
+        max-width: 1100px; /* Ancho para alinear con main */
         margin: 0 auto 30px auto;
         text-align: center;
         padding: 10px 0;
@@ -74,7 +76,7 @@
 
     /* === MAIN CONTAINER === */
     main {
-        max-width: 900px;
+        max-width: 1100px; /* Ancho suficiente para la tabla sin scroll horizontal en desktop */
         margin: 0 auto;
         padding: 0 10px; /* Padding horizontal para móviles */
         text-align: left; /* Alineamos el contenido dentro del main */
@@ -101,7 +103,6 @@
         border: 1px solid #007bff; /* Borde azul */
         border-radius: 0; /* Estilo plano */
         font-weight: bold;
-        flex-grow: 1;
         transition: background-color 0.2s, color 0.2s;
     }
     #refreshButton:hover:not(:disabled) {
@@ -157,31 +158,38 @@
     }
 
     #priceTable {
-      width: 100%;
-      /* Eliminamos min-width aquí para que se ajuste 100% en escritorio */
+      min-width: 100%;
+      width: max-content;
       border-collapse: collapse;
-      font-size: 0.9em; /* Ligero aumento en la fuente base de la tabla */
+      font-size: 0.9em;
       background-color: #000;
     }
 
+    /* Reglas comunes */
     #priceTable th, #priceTable td {
       border: 1px solid #111;
-      padding: 8px 6px;
-      text-align: right;
-      white-space: nowrap;
     }
 
-    /* Aumento de tamaño específico para los números (datos) */
-    #priceTable td {
-        font-size: 1em;
-    }
-
+    /* Encabezados (Permitimos el salto de línea) */
     #priceTable th {
       background-color: #111;
       text-align: left;
       font-weight: bold;
       padding: 10px 6px;
       color: var(--base);
+      white-space: normal; /* Permite que el texto salte de línea */
+    }
+
+    /* Celdas de datos (NO permitimos el salto de línea para mantener alineación) */
+    #priceTable td {
+      padding: 8px 6px;
+      text-align: right;
+      white-space: nowrap; /* Evita que los datos se rompan */
+    }
+
+    /* Aumento de tamaño específico para los números (datos) */
+    #priceTable td {
+        font-size: 1em;
     }
 
     .categoria {
@@ -207,7 +215,31 @@
     .negative.variacion::before { content: "▼ "; }
     .neutral.variacion::before { content: "▬ "; }
 
-    /* === OPTIMIZACIÓN MÓVIL (Max-width: 600px) === */
+    /* ------------------------------------------- */
+    /* ESTILOS PARA WIDGETS DE TRADINGVIEW (SOLUCIÓN FINAL) */
+    /* ------------------------------------------- */
+    .market-widgets-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Espacio entre los widgets */
+        margin-bottom: 25px;
+        align-items: stretch;
+    }
+
+    /* Contenedor de cada widget para control de ancho */
+    .tradingview-widget-container {
+        /* SOLUCIÓN FINAL: Ajustado a -12.5px para forzar el espacio de píxeles fraccionarios y garantizar el borde. */
+        flex: 1 1 calc(33.333% - 12.5px);
+        min-width: 250px;
+        border: 1px solid #111; /* Borde completo */
+        padding: 0;
+        background-color: #050505;
+        box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho */
+    }
+
+    /* ------------------------------------------- */
+    /* OPTIMIZACIÓN MÓVIL (Max-width: 600px) */
+    /* ------------------------------------------- */
     @media (max-width: 600px) {
 
         /* 1. Navegación: Permite que salte de línea */
@@ -223,38 +255,87 @@
             margin: 5px 2px;
         }
 
-        /* 2. Controles: Apilar y estirar */
+        /* 2. Controles: Apilar y centrar */
         .controls {
             flex-direction: column;
-            align-items: stretch;
+            align-items: center; /* Centramos el botón */
             gap: 10px;
         }
-        .currency-toggle-container, #refreshButton {
+        .currency-toggle-container { /* Mantenemos el toggle al 100% de ancho */
              width: 100%;
         }
+        /* El botón #refreshButton toma su ancho natural (auto) y queda centrado */
 
         /* 3. Tabla: Forzamos ancho mínimo en móviles para que haya scroll horizontal */
         #priceTable {
-            min-width: 550px;
+            min-width: 550px; /* Garantiza el scroll en pantallas pequeñas */
             font-size: 0.85em; /* Reducimos la fuente para que quepan más datos */
+        }
+
+        /* 4. Widgets: Apilar verticalmente, ocupando el 100% del ancho */
+        .tradingview-widget-container {
+            flex: 1 1 100%;
+            min-width: auto;
         }
     }
   </style>
 </head>
 <body>
     <header>
-        <h1>Listado de Precios Cañuelas</h1>
-    </header>
+        </header>
 
     <nav>
         <a href="index.html">Cotizaciones</a>
         <a href="calculadoras.html">Calculadoras</a>
         <a href="noticias.html">Noticias</a>
         <a href="Graficos historicos.html">Gráficos</a>
-        <a href="Hacienda.html" class="active">Hacienda</a>
+        <a href="Hacienda.html" class="active">Agro</a>
     </nav>
 
     <main>
+      <div class="market-widgets-container">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+          {
+          "symbol": "MATBAROFEX:SOJCONT",
+          "colorTheme": "dark",
+          "isTransparent": false,
+          "locale": "en",
+          "width": "100%"
+        }
+          </script>
+        </div>
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+          {
+          "symbol": "MATBAROFEX:TRICONT",
+          "colorTheme": "dark",
+          "isTransparent": false,
+          "locale": "en",
+          "width": "100%"
+        }
+          </script>
+        </div>
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+          {
+          "symbol": "MATBAROFEX:MAICONT",
+          "colorTheme": "dark",
+          "isTransparent": false,
+          "locale": "en",
+          "width": "100%"
+        }
+          </script>
+        </div>
+        </div>
+      <h1 style="text-align: center;">Listado de Precios Cañuelas</h1>
+
       <div class="controls">
         <div class="currency-toggle-container">
             <div id="toggleARS" class="currency-option active">ARS</div>
@@ -270,10 +351,10 @@
           <thead>
             <tr>
               <th class="categoria">Categoría</th>
-              <th id="headerCurrentPrice">Precio (Último Cierre)</th>
-              <th>Cantidad Operada</th>
-              <th>Precio (Semana Anterior)</th>
-              <th>Cantidad Operada Anterior</th>
+              <th id="headerCurrentPrice">Precio (Cierre)</th>
+              <th>Cant. Operada (Hoy)</th>
+              <th>Precio (Sem. Ant.)</th>
+              <th>Cant. Operada (Sem. Ant.)</th>
               <th>Tendencia</th>
             </tr>
           </thead>
@@ -370,8 +451,19 @@
         variationCell.textContent = formattedVariation;
       });
 
-      // Actualizar el encabezado del precio y mensaje. Se le añade el sufijo de moneda al texto original.
-      headerCurrentPrice.textContent = `${originalHeaderCurrentPriceText} (${isUSD ? 'USD' : 'ARS'})`;
+      // Actualizar el encabezado del precio y mensaje.
+      const currencySuffix = isUSD ? 'USD' : 'ARS';
+      let headerText = 'Precio (Cierre)';
+
+      // Detectamos si es el encabezado de "Cierre" para agregar la moneda
+      if (headerCurrentPrice.textContent.includes('(Cierre)')) {
+          headerText = `Precio (Cierre) (${currencySuffix})`;
+      } else {
+          // Esto es un fallback en caso de que el texto cambie
+          headerText = `${originalHeaderCurrentPriceText} (${currencySuffix})`;
+      }
+
+      headerCurrentPrice.textContent = headerText;
       errorDiv.textContent = `Datos actualizados. Moneda: ${isUSD ? 'USD' : 'ARS'}.`;
     };
 
