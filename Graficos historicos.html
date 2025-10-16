@@ -9,28 +9,32 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <style>
-        /* === ESTILOS GLOBALES (Consistentes con index.html) === */
+        /* === ESTILOS GLOBALES BASE === */
         :root {
             --base:#ccc;
             --gris:#111;
             --texto:#ddd;
             --borde:#ccc40;
             --error:#f44;
-            --destacado-compra: rgba(40, 167, 69, 0.4); 
-            --destacado-venta: rgba(0, 123, 255, 0.4); 
+            --destacado-compra: rgba(40, 167, 69, 0.4);
+            --destacado-venta: rgba(0, 123, 255, 0.4);
+            /* Nueva variable para el color de los botones */
+            --button-border-color: #333;
+            --button-text-color: #ccc;
+            --button-active-bg: #444;
         }
 
         body {
-            font-family: 'Courier New', monospace; /* Usando Courier New para consistencia */
+            font-family: 'Courier New', monospace;
             margin: 0;
             padding: 0;
-            background-color: #000; 
-            color: var(--texto); 
+            background-color: #000;
+            color: var(--texto);
             text-align: center;
         }
 
         header {
-            background-color: #111; 
+            background-color: #111;
             color: var(--base);
             padding: 20px;
             margin-bottom: 20px;
@@ -51,9 +55,9 @@
             text-align: center;
             padding: 10px 0;
             border-bottom: 1px solid #222;
-            display: flex; 
-            justify-content: center; 
-            flex-wrap: nowrap; 
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
         }
         nav a {
             color: var(--base);
@@ -85,15 +89,15 @@
 
         section {
             /* Estilo de sección plano y oscuro */
-            background-color: #050505; 
+            background-color: #050505;
             padding: 20px;
-            border-radius: 0; 
-            box-shadow: none; 
+            border-radius: 0;
+            box-shadow: none;
             border: 1px solid #111;
         }
 
         h2 {
-            color: var(--base); 
+            color: var(--base);
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
@@ -101,7 +105,7 @@
         .chart-container {
             position: relative;
             /* Altura fija para escritorio */
-            height: 400px; 
+            height: 400px;
             width: 100%;
             margin: 0 auto;
         }
@@ -116,31 +120,36 @@
         }
 
         .filter-buttons button {
+            /* === MODIFICACIONES DE COLOR AQUÍ === */
             padding: 8px 15px;
-            border: 1px solid #007bff;
-            background-color: #000; 
-            color: #007bff;
-            border-radius: 0; 
+            border: 1px solid var(--button-border-color); /* Gris oscuro */
+            background-color: #000;
+            color: var(--button-text-color); /* Gris claro */
+            /* ==================================== */
+
+            border-radius: 0;
             cursor: pointer;
             transition: background-color 0.2s, color 0.2s;
         }
 
         .filter-buttons button:hover,
         .filter-buttons button.active {
-            background-color: #007bff;
-            color: white;
+            /* === MODIFICACIONES DE COLOR AQUÍ === */
+            background-color: var(--button-active-bg); /* Gris un poco más claro para hover/active */
+            color: var(--base); /* Texto color base (blanco/gris claro) */
+            /* ==================================== */
         }
 
         footer {
             padding: 15px;
-            background-color: #111; 
+            background-color: #111;
             color: #999;
             margin-top: 30px;
         }
 
         /* === OPTIMIZACIÓN MÓVIL (Max-width: 600px) === */
         @media (max-width: 600px) {
-            
+
             h1 {
                 font-size: 1.5rem;
             }
@@ -151,16 +160,19 @@
 
             /* 1. Altura del gráfico reducida para caber mejor en la pantalla */
             .chart-container {
-                height: 300px; 
+                height: 300px;
             }
 
-            /* 2. Navegación: Permite que salte de línea si es necesario */
+            /* 2. Navegación: Corrección para mostrar en dos columnas sin desbordar */
             nav {
-                flex-wrap: wrap; 
+                width: 100%;
+                flex-wrap: wrap;
                 padding: 5px 0;
+                margin: 0 auto 30px auto;
             }
             nav a {
-                flex: 1 1 auto; /* Permite que el ancho se ajuste */
+                flex: 1 1 calc(50% - 10px);
+                box-sizing: border-box;
                 padding: 8px 5px;
                 font-size: 0.9rem;
                 margin: 5px 2px;
@@ -168,20 +180,125 @@
 
             /* 3. Botones de Filtro: Los apila verticalmente */
             .filter-buttons {
-                flex-direction: column; /* Apila los botones */
-                gap: 5px; /* Reduce el espacio entre ellos */
+                flex-direction: column;
+                gap: 5px;
             }
 
             .filter-buttons button {
-                width: 100%; /* Ocupa todo el ancho disponible */
+                width: 100%;
                 padding: 10px 5px;
+                font-size: 1rem;
+            }
+        }
+
+        /* === ESTILOS PARA LOS BLOQUES IPC y RIESGO PAÍS (Dos Columnas) === */
+        :root {
+          --base:#ccc;
+          --texto:#ddd;
+          --error:#f44;
+        }
+
+        /* Contenedor Flex para que se muestren uno al lado del otro */
+        .data-container {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Estilos de los bloques de datos (IPC y Riesgo País) */
+        #inflacion-section,
+        #riesgo-section {
+            width: 440px;
+            max-width: 50%;
+            flex-grow: 1;
+            min-width: 300px;
+
+            background:#050505;
+            border:1px solid #111;
+            padding:10px;
+            font-size:0.9rem;
+            box-sizing:border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data-header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:8px;
+        }
+        .data-grid {
+            display:flex;
+            justify-content:space-around;
+            flex-wrap:wrap;
+            gap:10px;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        .data-item {
+            text-align:center;
+            min-width:100px;
+            font-size: 1.1rem;
+            padding: 5px;
+        }
+        /* Estilo específico del valor grande (el número/porcentaje) */
+        #inflacion-section .data-item span,
+        #riesgo-section .data-item span {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--base);
+            display: block;
+            margin-top: 5px;
+        }
+
+        #last-inflacion, #last-riesgo {
+            font-size:0.75rem;
+            color:#777;
+            text-align:right;
+            margin-top:5px;
+        }
+        .fuente {
+            text-align:right;
+            font-size:0.7rem;
+            color:#666;
+            margin-top:4px;
+        }
+        .error {
+            color:var(--error);
+            font-size:0.8rem;
+            text-align:right;
+            margin-top:4px;
+        }
+
+        /* Media Query para asegurar el apilamiento en móvil cuando el espacio es menor a 640px */
+        @media (max-width: 640px) {
+            .data-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            #inflacion-section,
+            #riesgo-section {
+                width: 95%;
+                max-width: 95%;
+            }
+             /* Ajuste de tamaño para móvil para que no sea excesivamente grande */
+            #inflacion-section .data-item span,
+            #riesgo-section .data-item span {
+                font-size: 1.8rem;
+            }
+            .data-item {
                 font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    
+
     <nav>
         <a href="index.html">Cotizaciones</a>
         <a href="calculadoras.html">Calculadoras</a>
@@ -190,12 +307,33 @@
         <a href="Hacienda.html">Agro</a>
         <a href="ScreenerArgy.html">Argy</a>
     </nav>
-    
+
     <header>
         <h1>Indicadores Financieros de Argentina 🚀</h1>
         <p>Visualización de Inflación Mensual, Interanual y Riesgo País.</p>
     </header>
 
+    <div class="data-container">
+        <section id="inflacion-section">
+            <div class="data-header"><strong>📈 IPC </strong></div>
+            <div class="data-grid">
+                <div class="data-item">Mensual<br><span id="inflacion-mensual">--</span></div>
+                <div class="data-item">Período<br><span id="inflacion-mes">--</span></div>
+            </div>
+            <div id="last-inflacion">Esperando actualización...</div>
+            <div class="fuente">Fuente: argentinadatos.com</div>
+        </section>
+
+        <section id="riesgo-section">
+            <div class="data-header"><strong>📊 Riesgo País</strong></div>
+            <div class="data-grid">
+                <div class="data-item">Último valor<br><span id="riesgo-valor">--</span></div>
+                <div class="data-item">Fecha<br><span id="riesgo-fecha">--</span></div>
+            </div>
+            <div id="last-riesgo">Esperando actualización...</div>
+            <div class="fuente">Fuente: argentinadatos.com</div>
+        </section>
+    </div>
     <main>
         <section id="interanual-section">
             <h2>Inflación Interanual (%) - Últimos 12 meses</h2>
@@ -234,6 +372,44 @@
     </footer>
 
     <script>
+        /* === SCRIPT PARA CARGAR INFLACIÓN Y RIESGO PAÍS (EJECUCIÓN INMEDIATA) === */
+        async function cargarInflacion() {
+          const last = document.getElementById("last-inflacion");
+          try {
+            const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/inflacion");
+            const data = await res.json();
+            if (!Array.isArray(data) || data.length === 0) { throw new Error("Sin datos"); }
+
+            const ult = data[data.length - 1];
+            const valor = parseFloat(String(ult.valor).replace(",", "."));
+            const fecha = new Date(ult.fecha);
+            const mes = fecha.toLocaleString("es-AR", { month: "long", year: "numeric" });
+
+            document.getElementById("inflacion-mensual").textContent = isNaN(valor) ? "-" : valor.toFixed(2) + "%";
+            document.getElementById("inflacion-mes").textContent = mes;
+            last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+          } catch (err) {
+            console.error("Error al obtener inflación:", err);
+            last.innerHTML = '<span class="error">Error al cargar inflación</span>';
+            document.getElementById("inflacion-mensual").textContent = "-";
+            document.getElementById("inflacion-mes").textContent = "--";
+          }
+        }
+        cargarInflacion();
+
+        async function cargarRiesgo(){
+          const last=document.getElementById("last-riesgo");
+          try{
+            const res=await fetch("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais/ultimo");
+            const ult=await res.json();
+            document.getElementById("riesgo-valor").textContent=ult.valor+" pts";
+            document.getElementById("riesgo-fecha").textContent=ult.fecha;
+            last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
+          }catch(e){last.innerHTML='<span class="error">Error al cargar riesgo país</span>';}
+        }
+        cargarRiesgo();
+        /* === FIN SCRIPTS ADICIONALES === */
+
         document.addEventListener('DOMContentLoaded', () => {
 
             const BASE_URL = 'https://api.argentinadatos.com/v1/finanzas/indices/';
@@ -348,7 +524,7 @@
                                 y: {
                                     beginAtZero: false,
                                     title: { display: true, text: yAxisTitle },
-                                    grid: { color: 'rgba(255, 255, 255, 0.1)' } 
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
                                 }
                             }
                         }
@@ -377,7 +553,7 @@
 
                 RAW_DATA_STORE.inflacionInteranual = annualDataChart;
                 // Mostrar solo los últimos 12 meses para el gráfico inicial
-                const annualFinalData = annualDataChart.slice(-12); 
+                const annualFinalData = annualDataChart.slice(-12);
 
                 createOrUpdateChart(
                     'chartInflacionAnual',
