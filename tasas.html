@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparación de TNA</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        /* === ESTILOS ESPECÍFICOS DE TASAS === */
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #111;
+            padding: 15px;
+            border-radius: 0;
+            border: 1px solid #222;
+            box-shadow: 0 0 12px #ccc40 inset;
+        }
+
+        /* --- CONTROLES Y ESTADO (NUEVO BLOQUE) --- */
+        .controls-and-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        /* Botón de Refresco (Color y Tamaño modificado) */
+        #refreshButton {
+            padding: 8px 12px; /* Más pequeño */
+            background-color: #333; /* Color gris oscuro */
+            color: var(--texto);
+            border: 1px solid var(--base); /* Borde para el estilo retro */
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: none;
+            flex-grow: 0; /* No crece */
+        }
+        #refreshButton:hover:not(:disabled) {
+            background-color: #222;
+            transform: translateY(-1px);
+        }
+        #refreshButton:disabled {
+            background-color: #111;
+            cursor: not-allowed;
+            border-color: #555;
+        }
+
+        /* Estado (Subido junto al botón) */
+        .status {
+            text-align: right;
+            font-size: 0.85em;
+            color: #777;
+            /* Para que ocupe el resto del espacio y se alinee a la derecha */
+            flex-grow: 1;
+            padding-left: 10px;
+        }
+        .error-message {
+            color: var(--error);
+            font-weight: bold;
+        }
+        .success-message {
+            color: #4f4;
+            font-weight: bold;
+        }
+
+        /* --- TABLA Y ESTILOS ESPECÍFICOS --- */
+
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid #333;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
+            background-color: #000;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px 6px;
+            text-align: left;
+            font-size: 0.9rem;
+            vertical-align: top;
+        }
+        th {
+            background-color: #111;
+            color: var(--base);
+            text-transform: uppercase;
+            font-weight: bold;
+            border-bottom: 2px solid var(--base);
+            text-align: center !important;
+        }
+        th:first-child, td:first-child { text-align: left; }
+
+        .wrap-cell { word-wrap: break-word; overflow-wrap: break-word; }
+
+        /* Estilos de Fila de Plataforma */
+        .platform-row {
+            background-color: #000;
+            font-weight: 600;
+            border-top: 1px solid #333;
+            transition: background-color 0.3s;
+        }
+        .platform-row:hover {
+             background-color: #111;
+        }
+        .platform-row td { padding: 12px 8px; border: 1px solid #333; }
+        .platform-logo { width: 24px; height: 24px; object-fit: contain; margin-right: 8px; border-radius: 50%; border: 1px solid #444; }
+
+        /* Contenedor de Tasas y Límites */
+        .rate-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Elementos de la lista para alinear (clave: valor) */
+        .rate-list-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            font-size: 0.85em;
+        }
+
+        /* Tasa Principal */
+        .rate-principal {
+            font-weight: bold;
+            color: #4f4;
+            font-size: 1.0em;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+            justify-content: flex-end;
+        }
+        .rate-principal span { color: #4f4; }
+
+        /* Estilos para la Columna de Límites/Condiciones */
+        .rate-limits-cell .rate-list-item {
+            padding: 2px 0;
+            justify-content: flex-start;
+            flex-direction: column;
+        }
+        .rate-limits-cell .rate-principal {
+             justify-content: flex-start;
+             font-size: 0.95em;
+             font-weight: bold;
+             color: var(--texto);
+        }
+        .rate-limits-cell .rate-limits-title {
+            font-weight: bold;
+            color: var(--texto);
+        }
+        .rate-limits-cell .rate-limits-description {
+            font-style: italic;
+            font-weight: normal;
+            font-size: 0.9em;
+            color: var(--contraste-fuerte); /* Color blanco puro */
+            display: block;
+            padding-left: 0px;
+        }
+
+        /* ------------------------------------------- */
+        /* MEDIA QUERIES PARA MÓVILES */
+        /* ------------------------------------------- */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 10px; }
+            h1 { font-size: 1.5rem; }
+
+            .controls-and-status {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+            }
+            #refreshButton {
+                width: 100%;
+            }
+            .status {
+                text-align: center;
+                padding-left: 0;
+            }
+
+            table { min-width: 500px; }
+
+            th, td { padding: 8px 4px; font-size: 0.8rem; }
+            .platform-logo { width: 20px; height: 20px; }
+
+            nav a {
+                padding: 8px 5px;
+                font-size: 0.9rem;
+                margin: 5px 5px;
+            }
+
+            .rates-cell .rate-list-item,
+            .rate-limits-cell .rate-list-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .rate-list-item > span:last-child {
+                font-size: 1.0em;
+                margin-top: 1px;
+                align-self: flex-end;
+            }
+            .rate-principal {
+                border-bottom: none;
+            }
+
+            .rate-limits-cell .rate-limits-description {
+                font-size: 0.8em;
+                color: var(--contraste-fuerte);
+                padding-bottom: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <h1>Comparación de TNA</h1>
+
+    <div class="controls-and-status">
+        <button id="refreshButton" onclick="fetchData(true)">🔄 Actualizar Tasas</button>
+        <div class="status">
+            Última actualización: <span id="last-update">Cargando...</span> | Próximo refresco: <span id="next-refresh"></span>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="rates-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;"></th> <th style="width: 15%;">Plataforma</th>
+                    <th style="width: 15%;">Tipo de Tasa</th>
+                    <th style="width: 30%; text-align: center;">Tasa Nominal Anual (TNA)</th>
+                    <th style="width: 35%;">Límite / Condiciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="5" style="text-align:center;">Cargando datos...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="shared-scripts.js"></script>
+<script>
+    const TARGET_API_URL = 'https://tasas-api.fzspace.club/api/apps';
+    const PROXY_API_URL = `https://corsproxy.io/?${TARGET_API_URL}`;
+
+    const REFRESH_INTERVAL_MS = 10 * 60 * 1000; // 10 minutos
+
+    const tableBody = document.querySelector('#rates-table tbody');
+    const lastUpdateSpan = document.getElementById('last-update');
+    const nextRefreshSpan = document.getElementById('next-refresh');
+    const refreshButton = document.getElementById('refreshButton');
+
+    /** Formatea cadenas de tipo de tasa (ej: fondos_comunes -> Fondos Comunes). */
+    const formatTypeString = (str) => {
+        if (!str) return 'N/D';
+        let formatted = str.replace(/_/g, ' ');
+        return formatted.replace(/\b\w/g, char => char.toUpperCase());
+    };
+
+    /** Formatea el valor numérico como porcentaje con dos decimales. */
+    const formatPercentage = (value) => {
+        if (value === null || value === undefined || isNaN(parseFloat(value))) return '-';
+        return parseFloat(value).toLocaleString('es-AR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + '%';
+    };
+
+    /** Formatea el monto máximo como moneda o retorna "Ilimitado". */
+    const formatMaxAmount = (value) => {
+        if (value === null || value === undefined || isNaN(parseFloat(value))) return 'Ilimitado';
+        return parseFloat(value).toLocaleString('es-AR', {
+            style: 'currency',
+            currency: 'ARS',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    };
+
+    async function fetchData(manual = false) {
+        refreshButton.disabled = true;
+        lastUpdateSpan.className = '';
+        lastUpdateSpan.textContent = manual ? 'Refrescando manualmente...' : 'Actualizando...';
+
+        try {
+            const response = await fetch(PROXY_API_URL);
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}.`);
+            }
+
+            const rawData = await response.json();
+            let appsData = rawData.data;
+
+            if (!Array.isArray(appsData) || appsData.length === 0) {
+                 tableBody.innerHTML = '<tr><td colspan="5" class="no-data">⚠️ La API devolvió cero aplicaciones válidas. Intente actualizar más tarde.</td></tr>';
+                 return;
+            }
+
+            // Implementación del ordenamiento (Mayor a Menor TNA)
+            appsData.sort((a, b) => {
+                const tnaA = parseFloat(a.tna) || 0;
+                const tnaB = parseFloat(b.tna) || 0;
+                // b - a para orden descendente (mayor a menor)
+                return tnaB - tnaA;
+            });
+
+            tableBody.innerHTML = '';
+
+            appsData.forEach(app => {
+
+                const principalTNA = app.tna || null;
+                const tnaConditions = Array.isArray(app.tna_conditions) ? app.tna_conditions.filter(c => c.is_active) : [];
+
+                if (!app.name) return;
+
+                const row = tableBody.insertRow();
+                row.className = 'platform-row';
+
+                // Celda 1: Logo
+                row.insertCell().innerHTML = `<img src="${app.logo}" alt="${app.name} logo" class="platform-logo" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWJhbmsiPjxwYXRoIGQ9Ik02LjQgMTJhMi45MiAyLjkyIDAgMCAxIDUuMy0xLjg0Ii8+PHBhdGggZD0iTTE3LjUgMS44YTMuMDMgMy4wMyAwIDAgMC00LjY0IDIuMDRsLTkuMyA5LjNhMi42OSAyLjY5IDAgMCAwLS4wNCAzLjQ0bDEuNyAxLjdhMi43MiAyLjcyIDAgMCAwIDMuNDQgMGMuMDYtLjA2LjEyLS4xMy4xNy0uMlM2LjQgMTcuNCA2LjQgMTd2LTdhNSA1IDAgMCAxIDUtNWgxMGEuNTUuNTUgMCAwIDEgLjUgNS41ek0xNyAxMnYtNWg1LjkzIi8+PC9zdmc+'" />`;
+
+                // Celda 2: Nombre de la Plataforma
+                row.insertCell().innerHTML = `<strong>${app.name}</strong>`;
+
+                // Celda 3: Tipo de Tasa
+                row.insertCell().textContent = formatTypeString(app.type || 'N/D');
+
+                // --- Celda 4: TNA (Lista de Tasas) ---
+                const ratesCell = row.insertCell();
+                ratesCell.className = 'wrap-cell rates-cell';
+                let rateHTML = '<ul class="rate-list" style="text-align: right;">';
+
+                // --- Celda 5: Límite / Condiciones (Lista Paralela) ---
+                const limitsCell = row.insertCell();
+                limitsCell.className = 'rate-limits-cell wrap-cell';
+                let limitsHTML = '<ul class="rate-list rate-limits-list">';
+
+                const baseTNA = parseFloat(principalTNA);
+
+                // 1. TASA PRINCIPAL Y SU LÍMITE (maxAmount)
+                const tnaPrincipalValue = formatPercentage(principalTNA);
+
+                rateHTML += `<li class="rate-list-item rate-principal">
+                                <span>TNA Base&nbsp;</span>
+                                <span>${tnaPrincipalValue}</span>
+                             </li>`;
+
+                const maxAmountFormatted = formatMaxAmount(app.maxAmount);
+                limitsHTML += `<li class="rate-list-item rate-principal">
+                                <span>Límite Máximo Aplicable:</span>
+                                <span style="font-weight: normal; color: ${maxAmountFormatted === 'Ilimitado' ? '#4f4' : 'var(--texto)'};">${maxAmountFormatted}</span>
+                             </li>`;
+
+                // 2. TASAS CONDICIONALES Y SUS DESCRIPCIONES
+                tnaConditions.forEach(condition => {
+                    let finalTNA = baseTNA;
+                    const tnaValue = parseFloat(condition.tna_value);
+                    const title = condition.title || 'Bonificación';
+                    const description = condition.description || 'Condiciones no especificadas.';
+
+                    if (!isNaN(baseTNA) && !isNaN(tnaValue)) {
+                         if (condition.is_addition === true || condition.is_addition === 'true') {
+                             finalTNA = baseTNA + tnaValue;
+                         } else {
+                             finalTNA = baseTNA - tnaValue;
+                         }
+                    }
+
+                    // HTML para la TNA Condicional
+                    rateHTML += `<li class="rate-list-item rate-conditional">
+                                    <span>${title}</span>
+                                    <span>${formatPercentage(finalTNA)}</span>
+                                 </li>`;
+
+                    // HTML para la Condición/Límite
+                    limitsHTML += `<li class="rate-list-item">
+                                        <span class="rate-limits-title">${title}:</span>
+                                        <span class="rate-limits-description">${description}</span>
+                                    </li>`;
+                });
+
+                rateHTML += '</ul>';
+                ratesCell.innerHTML = rateHTML;
+
+                limitsHTML += '</ul>';
+                limitsCell.innerHTML = limitsHTML;
+            });
+
+            const now = new Date();
+            lastUpdateSpan.textContent = now.toLocaleTimeString('es-AR');
+            lastUpdateSpan.className = 'success-message';
+
+        } catch (error) {
+            console.error('ERROR CRÍTICO en la carga/procesamiento de datos:', error);
+            lastUpdateSpan.textContent = `❌ ERROR CRÍTICO: Falló la conexión o el formato de datos de la API.`;
+            lastUpdateSpan.className = 'error-message';
+            tableBody.innerHTML = `<tr><td colspan="5" style="color: var(--error); text-align: center; padding: 20px;">Error al cargar los datos. Revisa la Consola. Mensaje: ${error.message}</td></tr>`;
+        } finally {
+            refreshButton.disabled = false;
+        }
+    }
+
+    function iniciarRefrescoAutomatico() {
+        fetchData();
+        setInterval(() => fetchData(false), REFRESH_INTERVAL_MS);
+
+        const updateNextRefreshTime = () => {
+            const nextTime = new Date(new Date().getTime() + REFRESH_INTERVAL_MS);
+            nextRefreshSpan.textContent = nextTime.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+        };
+
+        setInterval(updateNextRefreshTime, 60000);
+        updateNextRefreshTime();
+    }
+
+    iniciarRefrescoAutomatico();
+</script>
+<script src="modern-navigation.js"></script>
+</body>
+</html>
