@@ -7,6 +7,7 @@ class ModernNavigation {
     this.navToggle = null;
     this.navMenu = null;
     this.isOpen = false;
+    this.navContainer = null;
     this.init();
   }
 
@@ -20,20 +21,26 @@ class ModernNavigation {
     // Crear contenedor de navegación
     const navContainer = document.createElement('div');
     navContainer.className = 'nav-container';
-    
+
     // Crear navegación
     const nav = document.createElement('nav');
-    
+
+    // Toggle para móvil
+    const navToggle = document.createElement('button');
+    navToggle.className = 'nav-toggle';
+    navToggle.innerHTML = '<span></span><span></span><span></span>';
+    navToggle.setAttribute('aria-label', 'Toggle navigation menu');
+
     // Brand/Logo
     const brand = document.createElement('a');
     brand.href = 'index.html';
     brand.className = 'nav-brand';
     brand.textContent = 'FinArgy';
-    
+
     // Menú de navegación
     const navMenu = document.createElement('ul');
-    navMenu.className = 'nav-menu';
-    
+    navMenu.className = 'nav-menu mobile-hidden';
+
     const menuItems = [
       { href: 'index.html', text: 'Cotizaciones', icon: '📊' },
       { href: 'calculadoras.html', text: 'Calculadoras', icon: '🧮' },
@@ -43,44 +50,40 @@ class ModernNavigation {
       { href: 'Hacienda.html', text: 'Agro', icon: '🌾' },
       { href: 'ScreenerArgy.html', text: 'Argy', icon: '📈' }
     ];
-    
+
     menuItems.forEach(item => {
       const li = document.createElement('li');
       li.className = 'nav-item';
-      
+
       const a = document.createElement('a');
       a.href = item.href;
       a.className = 'nav-link';
       a.innerHTML = `<span class="nav-icon">${item.icon}</span> ${item.text}`;
-      
+
       // Marcar como activo si coincide con la página actual
-      if (a.href === window.location.href || 
-          (window.location.pathname.endsWith('/') && item.href === 'index.html')) {
+      if (a.href === window.location.href ||
+        (window.location.pathname.endsWith('/') && item.href === 'index.html')) {
         a.classList.add('active');
       }
-      
+
       li.appendChild(a);
       navMenu.appendChild(li);
     });
-    
-    // Toggle para móvil
-    const navToggle = document.createElement('button');
-    navToggle.className = 'nav-toggle';
-    navToggle.innerHTML = '<span></span><span></span><span></span>';
-    navToggle.setAttribute('aria-label', 'Toggle navigation menu');
-    
+
+
     // Construir estructura
+    nav.appendChild(navToggle);
     nav.appendChild(brand);
     nav.appendChild(navMenu);
-    nav.appendChild(navToggle);
     navContainer.appendChild(nav);
-    
+
     // Insertar al inicio del body
     document.body.insertBefore(navContainer, document.body.firstChild);
-    
+
     // Guardar referencias
     this.navToggle = navToggle;
     this.navMenu = navMenu;
+    this.navContainer = navContainer;
   }
 
   bindEvents() {
@@ -88,28 +91,28 @@ class ModernNavigation {
     this.navToggle.addEventListener('click', () => {
       this.toggleMenu();
     });
-    
+
     // Cerrar menú al hacer clic en un enlace
     this.navMenu.addEventListener('click', (e) => {
       if (e.target.classList.contains('nav-link')) {
         this.closeMenu();
       }
     });
-    
+
     // Cerrar menú al hacer clic fuera
     document.addEventListener('click', (e) => {
       if (this.isOpen && !this.navContainer.contains(e.target)) {
         this.closeMenu();
       }
     });
-    
+
     // Cerrar menú con Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.isOpen) {
         this.closeMenu();
       }
     });
-    
+
     // Resize handler
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768 && this.isOpen) {
@@ -132,7 +135,7 @@ class ModernNavigation {
     this.navMenu.classList.remove('mobile-hidden');
     this.navMenu.classList.add('mobile-visible');
     document.body.style.overflow = 'hidden';
-    
+
     // Animar enlaces
     const links = this.navMenu.querySelectorAll('.nav-link');
     links.forEach((link, index) => {
@@ -147,7 +150,7 @@ class ModernNavigation {
     this.navMenu.classList.add('mobile-hidden');
     this.navMenu.classList.remove('mobile-visible');
     document.body.style.overflow = '';
-    
+
     // Limpiar animaciones
     const links = this.navMenu.querySelectorAll('.nav-link');
     links.forEach(link => {
@@ -158,7 +161,7 @@ class ModernNavigation {
   setupIntersectionObserver() {
     // Efecto de scroll en la navegación
     const navContainer = document.querySelector('.nav-container');
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -168,7 +171,7 @@ class ModernNavigation {
         }
       });
     }, { threshold: 0.1 });
-    
+
     observer.observe(document.querySelector('main') || document.body);
   }
 }
