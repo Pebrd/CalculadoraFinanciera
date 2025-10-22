@@ -135,14 +135,17 @@
             }
         }
 
-        /* === ESTILOS PARA LOS BLOQUES IPC y RIESGO PAÍS (Dos Columnas) === */
+        /* === ESTILOS PARA LOS BLOQUES IPC, RIESGO PAÍS, UVA y BCRA (Dos Columnas) === */
         :root {
           --base:#ccc;
           --texto:#ddd;
           --error:#f44;
+           /* Colores para la variación */
+           --positivo: #4CAF50; /* Verde para mejora */
+           --negativo: #F44336; /* Rojo para empeoramiento */
         }
 
-        /* Contenedor Flex para que se muestren uno al lado del otro */
+        /* Contenedor Flex para que los bloques se envuelvan */
         .data-container {
             max-width: 900px;
             margin: 0 auto 20px auto;
@@ -152,9 +155,11 @@
             flex-wrap: wrap;
         }
 
-        /* Estilos de los bloques de datos (IPC y Riesgo País) */
+        /* Estilos de los bloques de datos */
         #inflacion-section,
-        #riesgo-section {
+        #riesgo-section,
+        #uva-section,
+        #bcra-section { /* BCRA incluido */
             width: 440px;
             max-width: 50%;
             flex-grow: 1;
@@ -191,8 +196,11 @@
             padding: 5px;
         }
         /* Estilo específico del valor grande (el número/porcentaje) */
+        /* CORRECCIÓN: Se incluye #bcra-section para unificar el tamaño principal */
         #inflacion-section .data-item span,
-        #riesgo-section .data-item span {
+        #riesgo-section .data-item span,
+        #uva-section .data-item span,
+        #bcra-section .data-item span { /* <--- AÑADIDO BCRA AQUÍ */
             font-size: 2.2rem;
             font-weight: bold;
             color: var(--base);
@@ -200,7 +208,32 @@
             margin-top: 5px;
         }
 
-        #last-inflacion, #last-riesgo {
+        /* Ajuste para Base Monetaria para que el valor ocupe el espacio */
+        #bcra-section .data-grid {
+            justify-content: space-around;
+        }
+        #bcra-section .data-item span {
+            display: block;
+        }
+
+        /* Estilo para la variación (Mantenido aunque BCRA no lo use) */
+        .variacion {
+            font-size: 1.1rem;
+            font-weight: normal;
+            display: inline;
+            margin-left: 8px;
+            white-space: nowrap;
+            vertical-align: 0.1em;
+        }
+        .variacion.up {
+            color: var(--negativo);
+        }
+        .variacion.down {
+            color: var(--positivo);
+        }
+
+
+        #last-inflacion, #last-riesgo, #last-uva, #last-bcra { /* Selector BCRA incluido */
             font-size:0.75rem;
             color:#777;
             text-align:right;
@@ -225,14 +258,19 @@
                 flex-direction: column;
                 align-items: center;
             }
-            #inflacion-section,
-            #riesgo-section {
+        #inflacion-section,
+        #riesgo-section,
+        #uva-section,
+        #bcra-section { /* BCRA incluido */
                 width: 95%;
                 max-width: 95%;
             }
-             /* Ajuste de tamaño para móvil para que no sea excesivamente grande */
+             /* Ajuste de tamaño para móvil */
+            /* CORRECCIÓN: Se incluye BCRA y UVA para unificar el tamaño en móvil */
             #inflacion-section .data-item span,
-            #riesgo-section .data-item span {
+            #riesgo-section .data-item span,
+            #uva-section .data-item span, /* <--- AÑADIDO UVA AQUÍ */
+            #bcra-section .data-item span { /* <--- AÑADIDO BCRA AQUÍ */
                 font-size: 1.8rem;
             }
             .data-item {
@@ -245,7 +283,7 @@
 
     <header>
         <h1>Indicadores Financieros de Argentina 🚀</h1>
-        <p>Visualización de Inflación Mensual, Interanual y Riesgo País.</p>
+        <p>Visualización de Inflación Mensual, Interanual, Riesgo País y Base Monetaria.</p>
     </header>
 
     <div class="data-container">
@@ -268,7 +306,33 @@
             <div id="last-riesgo">Esperando actualización...</div>
             <div class="fuente">Fuente: argentinadatos.com</div>
         </section>
-    </div>
+
+        <section id="uva-section">
+            <div class="data-header"><strong>🏠 UVA</strong></div>
+            <div class="data-grid">
+                <div class="data-item">Último valor<br><span id="uva-valor">--</span></div>
+                <div class="data-item">Fecha<br><span id="uva-fecha">--</span></div>
+            </div>
+            <div id="last-uva">Esperando actualización...</div>
+            <div class="fuente">Fuente: argentinadatos.com</div>
+        </section>
+
+        <section id="bcra-section">
+            <div class="data-header"><strong>💰 Base Monetaria</strong></div>
+            <div class="data-grid">
+                <div class="data-item">
+                    Valor (Millones de Pesos)<br>
+                    <span id="bcra-valor">--</span>
+                </div>
+                <div class="data-item">
+                    Fecha<br>
+                    <span id="bcra-fecha">--</span>
+                </div>
+            </div>
+            <div id="last-bcra">Esperando actualización...</div>
+            <div class="fuente">Fuente: BCRA (API /Monetarias/1)</div>
+        </section>
+        </div>
     <main>
         <section id="interanual-section">
             <h2>Inflación Interanual (%) - Últimos 12 meses</h2>
@@ -300,14 +364,37 @@
                 <canvas id="chartRiesgoPais"></canvas>
             </div>
         </section>
+
+        <section>
+            <h2>Valor de la Unidad de Vivienda (UVA)</h2>
+            <div class="filter-buttons" data-chart-id="chartUVA" data-raw-data-key="uva">
+                <button class="active" data-period="1">Último Año</button>
+                <button data-period="5">Últimos 5 Años</button>
+                <button data-period="0">Total</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="chartUVA"></canvas>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <p>Datos obtenidos de ArgentinaDatos API.</p>
+        <p>Datos obtenidos de ArgentinaDatos API y BCRA.</p>
     </footer>
 
     <script>
-        /* === SCRIPT PARA CARGAR INFLACIÓN Y RIESGO PAÍS (EJECUCIÓN INMEDIATA) === */
+        /* === SCRIPT PARA CARGAR INFLACIÓN, RIESGO PAÍS y UVA (EJECUCIÓN INMEDIATA) === */
+
+        /**
+         * Función auxiliar para formatear números grandes (Base Monetaria)
+         * Se usa toLocaleString para separar miles con punto y decimales con coma.
+         */
+        function formatMillions(value) {
+            if (isNaN(value) || value === null) return "-";
+            return value.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+
         async function cargarInflacion() {
           const last = document.getElementById("last-inflacion");
           try {
@@ -340,9 +427,73 @@
             document.getElementById("riesgo-valor").textContent=ult.valor+" pts";
             document.getElementById("riesgo-fecha").textContent=ult.fecha;
             last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
-          }catch(e){last.innerHTML='<span class="error">Error al cargar riesgo país</span>';}
+          }catch(e){
+            console.error("Error al obtener riesgo país:", e);
+            last.innerHTML='<span class="error">Error al cargar riesgo país</span>';
+        }
         }
         cargarRiesgo();
+
+        async function cargarUVA(){
+            const last = document.getElementById("last-uva");
+            try {
+                const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/uva");
+                const data = await res.json();
+                if (!Array.isArray(data) || data.length === 0) { throw new Error("Sin datos"); }
+
+                const ult = data[data.length - 1];
+                const valor = parseFloat(String(ult.valor).replace(",", "."));
+                const fecha = ult.fecha;
+
+                document.getElementById("uva-valor").textContent = isNaN(valor) ? "-" : valor.toFixed(2);
+                document.getElementById("uva-fecha").textContent = fecha;
+                last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+            } catch (err) {
+                console.error("Error al obtener UVA:", err);
+                last.innerHTML = '<span class="error">Error al cargar UVA</span>';
+                document.getElementById("uva-valor").textContent = "-";
+                document.getElementById("uva-fecha").textContent = "--";
+            }
+        }
+        cargarUVA();
+
+        /* === Nueva función para cargar Base Monetaria (BCRA) con la estructura específica === */
+        async function cargarBCRA() {
+            const last = document.getElementById("last-bcra");
+            try {
+                const res = await fetch('https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1');
+                if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+
+                const data = await res.json();
+
+                // La data tiene la estructura: { results: [ { detalle: [ { fecha: "...", valor: N } ] } ] }
+                if (!data || !data.results || data.results.length === 0 || !data.results[0].detalle || data.results[0].detalle.length === 0) {
+                    throw new Error("No se encontraron resultados válidos en la respuesta del BCRA.");
+                }
+
+                // Extraer el valor y la fecha del primer elemento en el detalle
+                const ult = data.results[0].detalle[0];
+
+                const valor = parseFloat(String(ult.valor).replace(",", "."));
+                const fecha = ult.fecha;
+
+                // Formatear la fecha a DD/MM/YYYY
+                const dateObj = new Date(fecha);
+                const formattedDate = dateObj.toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+                document.getElementById("bcra-valor").textContent = isNaN(valor) ? "-" : formatMillions(valor);
+                document.getElementById("bcra-fecha").textContent = fecha ? formattedDate : "--";
+
+                last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+
+            } catch (err) {
+                console.error("Error al obtener Base Monetaria (BCRA):", err);
+                last.innerHTML = '<span class="error">Error al cargar Base Monetaria</span>';
+                document.getElementById("bcra-valor").textContent = "-";
+                document.getElementById("bcra-fecha").textContent = "--";
+            }
+        }
+        cargarBCRA();
         /* === FIN SCRIPTS ADICIONALES === */
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -560,6 +711,36 @@
             }
 
             // ----------------------------------------------------------------------
+            // --- GRÁFICO 4: UVA ---
+            // ----------------------------------------------------------------------
+
+            async function plotUVA() {
+                const dataRaw = await fetchData('uva');
+                if (dataRaw.length === 0) return;
+
+                const dataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (dataChart.length === 0) return;
+
+                RAW_DATA_STORE.uva = dataChart;
+                const finalData = filterDataByPeriod(dataChart, 1);
+
+                createOrUpdateChart(
+                    'chartUVA',
+                    'Valor de la Unidad de Vivienda (UVA)',
+                    finalData,
+                    'rgb(255, 205, 86)', // Color amarillo para UVA
+                    'day' // UVA se actualiza diariamente
+                );
+            }
+
+            // ----------------------------------------------------------------------
             // --- Lógica de Interacción de Botones ---
             // ----------------------------------------------------------------------
 
@@ -589,6 +770,10 @@
                     title = 'Riesgo País (Puntos Básicos)';
                     borderColor = 'rgb(75, 192, 192)';
                     dateUnit = 'day';
+                } else if (chartId === 'chartUVA') { // Añadir lógica para UVA
+                    title = 'Valor de la Unidad de Vivienda (UVA)';
+                    borderColor = 'rgb(255, 205, 86)';
+                    dateUnit = 'day';
                 } else {
                     return;
                 }
@@ -610,6 +795,7 @@
             plotInflacionInteranual();
             plotInflacionMensual();
             plotRiesgoPais();
+            plotUVA(); // Cargar el gráfico de UVA
         });
     </script>
     <script src="modern-navigation.js"></script>
