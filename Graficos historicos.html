@@ -196,15 +196,14 @@
             padding: 5px;
         }
         /* Estilo específico del valor grande (el número/porcentaje) */
-        /* CORRECCIÓN: Se incluye #bcra-section para unificar el tamaño principal */
-        #inflacion-section .data-item span,
-        #riesgo-section .data-item span,
-        #uva-section .data-item span,
-        #bcra-section .data-item span { /* <--- AÑADIDO BCRA AQUÍ */
+        #inflacion-section .data-item span:first-child,
+        #riesgo-section .data-item span:first-child,
+        #uva-section .data-item span:first-child,
+        #bcra-section .data-item span:first-child {
             font-size: 2.2rem;
             font-weight: bold;
             color: var(--base);
-            display: block;
+            display: inline; /* Importante para que valor y variación estén juntos */
             margin-top: 5px;
         }
 
@@ -212,8 +211,8 @@
         #bcra-section .data-grid {
             justify-content: space-around;
         }
-        #bcra-section .data-item span {
-            display: block;
+        #bcra-section .data-item span:first-child {
+            display: inline;
         }
 
         /* Estilo para la variación (Mantenido aunque BCRA no lo use) */
@@ -226,10 +225,10 @@
             vertical-align: 0.1em;
         }
         .variacion.up {
-            color: var(--negativo);
+            color: var(--negativo); /* Rojo */
         }
         .variacion.down {
-            color: var(--positivo);
+            color: var(--positivo); /* Verde */
         }
 
 
@@ -266,11 +265,10 @@
                 max-width: 95%;
             }
              /* Ajuste de tamaño para móvil */
-            /* CORRECCIÓN: Se incluye BCRA y UVA para unificar el tamaño en móvil */
-            #inflacion-section .data-item span,
-            #riesgo-section .data-item span,
-            #uva-section .data-item span, /* <--- AÑADIDO UVA AQUÍ */
-            #bcra-section .data-item span { /* <--- AÑADIDO BCRA AQUÍ */
+            #inflacion-section .data-item span:first-child,
+            #riesgo-section .data-item span:first-child,
+            #uva-section .data-item span:first-child,
+            #bcra-section .data-item span:first-child {
                 font-size: 1.8rem;
             }
             .data-item {
@@ -290,7 +288,7 @@
         <section id="inflacion-section">
             <div class="data-header"><strong>📈 IPC </strong></div>
             <div class="data-grid">
-                <div class="data-item">Mensual<br><span id="inflacion-mensual">--</span></div>
+                <div class="data-item">Mensual<br><span id="inflacion-mensual">--</span><span id="inflacion-variacion"></span></div>
                 <div class="data-item">Período<br><span id="inflacion-mes">--</span></div>
             </div>
             <div id="last-inflacion">Esperando actualización...</div>
@@ -300,7 +298,7 @@
         <section id="riesgo-section">
             <div class="data-header"><strong>📊 Riesgo País</strong></div>
             <div class="data-grid">
-                <div class="data-item">Último valor<br><span id="riesgo-valor">--</span></div>
+                <div class="data-item">Último valor<br><span id="riesgo-valor">--</span><span id="riesgo-variacion"></span></div>
                 <div class="data-item">Fecha<br><span id="riesgo-fecha">--</span></div>
             </div>
             <div id="last-riesgo">Esperando actualización...</div>
@@ -310,7 +308,7 @@
         <section id="uva-section">
             <div class="data-header"><strong>🏠 UVA</strong></div>
             <div class="data-grid">
-                <div class="data-item">Último valor<br><span id="uva-valor">--</span></div>
+                <div class="data-item">Último valor<br><span id="uva-valor">--</span><span id="uva-variacion"></span></div>
                 <div class="data-item">Fecha<br><span id="uva-fecha">--</span></div>
             </div>
             <div id="last-uva">Esperando actualización...</div>
@@ -318,11 +316,11 @@
         </section>
 
         <section id="bcra-section">
-            <div class="data-header"><strong>💰 Base Monetaria</strong></div>
+            <div class="data-header"><strong>💰 Reservas Internacionales</strong></div>
             <div class="data-grid">
                 <div class="data-item">
-                    Valor (Millones de Pesos)<br>
-                    <span id="bcra-valor">--</span>
+                    Valor (M. de Pesos)<br>
+                    <span id="bcra-valor">--</span><span id="bcra-variacion"></span>
                 </div>
                 <div class="data-item">
                     Fecha<br>
@@ -330,7 +328,7 @@
                 </div>
             </div>
             <div id="last-bcra">Esperando actualización...</div>
-            <div class="fuente">Fuente: BCRA (API /Monetarias/1)</div>
+            <div class="fuente">Fuente: BCRA </div>
         </section>
         </div>
     <main>
@@ -387,11 +385,46 @@
 
         /**
          * Función auxiliar para formatear números grandes (Base Monetaria)
-         * Se usa toLocaleString para separar miles con punto y decimales con coma.
          */
         function formatMillions(value) {
             if (isNaN(value) || value === null) return "-";
             return value.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        /**
+         * Función auxiliar para calcular la variación y generar el HTML
+         * @param {number} actual - Valor actual.
+         * @param {number} anterior - Valor anterior.
+         * @param {string} tipo - 'peor_es_mas' (IPC, UVA, Riesgo) o 'peor_es_menos' (Base Monetaria, para que subir sea verde).
+         * @returns {string} HTML con la variación y la flecha.
+         */
+        function generarVariacionHTML(actual, anterior, tipo) {
+            if (isNaN(actual) || isNaN(anterior) || anterior === 0) {
+                return '';
+            }
+
+            const variacion = ((actual - anterior) / anterior) * 100;
+            const variacionAbs = Math.abs(variacion).toFixed(2);
+            let clase = '';
+            let simbolo = '';
+
+            if (variacion > 0) {
+                // El valor actual es MAYOR al anterior (Sube)
+                // 'peor_es_mas' (IPC, Riesgo): Sube es Rojo ('up').
+                // 'peor_es_menos' (Base Mon.): Sube es Verde ('down').
+                clase = (tipo === 'peor_es_mas') ? 'up' : 'down';
+                simbolo = '▲';
+            } else if (variacion < 0) {
+                // El valor actual es MENOR al anterior (Baja)
+                // 'peor_es_mas' (IPC, Riesgo): Baja es Verde ('down').
+                // 'peor_es_menos' (Base Mon.): Baja es Rojo ('up').
+                clase = (tipo === 'peor_es_mas') ? 'down' : 'up';
+                simbolo = '▼';
+            } else {
+                return ''; // No hay variación
+            }
+
+            return `<span class="variacion ${clase}">${simbolo} ${variacionAbs}%</span>`;
         }
 
 
@@ -400,14 +433,25 @@
           try {
             const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/inflacion");
             const data = await res.json();
-            if (!Array.isArray(data) || data.length === 0) { throw new Error("Sin datos"); }
+            if (!Array.isArray(data) || data.length < 1) { throw new Error("Sin datos"); }
 
+            // Último y Penúltimo
             const ult = data[data.length - 1];
-            const valor = parseFloat(String(ult.valor).replace(",", "."));
+            const ant = data.length >= 2 ? data[data.length - 2] : null;
+
+            const valorActual = parseFloat(String(ult.valor).replace(",", "."));
+            const valorAnterior = ant ? parseFloat(String(ant.valor).replace(",", ".")) : NaN;
+
             const fecha = new Date(ult.fecha);
             const mes = fecha.toLocaleString("es-AR", { month: "long", year: "numeric" });
 
-            document.getElementById("inflacion-mensual").textContent = isNaN(valor) ? "-" : valor.toFixed(2) + "%";
+            // LÓGICA IPC: Sube = Rojo, Baja = Verde -> 'peor_es_mas'
+            const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_mas');
+
+            // Actualizar el valor y la variación en spans separados
+            document.getElementById("inflacion-mensual").textContent = isNaN(valorActual) ? "-" : valorActual.toFixed(2) + "%";
+            document.getElementById("inflacion-variacion").innerHTML = variacionHTML;
+
             document.getElementById("inflacion-mes").textContent = mes;
             last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
           } catch (err) {
@@ -415,6 +459,7 @@
             last.innerHTML = '<span class="error">Error al cargar inflación</span>';
             document.getElementById("inflacion-mensual").textContent = "-";
             document.getElementById("inflacion-mes").textContent = "--";
+            document.getElementById("inflacion-variacion").innerHTML = "";
           }
         }
         cargarInflacion();
@@ -422,14 +467,30 @@
         async function cargarRiesgo(){
           const last=document.getElementById("last-riesgo");
           try{
-            const res=await fetch("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais/ultimo");
-            const ult=await res.json();
-            document.getElementById("riesgo-valor").textContent=ult.valor+" pts";
+            // Se utiliza el endpoint de datos históricos para obtener el penúltimo valor
+            const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais");
+            const data = await res.json();
+            if (!Array.isArray(data) || data.length < 1) { throw new Error("Sin datos"); }
+
+            const ult = data[data.length - 1];
+            const ant = data.length >= 2 ? data[data.length - 2] : null;
+
+            const valorActual = ult.valor;
+            const valorAnterior = ant ? ant.valor : NaN;
+
+            // LÓGICA RIESGO PAÍS: Sube = Rojo, Baja = Verde -> 'peor_es_mas'
+            const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_mas');
+
+            // Actualizar el valor y la variación en spans separados
+            document.getElementById("riesgo-valor").textContent=valorActual+" pts";
+            document.getElementById("riesgo-variacion").innerHTML = variacionHTML;
             document.getElementById("riesgo-fecha").textContent=ult.fecha;
             last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
           }catch(e){
             console.error("Error al obtener riesgo país:", e);
             last.innerHTML='<span class="error">Error al cargar riesgo país</span>';
+            document.getElementById("riesgo-valor").textContent = "-";
+            document.getElementById("riesgo-variacion").innerHTML = "";
         }
         }
         cargarRiesgo();
@@ -439,13 +500,22 @@
             try {
                 const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/uva");
                 const data = await res.json();
-                if (!Array.isArray(data) || data.length === 0) { throw new Error("Sin datos"); }
+                if (!Array.isArray(data) || data.length < 1) { throw new Error("Sin datos"); }
 
                 const ult = data[data.length - 1];
-                const valor = parseFloat(String(ult.valor).replace(",", "."));
+                const ant = data.length >= 2 ? data[data.length - 2] : null;
+
+                const valorActual = parseFloat(String(ult.valor).replace(",", "."));
+                const valorAnterior = ant ? parseFloat(String(ant.valor).replace(",", ".")) : NaN;
                 const fecha = ult.fecha;
 
-                document.getElementById("uva-valor").textContent = isNaN(valor) ? "-" : valor.toFixed(2);
+                // LÓGICA UVA: Sube = Rojo, Baja = Verde -> 'peor_es_mas'
+                const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_mas');
+
+                // Actualizar el valor y la variación en spans separados
+                document.getElementById("uva-valor").textContent = isNaN(valorActual) ? "-" : valorActual.toFixed(2);
+                document.getElementById("uva-variacion").innerHTML = variacionHTML;
+
                 document.getElementById("uva-fecha").textContent = fecha;
                 last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
             } catch (err) {
@@ -453,6 +523,7 @@
                 last.innerHTML = '<span class="error">Error al cargar UVA</span>';
                 document.getElementById("uva-valor").textContent = "-";
                 document.getElementById("uva-fecha").textContent = "--";
+                document.getElementById("uva-variacion").innerHTML = "";
             }
         }
         cargarUVA();
@@ -467,21 +538,30 @@
                 const data = await res.json();
 
                 // La data tiene la estructura: { results: [ { detalle: [ { fecha: "...", valor: N } ] } ] }
-                if (!data || !data.results || data.results.length === 0 || !data.results[0].detalle || data.results[0].detalle.length === 0) {
+                if (!data || !data.results || data.results.length === 0 || !data.results[0].detalle || data.results[0].detalle.length < 1) {
                     throw new Error("No se encontraron resultados válidos en la respuesta del BCRA.");
                 }
 
-                // Extraer el valor y la fecha del primer elemento en el detalle
-                const ult = data.results[0].detalle[0];
+                // Extraer el valor y la fecha de los dos últimos elementos en el detalle
+                const detalle = data.results[0].detalle;
+                const ult = detalle[0]; // El BCRA API a menudo retorna el más reciente primero
+                const ant = detalle.length >= 2 ? detalle[1] : null;
 
-                const valor = parseFloat(String(ult.valor).replace(",", "."));
+                const valorActual = parseFloat(String(ult.valor).replace(",", "."));
+                const valorAnterior = ant ? parseFloat(String(ant.valor).replace(",", ".")) : NaN;
                 const fecha = ult.fecha;
 
                 // Formatear la fecha a DD/MM/YYYY
                 const dateObj = new Date(fecha);
                 const formattedDate = dateObj.toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
-                document.getElementById("bcra-valor").textContent = isNaN(valor) ? "-" : formatMillions(valor);
+                // LÓGICA BASE MONETARIA: Sube = Verde, Baja = Rojo -> 'peor_es_menos' (según solicitud)
+                const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_menos');
+
+                // Actualizar el valor y la variación en spans separados
+                document.getElementById("bcra-valor").textContent = isNaN(valorActual) ? "-" : formatMillions(valorActual);
+                document.getElementById("bcra-variacion").innerHTML = variacionHTML;
+
                 document.getElementById("bcra-fecha").textContent = fecha ? formattedDate : "--";
 
                 last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
@@ -491,6 +571,7 @@
                 last.innerHTML = '<span class="error">Error al cargar Base Monetaria</span>';
                 document.getElementById("bcra-valor").textContent = "-";
                 document.getElementById("bcra-fecha").textContent = "--";
+                document.getElementById("bcra-variacion").innerHTML = "";
             }
         }
         cargarBCRA();
