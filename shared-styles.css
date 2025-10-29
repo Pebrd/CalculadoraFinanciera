@@ -18,8 +18,8 @@
   --text-muted: #666666;        /* Texto atenuado */
   --text-accent: #e0e0e0;       /* Texto de acento */
   
-  /* Colores de estado (He ajustado el --success de blanco a verde moderno) */
-  --success: #00d4aa;           /* Verde moderno (Usando el color --buy para consistencia) */
+  /* Colores de estado (Ajustado a verde moderno para consistencia) */
+  --success: #00d4aa;           /* Verde moderno */
   --success-glow: rgba(0, 212, 170, 0.3);
   --error: #ff4757;             /* Rojo moderno */
   --error-glow: rgba(255, 71, 87, 0.3);
@@ -53,13 +53,17 @@
   --transition-slow: 0.5s ease-out;
 }
 
-/* === RESET Y ESTILOS BASE === */
+/* === RESET Y ESTILOS BASE (AJUSTE CRÍTICO DE FONDO) === */
 * {
   box-sizing: border-box;
 }
 
+/* APLICACIÓN CRÍTICA DEL FONDO A HTML y BODY PARA FORZAR EL MODO OSCURO */
+html {
+  background: var(--surface) !important; /* Forzar el fondo oscuro a nivel raíz */
+}
+
 body {
-  /* Asegurar que el fondo es siempre el oscuro definido en :root */
   background: var(--surface);
   color: var(--text-primary);
   font-family: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -70,6 +74,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Asegurar que body usa toda la altura del html, lo que es clave en la mayoría de los casos */
+  min-height: 100vh;
 }
 
 /* === TIPOGRAFÍA MODERNA === */
@@ -77,7 +83,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 0;
-  /* Asegurar que el color de los títulos usa el primario (blanco) */
   color: var(--text-primary); 
 }
 
@@ -327,7 +332,6 @@ button:hover::before, .btn:hover::before {
 }
 
 button:hover:not(:disabled), .btn:hover:not(:disabled) {
-  /* Usar text-primary (blanco) para el hover del texto */
   background: var(--accent);
   border-color: var(--success);
   color: var(--text-primary); 
@@ -354,7 +358,6 @@ button:disabled, .btn:disabled {
 .btn-primary {
   background: var(--success);
   border-color: var(--success);
-  /* Usar --surface (negro profundo) para el texto del botón primario */
   color: var(--surface); 
   box-shadow: var(--glow-success);
 }
@@ -368,7 +371,6 @@ button:disabled, .btn:disabled {
 .btn-danger {
   background: var(--error);
   border-color: var(--error);
-  /* Usar --surface (negro profundo) para el texto del botón danger */
   color: var(--surface); 
   box-shadow: var(--glow-error);
 }
@@ -382,7 +384,6 @@ button:disabled, .btn:disabled {
 .btn-info {
   background: var(--info);
   border-color: var(--info);
-  /* Usar --surface (negro profundo) para el texto del botón info */
   color: var(--surface); 
   box-shadow: var(--glow-info);
 }
@@ -412,7 +413,6 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--success);
   outline: none;
   box-shadow: var(--glow-success);
-  /* Usar --surface (negro profundo) en el foco para contraste */
   background: var(--surface); 
 }
 
@@ -510,7 +510,6 @@ tbody tr {
 }
 
 tbody tr:nth-child(even) {
-  /* Usar el fondo principal oscuro para las filas pares */
   background: var(--surface);
 }
 
@@ -856,7 +855,6 @@ tbody tr:hover {
 .text-left { text-align: left; }
 
 .error { color: var(--error); }
-/* He ajustado el color de la utilidad success para usar la variable definida */
 .success { color: var(--success); }
 .warning { color: var(--warning); }
 
@@ -878,7 +876,6 @@ tbody tr:hover {
   height: 20px;
   margin: -10px 0 0 -10px;
   border: 2px solid #333;
-  /* Usar una variable para --base no definida, la cambio a --success para spinner */
   border-top: 2px solid var(--success); 
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -1064,10 +1061,6 @@ tbody tr:hover {
     transition-duration: 0.01ms !important;
   }
 }
-
-/* === BLOQUE ELIMINADO: Eliminado para forzar el tema oscuro. */
-/* @media (prefers-color-scheme: light) { ... } */
-
 
 /* === PRINT STYLES === */
 @media print {
