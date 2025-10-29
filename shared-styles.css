@@ -18,14 +18,14 @@
   --text-muted: #666666;        /* Texto atenuado */
   --text-accent: #e0e0e0;       /* Texto de acento */
   
-  /* Colores de estado (AJUSTADO A VERDE MODERNO) */
-  --success: #00d4aa;           /* Verde moderno */
+  /* Colores de estado (Ajustado para usar el color buy/sell para éxito/información) */
+  --success: #00d4aa;           /* Verde moderno (usando el color de --buy) */
   --success-glow: rgba(0, 212, 170, 0.3);
   --error: #ff4757;             /* Rojo moderno */
   --error-glow: rgba(255, 71, 87, 0.3);
   --warning: #ffa502;           /* Naranja moderno */
   --warning-glow: rgba(255, 165, 2, 0.3);
-  --info: #3742fa;              /* Azul moderno */
+  --info: #3742fa;              /* Azul moderno (usando el color de --sell) */
   --info-glow: rgba(55, 66, 250, 0.3);
   
   /* Colores de datos financieros */
@@ -107,7 +107,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 1000;
-  /* Usar rgba(var(--surface), 0.95) para el fondo semitransparente oscuro */
+  /* El fondo ya es oscuro por defecto, no es necesario cambiarlo */
   background: rgba(15, 15, 15, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--accent);
@@ -865,6 +865,7 @@ tbody tr:hover {
 .loading {
   opacity: 0.6;
   pointer-events: none;
+  position: relative; /* Asegurar que el after se posicione correctamente */
 }
 
 .loading::after {
@@ -875,8 +876,7 @@ tbody tr:hover {
   width: 20px;
   height: 20px;
   margin: -10px 0 0 -10px;
-  border: 2px solid #333;
-  /* Corregido: Usar --success para el spinner */
+  border: 2px solid var(--accent); /* Corregido para usar una variable oscura */
   border-top: 2px solid var(--success); 
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -1063,9 +1063,7 @@ tbody tr:hover {
   }
 }
 
-/* === BLOQUE ELIMINADO: Eliminado para forzar el tema oscuro. */
-/* El bloque @media (prefers-color-scheme: light) ha sido eliminado de aquí. */
-
+/* === BLOQUE DE MODO CLARO ELIMINADO PARA FORZAR MODO OSCURO === */
 
 /* === PRINT STYLES === */
 @media print {
