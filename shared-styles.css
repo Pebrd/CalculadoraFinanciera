@@ -18,7 +18,7 @@
   --text-muted: #666666;        /* Texto atenuado */
   --text-accent: #e0e0e0;       /* Texto de acento */
   
-  /* Colores de estado (Ajustado a verde moderno para consistencia) */
+  /* Colores de estado (AJUSTADO A VERDE MODERNO) */
   --success: #00d4aa;           /* Verde moderno */
   --success-glow: rgba(0, 212, 170, 0.3);
   --error: #ff4757;             /* Rojo moderno */
@@ -61,6 +61,7 @@
 /* APLICACIÓN CRÍTICA DEL FONDO A HTML y BODY PARA FORZAR EL MODO OSCURO */
 html {
   background: var(--surface) !important; /* Forzar el fondo oscuro a nivel raíz */
+  min-height: 100vh; /* Asegurar que el html cubre toda la altura */
 }
 
 body {
@@ -74,7 +75,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  /* Asegurar que body usa toda la altura del html, lo que es clave en la mayoría de los casos */
   min-height: 100vh;
 }
 
@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 0;
-  color: var(--text-primary); 
+  color: var(--text-primary); /* Forzar color de texto principal */
 }
 
 h1 {
@@ -876,6 +876,7 @@ tbody tr:hover {
   height: 20px;
   margin: -10px 0 0 -10px;
   border: 2px solid #333;
+  /* Corregido: Usar --success para el spinner */
   border-top: 2px solid var(--success); 
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -1061,6 +1062,10 @@ tbody tr:hover {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* === BLOQUE ELIMINADO: Eliminado para forzar el tema oscuro. */
+/* El bloque @media (prefers-color-scheme: light) ha sido eliminado de aquí. */
+
 
 /* === PRINT STYLES === */
 @media print {
