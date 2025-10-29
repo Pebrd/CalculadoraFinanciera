@@ -3,24 +3,24 @@
 /* === VERSIÓN MODERNA - MINIMALISTA CON GLOW EFFECTS === */
 /* ========================================================== */
 
-/* === PALETA DE COLORES SERIA Y MODERNA === */
+/* === PALETA DE COLORES SERIA Y MODERNA (MODO OSCURO FORZADO) === */
 :root {
   /* Colores principales */
   --primary: #1a1a1a;           /* Negro profundo */
   --secondary: #2a2a2a;         /* Gris muy oscuro */
   --accent: #3a3a3a;            /* Gris medio */
-  --surface: #0f0f0f;           /* Superficie principal */
+  --surface: #0f0f0f;           /* Superficie principal (FONDO GENERAL) */
   --surface-elevated: #3a3a3a;  /* Superficie elevada */
   
   /* Colores de texto */
-  --text-primary: #ffffff;      /* Texto principal */
-  --text-secondary: #b3b3b3;    /* Texto secundario */
+  --text-primary: #ffffff;      /* Texto principal (BLANCO) */
+  --text-secondary: #b3b3b3;    /* Texto secundario (GRIS CLARO) */
   --text-muted: #666666;        /* Texto atenuado */
   --text-accent: #e0e0e0;       /* Texto de acento */
   
-  /* Colores de estado */
-  --success: #c9c9c9;           /* Verde moderno */
-  --success-glow: rgba(238, 238, 238, 0.3);
+  /* Colores de estado (He ajustado el --success de blanco a verde moderno) */
+  --success: #00d4aa;           /* Verde moderno (Usando el color --buy para consistencia) */
+  --success-glow: rgba(0, 212, 170, 0.3);
   --error: #ff4757;             /* Rojo moderno */
   --error-glow: rgba(255, 71, 87, 0.3);
   --warning: #ffa502;           /* Naranja moderno */
@@ -59,6 +59,7 @@
 }
 
 body {
+  /* Asegurar que el fondo es siempre el oscuro definido en :root */
   background: var(--surface);
   color: var(--text-primary);
   font-family: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -76,6 +77,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 0;
+  /* Asegurar que el color de los títulos usa el primario (blanco) */
+  color: var(--text-primary); 
 }
 
 h1 {
@@ -99,6 +102,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 1000;
+  /* Usar rgba(var(--surface), 0.95) para el fondo semitransparente oscuro */
   background: rgba(15, 15, 15, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--accent);
@@ -323,9 +327,10 @@ button:hover::before, .btn:hover::before {
 }
 
 button:hover:not(:disabled), .btn:hover:not(:disabled) {
+  /* Usar text-primary (blanco) para el hover del texto */
   background: var(--accent);
   border-color: var(--success);
-  color: var(--text-primary);
+  color: var(--text-primary); 
   transform: translateY(-2px);
   box-shadow: var(--glow-success);
 }
@@ -349,7 +354,8 @@ button:disabled, .btn:disabled {
 .btn-primary {
   background: var(--success);
   border-color: var(--success);
-  color: var(--surface);
+  /* Usar --surface (negro profundo) para el texto del botón primario */
+  color: var(--surface); 
   box-shadow: var(--glow-success);
 }
 
@@ -362,7 +368,8 @@ button:disabled, .btn:disabled {
 .btn-danger {
   background: var(--error);
   border-color: var(--error);
-  color: var(--surface);
+  /* Usar --surface (negro profundo) para el texto del botón danger */
+  color: var(--surface); 
   box-shadow: var(--glow-error);
 }
 
@@ -375,7 +382,8 @@ button:disabled, .btn:disabled {
 .btn-info {
   background: var(--info);
   border-color: var(--info);
-  color: var(--surface);
+  /* Usar --surface (negro profundo) para el texto del botón info */
+  color: var(--surface); 
   box-shadow: var(--glow-info);
 }
 
@@ -404,7 +412,8 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--success);
   outline: none;
   box-shadow: var(--glow-success);
-  background: var(--surface);
+  /* Usar --surface (negro profundo) en el foco para contraste */
+  background: var(--surface); 
 }
 
 input::placeholder, textarea::placeholder {
@@ -501,6 +510,7 @@ tbody tr {
 }
 
 tbody tr:nth-child(even) {
+  /* Usar el fondo principal oscuro para las filas pares */
   background: var(--surface);
 }
 
@@ -846,8 +856,9 @@ tbody tr:hover {
 .text-left { text-align: left; }
 
 .error { color: var(--error); }
-.success { color: #4f4; }
-.warning { color: #ffa500; }
+/* He ajustado el color de la utilidad success para usar la variable definida */
+.success { color: var(--success); }
+.warning { color: var(--warning); }
 
 .hidden { display: none; }
 .visible { display: block; }
@@ -867,7 +878,8 @@ tbody tr:hover {
   height: 20px;
   margin: -10px 0 0 -10px;
   border: 2px solid #333;
-  border-top: 2px solid var(--base);
+  /* Usar una variable para --base no definida, la cambio a --success para spinner */
+  border-top: 2px solid var(--success); 
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -1053,18 +1065,9 @@ tbody tr:hover {
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --surface: #f8f9fa;
-    --surface-elevated: #ffffff;
-    --primary: #ffffff;
-    --secondary: #e9ecef;
-    --accent: #dee2e6;
-    --text-primary: #212529;
-    --text-secondary: #6c757d;
-    --text-muted: #adb5bd;
-  }
-}
+/* === BLOQUE ELIMINADO: Eliminado para forzar el tema oscuro. */
+/* @media (prefers-color-scheme: light) { ... } */
+
 
 /* === PRINT STYLES === */
 @media print {
