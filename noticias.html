@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feed de Noticias Financieras</title>
+<link rel="stylesheet" href="shared-styles.css">
+<style>
+/* === ESTILOS ESPECÍFICOS DE NOTICIAS === */
+
+#noticias {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+    font-family: 'Arial', sans-serif; 
+    color: #eee;
+}
+
+/* --- Estilos para el Feed de Noticias --- */
+.controls {
+    display:flex; 
+    gap:10px; 
+    margin-bottom:15px; 
+    align-items:center;
+    flex-wrap: wrap; /* Permitir que los controles se envuelvan */
+}
+#category-select, #toggle-view-btn, #reload-news-btn {
+    padding:6px 10px; 
+    background:#222; 
+    color:#eee; 
+    border:1px solid #1a1a1a;
+    cursor: pointer;
+    font-family:'Courier New', monospace;
+}
+.news-list {
+    padding:0;
+    list-style: none;
+}
+/* LISTA VIEW (Default) */
+.news-list li {
+    background: #111;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: #eee;
+}
+.news-list img {
+    width:120px; 
+    height:auto; 
+    object-fit: cover; 
+    margin-right:10px;
+}
+.news-list a {
+    color:#eee; 
+    font-weight:bold; 
+    text-decoration:none;
+}
+.news-list small {
+    display:block; 
+    color:#aaa; 
+    margin-top:4px;
+}
+.news-list p {
+    margin-top:4px; 
+    font-size:0.85em; 
+    color:#ccc; 
+    max-height: 40px; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+/* MOSAICO/GRID VIEW */
+.news-list.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0;
+}
+.news-list.grid li {
+    flex-direction: column; 
+    align-items: flex-start;
+    padding: 15px;
+    height: auto; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0; /* No margin-bottom en grid item */
+}
+.news-list.grid li .content {
+    width: 100%;
+}
+.news-list.grid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 0;
+    margin-bottom: 10px;
+}
+.news-list.grid p {
+    max-height: none; 
+    overflow: visible;
+}
+@media (max-width: 600px) {
+    .news-list.grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.pagination button {
+    padding:6px 10px;
+    margin:0 5px; 
+    background:#222; 
+    color:#eee; 
+    border:1px solid #333;
+}
+
+
+/* --- Estado de APIs --- */
+#api-status {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 5px 20px;
+  background: #050505;
+  border: 1px solid #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  box-sizing: border-box;
+}
+.api-indicator {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+}
+.api-indicator strong {
+  display: inline;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+  color: #777;
+  margin-right: 5px;
+}
+.status-light {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.status-light.funcional {
+  background-color: #4f4;
+  box-shadow: 0 0 8px #4f4;
+}
+.status-light.error {
+  background-color: var(--error);
+  box-shadow: 0 0 8px var(--error);
+}
+.status-text {
+  font-weight: normal;
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
+/* Media Query para móvil */
+@media (max-width: 600px) {
+    /* 1. Fix: Navegación */
+    nav {
+        justify-content: space-between;
+    }
+    nav a {
+        padding: 8px 5px;
+        font-size: 0.9rem;
+        margin: 0 2px;
+    }
+    /* Estilos API Status existente */
+    #api-status {
+        height: auto;
+        flex-direction: column;
+        padding: 8px 10px;
+    }
+    .api-indicator {
+        margin: 3px 0;
+        justify-content: center;
+    }
+}
+</style>
+</head>
+<body>
+<script src="modern-navigation.js"></script>
+<main>
+      <h1 class="page-title">Feed de Noticias</h1>
+
+      </main>
+
+<div id="noticias">
+  <h2 style="margin:0 0 15px; text-align:center; color:var(--base);">Noticias Económicas y Financieras</h2>
+  <div class="controls">
+    <label for="category-select">Filtrar por categoría:</label>
+    <select id="category-select">
+      <option value="all">Todas</option>
+      <option value="economia">Economía</option>
+      <option value="finanzas">Finanzas</option>
+      <option value="negocios">Negocios</option>
+      <option value="politica">Política</option>
+      <option value="internacional">Internacional</option>
+    </select>
+    <button id="reload-news-btn">Recargar</button>
+    <button id="toggle-view-btn">Modo Mosaico</button>
+  </div>
+
+  <ul class="news-list" id="news-list" style="padding:0;"></ul>
+
+  <div class="pagination" id="pagination" style="text-align:center; margin-top:10px; display:none;">
+    <button id="prev-btn" disabled>Anterior</button>
+    <button id="next-btn" disabled>Siguiente</button>
+  </div>
+</div>
+
+<div id="api-status">
+  <div class="api-indicator">
+    <strong>DolarAPI.com:</strong>
+    <span id="dolarapi-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+  <div class="api-indicator">
+    <strong>ArgentinaDatos.com:</strong>
+    <span id="argentinadatos-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+  <div class="api-indicator">
+    <strong>CriptoYa.com:</strong>
+    <span id="criptoya-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+</div>
+
+<script src="shared-scripts.js"></script>
+<script>
+/* ========================================================== */
+/* === SCRIPT 1: FEED DE NOTICIAS (Sin cambios) === */
+/* ========================================================== */
+  const feeds = {
+    economia: [
+      'https://www.ambito.com/rss/pages/economia.xml',
+      'https://derechadiario.com.ar/rss/cat/economia',
+    ],
+    finanzas: [
+      'https://www.ambito.com/rss/pages/finanzas.xml',
+      'https://derechadiario.com.ar/rss/cat/negocios-finanzas',
+    ],
+    negocios: [
+      'https://derechadiario.com.ar/rss/cat/negocios-finanzas',
+    ],
+    politica: [
+      'https://www.ambito.com/rss/pages/politica.xml',
+      'https://derechadiario.com.ar/rss/cat/politica',
+    ],
+    internacional: []
+  };
+
+  let allArticles = [];
+  let filteredArticles = [];
+  let currentPage = 1;
+  const pageSize = 6;
+
+  const newsList = document.getElementById('news-list');
+  const categorySelect = document.getElementById('category-select');
+  const reloadNewsBtn = document.getElementById('reload-news-btn');
+  const pagination = document.getElementById('pagination');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const toggleViewBtn = document.getElementById('toggle-view-btn');
+  let isGridView = false; // Estado de la vista
+
+  function toggleView() {
+    isGridView = !isGridView;
+    if (isGridView) {
+        newsList.classList.add('grid');
+        toggleViewBtn.textContent = 'Modo Lista';
+    } else {
+        newsList.classList.remove('grid');
+        toggleViewBtn.textContent = 'Modo Mosaico';
+    }
+    renderPage();
+  }
+
+  async function fetchFeed(url) {
+    try {
+      const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+      const response = await fetch(proxyUrl);
+      const data = await response.json();
+      
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+      const items = xmlDoc.querySelectorAll("item");
+      const articles = [];
+      items.forEach(item => {
+        const title = item.querySelector("title")?.textContent || "Sin título";
+        const link = item.querySelector("link")?.textContent || "#";
+        const description = item.querySelector("description")?.textContent || "";
+        const pubDateRaw = item.querySelector("pubDate")?.textContent;
+        const pubDate = pubDateRaw ? new Date(pubDateRaw) : null;
+        const enclosure = item.querySelector("enclosure");
+        let imageUrl = null;
+        if (enclosure && enclosure.getAttribute("url")) {
+          imageUrl = enclosure.getAttribute("url");
+        } else {
+          const imgMatch = description.match(/<img.*?src="(.*?)"/);
+          if(imgMatch && imgMatch[1]){ imageUrl = imgMatch[1]; }
+        }
+        articles.push({
+          title, link, description: description.replace(/<[^>]*>?/gm, ''), pubDate, imageUrl
+        });
+      });
+      return articles;
+    } catch (e) {
+      console.error("Error cargando feed:", url, e);
+      return [];
+    }
+  }
+
+  async function loadAllFeeds() {
+    newsList.innerHTML = "<li>Cargando noticias...</li>";
+    allArticles = [];
+    const promises = [];
+
+    const selectedCategory = categorySelect.value;
+    
+    if(selectedCategory === "all"){
+      for(const cat in feeds){
+        feeds[cat].forEach(feedUrl => promises.push(fetchFeed(feedUrl)));
+      }
+    } else {
+      feeds[selectedCategory]?.forEach(feedUrl => promises.push(fetchFeed(feedUrl)));
+    }
+
+    const results = await Promise.all(promises);
+    results.forEach(arr => { allArticles = allArticles.concat(arr); });
+
+    allArticles = allArticles.filter(a => a.pubDate).sort((a,b) => b.pubDate - a.pubDate);
+
+    const uniqueArticles = [];
+    const seen = new Set();
+    allArticles.forEach(item => {
+        const key = item.title + item.link;
+        if (!seen.has(key)) {
+            seen.add(key);
+            uniqueArticles.push(item);
+        }
+    });
+
+    filteredArticles = uniqueArticles;
+    currentPage = 1;
+    renderPage();
+  }
+
+  function renderPage(){
+    newsList.innerHTML = "";
+    const start = (currentPage -1) * pageSize;
+    const end = start + pageSize;
+    const pageItems = filteredArticles.slice(start,end);
+
+    if(pageItems.length === 0){
+      newsList.innerHTML = "<li>No hay noticias para mostrar.</li>";
+      pagination.style.display = "none";
+      return;
+    }
+
+    pageItems.forEach(item => {
+      const li = document.createElement("li");
+      
+      li.innerHTML = `
+        ${item.imageUrl ? `<img src="${item.imageUrl}" alt="Imagen noticia">` : ''}
+        <div class="content" style="flex-grow:1;">
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
+          <small>${item.pubDate ? item.pubDate.toLocaleString('es-AR',{hour12:false}) : ''}</small>
+          <p>${item.description}</p>
+        </div>
+      `;
+      newsList.appendChild(li);
+    });
+
+    pagination.style.display = filteredArticles.length > pageSize ? "block" : "none";
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = end >= filteredArticles.length;
+  }
+
+  categorySelect.addEventListener("change", loadAllFeeds);
+  reloadNewsBtn.addEventListener("click", loadAllFeeds);
+  toggleViewBtn.addEventListener("click", toggleView);
+  prevBtn.addEventListener("click", () => { if(currentPage>1){ currentPage--; renderPage(); }});
+  nextBtn.addEventListener("click", () => { if(currentPage*pageSize<filteredArticles.length){ currentPage++; renderPage(); }});
+
+  loadAllFeeds();
+
+/* ========================================================== */
+/* === SCRIPT 2: MONITOREO DE ESTADO DE APIS (Sin cambios) === */
+/* ========================================================== */
+async function checkApiStatus(url, elementId) {
+  const statusElement = document.getElementById(elementId);
+  const light = statusElement.querySelector('.status-light');
+  const text = statusElement.querySelector('.status-text');
+
+  light.className = 'status-light';
+  text.textContent = 'Cargando...';
+  text.style.color = '#ddd';
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Lógica simplificada que el usuario indicó que funciona para DolarAPI y ArgentinaDatos.
+    // Se utiliza para todas las APIs para mantener el código unificado.
+    const isUp = (data.status === "ok" || data.status === "available" || response.ok);
+
+    if (isUp) {
+      light.className = 'status-light funcional';
+      text.textContent = 'Funcional';
+      text.style.color = '#4f4';
+    } else {
+      light.className = 'status-light error';
+      text.textContent = 'Error';
+      text.style.color = 'var(--error)';
+    }
+  } catch (e) {
+    light.className = 'status-light error';
+    text.textContent = 'Error';
+    text.style.color = 'var(--error)';
+    console.error(`Error al verificar estado de API ${elementId}:`, e);
+  }
+}
+
+function loadApiStatus() {
+  checkApiStatus("https://dolarapi.com/v1/estado", "dolarapi-status");
+  checkApiStatus("https://api.argentinadatos.com/v1/estado", "argentinadatos-status");
+  checkApiStatus("https://criptoya.com/api/dolar", "criptoya-status"); 
+}
+
+loadApiStatus();
+setInterval(loadApiStatus, 3600000); 
+</script>
+</body>
+</html>

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cotizaciones Bancarias y Cripto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared-styles.css">
+<style>
+/* === ESTILOS ESPECÍFICOS DE COTIZACIONES === */
+
+/* --- SECCIONES DE TABLAS NUEVAS (Bancos y USDT) Y EL NUEVO BLOQUE DE DÓLAR --- */
+/* Esta clase define el ancho y el centrado (900px max-width, margin: 0 auto) */
+.table-block-container {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+}
+.new-table-container {
+    background: #050505;
+    border: 1px solid #111;
+    padding: 15px;
+    border-radius: 0;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+.table-block-container h2 {
+    color: var(--base);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* --- BANNERS DE RESUMEN (APLICADO A USD Y USDT) --- */
+.summary-banner {
+    background: #111;
+    border-left: 5px solid #333;
+    padding: 10px;
+    box-shadow: none;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.best-buy {
+    background-color: var(--destacado-compra);
+    border-left: 5px solid #4f4;
+}
+.best-sell {
+    background-color: var(--destacado-venta);
+    border-left: 5px solid #007bff;
+}
+.best-deal {
+    padding: 10px; border-radius: 4px; text-align: center; flex: 1;
+}
+.best-deal h3 {
+    color: var(--base);
+    font-size: 1em;
+    margin: 0 0 5px 0;
+}
+.best-deal p {
+    color: var(--texto);
+    font-size: 1.2em; font-weight: bold; margin: 0;
+}
+
+.controls button {
+    background-color: #333 !important;
+    color: var(--base) !important;
+    padding:6px 10px;
+    border:1px solid #444;
+    cursor:pointer;
+}
+#last-updated, .last-update {
+    color: #777;
+    font-size: 0.8em;
+}
+
+/* --- Tablas (General) --- */
+.table-scroll-container, .table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    border-radius: 0;
+}
+#quotation-table, .price-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#quotation-table th, .price-table th, 
+#quotation-table td, .price-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #222;
+    background-color: #000;
+}
+#quotation-table th, .price-table th {
+    background-color: #111 !important;
+    color: var(--base) !important;
+    cursor: pointer;
+}
+#quotation-table tbody tr:nth-child(even) {
+    background-color: #050505;
+}
+/* Resaltado de mejores ofertas */
+.highlight-best-buy, .price-table .best-buy-cell {
+    background: var(--buy-glow) !important;
+    color: var(--buy) !important;
+    font-weight: 600;
+    box-shadow: var(--glow-success);
+}
+.highlight-best-sell, .price-table .best-sell-cell {
+    background: var(--sell-glow) !important;
+    color: var(--sell) !important;
+    font-weight: 600;
+    box-shadow: var(--glow-info);
+}
+
+/* --- Estado de APIs --- */
+#api-status {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 5px 20px;
+  background: #050505;
+  border: 1px solid #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  box-sizing: border-box;
+}
+.api-indicator {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+}
+.api-indicator strong {
+  display: inline;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+  color: #777;
+  margin-right: 5px;
+}
+.status-light {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.status-light.funcional {
+  background-color: #4f4;
+  box-shadow: 0 0 8px #4f4;
+}
+.status-light.error {
+  background-color: var(--error);
+  box-shadow: 0 0 8px var(--error);
+}
+.status-text {
+  font-weight: normal;
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
+
+/* === ESTILOS ESPECÍFICOS DEL NUEVO BLOQUE DE COTIZACIONES DÓLAR === */
+/* Se unificó el contenedor principal con .table-block-container */
+.data-section {
+  background:#050505;
+  border:1px solid #111;
+  padding:10px;
+  margin:0;
+  font-size:0.9rem;
+  box-sizing:border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.data-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.data-grid {
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:10px;
+  flex-grow: 1;
+  align-items: center;
+}
+.data-item {
+  text-align:center;
+  min-width:100px;
+}
+#reload-btn {
+  background:#111;
+  color:#ccc;
+  border:1px solid #333;
+  padding:4px 8px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
+#reload-btn:hover { background:#222; }
+#last-update { 
+  font-size:0.75rem;
+  color:#777;
+  text-align:right;
+  margin-top:5px;
+}
+.fuente {
+  text-align:right;
+  font-size:0.7rem;
+  color:#666;
+  margin-top:4px;
+}
+.error {
+  color:var(--error);
+  font-size:0.8rem;
+  text-align:right;
+  margin-top:4px;
+}
+/* --- Estilo específico para los valores del dólar --- */
+#dolar-section .data-item span {
+  font-size: 0.9rem;
+}
+
+/* Media Query para móvil (Existente y modificado) */
+@media (max-width: 600px) {
+    /* 1. Fix: Navegación */
+    nav {
+        justify-content: space-around; /* Mejor distribución para elementos que saltan de línea */
+    }
+    nav a {
+        padding: 8px 5px;
+        font-size: 0.9rem;
+        margin: 4px 2px; /* Separación vertical y horizontal */
+        flex-basis: 45%; /* Dos elementos por línea, usando casi la mitad del espacio */
+        box-sizing: border-box; 
+    }
+    /* 2. Fix: Botones de Actualización y Hora */
+    .table-block-container .controls {
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .table-block-container .controls button {
+        width: 100%; 
+        padding: 8px !important; 
+        font-size: 1rem;
+    }
+    #last-updated-usd, #last-update-time-usdt {
+        align-self: flex-start; 
+        font-size: 0.8em;
+    }
+    /* Estilos API Status existente */
+    #api-status {
+        height: auto;
+        flex-direction: column;
+        padding: 8px 10px;
+    }
+    .api-indicator {
+        margin: 3px 0;
+        justify-content: center;
+    }
+    /* Asegurar que el botón de recarga del nuevo bloque se vea bien en móvil */
+    #dolar-section .data-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    #dolar-section #reload-btn {
+        width: 100%;
+        padding: 8px !important; 
+        font-size: 1rem;
+    }
+    #dolar-section strong {
+        font-size: 1.1rem;
+    }
+}
+</style>
+</head>
+<body>
+<script src="modern-navigation.js"></script>
+<main class="main-container">
+<h1 class="page-title fade-in">Cotizaciones Bancarias y Cripto</h1>
+
+<div class="table-block-container new-table-container">
+  <section class="data-section" id="dolar-section">
+    <div class="data-header">
+      <strong>💵 Cotizaciones del dólar</strong>
+      <button id="reload-btn">Recargar</button>
+    </div>
+    <div class="data-grid">
+      <div class="data-item" id="oficial">Oficial<br><span>--</span></div>
+      <div class="data-item" id="blue">Blue<br><span>--</span></div>
+      <div class="data-item" id="mep">MEP<br><span>--</span></div>
+      <div class="data-item" id="ccl">CCL<br><span>--</span></div>
+      <div class="data-item" id="cripto">Cripto<br><span>--</span></div>
+    </div>
+    <div id="last-update">Esperando actualización...</div>
+    <div class="fuente">Fuente: dolarapi.com</div>
+  </section>
+</div>
+    <div class="table-block-container new-table-container slide-up">
+    <h2 class="section-title">📊 Dólar (USD/ARS) Bancos</h2>
+
+    <div id="summary-banner-usd" class="summary-banner" >
+        <div class="best-deal best-buy" id="best-buy-deal-usd">
+            <h3>💰 Mejor Compra (Ask más bajo)</h3>
+            <p id="best-buy-info-usd">Cargando...</p>
+        </div>
+        <div class="best-deal best-sell" id="best-sell-deal-usd">
+            <h3>💸 Mejor Venta (Bid más alto)</h3>
+            <p id="best-sell-info-usd">Cargando...</p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="refresh-button-usd" class="btn btn-primary glow-effect">🔄 Actualizar Ahora</button>
+        <span id="last-updated-usd" class="text-secondary">Última actualización: --:--:--</span>
+    </div>
+
+    <div class="table-container">
+        <table id="quotation-table">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Entidad</th>
+                    <th id="sort-ask" class="sortable">Compra (Ask)</th>
+                    <th id="sort-bid" class="sortable">Venta (Bid)</th>
+                </tr>
+            </thead>
+            <tbody id="quotation-body-usd">
+                <tr><td colspan="3">Cargando cotizaciones...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="footer" style="text-align: center; margin-top: 10px; font-size: 0.8em; color: #666;">Datos provistos por CriptoYa y ComparaDolar - Actualización automática cada 5 minutos.</p>
+</div>
+
+<div class="table-block-container new-table-container slide-up">
+    <h2 class="section-title">💸 Cotización de Compra/Venta USDT/ARS</h2>
+
+    <div id="summary-banner-usdt" class="summary-banner" >
+        <div class="best-deal best-buy" id="best-buy-deal-usdt">
+            <h3>💰 Compras más Barata (Ask)</h3>
+            <p id="best-buy-info-usdt">Cargando...</p>
+        </div>
+        <div class="best-deal best-sell" id="best-sell-deal-usdt">
+            <h3>🚀 Vendes más Cara (Bid)</h3>
+            <p id="best-sell-info-usdt">Cargando...</p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-primary glow-effect" id="manual-update-button-usdt">🔄 Actualizar Precios</button>
+        <span class="text-secondary" id="last-update-time-usdt">Última actualización: Cargando...</span>
+    </div>
+
+    <div class="table-scroll-container">
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Exchange</th>
+                    <th class="sortable" data-sort-by="ask">Compra (Ask)</th>
+                    <th class="sortable" data-sort-by="bid">Venta (Bid)</th>
+                </tr>
+            </thead>
+            <tbody id="price-table-body-usdt">
+                <tr><td colspan="3">Cargando cotizaciones...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</main>
+
+<div id="api-status">
+  <div class="api-indicator">
+    <strong>DolarAPI.com:</strong>
+    <span id="dolarapi-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+  <div class="api-indicator">
+    <strong>ArgentinaDatos.com:</strong>
+    <span id="argentinadatos-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+  <div class="api-indicator">
+    <strong>CriptoYa.com:</strong>
+    <span id="criptoya-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+  <div class="api-indicator">
+    <strong>ComparaDolar.ar:</strong>
+    <span id="comparadolar-status">
+      <span class="status-light"></span>
+      <span class="status-text">Cargando...</span>
+    </span>
+  </div>
+</div>
+
+<script src="shared-scripts.js"></script>
+<script>
+/* ========================================================== */
+/* === SCRIPT para cargar solo las cotizaciones del Dólar (MODIFICADO) === */
+async function cargarDolares(){
+  const last=document.getElementById("last-update");
+  const reloadBtn = document.getElementById("reload-btn");
+  if (reloadBtn) {
+    reloadBtn.disabled = true;
+    reloadBtn.textContent = 'Cargando...';
+  }
+  
+  try{
+    // Verificar cache primero
+    const cacheKey = 'dolares-data';
+    let data = CalculadoraFinanciera.Cache.get(cacheKey);
+    
+    if (!data) {
+      const res=await fetch("https://dolarapi.com/v1/dolares");
+      data=await res.json();
+      CalculadoraFinanciera.Cache.set(cacheKey, data);
+    }
+    const map={
+      oficial:data.find(d=>d.nombre.toLowerCase().includes("oficial")),
+      blue:data.find(d=>d.nombre.toLowerCase().includes("blue")),
+      mep:data.find(d=>d.nombre.toLowerCase().includes("bolsa")),
+      ccl:data.find(d=>d.nombre.toLowerCase().includes("contado con liqui")),
+      cripto:data.find(d=>d.nombre.toLowerCase().includes("cripto"))
+    };
+    Object.entries(map).forEach(([k,v])=>{
+      const el=document.querySelector(`#${k} span`);
+      if(v&&el){el.textContent=`C: ${v.compra.toFixed(2)} | V: ${v.venta.toFixed(2)}`;}
+      else if(el){el.textContent="N/D";}
+    });
+    last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
+  }catch(e){
+    last.innerHTML='<span class="error">Error al cargar cotizaciones</span>';
+    console.error("Error al cargar cotizaciones de DolarAPI:", e);
+  } finally {
+      if (reloadBtn) {
+          reloadBtn.disabled = false;
+          reloadBtn.textContent = 'Recargar';
+      }
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+    // Solo si el elemento existe (el nuevo bloque fue insertado)
+    const reloadBtn = document.getElementById("reload-btn");
+    if (reloadBtn) {
+        reloadBtn.addEventListener("click", cargarDolares);
+        cargarDolares();
+    }
+});
+/* Se quitan las funciones cargarInflacion() y cargarRiesgo() */
+
+/* ========================================================== */
+/* === SCRIPT 1: TABLA BANCOS USD/ARS (MODIFICADO PARA COMBINAR APIS) === */
+/* ========================================================== */
+(function() {
+    const CRIPTOYA_API_URL = 'https://criptoya.com/api/bancostodos';
+    const COMPARADOLAR_API_URL = 'https://api2.comparadolar.ar/usd';
+    const TABLE_BODY = document.getElementById('quotation-body-usd');
+    const LAST_UPDATED_SPAN = document.getElementById('last-updated-usd');
+    const REFRESH_BUTTON = document.getElementById('refresh-button-usd');
+    const BEST_BUY_INFO = document.getElementById('best-buy-info-usd');
+    const BEST_SELL_INFO = document.getElementById('best-sell-info-usd');
+
+    let currentSort = { column: 'ask', direction: 1 };
+
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2, }).format(value);
+    };
+
+    const processCriptoYaData = (rawData) => {
+        const cleanedData = [];
+        // Entidades a excluir de CriptoYa
+        const excludedEntities = [
+            'pluscambio', 'santander', 'macro', 'bna', 'bapro', 'patagonia', 'brubank',
+            'andina', 'plazacambio', 'columbia', 'mariva', 'ciudad', 'triacambio', 'supervielle', 'bytelime'
+        ];
+        
+        for (const [entityName, prices] of Object.entries(rawData)) {
+            // Verificar si la entidad debe ser excluida
+            const shouldExclude = excludedEntities.some(excluded => 
+                entityName.toLowerCase().includes(excluded.toLowerCase())
+            );
+            
+            if (shouldExclude) {
+                continue; // Saltar esta entidad
+            }
+            
+            const ask = prices.ask;
+            const bid = prices.bid;
+            const isValid = (value) => value !== null && value !== 0 && typeof value === 'number' && !isNaN(value);
+            if (isValid(ask) && isValid(bid)) { 
+                cleanedData.push({ 
+                    entity: entityName, 
+                    ask: ask, 
+                    bid: bid,
+                    logoUrl: null,
+                    svgContent: getEntitySvg(entityName),
+                    source: 'CriptoYa'
+                }); 
+            }
+        }
+        return cleanedData;
+    };
+
+    // Mapeo de entidades a SVGs
+    const entitySvgs = {
+        'galicia': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><g clip-path="url(#a)"><path fill="#E86E2C" d="M0 0h18v18H0V0Z" /><path fill="#fff" d="M11.686 6.448a.061.061 0 0 1-.036-.012 2.197 2.197 0 0 0-.457-.184c-.35-.106-.96-.237-1.895-.26.053.999.23 1.577.332 1.832l.013.031c.059.138.224.466.483.542a.062.062 0 0 1 .042.074l-1.103 7.504a.063.063 0 0 1-.062.054.063.063 0 0 1-.062-.054l-1.108-7.5a.062.062 0 0 1 .041-.078c.258-.075.423-.402.481-.538.107-.26.291-.842.346-1.868-.935.023-1.545.154-1.894.261a2.03 2.03 0 0 0-.457.186.06.06 0 0 1-.022.009.744.744 0 1 1-.014-1.486c.003 0 .007 0 .011.002a.063.063 0 0 1 .025.009s.14.088.456.185c.351.108.966.24 1.908.262-.024-.936-.155-1.544-.262-1.891a2.104 2.104 0 0 0-.186-.454.06.06 0 0 1-.005-.049.735.735 0 0 1 .456-.668.735.735 0 0 1 .284-.056.72.72 0 0 1 .74.732.068.068 0 0 1-.01.046 2 2 0 0 0-.182.45c-.107.347-.238.955-.263 1.89.941-.022 1.554-.152 1.905-.259.287-.088.428-.168.456-.185a.062.062 0 0 1 .04-.014.745.745 0 0 1 0 1.487Z" /></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h18v18H0z" /></clipPath></defs></svg>',
+        'hipotecario': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><rect x="0" y="0" width="18" height="18" style="fill: #f47321" /><g><path id="path3019" d="M11.5,14h-5v-2.07l2.13-1.24c.17-.1.25-.16.37-.17.11,0,.2.06.37.17l2.13,1.24v2.07Z" style="fill: #fff; fill-rule: evenodd" /><path id="path3021" d="M11.5,4h-5v7.11l2.13-1.24c.17-.1.25-.16.37-.17.11,0,.2.06.37.17l2.13,1.24V4Z" style="fill: #fff; fill-rule: evenodd" /></g></svg>',
+        'piano': '<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><rect width="18" height="18" style="fill: #13294a;"/><g><path id="Layer" d="M4.63,10.67h7.62c.36,0,.72-.05,1.08-.15.3-.1.56-.25.79-.44.3-.23.51-.52.64-.89.16-.36.25-.74.25-1.13,0-.49-.15-.93-.34-1.33-.3-.54-.74-.93-1.28-1.08-.33-.1-.85-.15-1.57-.15h-4.08v3.25h1.72v-1.87h2.41c.23,0,.44.03.64.1.39.13.59.48.59,1.03,0,.49-.13.84-.39,1.03-.16.13-.46.2-.89.2H3.01v1.43" style="fill: #fff;"/><path id="Layer-2" data-name="Layer" d="M9.5,11.11h-1.72v1.38h1.72v-1.38Z" style="fill: #fff;"/></g></svg>',
+        'prex': '<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 18"><defs><mask id="mask" x="3.01" y="5.61" width="11.88" height="6.65" maskUnits="userSpaceOnUse"><g id="mask-2" data-name="mask"><rect x="3.01" y="5.61" width="11.88" height="6.65" style="fill: #fff;"/><path d="M14.89,7.85h-3.18l.3,1.5-.3,1.5h3.18v-.02h-.94l-.55-.76.46-.61,1.03,1.37M11.76,7.91h.94l.55.77-.46.61-1.03-1.37h0ZM12.63,10.84h-.86l2.27-2.93h.85s-2.26,2.93-2.26,2.93Z"/></g></mask></defs><rect width="18" height="18" style="fill: #5a50f9;"/><g><path d="M4.69,9.03c.09,0,.17,0,.25-.04s.15-.07.22-.13c.06-.06.11-.13.15-.2s.05-.16.05-.24-.02-.17-.05-.24c-.03-.08-.08-.15-.15-.2-.06-.06-.14-.1-.22-.13s-.17-.04-.25-.04h-.86v1.24h.86ZM3.01,7.1h1.68c.91,0,1.5.56,1.5,1.32s-.59,1.3-1.5,1.3h-.86v1.12h-.81v-3.74Z" style="fill: #fff;"/><path d="M6.51,9.26c0-1.54,1.45-1.49,1.99-1.36l-.09.69c-.65-.19-1.14.09-1.14.6v1.65h-.77v-1.58Z" style="fill: #fff;"/><path d="M10.94,9.07c-.05-.17-.15-.32-.29-.42-.14-.11-.32-.16-.5-.16s-.35.06-.5.16c-.14.11-.24.25-.29.42h1.57ZM10.15,7.85c1.01,0,1.72.81,1.56,1.78h-2.36c.04.18.15.35.31.46s.35.17.54.16c.16,0,.31-.03.45-.11.14-.07.25-.19.33-.32l.63.27c-.14.24-.35.45-.6.59-.25.14-.54.21-.83.2-.92,0-1.62-.66-1.62-1.53,0-.2.04-.4.12-.59s.2-.36.34-.5.32-.25.52-.33c.19-.07.4-.11.61-.11" style="fill: #fff;"/><g style="mask: url(#mask);"><path d="M12.87,9.39l-1.11-1.48h.94l.64.89.65-.89h.89l-1.11,1.45,1.11,1.48h-.94l-.64-.89-.65.89h-.89l1.11-1.45h0Z" style="fill: #fff;"/></g></g></svg>',
+        'bbva': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><g clip-path="url(#a)"><path fill="#0E2043" d="M0 0h18v18H0V0Z" /><path fill="url(#b)" fill-opacity=".7" d="m1.7 18 9.65-18H0v18h1.7Z" /><path fill="#fff" d="M6.064 12.913 8.857 7.6c.06-.113.232-.113.292 0l2.792 5.314a.156.156 0 0 0 .14.087h1.354a.122.122 0 0 0 .108-.179l-4.4-8.236c-.06-.113-.221-.113-.286 0l-4.4 8.236a.122.122 0 0 0 .108.179h1.353a.189.189 0 0 0 .146-.087Z" /></g><defs><radialGradient id="b" cx="0" cy="0" r="1" gradientTransform="matrix(-7.46952 -6.50002 6.98802 -8.0303 6.536 9)" gradientUnits="userSpaceOnUse"><stop stop-color="#2B5F9D" /><stop offset="1" stop-color="#2B5F9D" stop-opacity="0" /></radialGradient><clipPath id="a"><path fill="#fff" d="M0 0h18v18H0z" /></clipPath></defs></svg>',
+        'icbc': '<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><rect width="18" height="18" style="fill: #fafafa;"/><g><path id="Layer" d="M3.01,9.01c0-3.33,2.68-6.01,6.01-6.01s5.99,2.68,5.99,6.01-2.7,5.99-5.99,5.99-6.01-2.7-6.01-5.99ZM3.9,9.01c0,.68.12,1.33.39,1.96.27.6.63,1.18,1.11,1.64.48.48,1.04.87,1.67,1.11.6.27,1.28.39,1.96.39,2.78,0,5.05-2.27,5.05-5.09s-2.27-5.12-5.05-5.12c-.68,0-1.35.14-1.96.39-.63.27-1.18.63-1.67,1.11s-.85,1.04-1.11,1.67c-.27.6-.39,1.28-.39,1.96h0Z" style="fill: #b81e2d; fill-rule: evenodd;"/><path id="Layer-2" data-name="Layer" d="M5.82,12.2h2.92v-.85h-2.08v-1.01h1.86v-2.66h-1.86v-1.01h2.08v-.85h-2.92v2.75h1.86v.94h-1.86v2.68ZM12.2,9.49h-1.91v-.94h1.91v-2.75h-2.95v.85h2.1v1.01h-1.91v2.68h1.91v1.01h-2.1v.85h2.95v-2.7Z" style="fill: #b81e2d; fill-rule: evenodd;"/></g></svg>',
+        'comafi': '<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 18"><defs><radialGradient id="radial-gradient" cx="6.94" cy="15.03" fx="6.94" fy="15.03" r="7.87" gradientTransform="translate(0 22) scale(1 -1)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#adc46a"/><stop offset=".61" stop-color="#657733"/><stop offset="1" stop-color="#384125"/></radialGradient><radialGradient id="radial-gradient-2" cx="23.97" cy="7.84" fx="23.97" fy="7.84" r="6.33" gradientTransform="translate(-15.12 16.81) scale(.98 -1.02)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset=".14" stop-color="#dfe4d7"/><stop offset=".45" stop-color="#a1ae8b"/><stop offset=".71" stop-color="#728551"/><stop offset=".9" stop-color="#556c31"/><stop offset="1" stop-color="#4a642e"/></radialGradient><radialGradient id="radial-gradient-3" cx="24.51" cy="17.17" fx="24.51" fy="17.17" r="6.35" gradientTransform="translate(-15.6 25.6) scale(.98 -.98)" xlink:href="#radial-gradient-2"/></defs><rect width="18" height="18" style="fill: #fafafa;"/><path d="M8.84,8.77c.16-.23.23-.47.23-.62q0-.08-.08-.16c-.16-.08-.47,0-.78.23v-1.09c.31.23.62.39.78.23,0,0,.08-.08.08-.16,0-.16-.08-.39-.31-.54h1.09c-.16.23-.23.47-.23.62q0,.08.08.16c.08.08.47,0,.78-.23v1.09c-.31-.23-.62-.39-.78-.23,0,0-.08.08-.08.16,0,.16.08.39.31.54h-1.09Z" style="fill: #fff;"/><g><circle cx="8.69" cy="8.96" r="4.68" style="fill: url(#radial-gradient);"/><path d="M8.55,14.44h.1c2.88,0,5.23-2.32,5.37-5.29h-5.46v5.29h0Z" style="fill: url(#radial-gradient-2); isolation: isolate; opacity: .65;"/><path d="M14.01,8.81c-.06-2.91-2.44-5.25-5.37-5.25h-.1v5.25h5.46Z" style="fill: url(#radial-gradient-3); isolation: isolate; opacity: .65;"/></g></svg>'
+    };
+
+    const getEntitySvg = (entityName) => {
+        const lowerName = entityName.toLowerCase();
+        // Buscar coincidencias parciales
+        for (const [key, svg] of Object.entries(entitySvgs)) {
+            if (lowerName.includes(key)) {
+                return svg;
+            }
+        }
+        return null;
+    };
+
+    const processComparaDolarData = (rawData) => {
+        const cleanedData = [];
+        for (const item of rawData) {
+            const ask = item.ask;
+            const bid = item.bid;
+            const isValid = (value) => value !== null && value !== 0 && typeof value === 'number' && !isNaN(value);
+            if (isValid(ask) && isValid(bid)) { 
+                cleanedData.push({ 
+                    entity: item.prettyName, 
+                    ask: ask, 
+                    bid: bid,
+                    logoUrl: item.logoUrl,
+                    svgContent: getEntitySvg(item.prettyName),
+                    source: 'ComparaDolar'
+                }); 
+            }
+        }
+        return cleanedData;
+    };
+
+    const processData = async () => {
+        const allData = [];
+        
+        try {
+            // Cargar datos de CriptoYa
+            const criptoyaResponse = await fetch(CRIPTOYA_API_URL);
+            if (criptoyaResponse.ok) {
+                const criptoyaData = await criptoyaResponse.json();
+                allData.push(...processCriptoYaData(criptoyaData));
+            }
+        } catch (error) {
+            console.error('Error cargando CriptoYa:', error);
+        }
+
+        try {
+            // Cargar datos de ComparaDolar
+            const comparadolarResponse = await fetch(COMPARADOLAR_API_URL);
+            if (comparadolarResponse.ok) {
+                const comparadolarData = await comparadolarResponse.json();
+                allData.push(...processComparaDolarData(comparadolarData));
+            }
+        } catch (error) {
+            console.error('Error cargando ComparaDolar:', error);
+        }
+
+        return allData;
+    };
+
+    const applySort = (data, column, direction) => {
+        return [...data].sort((a, b) => {
+            if (a[column] < b[column]) return -1 * direction;
+            if (a[column] > b[column]) return 1 * direction;
+            return 0;
+        });
+    };
+
+    const initialSort = (data) => {
+        if (data.length === 0) return [];
+        const bestAskValue = Math.min(...data.map(item => item.ask));
+        const bestBidValue = Math.max(...data.map(item => item.bid));
+        const highlights = [];
+        const rest = [];
+        const highlightEntities = new Set();
+        data.forEach(item => {
+            const isBestAsk = item.ask === bestAskValue;
+            const isBestBid = item.bid === bestBidValue;
+            if (isBestAsk || isBestBid) {
+                if (!highlightEntities.has(item.entity)) {
+                    highlights.push(item);
+                    highlightEntities.add(item.entity);
+                }
+            } else {
+                rest.push(item);
+            }
+        });
+        rest.sort((a, b) => b.bid - a.bid); 
+        return [...highlights, ...rest];
+    };
+
+    const updateSummaryBanner = (data) => {
+        const buyDeal = document.getElementById('best-buy-deal-usd');
+        const sellDeal = document.getElementById('best-sell-deal-usd');
+        
+        if (data.length === 0) {
+            BEST_BUY_INFO.textContent = 'No hay datos válidos.';
+            BEST_SELL_INFO.textContent = 'No hay datos válidos.';
+            buyDeal.className = 'best-deal summary-banner';
+            sellDeal.className = 'best-deal summary-banner';
+            return;
+        }
+
+        const bestAsk = data.reduce((min, curr) => (!min || curr.ask < min.ask) ? curr : min, null);
+        const bestBid = data.reduce((max, curr) => (!max || curr.bid > max.bid) ? curr : max, null);
+
+        if (bestAsk) {
+            BEST_BUY_INFO.innerHTML = `${bestAsk.entity}: <br>${formatCurrency(bestAsk.ask)}`;
+            buyDeal.className = 'best-deal best-buy';
+        }
+        if (bestBid) {
+            BEST_SELL_INFO.innerHTML = `${bestBid.entity}: <br>${formatCurrency(bestBid.bid)}`;
+            sellDeal.className = 'best-deal best-sell';
+        }
+    };
+
+    const renderTable = (data) => {
+        TABLE_BODY.innerHTML = '';
+        if (data.length === 0) {
+            TABLE_BODY.innerHTML = '<tr><td colspan="3" style="color: var(--error); text-align:center;">No hay cotizaciones válidas para mostrar.</td></tr>';
+            return;
+        }
+
+        const bestAskValue = Math.min(...data.map(item => item.ask));
+        const bestBidValue = Math.max(...data.map(item => item.bid));
+
+        data.forEach(item => {
+            const row = TABLE_BODY.insertRow();
+            const isBestAsk = item.ask === bestAskValue;
+            const isBestBid = item.bid === bestBidValue;
+            
+            const entityCell = row.insertCell();
+            entityCell.style.textAlign = 'left';
+            entityCell.style.display = 'flex';
+            entityCell.style.alignItems = 'center';
+            entityCell.style.gap = '8px';
+            
+            // Agregar logo SVG si existe
+            if (item.svgContent) {
+                const logoDiv = document.createElement('div');
+                logoDiv.innerHTML = item.svgContent;
+                logoDiv.style.width = '20px';
+                logoDiv.style.height = '20px';
+                logoDiv.style.display = 'flex';
+                logoDiv.style.alignItems = 'center';
+                logoDiv.style.justifyContent = 'center';
+                const svg = logoDiv.querySelector('svg');
+                if (svg) {
+                    svg.style.width = '100%';
+                    svg.style.height = '100%';
+                }
+                entityCell.appendChild(logoDiv);
+            } else if (item.logoUrl) {
+                // Fallback a URL de logo si no hay SVG
+                const logoImg = document.createElement('img');
+                logoImg.src = item.logoUrl;
+                logoImg.style.width = '20px';
+                logoImg.style.height = '20px';
+                logoImg.style.borderRadius = '2px';
+                logoImg.style.objectFit = 'contain';
+                entityCell.appendChild(logoImg);
+            }
+            
+            const entityName = document.createElement('span');
+            entityName.textContent = item.entity;
+            entityCell.appendChild(entityName);
+
+            const askCell = row.insertCell();
+            askCell.textContent = formatCurrency(item.ask);
+            if (isBestAsk) { askCell.classList.add('highlight-buy'); }
+
+            const bidCell = row.insertCell();
+            bidCell.textContent = formatCurrency(item.bid);
+            if (isBestBid) { bidCell.classList.add('highlight-sell'); }
+        });
+
+        LAST_UPDATED_SPAN.textContent = `Última actualización: ${new Date().toLocaleTimeString('es-AR')}`;
+    };
+
+    const fetchDataAndRender = async (isInitialLoad = false) => {
+        REFRESH_BUTTON.disabled = true;
+        REFRESH_BUTTON.textContent = 'Cargando...';
+
+        try {
+            const processed = await processData();
+            updateSummaryBanner(processed);
+
+            let dataToShow;
+            if (isInitialLoad) {
+                dataToShow = initialSort(processed);
+                currentSort = { column: 'ask', direction: 1 };
+            } else {
+                dataToShow = applySort(processed, currentSort.column, currentSort.direction);
+            }
+            renderTable(dataToShow);
+        } catch (error) {
+            console.error('Error al obtener o procesar datos USD:', error);
+            TABLE_BODY.innerHTML = `<tr><td colspan="3" style="color: var(--error); text-align:center;">Error al cargar los datos.</td></tr>`;
+            BEST_BUY_INFO.textContent = 'Error de carga.';
+            BEST_SELL_INFO.textContent = 'Error de carga.';
+            document.getElementById('best-buy-deal-usd').className = 'best-deal summary-banner';
+            document.getElementById('best-sell-deal-usd').className = 'best-deal summary-banner';
+        } finally {
+            REFRESH_BUTTON.disabled = false;
+            REFRESH_BUTTON.textContent = '🔄 Actualizar Ahora';
+        }
+    };
+
+    const handleSortClick = async (column) => {
+        let newDirection;
+        if (currentSort.column === column) { newDirection = currentSort.direction * -1; } 
+        else { newDirection = (column === 'ask') ? 1 : -1; }
+        currentSort = { column: column, direction: newDirection };
+        
+        // Re-fetch para garantizar datos frescos antes de ordenar
+        const data = await processData(); 
+
+        renderTable(applySort(data, currentSort.column, currentSort.direction));
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchDataAndRender(true);
+        REFRESH_BUTTON.addEventListener('click', () => fetchDataAndRender(false));
+        document.getElementById('sort-ask').addEventListener('click', () => handleSortClick('ask'));
+        document.getElementById('sort-bid').addEventListener('click', () => handleSortClick('bid'));
+        const FIVE_MINUTES = 5 * 60 * 1000;
+        setInterval(() => fetchDataAndRender(false), FIVE_MINUTES);
+    });
+})();
+
+/* ========================================================== */
+/* === SCRIPT 2: TABLA USDT/ARS (Sin cambios) === */
+/* ========================================================== */
+(function() {
+    const API_URL = 'https://criptoya.com/api/usdt/ars/0.1';
+    const tableBody = document.getElementById('price-table-body-usdt');
+    const sortableHeaders = document.querySelectorAll('.price-table .sortable');
+    const updateButton = document.getElementById('manual-update-button-usdt');
+    const lastUpdateTimeSpan = document.getElementById('last-update-time-usdt');
+    const BEST_BUY_INFO = document.getElementById('best-buy-info-usdt');
+    const BEST_SELL_INFO = document.getElementById('best-sell-info-usdt');
+    const AUTO_UPDATE_INTERVAL = 300000; 
+
+    let allExchangeData = [];
+    let bestPrices = {};
+    let currentSort = { column: null, direction: null };
+    
+    // UTILS
+    function capitalize(s) {
+        if (typeof s !== 'string' || s.length === 0) return '';
+        return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    }
+    function formatPrice(price) {
+        return price.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2, maximumFractionDigits: 2, });
+    }
+
+    function updateLastUpdateTime(date) {
+        const timeString = date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        lastUpdateTimeSpan.textContent = `Última actualización: ${timeString}`;
+    }
+
+    function processData(data) {
+        const processed = [];
+        for (const [exchange, values] of Object.entries(data)) {
+            // Filtrar y limpiar datos
+            if (values.ask && values.ask > 0 && values.bid && values.bid > 0) {
+                processed.push({
+                    exchange: capitalize(exchange),
+                    ask: parseFloat(values.ask),
+                    bid: parseFloat(values.bid)
+                });
+            }
+        }
+        return processed;
+    }
+
+    function findBestPrices(data) {
+        let bestBuy = data.reduce((min, item) => (item.ask < min.price ? { exchange: item.exchange, price: item.ask } : min), { exchange: '', price: Infinity });
+        let bestSell = data.reduce((max, item) => (item.bid > max.price ? { exchange: item.exchange, price: item.bid } : max), { exchange: '', price: -Infinity });
+        return { bestBuy, bestSell };
+    }
+
+    function updateSummaryBanner() {
+        const buyDeal = document.getElementById('best-buy-deal-usdt');
+        const sellDeal = document.getElementById('best-sell-deal-usdt');
+
+        if (!bestPrices.bestBuy || bestPrices.bestBuy.price === Infinity) {
+            BEST_BUY_INFO.textContent = 'No hay datos válidos.';
+            BEST_SELL_INFO.textContent = 'No hay datos válidos.';
+            buyDeal.className = 'best-deal summary-banner';
+            sellDeal.className = 'best-deal summary-banner';
+            return;
+        }
+
+        const buyPrice = formatPrice(bestPrices.bestBuy.price);
+        const sellPrice = formatPrice(bestPrices.bestSell.price);
+
+        BEST_BUY_INFO.innerHTML = `${bestPrices.bestBuy.exchange}: <br>${buyPrice}`;
+        buyDeal.className = 'best-deal best-buy';
+
+        BEST_SELL_INFO.innerHTML = `${bestPrices.bestSell.exchange}: <br>${sellPrice}`;
+        sellDeal.className = 'best-deal best-sell';
+    }
+
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+        if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="3" style="color: var(--error); text-align:center;">No hay cotizaciones válidas para mostrar.</td></tr>';
+            return;
+        }
+
+        data.forEach(item => {
+            const row = tableBody.insertRow();
+            
+            const exchangeCell = row.insertCell();
+            exchangeCell.textContent = item.exchange;
+            exchangeCell.style.textAlign = 'left';
+
+            const askCell = row.insertCell();
+            askCell.textContent = formatPrice(item.ask);
+            if (item.exchange === bestPrices.bestBuy.exchange) { askCell.classList.add('highlight-buy'); }
+
+            const bidCell = row.insertCell();
+            bidCell.textContent = formatPrice(item.bid);
+            if (item.exchange === bestPrices.bestSell.exchange) { bidCell.classList.add('highlight-sell'); }
+        });
+    }
+
+    // SORTING LOGIC
+    function initialDataPresentation() {
+        const bestBuyExchange = bestPrices.bestBuy.exchange;
+        const bestSellExchange = bestPrices.bestSell.exchange;
+        const bestBuyItem = allExchangeData.find(item => item.exchange === bestBuyExchange);
+        const bestSellItem = allExchangeData.find(item => item.exchange === bestSellExchange);
+        const restOfData = allExchangeData.filter(item =>
+            item.exchange !== bestBuyExchange && item.exchange !== bestSellExchange
+        );
+        restOfData.sort((a, b) => b.bid - a.bid);
+        let finalPresentationData = [];
+        if (bestBuyItem) { finalPresentationData.push(bestBuyItem); }
+        if (bestSellItem && bestBuyExchange !== bestSellExchange) { finalPresentationData.push(bestSellItem); }
+        finalPresentationData = finalPresentationData.concat(restOfData);
+        renderTable(finalPresentationData);
+    }
+
+    function applySorting(column, direction) {
+        const sortedData = [...allExchangeData].sort((a, b) => {
+            let comparison = 0;
+            if (a[column] > b[column]) { comparison = 1; } 
+            else if (a[column] < b[column]) { comparison = -1; }
+            return direction === 'desc' ? comparison * -1 : comparison;
+        });
+
+        currentSort = { column, direction };
+        renderTable(sortedData);
+    }
+
+    function handleHeaderClick() {
+        const column = this.dataset.sortBy;
+        let direction = 'asc';
+
+        if (currentSort.column === column) {
+            direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            direction = column === 'ask' ? 'asc' : 'desc';
+        }
+        applySorting(column, direction);
+    }
+
+    // MAIN FETCH
+    async function fetchPrices() {
+        updateButton.disabled = true;
+        updateButton.textContent = '🔄 Cargando...';
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+            const data = await response.json();
+            allExchangeData = processData(data);
+            if (allExchangeData.length === 0) { throw new Error("No se recibieron datos de cotización válidos."); }
+            bestPrices = findBestPrices(allExchangeData);
+            updateSummaryBanner();
+
+            if (currentSort.column === null) { initialDataPresentation(); } 
+            else { applySorting(currentSort.column, currentSort.direction); }
+
+            updateLastUpdateTime(new Date());
+
+        } catch (error) {
+            console.error("Error al obtener o procesar la cotización USDT:", error);
+            BEST_BUY_INFO.textContent = 'Error de carga.';
+            BEST_SELL_INFO.textContent = 'Error de carga.';
+            document.getElementById('best-buy-deal-usdt').className = 'best-deal summary-banner';
+            document.getElementById('best-sell-deal-usdt').className = 'best-deal summary-banner';
+            tableBody.innerHTML = `<tr><td colspan="3" style="color:var(--error); text-align:center;">⚠️ Error al cargar los datos.</td></tr>`;
+        } finally {
+            updateButton.disabled = false;
+            updateButton.textContent = '🔄 Actualizar Precios';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchPrices();
+        updateButton.addEventListener('click', fetchPrices);
+        sortableHeaders.forEach(header => { header.addEventListener('click', handleHeaderClick); });
+        setInterval(fetchPrices, AUTO_UPDATE_INTERVAL);
+    });
+})();
+
+/* ========================================================== */
+/* === SCRIPT 3: MONITOREO DE ESTADO DE APIS (Sin cambios) === */
+/* ========================================================== */
+async function checkApiStatus(url, elementId) {
+  const statusElement = document.getElementById(elementId);
+  const light = statusElement.querySelector('.status-light');
+  const text = statusElement.querySelector('.status-text');
+
+  light.className = 'status-light';
+  text.textContent = 'Cargando...';
+  text.style.color = '#ddd';
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Lógica simplificada que el usuario indicó que funciona para DolarAPI y ArgentinaDatos.
+    // Se utiliza para todas las APIs para mantener el código unificado.
+    const isUp = (data.status === "ok" || data.status === "available" || response.ok);
+
+    if (isUp) {
+      light.className = 'status-light funcional';
+      text.textContent = 'Funcional';
+      text.style.color = '#4f4';
+    } else {
+      light.className = 'status-light error';
+      text.textContent = 'Error';
+      text.style.color = 'var(--error)';
+    }
+  } catch (e) {
+    light.className = 'status-light error';
+    text.textContent = 'Error';
+    text.style.color = 'var(--error)';
+    console.error(`Error al verificar estado de API ${elementId}:`, e);
+  }
+}
+
+function loadApiStatus() {
+  checkApiStatus("https://dolarapi.com/v1/estado", "dolarapi-status");
+  checkApiStatus("https://api.argentinadatos.com/v1/estado", "argentinadatos-status");
+  checkApiStatus("https://criptoya.com/api/dolar", "criptoya-status");
+  checkApiStatus("https://api2.comparadolar.ar/quotes", "comparadolar-status");
+}
+
+loadApiStatus();
+setInterval(loadApiStatus, 3600000); 
+</script>
+</body>
+</html>

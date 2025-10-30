@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores Financieros de Argentina - Gráficos Históricos</title>
+
+    <link rel="stylesheet" href="shared-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="shared-scripts.js"></script>
+    <style>
+        /* === ESTILOS ESPECÍFICOS DE GRÁFICOS === */
+
+
+        section {
+            /* Estilo de sección plano y oscuro */
+            background-color: #050505;
+            padding: 20px;
+            border-radius: 0;
+            box-shadow: none;
+            border: 1px solid #111;
+        }
+
+        h2 {
+            color: var(--base);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .chart-container {
+            position: relative;
+            /* Altura fija para escritorio */
+            height: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Estilos para los botones de filtro */
+        .filter-buttons {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: nowrap;
+        }
+
+        .filter-buttons button {
+            /* === MODIFICACIONES DE COLOR AQUÍ === */
+            padding: 8px 15px;
+            border: 1px solid var(--button-border-color); /* Gris oscuro */
+            background-color: #000;
+            color: var(--button-text-color); /* Gris claro */
+            /* ==================================== */
+
+            border-radius: 0;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .filter-buttons button:hover,
+        .filter-buttons button.active {
+            /* === MODIFICACIONES DE COLOR AQUÍ === */
+            background-color: var(--button-active-bg); /* Gris un poco más claro para hover/active */
+            color: var(--base); /* Texto color base (blanco/gris claro) */
+            /* ==================================== */
+        }
+
+        footer {
+            padding: 15px;
+            background-color: #111;
+            color: #999;
+            margin-top: 30px;
+        }
+
+        /* === OPTIMIZACIÓN MÓVIL (Max-width: 600px) === */
+        @media (max-width: 600px) {
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            /* 1. Altura del gráfico reducida para caber mejor en la pantalla */
+            .chart-container {
+                height: 300px;
+            }
+
+            /* 2. Navegación: Corrección para mostrar en dos columnas sin desbordar */
+            nav {
+                width: 100%;
+                flex-wrap: wrap;
+
+            }
+            nav a {
+                flex: 1 1 calc(50% - 10px);
+                box-sizing: border-box;
+                padding: 8px 5px;
+                font-size: 0.9rem;
+                margin: 5px 2px;
+            }
+
+            /* 3. Botones de Filtro: Los apila verticalmente */
+            .filter-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .filter-buttons button {
+                width: 100%;
+                padding: 10px 5px;
+                font-size: 1rem;
+            }
+        }
+
+        /* === ESTILOS PARA LOS BLOQUES IPC, RIESGO PAÍS, UVA y BCRA (Dos Columnas) === */
+        :root {
+          --base:#ccc;
+          --texto:#ddd;
+          --error:#f44;
+           /* Colores para la variación */
+           --positivo: #4CAF50; /* Verde para mejora */
+           --negativo: #F44336; /* Rojo para empeoramiento */
+        }
+
+        /* Contenedor Flex para que los bloques se envuelvan */
+        .data-container {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Estilos de los bloques de datos */
+        #inflacion-section,
+        #riesgo-section,
+        #uva-section,
+        #bcra-section { /* BCRA incluido */
+            width: 440px;
+            max-width: 50%;
+            flex-grow: 1;
+            min-width: 300px;
+
+            background:#050505;
+            border:1px solid #111;
+            padding:10px;
+            font-size:0.9rem;
+            box-sizing:border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data-header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:8px;
+        }
+        .data-grid {
+            display:flex;
+            justify-content:space-around;
+            flex-wrap:wrap;
+            gap:10px;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        .data-item {
+            text-align:center;
+            min-width:100px;
+            font-size: 1.1rem;
+            padding: 5px;
+        }
+        /* Estilo específico del valor grande (el número/porcentaje) */
+        #inflacion-section .data-item span:first-child,
+        #riesgo-section .data-item span:first-child,
+        #uva-section .data-item span:first-child,
+        #bcra-section .data-item span:first-child {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--base);
+            display: inline; /* Importante para que valor y variación estén juntos */
+            margin-top: 5px;
+        }
+
+        /* Ajuste para Base Monetaria para que el valor ocupe el espacio */
+        #bcra-section .data-grid {
+            justify-content: space-around;
+        }
+        #bcra-section .data-item span:first-child {
+            display: inline;
+        }
+
+        /* Estilo para la variación (Mantenido aunque BCRA no lo use) */
+        .variacion {
+            font-size: 1.1rem;
+            font-weight: normal;
+            display: inline;
+            margin-left: 8px;
+            white-space: nowrap;
+            vertical-align: 0.1em;
+        }
+        .variacion.up {
+            color: var(--negativo); /* Rojo */
+        }
+        .variacion.down {
+            color: var(--positivo); /* Verde */
+        }
+
+
+        #last-inflacion, #last-riesgo, #last-uva, #last-bcra { /* Selector BCRA incluido */
+            font-size:0.75rem;
+            color:#777;
+            text-align:right;
+            margin-top:5px;
+        }
+        .fuente {
+            text-align:right;
+            font-size:0.7rem;
+            color:#666;
+            margin-top:4px;
+        }
+        .error {
+            color:var(--error);
+            font-size:0.8rem;
+            text-align:right;
+            margin-top:4px;
+        }
+
+        /* Media Query para asegurar el apilamiento en móvil cuando el espacio es menor a 640px */
+        @media (max-width: 640px) {
+            .data-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        #inflacion-section,
+        #riesgo-section,
+        #uva-section,
+        #bcra-section { /* BCRA incluido */
+                width: 95%;
+                max-width: 95%;
+            }
+             /* Ajuste de tamaño para móvil */
+            #inflacion-section .data-item span:first-child,
+            #riesgo-section .data-item span:first-child,
+            #uva-section .data-item span:first-child,
+            #bcra-section .data-item span:first-child {
+                font-size: 1.8rem;
+            }
+            .data-item {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+    <body>
+    <script src="modern-navigation.js"></script>
+    <main>
+      <h1 class="page-title">Indicadores </h1>
+
+      </main>
+
+    <div class="data-container">
+        <section id="inflacion-section">
+            <div class="data-header"><strong>📈 IPC </strong></div>
+            <div class="data-grid">
+                <div class="data-item">Mensual<br><span id="inflacion-mensual">--</span><span id="inflacion-variacion"></span></div>
+                <div class="data-item">Período<br><span id="inflacion-mes">--</span></div>
+            </div>
+            <div id="last-inflacion">Esperando actualización...</div>
+            <div class="fuente">Fuente: argentinadatos.com</div>
+        </section>
+
+        <section id="riesgo-section">
+            <div class="data-header"><strong>📊 Riesgo País</strong></div>
+            <div class="data-grid">
+                <div class="data-item">Último valor<br><span id="riesgo-valor">--</span><span id="riesgo-variacion"></span></div>
+                <div class="data-item">Fecha<br><span id="riesgo-fecha">--</span></div>
+            </div>
+            <div id="last-riesgo">Esperando actualización...</div>
+            <div class="fuente">Fuente: argentinadatos.com</div>
+        </section>
+
+        <section id="uva-section">
+            <div class="data-header"><strong>🏠 UVA</strong></div>
+            <div class="data-grid">
+                <div class="data-item">Último valor<br><span id="uva-valor">--</span><span id="uva-variacion"></span></div>
+                <div class="data-item">Fecha<br><span id="uva-fecha">--</span></div>
+            </div>
+            <div id="last-uva">Esperando actualización...</div>
+            <div class="fuente">Fuente: argentinadatos.com</div>
+        </section>
+
+        <section id="bcra-section">
+            <div class="data-header"><strong>💰 Reservas Internacionales</strong></div>
+            <div class="data-grid">
+                <div class="data-item">
+                    Valor (M. de Pesos)<br>
+                    <span id="bcra-valor">--</span><span id="bcra-variacion"></span>
+                </div>
+                <div class="data-item">
+                    Fecha<br>
+                    <span id="bcra-fecha">--</span>
+                </div>
+            </div>
+            <div id="last-bcra">Esperando actualización...</div>
+            <div class="fuente">Fuente: BCRA </div>
+        </section>
+        </div>
+    <main>
+        <section id="interanual-section">
+            <h2>Inflación Interanual (%) - Últimos 12 meses</h2>
+            <div class="chart-container">
+                <canvas id="chartInflacionAnual"></canvas>
+            </div>
+        </section>
+
+        <section>
+            <h2>Inflación Mensual - Nivel General (%)</h2>
+            <div class="filter-buttons" data-chart-id="chartInflacionMensual" data-raw-data-key="inflacionMensual">
+                <button class="active" data-period="1">Último Año</button>
+                <button data-period="5">Últimos 5 Años</button>
+                <button data-period="0">Total</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="chartInflacionMensual"></canvas>
+            </div>
+        </section>
+
+        <section>
+            <h2>Riesgo País (Puntos Básicos)</h2>
+            <div class="filter-buttons" data-chart-id="chartRiesgoPais" data-raw-data-key="riesgoPais">
+                <button class="active" data-period="1">Último Año</button>
+                <button data-period="5">Últimos 5 Años</button>
+                <button data-period="0">Total</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="chartRiesgoPais"></canvas>
+            </div>
+        </section>
+
+        <section>
+            <h2>Valor de la Unidad de Vivienda (UVA)</h2>
+            <div class="filter-buttons" data-chart-id="chartUVA" data-raw-data-key="uva">
+                <button class="active" data-period="1">Último Año</button>
+                <button data-period="5">Últimos 5 Años</button>
+                <button data-period="0">Total</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="chartUVA"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Datos obtenidos de ArgentinaDatos API y BCRA.</p>
+    </footer>
+
+    <script>
+        /* === SCRIPT PARA CARGAR INFLACIÓN, RIESGO PAÍS y UVA (EJECUCIÓN INMEDIATA) === */
+
+        /**
+         * Función auxiliar para formatear números grandes (Base Monetaria)
+         */
+        function formatMillions(value) {
+            if (isNaN(value) || value === null) return "-";
+            return value.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        /**
+         * Función auxiliar para calcular la variación y generar el HTML
+         * @param {number} actual - Valor actual.
+         * @param {number} anterior - Valor anterior.
+         * @param {string} tipo - 'peor_es_mas' (IPC, UVA, Riesgo) o 'peor_es_menos' (Base Monetaria, para que subir sea verde).
+         * @returns {string} HTML con la variación y la flecha.
+         */
+        function generarVariacionHTML(actual, anterior, tipo) {
+            if (isNaN(actual) || isNaN(anterior) || anterior === 0) {
+                return '';
+            }
+
+            const variacion = ((actual - anterior) / anterior) * 100;
+            const variacionAbs = Math.abs(variacion).toFixed(2);
+            let clase = '';
+            let simbolo = '';
+
+            if (variacion > 0) {
+                // El valor actual es MAYOR al anterior (Sube)
+                // 'peor_es_mas' (IPC, Riesgo): Sube es Rojo ('up').
+                // 'peor_es_menos' (Base Mon.): Sube es Verde ('down').
+                clase = (tipo === 'peor_es_mas') ? 'up' : 'down';
+                simbolo = '▲';
+            } else if (variacion < 0) {
+                // El valor actual es MENOR al anterior (Baja)
+                // 'peor_es_mas' (IPC, Riesgo): Baja es Verde ('down').
+                // 'peor_es_menos' (Base Mon.): Baja es Rojo ('up').
+                clase = (tipo === 'peor_es_mas') ? 'down' : 'up';
+                simbolo = '▼';
+            } else {
+                return ''; // No hay variación
+            }
+
+            return `<span class="variacion ${clase}">${simbolo} ${variacionAbs}%</span>`;
+        }
+
+
+        async function cargarInflacion() {
+          const last = document.getElementById("last-inflacion");
+          try {
+            const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/inflacion");
+            const data = await res.json();
+            if (!Array.isArray(data) || data.length < 1) { throw new Error("Sin datos"); }
+
+            // Último y Penúltimo
+            const ult = data[data.length - 1];
+            const ant = data.length >= 2 ? data[data.length - 2] : null;
+
+            const valorActual = parseFloat(String(ult.valor).replace(",", "."));
+            const valorAnterior = ant ? parseFloat(String(ant.valor).replace(",", ".")) : NaN;
+
+            const fecha = new Date(ult.fecha);
+            const mes = fecha.toLocaleString("es-AR", { month: "long", year: "numeric" });
+
+            // LÓGICA IPC: Sube = Rojo, Baja = Verde -> 'peor_es_mas'
+            const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_mas');
+
+            // Actualizar el valor y la variación en spans separados
+            document.getElementById("inflacion-mensual").textContent = isNaN(valorActual) ? "-" : valorActual.toFixed(2) + "%";
+            document.getElementById("inflacion-variacion").innerHTML = variacionHTML;
+
+            document.getElementById("inflacion-mes").textContent = mes;
+            last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+          } catch (err) {
+            console.error("Error al obtener inflación:", err);
+            last.innerHTML = '<span class="error">Error al cargar inflación</span>';
+            document.getElementById("inflacion-mensual").textContent = "-";
+            document.getElementById("inflacion-mes").textContent = "--";
+            document.getElementById("inflacion-variacion").innerHTML = "";
+          }
+        }
+        cargarInflacion();
+
+        async function cargarRiesgo(){
+          const last=document.getElementById("last-riesgo");
+          try{
+            // Se utiliza el endpoint de datos históricos para obtener el penúltimo valor
+            const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais");
+            const data = await res.json();
+            if (!Array.isArray(data) || data.length < 1) { throw new Error("Sin datos"); }
+
+            const ult = data[data.length - 1];
+            const ant = data.length >= 2 ? data[data.length - 2] : null;
+
+            const valorActual = ult.valor;
+            const valorAnterior = ant ? ant.valor : NaN;
+
+            // LÓGICA RIESGO PAÍS: Sube = Rojo, Baja = Verde -> 'peor_es_mas'
+            const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_mas');
+
+            // Actualizar el valor y la variación en spans separados
+            document.getElementById("riesgo-valor").textContent=valorActual+" pts";
+            document.getElementById("riesgo-variacion").innerHTML = variacionHTML;
+            document.getElementById("riesgo-fecha").textContent=ult.fecha;
+            last.textContent="Actualizado: "+new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false});
+          }catch(e){
+            console.error("Error al obtener riesgo país:", e);
+            last.innerHTML='<span class="error">Error al cargar riesgo país</span>';
+            document.getElementById("riesgo-valor").textContent = "-";
+            document.getElementById("riesgo-variacion").innerHTML = "";
+        }
+        }
+        cargarRiesgo();
+
+        async function cargarUVA(){
+            const last = document.getElementById("last-uva");
+            try {
+                const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/uva");
+                const data = await res.json();
+                if (!Array.isArray(data) || data.length < 1) { throw new Error("Sin datos"); }
+
+                const ult = data[data.length - 1];
+                const ant = data.length >= 2 ? data[data.length - 2] : null;
+
+                const valorActual = parseFloat(String(ult.valor).replace(",", "."));
+                const valorAnterior = ant ? parseFloat(String(ant.valor).replace(",", ".")) : NaN;
+                const fecha = ult.fecha;
+
+                // LÓGICA UVA: Sube = Rojo, Baja = Verde -> 'peor_es_mas'
+                const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_mas');
+
+                // Actualizar el valor y la variación en spans separados
+                document.getElementById("uva-valor").textContent = isNaN(valorActual) ? "-" : valorActual.toFixed(2);
+                document.getElementById("uva-variacion").innerHTML = variacionHTML;
+
+                document.getElementById("uva-fecha").textContent = fecha;
+                last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+            } catch (err) {
+                console.error("Error al obtener UVA:", err);
+                last.innerHTML = '<span class="error">Error al cargar UVA</span>';
+                document.getElementById("uva-valor").textContent = "-";
+                document.getElementById("uva-fecha").textContent = "--";
+                document.getElementById("uva-variacion").innerHTML = "";
+            }
+        }
+        cargarUVA();
+
+        /* === Nueva función para cargar Base Monetaria (BCRA) con la estructura específica === */
+        async function cargarBCRA() {
+            const last = document.getElementById("last-bcra");
+            try {
+                const res = await fetch('https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1');
+                if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+
+                const data = await res.json();
+
+                // La data tiene la estructura: { results: [ { detalle: [ { fecha: "...", valor: N } ] } ] }
+                if (!data || !data.results || data.results.length === 0 || !data.results[0].detalle || data.results[0].detalle.length < 1) {
+                    throw new Error("No se encontraron resultados válidos en la respuesta del BCRA.");
+                }
+
+                // Extraer el valor y la fecha de los dos últimos elementos en el detalle
+                const detalle = data.results[0].detalle;
+                const ult = detalle[0]; // El BCRA API a menudo retorna el más reciente primero
+                const ant = detalle.length >= 2 ? detalle[1] : null;
+
+                const valorActual = parseFloat(String(ult.valor).replace(",", "."));
+                const valorAnterior = ant ? parseFloat(String(ant.valor).replace(",", ".")) : NaN;
+                const fecha = ult.fecha;
+
+                // Formatear la fecha a DD/MM/YYYY
+                const dateObj = new Date(fecha);
+                const formattedDate = dateObj.toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+                // LÓGICA BASE MONETARIA: Sube = Verde, Baja = Rojo -> 'peor_es_menos' (según solicitud)
+                const variacionHTML = generarVariacionHTML(valorActual, valorAnterior, 'peor_es_menos');
+
+                // Actualizar el valor y la variación en spans separados
+                document.getElementById("bcra-valor").textContent = isNaN(valorActual) ? "-" : formatMillions(valorActual);
+                document.getElementById("bcra-variacion").innerHTML = variacionHTML;
+
+                document.getElementById("bcra-fecha").textContent = fecha ? formattedDate : "--";
+
+                last.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+
+            } catch (err) {
+                console.error("Error al obtener Base Monetaria (BCRA):", err);
+                last.innerHTML = '<span class="error">Error al cargar Base Monetaria</span>';
+                document.getElementById("bcra-valor").textContent = "-";
+                document.getElementById("bcra-fecha").textContent = "--";
+                document.getElementById("bcra-variacion").innerHTML = "";
+            }
+        }
+        cargarBCRA();
+        /* === FIN SCRIPTS ADICIONALES === */
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const BASE_URL = 'https://api.argentinadatos.com/v1/finanzas/indices/';
+            const RAW_DATA_STORE = {};
+            const CHART_INSTANCES = {};
+
+            // --- Funciones Auxiliares ---
+
+            function parseDateForChart(dateString) {
+                if (!dateString) return null;
+                // Formato ISO 8601 (YYYY-MM-DD)
+                if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                    return dateString;
+                }
+                return null;
+            }
+
+            async function fetchData(endpoint) {
+                try {
+                    const url = `${BASE_URL}${endpoint}`;
+                    const response = await axios.get(url);
+                    return response.data || [];
+                } catch (error) {
+                    console.error(`ERROR al obtener datos de ${endpoint}:`, error);
+                    return [];
+                }
+            }
+
+            function filterDataByPeriod(data, years) {
+                if (years === 0) {
+                    return data;
+                }
+
+                const currentDate = new Date();
+                const targetDate = new Date();
+                targetDate.setFullYear(currentDate.getFullYear() - years);
+
+                let startIndex = 0;
+                for (let i = 0; i < data.length; i++) {
+                    if (new Date(data[i].x) >= targetDate) {
+                        startIndex = i;
+                        break;
+                    }
+                }
+
+                return data.slice(startIndex);
+            }
+
+            function createOrUpdateChart(canvasId, title, data, borderColor, dateUnit) {
+                let canvas = document.getElementById(canvasId);
+
+                if (data.length === 0) {
+                    if (CHART_INSTANCES[canvasId]) {
+                        CHART_INSTANCES[canvasId].destroy();
+                        delete CHART_INSTANCES[canvasId];
+                    }
+                    console.log(`No hay datos para el gráfico: ${title}`);
+                    return;
+                }
+
+                if (!canvas || !canvas.getContext) {
+                    const targetContainer = document.querySelector(`#${canvasId}`).parentNode;
+                    targetContainer.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+                    canvas = document.getElementById(canvasId);
+                }
+
+                const ctx = canvas.getContext('2d');
+                const yAxisTitle = (canvasId === 'chartRiesgoPais' ? 'Valor' : 'Valor (%)');
+                const pointRadiusValue = (canvasId === 'chartInflacionAnual' ? 2 : 0);
+
+
+                if (CHART_INSTANCES[canvasId]) {
+                    // 1. Actualizar gráfico existente
+                    CHART_INSTANCES[canvasId].data.datasets[0].data = data;
+                    CHART_INSTANCES[canvasId].options.scales.y.title.text = yAxisTitle;
+                    CHART_INSTANCES[canvasId].data.datasets[0].label = title;
+                    CHART_INSTANCES[canvasId].data.datasets[0].pointRadius = pointRadiusValue;
+                    CHART_INSTANCES[canvasId].update();
+                } else {
+                    // 2. Crear nuevo gráfico
+                    const newChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            datasets: [{
+                                label: title,
+                                data: data,
+                                borderColor: borderColor,
+                                backgroundColor: `${borderColor}30`,
+                                tension: 0.2,
+                                fill: false,
+                                pointRadius: pointRadiusValue,
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: true },
+                                tooltip: { mode: 'index', intersect: false },
+                                decimation: { enabled: true, algorithm: 'min-max' }
+                            },
+                            scales: {
+                                x: {
+                                    type: 'time',
+                                    time: {
+                                        unit: dateUnit,
+                                        tooltipFormat: dateUnit === 'day' ? 'dd/MM/yyyy' : 'MM/yyyy'
+                                    },
+                                    title: { display: true, text: 'Fecha' }
+                                },
+                                y: {
+                                    beginAtZero: false,
+                                    title: { display: true, text: yAxisTitle },
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                                }
+                            }
+                        }
+                    });
+                    CHART_INSTANCES[canvasId] = newChart;
+                }
+            }
+
+            // ----------------------------------------------------------------------
+            // --- GRÁFICO 1: Inflación Interanual ---
+            // ----------------------------------------------------------------------
+
+            async function plotInflacionInteranual() {
+                const dataRaw = await fetchData('inflacionInteranual');
+                if (dataRaw.length === 0) return;
+
+                const annualDataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (annualDataChart.length === 0) return;
+
+                RAW_DATA_STORE.inflacionInteranual = annualDataChart;
+                // Mostrar solo los últimos 12 meses para el gráfico inicial
+                const annualFinalData = annualDataChart.slice(-12);
+
+                createOrUpdateChart(
+                    'chartInflacionAnual',
+                    'Inflación Interanual (%)',
+                    annualFinalData,
+                    'rgb(255, 99, 132)',
+                    'month'
+                );
+            }
+
+            // ----------------------------------------------------------------------
+            // --- GRÁFICO 2: Inflación Mensual ---
+            // ----------------------------------------------------------------------
+
+            async function plotInflacionMensual() {
+                const dataRaw = await fetchData('inflacion');
+                if (dataRaw.length === 0) return;
+
+                const monthlyDataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (monthlyDataChart.length === 0) return;
+
+                RAW_DATA_STORE.inflacionMensual = monthlyDataChart;
+                const monthlyFinalData = filterDataByPeriod(monthlyDataChart, 1);
+
+                createOrUpdateChart(
+                    'chartInflacionMensual',
+                    'Inflación Mensual - Nivel General (%)',
+                    monthlyFinalData,
+                    'rgb(54, 162, 235)',
+                    'month'
+                );
+            }
+
+            // ----------------------------------------------------------------------
+            // --- GRÁFICO 3: Riesgo País ---
+            // ----------------------------------------------------------------------
+
+            async function plotRiesgoPais() {
+                const dataRaw = await fetchData('riesgo-pais');
+                if (dataRaw.length === 0) return;
+
+                const dataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (dataChart.length === 0) return;
+
+                RAW_DATA_STORE.riesgoPais = dataChart;
+                const finalData = filterDataByPeriod(dataChart, 1);
+
+                createOrUpdateChart(
+                    'chartRiesgoPais',
+                    'Riesgo País (Puntos Básicos)',
+                    finalData,
+                    'rgb(75, 192, 192)',
+                    'day'
+                );
+            }
+
+            // ----------------------------------------------------------------------
+            // --- GRÁFICO 4: UVA ---
+            // ----------------------------------------------------------------------
+
+            async function plotUVA() {
+                const dataRaw = await fetchData('uva');
+                if (dataRaw.length === 0) return;
+
+                const dataChart = dataRaw
+                    .map(item => ({
+                        x: parseDateForChart(item.fecha),
+                        y: item.valor
+                    }))
+                    .filter(item => item.x !== null && item.y !== undefined)
+                    .sort((a, b) => new Date(a.x) - new Date(b.x));
+
+                if (dataChart.length === 0) return;
+
+                RAW_DATA_STORE.uva = dataChart;
+                const finalData = filterDataByPeriod(dataChart, 1);
+
+                createOrUpdateChart(
+                    'chartUVA',
+                    'Valor de la Unidad de Vivienda (UVA)',
+                    finalData,
+                    'rgb(255, 205, 86)', // Color amarillo para UVA
+                    'day' // UVA se actualiza diariamente
+                );
+            }
+
+            // ----------------------------------------------------------------------
+            // --- Lógica de Interacción de Botones ---
+            // ----------------------------------------------------------------------
+
+            function handleFilterClick(event) {
+                const button = event.target;
+                if (button.tagName !== 'BUTTON') return;
+
+                const container = button.closest('.filter-buttons');
+                const chartId = container.dataset.chartId;
+                const rawDataKey = container.dataset.rawDataKey;
+                const period = parseInt(button.dataset.period);
+
+                container.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const rawData = RAW_DATA_STORE[rawDataKey];
+                if (!rawData) return;
+
+                const filteredData = filterDataByPeriod(rawData, period);
+
+                let title, borderColor, dateUnit;
+                if (chartId === 'chartInflacionMensual') {
+                    title = 'Inflación Mensual - Nivel General (%)';
+                    borderColor = 'rgb(54, 162, 235)';
+                    dateUnit = 'month';
+                } else if (chartId === 'chartRiesgoPais') {
+                    title = 'Riesgo País (Puntos Básicos)';
+                    borderColor = 'rgb(75, 192, 192)';
+                    dateUnit = 'day';
+                } else if (chartId === 'chartUVA') { // Añadir lógica para UVA
+                    title = 'Valor de la Unidad de Vivienda (UVA)';
+                    borderColor = 'rgb(255, 205, 86)';
+                    dateUnit = 'day';
+                } else {
+                    return;
+                }
+
+                createOrUpdateChart(
+                    chartId,
+                    title,
+                    filteredData,
+                    borderColor,
+                    dateUnit
+                );
+            }
+
+            document.querySelectorAll('.filter-buttons').forEach(container => {
+                container.addEventListener('click', handleFilterClick);
+            });
+
+            // Ejecutar la carga de datos y gráficos iniciales
+            plotInflacionInteranual();
+            plotInflacionMensual();
+            plotRiesgoPais();
+            plotUVA(); // Cargar el gráfico de UVA
+        });
+    </script>
+
+</body>
+</html>
