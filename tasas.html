@@ -17,7 +17,44 @@
             box-shadow: 0 0 12px #ccc40 inset;
         }
 
-        /* --- CONTROLES Y ESTADO (NUEVO BLOQUE) --- */
+        /* --- NAVEGACIÓN (MINIMALISTA) --- */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 5px 0; /* Menos padding */
+            background-color: #000;
+            border-bottom: 1px solid #333; /* Borde más sutil */
+            gap: 5px; /* Espacio entre items */
+        }
+        .main-nav .nav-item {
+            color: #999; /* Texto más suave */
+            text-decoration: none;
+            padding: 5px 10px; /* Menos padding */
+            border-bottom: 2px solid transparent; /* Efecto de pestaña */
+            transition: color 0.2s, border-bottom-color 0.2s;
+            font-size: 0.9em; /* Fuente ligeramente más pequeña */
+            font-weight: normal;
+        }
+        .main-nav .nav-item:hover {
+            color: var(--texto); /* Blanco al pasar el mouse */
+            background-color: transparent;
+            border-bottom-color: #555;
+        }
+        .main-nav .current-page {
+            color: var(--base); /* Color de contraste (verde) */
+            border-bottom-color: var(--base);
+            font-weight: bold;
+            background-color: #000;
+        }
+        .main-nav .disabled {
+            color: #444;
+            cursor: not-allowed;
+            pointer-events: none;
+            border-bottom-color: transparent;
+        }
+
+        /* --- CONTROLES Y ESTADO --- */
         .controls-and-status {
             display: flex;
             justify-content: space-between;
@@ -27,19 +64,19 @@
             gap: 10px;
         }
 
-        /* Botón de Refresco (Color y Tamaño modificado) */
+        /* Botón de Refresco */
         #refreshButton {
-            padding: 8px 12px; /* Más pequeño */
-            background-color: #333; /* Color gris oscuro */
+            padding: 8px 12px;
+            background-color: #333;
             color: var(--texto);
-            border: 1px solid var(--base); /* Borde para el estilo retro */
+            border: 1px solid var(--base);
             border-radius: 0;
             cursor: pointer;
             font-weight: bold;
             letter-spacing: 0.5px;
             transition: background-color 0.3s, transform 0.1s;
             box-shadow: none;
-            flex-grow: 0; /* No crece */
+            flex-grow: 0;
         }
         #refreshButton:hover:not(:disabled) {
             background-color: #222;
@@ -51,12 +88,11 @@
             border-color: #555;
         }
 
-        /* Estado (Subido junto al botón) */
+        /* Estado */
         .status {
             text-align: right;
             font-size: 0.85em;
             color: #777;
-            /* Para que ocupe el resto del espacio y se alinee a la derecha */
             flex-grow: 1;
             padding-left: 10px;
         }
@@ -70,7 +106,6 @@
         }
 
         /* --- TABLA Y ESTILOS ESPECÍFICOS --- */
-
         .table-container {
             overflow-x: auto;
             border: 1px solid #333;
@@ -171,8 +206,17 @@
         /* MEDIA QUERIES PARA MÓVILES */
         /* ------------------------------------------- */
         @media (max-width: 600px) {
-         }
 
+            .main-nav { /* Navegación en móvil */
+                flex-direction: row; /* Mantenemos en fila si caben */
+                flex-wrap: wrap; /* Permitimos que se envuelvan */
+                padding: 5px 0;
+            }
+            .main-nav .nav-item {
+                margin: 2px 5px; /* Menos margen */
+                text-align: center;
+                flex-grow: 1; /* Para que ocupen el espacio disponible */
+            }
 
             .controls-and-status {
                 flex-direction: column;
@@ -191,12 +235,6 @@
 
             th, td { padding: 8px 4px; font-size: 0.8rem; }
             .platform-logo { width: 20px; height: 20px; }
-
-            nav a {
-                padding: 8px 5px;
-                font-size: 0.9rem;
-                margin: 5px 5px;
-            }
 
             .rates-cell .rate-list-item,
             .rate-limits-cell .rate-list-item {
@@ -226,9 +264,12 @@
 <script src="modern-navigation.js"></script>
 <main>
       <h1 class="page-title">Comparación de TNA</h1>
+</main>
 
-      </main>
-
+<nav class="main-nav">
+    <a href="tasas.html" class="nav-item current-page">Bancos Digitales</a>
+    <a href="plazo-fijo.html" class="nav-item">Plazo Fijo</a>
+</nav>
 <div class="container">
     <div class="controls-and-status">
         <button id="refreshButton" onclick="fetchData(true)">🔄 Actualizar Tasas</button>
@@ -292,13 +333,11 @@
             maximumFractionDigits: 0
         });
     };
-    
-    /** 💡 FUNCIÓN DE FECHA: Formatea la cadena de fecha ISO (ej: 2025-11-03T17:37:38.000000Z) a hora local. */
+
+    /** FUNCIÓN DE FECHA: Formatea la cadena de fecha ISO (ej: 2025-11-03T17:37:38.000000Z) a hora local. */
     const formatAPIDate = (isoString) => {
         if (!isoString) return 'N/D';
-        // new Date() interpreta el 'Z' como UTC y crea la fecha en ese tiempo.
-        const date = new Date(isoString); 
-        // toLocaleTimeString la convierte a la zona horaria del sistema del usuario, usando el formato es-AR.
+        const date = new Date(isoString);
         return date.toLocaleTimeString('es-AR', {
             hour: '2-digit',
             minute: '2-digit',
@@ -320,22 +359,19 @@
 
             const rawData = await response.json();
             let appsData = rawData.data;
-            // <-- CAMBIO CLAVE: Captura el campo 'last_updated'
-            const lastUpdatedTime = rawData.last_updated; 
+            const lastUpdatedTime = rawData.last_updated;
 
             if (!Array.isArray(appsData) || appsData.length === 0) {
                  tableBody.innerHTML = '<tr><td colspan="5" class="no-data">⚠️ La API devolvió cero aplicaciones válidas. Intente actualizar más tarde.</td></tr>';
-                 // Muestra la hora de la API incluso si no hay datos de apps
                  lastUpdateSpan.textContent = formatAPIDate(lastUpdatedTime);
-                 lastUpdateSpan.className = 'error-message'; 
+                 lastUpdateSpan.className = 'error-message';
                  return;
             }
 
-            // Implementación del ordenamiento (Mayor a Menor TNA)
+            // Ordenamiento por TNA (Mayor a Menor)
             appsData.sort((a, b) => {
                 const tnaA = parseFloat(a.tna) || 0;
                 const tnaB = parseFloat(b.tna) || 0;
-                // b - a para orden descendente (mayor a menor)
                 return tnaB - tnaA;
             });
 
@@ -421,8 +457,7 @@
                 limitsCell.innerHTML = limitsHTML;
             });
 
-            // 💡 CAMBIO CLAVE: Usar el valor de la API formateado
-            lastUpdateSpan.textContent = formatAPIDate(lastUpdatedTime); 
+            lastUpdateSpan.textContent = formatAPIDate(lastUpdatedTime);
             lastUpdateSpan.className = 'success-message';
 
         } catch (error) {
