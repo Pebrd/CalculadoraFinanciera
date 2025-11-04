@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plazo Fijo - Comparación de TNA</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        /* === ESTILOS BASE (COPIADOS DE TASAS.HTML) === */
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 900px;
+            background: #111;
+            border-radius: 0;
+            border: 1px solid #222;
+            box-shadow: 0 0 12px #ccc40 inset;
+        }
+
+        /* --- NAVEGACIÓN (MINIMALISTA) --- */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 5px 0; /* Menos padding */
+            background-color: #000;
+            border-bottom: 1px solid #333; /* Borde más sutil */
+            gap: 5px; /* Espacio entre items */
+        }
+        .main-nav .nav-item {
+            color: #999; /* Texto más suave */
+            text-decoration: none;
+            padding: 5px 10px; /* Menos padding */
+            border-bottom: 2px solid transparent; /* Efecto de pestaña */
+            transition: color 0.2s, border-bottom-color 0.2s;
+            font-size: 0.9em; /* Fuente ligeramente más pequeña */
+            font-weight: normal;
+        }
+        .main-nav .nav-item:hover {
+            color: var(--texto); /* Blanco al pasar el mouse */
+            background-color: transparent;
+            border-bottom-color: #555;
+        }
+        /* Color de página actual para Plazo Fijo */
+        .main-nav .current-page {
+            color: var(--base); /* Color de contraste (verde) */
+            border-bottom-color: var(--base);
+            font-weight: bold;
+            background-color: #000;
+        }
+        .main-nav .disabled {
+            color: #444;
+            cursor: not-allowed;
+            pointer-events: none;
+            border-bottom-color: transparent;
+        }
+
+        /* --- CONTROLES Y ESTADO --- */
+        .controls-and-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        /* Botón de Refresco */
+        #refreshButton {
+            padding: 8px 12px;
+            background-color: #333;
+            color: var(--texto);
+            border: 1px solid var(--base);
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            box-shadow: none;
+            flex-grow: 0;
+        }
+        #refreshButton:disabled {
+            background-color: #111;
+            cursor: not-allowed;
+            border-color: #555;
+        }
+
+        /* Estado */
+        .status {
+            text-align: right;
+            font-size: 0.85em;
+            color: #777;
+            flex-grow: 1;
+            padding-left: 10px;
+        }
+        .error-message {
+            color: var(--error);
+            font-weight: bold;
+        }
+        .success-message {
+            color: #4f4;
+            font-weight: bold;
+        }
+
+        /* --- TABLA Y ESTILOS ESPECÍFICOS --- */
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid #333;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
+            background-color: #000;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px 6px;
+            text-align: left;
+            font-size: 0.9rem;
+            vertical-align: top;
+        }
+        th {
+            background-color: #111;
+            color: var(--base);
+            text-transform: uppercase;
+            font-weight: bold;
+            border-bottom: 2px solid var(--base);
+            text-align: center !important;
+        }
+        th:first-child, td:first-child { text-align: left; }
+
+        /* Estilos de Fila de Plataforma */
+        .platform-row {
+            background-color: #000;
+            font-weight: 600;
+            border-top: 1px solid #333;
+            transition: background-color 0.3s;
+        }
+        .platform-row:hover {
+             background-color: #111;
+        }
+        .platform-row td { padding: 12px 8px; border: 1px solid #333; }
+        .platform-logo { width: 24px; height: 24px; object-fit: contain; margin-right: 8px; border-radius: 50%; border: 1px solid #444; }
+
+        /* Estilos específicos para las celdas de TNA en esta tabla */
+        .tna-clientes {
+            font-weight: bold;
+            color: #4f4;
+            font-size: 1.1em;
+            text-align: right !important;
+        }
+        .tna-no-clientes {
+            color: var(--contraste-fuerte);
+            font-size: 1.0em;
+            text-align: right !important;
+        }
+        .rate-cell-single {
+            white-space: nowrap;
+        }
+
+
+        /* ------------------------------------------- */
+        /* MEDIA QUERIES PARA MÓVILES */
+        /* ------------------------------------------- */
+        @media (max-width: 600px) {
+
+            .main-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 5px 0;
+            }
+            .main-nav .nav-item {
+                margin: 2px 5px;
+                text-align: center;
+                flex-grow: 1;
+            }
+
+            .controls-and-status {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+            }
+            #refreshButton {
+                width: 100%;
+            }
+            .status {
+                text-align: center;
+                padding-left: 0;
+            }
+
+            table { min-width: 400px; }
+
+            th, td { padding: 8px 4px; font-size: 0.8rem; }
+            .platform-logo { width: 20px; height: 20px; }
+
+            .tna-clientes, .tna-no-clientes {
+                font-size: 0.9em;
+            }
+
+            /* Ajuste de encabezados en móvil */
+            .table-container th:nth-child(3),
+            .table-container th:nth-child(4) {
+                 font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<script src="modern-navigation.js"></script>
+<main>
+      <h1 class="page-title">Plazo Fijo - Tasas de Bancos</h1>
+</main>
+
+<nav class="main-nav">
+    <a href="tasas.html" class="nav-item">Bancos Digitales</a>
+    <a href="plazo-fijo.html" class="nav-item current-page">Plazo Fijo</a>
+
+</nav>
+<div class="container">
+    <div class="controls-and-status">
+        <button id="refreshButton" onclick="fetchData(true)">🔄 Actualizar Tasas</button>
+        <div class="status">
+            Última actualización (Local): <span id="last-update">Cargando...</span> | Próximo refresco: <span id="next-refresh"></span>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="rates-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;"></th>
+                    <th style="width: 50%;">Entidad</th>
+                    <th style="width: 25%; text-align: center;">TNA Clientes</th>
+                    <th style="width: 20%; text-align: center;">TNA No Clientes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="4" style="text-align:center;">Cargando datos...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="shared-scripts.js"></script>
+<script>
+    // Usamos el proxy para evitar problemas de CORS
+    const TARGET_API_URL = 'https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo';
+    const PROXY_API_URL = `https://corsproxy.io/?${TARGET_API_URL}`;
+
+    const REFRESH_INTERVAL_MS = 10 * 60 * 1000; // 10 minutos
+
+    const tableBody = document.querySelector('#rates-table tbody');
+    const lastUpdateSpan = document.getElementById('last-update');
+    const nextRefreshSpan = document.getElementById('next-refresh');
+    const refreshButton = document.getElementById('refreshButton');
+
+    /** FUNCIÓN CORREGIDA: Formatea el valor numérico (decimal) como porcentaje. */
+    const formatPercentage = (value) => {
+        if (value === null || value === undefined || isNaN(parseFloat(value))) return '-';
+
+        // Multiplicamos por 100 para convertir el decimal a porcentaje
+        const percentageValue = parseFloat(value) * 100;
+
+        return percentageValue.toLocaleString('es-AR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + '%';
+    };
+
+    /** Formatea la hora actual para el indicador de actualización. */
+    const formatLocalTime = () => {
+        const date = new Date();
+        return date.toLocaleTimeString('es-AR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+    };
+
+    async function fetchData(manual = false) {
+        refreshButton.disabled = true;
+        lastUpdateSpan.className = '';
+        lastUpdateSpan.textContent = manual ? 'Refrescando manualmente...' : 'Actualizando...';
+
+        try {
+            const response = await fetch(PROXY_API_URL);
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}.`);
+            }
+
+            const ratesData = await response.json();
+
+            if (!Array.isArray(ratesData) || ratesData.length === 0) {
+                 tableBody.innerHTML = '<tr><td colspan="4" class="no-data">⚠️ La API devolvió cero entidades válidas. Intente actualizar más tarde.</td></tr>';
+                 lastUpdateSpan.textContent = formatLocalTime();
+                 lastUpdateSpan.className = 'error-message';
+                 return;
+            }
+
+            // Implementación del ordenamiento (Mayor a Menor TNA Clientes)
+            ratesData.sort((a, b) => {
+                const tnaA = parseFloat(a.tnaClientes) || 0;
+                const tnaB = parseFloat(b.tnaClientes) || 0;
+                return tnaB - tnaA;
+            });
+
+            tableBody.innerHTML = '';
+
+            ratesData.forEach(item => {
+                const row = tableBody.insertRow();
+                row.className = 'platform-row';
+
+                // Celda 1: Logo
+                row.insertCell().innerHTML = `<img src="${item.logo}" alt="${item.entidad} logo" class="platform-logo" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGNsYXNzPSJsdWNpZGUgbXVzZXVtLWhvbWUiPjxwYXRoIGQ9Ik02IDIzVjEzIi8+PHBhdGgGZGl0c2E9Ik0xMiAyM1YxMyIvPjxwYXRoIGQ9Ik0xOCAyM1YxMyIvPjxwYXRoIGQ9Ik0yIDZIMThBNC00LTAtMC0xIDQgMTAgVjIySDIiLz48cGF0aCBkPSJNMiAxNnI0LjUgMyA5IDAtNC41LTMgOSAwbDIuNS02LjVjLjktMi4zLTItMy42LTMuNC0xLjFsLTItMS42Yy0xLjQtMS4xLTMuNi0xLjEtNSAwLjlsLTYgNC44Ii8+PC9wYXRoPjwvc3ZnPg=='" />`;
+
+                // Celda 2: Entidad
+                row.insertCell().innerHTML = `<strong>${item.entidad}</strong>`;
+
+                // Celda 3: TNA Clientes (Principal)
+                const tnaClientesCell = row.insertCell();
+                tnaClientesCell.className = 'rate-cell-single tna-clientes';
+                tnaClientesCell.textContent = formatPercentage(item.tnaClientes);
+
+                // Celda 4: TNA No Clientes
+                const tnaNoClientesCell = row.insertCell();
+                tnaNoClientesCell.className = 'rate-cell-single tna-no-clientes';
+                tnaNoClientesCell.textContent = formatPercentage(item.tnaNoClientes);
+            });
+
+            // Usamos la hora local para la actualización ya que la API no proporciona un campo
+            lastUpdateSpan.textContent = formatLocalTime();
+            lastUpdateSpan.className = 'success-message';
+
+        } catch (error) {
+            console.error('ERROR CRÍTICO en la carga/procesamiento de datos:', error);
+            lastUpdateSpan.textContent = `❌ ERROR CRÍTICO: Falló la conexión o el formato de datos de la API.`;
+            lastUpdateSpan.className = 'error-message';
+            tableBody.innerHTML = `<tr><td colspan="4" style="color: var(--error); text-align: center; padding: 20px;">Error al cargar los datos. Revisa la Consola. Mensaje: ${error.message}</td></tr>`;
+        } finally {
+            refreshButton.disabled = false;
+        }
+    }
+
+    function iniciarRefrescoAutomatico() {
+        fetchData();
+        setInterval(() => fetchData(false), REFRESH_INTERVAL_MS);
+
+        const updateNextRefreshTime = () => {
+            const nextTime = new Date(new Date().getTime() + REFRESH_INTERVAL_MS);
+            nextRefreshSpan.textContent = nextTime.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+        };
+
+        setInterval(updateNextRefreshTime, 60000);
+        updateNextRefreshTime();
+    }
+
+    iniciarRefrescoAutomatico();
+</script>
+
+</body>
+</html>
