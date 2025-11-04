@@ -51,11 +51,11 @@ class ModernNavigation {
     const menuItems = [
       { href: 'index.html', text: 'Cotizaciones', icon: '📊' },
       { href: 'calculadoras.html', text: 'Calculadoras', icon: '🧮' },
-      { href: 'tasas.html', text: 'TNA', icon: '📈' },
+      { href: 'tasas.html', text: 'Tasas', icon: '📈' },
       { href: 'noticias.html', text: 'Noticias', icon: '📰' },
       { href: 'Graficos historicos.html', text: 'Gráficos', icon: '📉' },
       { href: 'Hacienda.html', text: 'Agro', icon: '🌾' },
-      { href: 'ScreenerArgy.html', text: 'Argy', icon: '📈' }
+      { href: 'ScreenerArgy.html', text: 'Argy', icon: '🇦🇷' }
     ];
 
     menuItems.forEach(item => {
