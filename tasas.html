@@ -292,6 +292,20 @@
             maximumFractionDigits: 0
         });
     };
+    
+    /** 💡 FUNCIÓN DE FECHA: Formatea la cadena de fecha ISO (ej: 2025-11-03T17:37:38.000000Z) a hora local. */
+    const formatAPIDate = (isoString) => {
+        if (!isoString) return 'N/D';
+        // new Date() interpreta el 'Z' como UTC y crea la fecha en ese tiempo.
+        const date = new Date(isoString); 
+        // toLocaleTimeString la convierte a la zona horaria del sistema del usuario, usando el formato es-AR.
+        return date.toLocaleTimeString('es-AR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+    };
 
     async function fetchData(manual = false) {
         refreshButton.disabled = true;
@@ -306,9 +320,14 @@
 
             const rawData = await response.json();
             let appsData = rawData.data;
+            // <-- CAMBIO CLAVE: Captura el campo 'last_updated'
+            const lastUpdatedTime = rawData.last_updated; 
 
             if (!Array.isArray(appsData) || appsData.length === 0) {
                  tableBody.innerHTML = '<tr><td colspan="5" class="no-data">⚠️ La API devolvió cero aplicaciones válidas. Intente actualizar más tarde.</td></tr>';
+                 // Muestra la hora de la API incluso si no hay datos de apps
+                 lastUpdateSpan.textContent = formatAPIDate(lastUpdatedTime);
+                 lastUpdateSpan.className = 'error-message'; 
                  return;
             }
 
@@ -333,7 +352,7 @@
                 row.className = 'platform-row';
 
                 // Celda 1: Logo
-                row.insertCell().innerHTML = `<img src="${app.logo}" alt="${app.name} logo" class="platform-logo" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWJhbmsiPjxwYXRoIGQ9Ik02LjQgMTJhMi45MiAyLjkyIDAgMCAxIDUuMy0xLjg0Ii8+PHBhdGggZD0iTTE3LjUgMS44YTMuMDMgMy4wMyAwIDAgMC00LjY0IDIuMDRsLTkuMyA5LjNhMi42OSAyLjY5IDAgMCAwLS4wNCAzLjQ0bDEuNyAxLjdhMi43MiAyLjcyIDAgMCAwIDMuNDQgMGMuMDYtLjA2LjEyLS4xMy4xNy0uMlM2LjQgMTcuNCA2LjQgMTd2LTdhNSA1IDAgMCAxIDUtNWgxMGEuNTUuNTUgMCAwIDEgLjUgNS41ek0xNyAxMnYtNWg1LjkzIi8+PC9zdmc+'" />`;
+                row.insertCell().innerHTML = `<img src="${app.logo}" alt="${app.name} logo" class="platform-logo" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWJhbmsiPjxwYXRoIGQ9Ik02LjQgMTJhMi45MiAyLjkyIDAgMCAxIDUuMy0xLjg0Ii8+PHBhdGggZD0iTTE3LjUgMS44YTMuMDMgMy4wMyAwIDAgMC00LjY0IDIuMDRsLTkuMyA5LjNhMi42OSAyLjY5IDAgMCAwLS4wNCAzLjQ0bDEuNyAxLjdhMi43MiAyLjcyIDAgMCAwIDMuNDQgMGMuMDYtLjA2LjEyLS4xMy4xNy0uMlM2LjQgMTcuNCA2LjQgMTd2LTdhNSA1IDAgMCAxIDUtNWgxMGEuNTUuNTUgMCAwIDEgLjUgNS41ek0xNyAxMnYtNWg1LjkzIi8+PC9wYXRoPjwvc3ZnPg=='" />`;
 
                 // Celda 2: Nombre de la Plataforma
                 row.insertCell().innerHTML = `<strong>${app.name}</strong>`;
@@ -402,8 +421,8 @@
                 limitsCell.innerHTML = limitsHTML;
             });
 
-            const now = new Date();
-            lastUpdateSpan.textContent = now.toLocaleTimeString('es-AR');
+            // 💡 CAMBIO CLAVE: Usar el valor de la API formateado
+            lastUpdateSpan.textContent = formatAPIDate(lastUpdatedTime); 
             lastUpdateSpan.className = 'success-message';
 
         } catch (error) {
