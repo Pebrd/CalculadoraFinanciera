@@ -704,7 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isBestBid) { bidCell.classList.add('highlight-sell'); }
         });
 
-        LAST_UPDATED_SPAN.textContent = `Última actualización: ${new Date().toLocaleTimeString('es-AR')}`;
+        LAST_UPDATED_SPAN.textContent = `Última actualización: ${new Date().toLocaleTimeString('es-AR',{hour: '2-digit', minute: '2-digit',hour12: false})}`;
     };
 
     const fetchDataAndRender = async (isInitialLoad = false) => {
