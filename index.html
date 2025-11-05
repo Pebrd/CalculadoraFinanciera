@@ -785,7 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateLastUpdateTime(date) {
-        const timeString = date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const timeString = date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
         lastUpdateTimeSpan.textContent = `Última actualización: ${timeString}`;
     }
 
