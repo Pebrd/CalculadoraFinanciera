@@ -35,7 +35,7 @@ class ModernNavigation {
     const brand = document.createElement('a');
     brand.href = 'index.html';
     brand.className = 'nav-brand';
-    brand.textContent = 'FinArgy';
+    brand.textContent = 'Pampa Finance';
 
     // === MODIFICACIÓN CLAVE: Agrupar Toggle y Brand en un nuevo contenedor ===
     const headerGroup = document.createElement('div');
