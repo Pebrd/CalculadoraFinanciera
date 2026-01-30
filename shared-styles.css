@@ -215,43 +215,48 @@ nav {
   box-shadow: var(--glow-success);
 }
 
-/* === MENÚ HAMBURGUESA PARA MÓVIL === */
+/* === BOTÓN HAMBURGUESA MEJORADO === */
 .nav-toggle {
-  display: none;
+  display: none; /* Se activa en el media query */
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   z-index: 1001;
+  position: relative;
 }
 
 .nav-toggle span {
   display: block;
-  width: 1.5rem;
+  width: 1.6rem;
   height: 2px;
   background: var(--text-primary);
-  margin: 2px 0;
-  transition: var(--transition-fast);
-  transform-origin: center;
+  margin: 3px 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  transform-origin: center; /* Crucial para la rotación */
 }
 
+/* Transformación a X perfecta */
 .nav-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: translateY(8px) rotate(45deg);
+  background: var(--success); /* Cambia a verde al abrir para feedback visual */
 }
 
 .nav-toggle.active span:nth-child(2) {
   opacity: 0;
+  transform: translateX(-10px);
 }
 
 .nav-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+  transform: translateY(-8px) rotate(-45deg);
+  background: var(--success);
 }
-
 /* === TÍTULOS MODERNOS === */
 .page-title {
   text-align: center;
@@ -923,109 +928,89 @@ tbody tr:hover {
   }
 }
 
+/* === RESPONSIVE DESIGN MODERNO - MÓVIL ABAJO === */
+/* === RESPONSIVE DESIGN MODERNO - MÓVIL ABAJO (OPTIMIZADO) === */
 @media (max-width: 768px) {
-  /* MODIFICACIÓN CRÍTICA 1: ELIMINAR CUALQUIER PADDING DE BODY */
   body {
-    padding: 0;
+    padding: 0 0 80px 0 !important; /* Espacio para que la nav no tape contenido */
   }
 
   .nav-container {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: auto !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     margin-bottom: 0;
+    border-bottom: none;
+    border-top: 1px solid var(--accent);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+    background: rgba(15, 15, 15, 0.98);
   }
 
   nav {
-    flex-direction: column;
-    gap: 0.5rem;
-    /* MODIFICACIÓN CLAVE 3: Eliminamos el padding vertical del NAV principal */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 0;
+    height: 65px; /* Un poco más delgada para ganar pantalla */
   }
 
-  /* REGLA CRÍTICA: Define ALTURA UNIFICADA y espaciado lateral del menú móvil */
   .nav-header-group {
     display: flex;
     align-items: center;
     width: 100%;
-    justify-content: flex-start;
-    gap: 0.75rem;
-    /* AUMENTAMOS LA ALTURA MÍNIMA para asegurar homogeneidad */
-    min-height: 4.5rem; /* Altura uniforme para todos */
-    /* Aplicamos el padding lateral aquí para separar el ícono del borde */
-    padding: 0 var(--padding-mobile);
+    height: 100%;
+    gap: 0.5rem; /* Espacio reducido entre icono y texto */
+    padding: 0 10px; /* Padding mínimo lateral */
   }
 
-  .nav-menu {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
-  }
-
-  .nav-link {
-    width: 100%;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1rem;
+  .nav-brand {
+    white-space: nowrap;
+    /* Tamaño de fuente fluido: se ajusta entre 1.1rem y 1.4rem según el ancho */
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    letter-spacing: -0.03em; /* Un poco más apretadas las letras para que entren */
+    flex-shrink: 1;
+    min-width: 0; /* Permite que el flexbox gestione el tamaño correctamente */
   }
 
   .nav-toggle {
     display: flex;
+    flex-shrink: 0; /* Evita que el botón se aplaste */
   }
 
-  .nav-menu.mobile-hidden {
+  /* AJUSTE DEL MENÚ DESPLEGABLE */
+  .nav-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(15, 15, 15, 0.98);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--accent);
+    gap: 0;
     display: none;
   }
 
   .nav-menu.mobile-visible {
     display: flex;
-    animation: slideDown 0.3s ease-out;
+    animation: slideUpMenu 0.3s ease-out;
   }
 
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .controls button {
+  .nav-link {
     width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .api-status {
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  .api-indicator {
-    justify-content: center;
-    width: 100%;
-  }
-
-  table {
-    min-width: 400px;
-    font-size: 0.85rem;
-  }
-
-  th, td {
-    padding: 0.75rem 0.5rem;
-  }
-
-  .form-row {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  /* CRÍTICO: Aplica el padding lateral y el margin-top responsivo a todos los contenedores principales unificados */
-  .main-container, main, #noticias,
-  .table-block-container, .container {
-    padding: 0 var(--padding-mobile);
-    margin-top: 1.5rem; /* Margen responsivo para el contenido debajo de la nav */
+  @keyframes slideUpMenu {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
-
 @media (max-width: 480px) {
   /* MODIFICACIÓN CRÍTICA 2: ASEGURAR QUE BODY TAMBIÉN QUEDE SIN PADDING AQUÍ */
   body {
