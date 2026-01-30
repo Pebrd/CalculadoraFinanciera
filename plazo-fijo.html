@@ -3,363 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plazo Fijo - Comparación de TNA</title>
+    <title>Plazo Fijo - Pampa Finance</title>
     <link rel="stylesheet" href="shared-styles.css">
     <style>
-        /* === ESTILOS BASE (COPIADOS DE TASAS.HTML) === */
-
-        /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             max-width: 900px;
             background: #111;
-            border-radius: 0;
             border: 1px solid #222;
-            box-shadow: 0 0 12px #ccc40 inset;
+            box-shadow: 0 0 12px rgba(0, 212, 170, 0.05) inset;
         }
 
-        /* --- NAVEGACIÓN (MINIMALISTA) --- */
         .main-nav {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            padding: 5px 0; /* Menos padding */
-            background-color: #000;
-            border-bottom: 1px solid #333; /* Borde más sutil */
-            gap: 5px; /* Espacio entre items */
+            display: flex; justify-content: center; margin-bottom: 20px;
+            padding: 5px 0; background-color: #000; border-bottom: 1px solid #333; gap: 5px;
         }
+
         .main-nav .nav-item {
-            color: #999; /* Texto más suave */
-            text-decoration: none;
-            padding: 5px 10px; /* Menos padding */
-            border-bottom: 2px solid transparent; /* Efecto de pestaña */
-            transition: color 0.2s, border-bottom-color 0.2s;
-            font-size: 0.9em; /* Fuente ligeramente más pequeña */
-            font-weight: normal;
-        }
-        .main-nav .nav-item:hover {
-            color: var(--texto); /* Blanco al pasar el mouse */
-            background-color: transparent;
-            border-bottom-color: #555;
-        }
-        /* Color de página actual para Plazo Fijo */
-        .main-nav .current-page {
-            color: var(--base); /* Color de contraste (verde) */
-            border-bottom-color: var(--base);
-            font-weight: bold;
-            background-color: #000;
-        }
-        .main-nav .disabled {
-            color: #444;
-            cursor: not-allowed;
-            pointer-events: none;
-            border-bottom-color: transparent;
+            color: #999; text-decoration: none; padding: 8px 15px;
+            border-bottom: 2px solid transparent; transition: all 0.2s; font-size: 0.9em;
         }
 
-        /* --- CONTROLES Y ESTADO --- */
-        .controls-and-status {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            gap: 10px;
+        .main-nav .current-page { color: var(--success); border-bottom-color: var(--success); font-weight: bold; }
+
+        /* --- ESTILOS DEL MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center; z-index: 3000;
         }
 
-        /* Botón de Refresco */
-        #refreshButton {
-            padding: 8px 12px;
-            background-color: #333;
-            color: var(--texto);
-            border: 1px solid var(--base);
-            border-radius: 0;
-            cursor: pointer;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            box-shadow: none;
-            flex-grow: 0;
-        }
-        #refreshButton:disabled {
-            background-color: #111;
-            cursor: not-allowed;
-            border-color: #555;
+        .modal-content {
+            background: #151515; border: 1px solid var(--success); padding: 25px;
+            max-width: 400px; width: 85%; box-shadow: 0 0 40px rgba(0, 212, 170, 0.15);
+            animation: modalIn 0.3s ease-out;
+            text-align: center;
         }
 
-        /* Estado */
-        .status {
-            text-align: right;
-            font-size: 0.85em;
-            color: #777;
-            flex-grow: 1;
-            padding-left: 10px;
-        }
-        .error-message {
-            color: var(--error);
-            font-weight: bold;
-        }
-        .success-message {
-            color: #4f4;
-            font-weight: bold;
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- TABLA Y ESTILOS ESPECÍFICOS --- */
-        .table-container {
-            overflow-x: auto;
-            border: 1px solid #333;
-            border-radius: 0;
-            box-shadow: none;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 550px;
-            background-color: #000;
-        }
-        th, td {
-            border: 1px solid #333;
-            padding: 10px 6px;
-            text-align: left;
-            font-size: 0.9rem;
-            vertical-align: top;
-        }
-        th {
-            background-color: #111;
-            color: var(--base);
-            text-transform: uppercase;
-            font-weight: bold;
-            border-bottom: 2px solid var(--base);
-            text-align: center !important;
-        }
-        th:first-child, td:first-child { text-align: left; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .close-btn { background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; }
 
-        /* Estilos de Fila de Plataforma */
-        .platform-row {
-            background-color: #000;
-            font-weight: 600;
-            border-top: 1px solid #333;
-            transition: background-color 0.3s;
+        /* Botón TNA No Clientes Minimalista */
+        .btn-tna-min {
+            padding: 4px 10px; font-size: 0.8rem; background: #222; border: 1px solid #444;
+            color: var(--success); cursor: pointer; transition: all 0.2s;
+            font-weight: bold; border-radius: 4px;
         }
-        .platform-row:hover {
-             background-color: #111;
-        }
-        .platform-row td { padding: 12px 8px; border: 1px solid #333; }
-        .platform-logo { width: 24px; height: 24px; object-fit: contain; margin-right: 8px; border-radius: 50%; border: 1px solid #444; }
+        .btn-tna-min:hover { background: var(--success); color: #000; }
 
-        /* Estilos específicos para las celdas de TNA en esta tabla */
-        .tna-clientes {
-            font-weight: bold;
-            color: #4f4;
-            font-size: 1.1em;
-            text-align: right !important;
-        }
-        .tna-no-clientes {
-            color: var(--contraste-fuerte);
-            font-size: 1.0em;
-            text-align: right !important;
-        }
-        .rate-cell-single {
-            white-space: nowrap;
+        /* Separador de Sección */
+        .section-divider {
+            background: #1a1a1a; color: #666; font-size: 0.75rem;
+            text-align: center; padding: 10px; text-transform: uppercase;
+            letter-spacing: 1px; font-weight: bold;
         }
 
+        /* Logos y Tasas */
+        .bank-logo { width: 32px; height: 32px; object-fit: contain; margin-right: 15px; }
+        .tna-principal { color: var(--success); font-weight: bold; font-size: 1.4rem; }
 
-        /* ------------------------------------------- */
-        /* MEDIA QUERIES PARA MÓVILES */
-        /* ------------------------------------------- */
         @media (max-width: 600px) {
-
-            .main-nav {
-                flex-direction: row;
-                flex-wrap: wrap;
-                padding: 5px 0;
-            }
-            .main-nav .nav-item {
-                margin: 2px 5px;
-                text-align: center;
-                flex-grow: 1;
-            }
-
-            .controls-and-status {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 5px;
-            }
-            #refreshButton {
-                width: 100%;
-            }
-            .status {
-                text-align: center;
-                padding-left: 0;
-            }
-
-            table { min-width: 400px; }
-
-            th, td { padding: 8px 4px; font-size: 0.8rem; }
-            .platform-logo { width: 20px; height: 20px; }
-
-            .tna-clientes, .tna-no-clientes {
-                font-size: 0.9em;
-            }
-
-            /* Ajuste de encabezados en móvil */
-            .table-container th:nth-child(3),
-            .table-container th:nth-child(4) {
-                 font-size: 0.7em;
-            }
+            table { min-width: 100%; }
         }
     </style>
 </head>
 <body>
 
 <script src="modern-navigation.js"></script>
+
 <main>
     <nav class="main-nav">
         <a href="tasas.html" class="nav-item">Bancos Digitales</a>
         <a href="plazo-fijo.html" class="nav-item current-page">Plazo Fijo</a>
-    
     </nav>
-    <h1 class="page-title">Plazo Fijo - Tasas de Bancos</h1>
+    <h1 class="page-title">Tasas de Plazo Fijo</h1>
 </main>
-    
+
 <div class="container">
     <div class="controls-and-status">
-        <button id="refreshButton" onclick="fetchData(true)">🔄 Actualizar Tasas</button>
-        <div class="status">
-            Última actualización (Local): <span id="last-update">Cargando...</span> | Próximo refresco: <span id="next-refresh"></span>
-        </div>
+        <button id="refreshButton" onclick="fetchData(true)">🔄 Actualizar Datos</button>
+        <div class="status">Sincronizado: <span id="last-update">...</span></div>
     </div>
 
     <div class="table-container">
         <table id="rates-table">
             <thead>
                 <tr>
-                    <th style="width: 5%;"></th>
                     <th style="width: 50%;">Entidad</th>
-                    <th style="width: 25%; text-align: center;">TNA Clientes</th>
-                    <th style="width: 20%; text-align: center;">TNA No Clientes</th>
+                    <th style="width: 25%;">TNA Clientes</th>
+                    <th style="width: 25%;">No Clientes</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td colspan="4" style="text-align:center;">Cargando datos...</td></tr>
+                <tr><td colspan="3" style="text-align:center; padding: 40px;">Cargando bancos...</td></tr>
             </tbody>
         </table>
     </div>
 </div>
 
-<script src="shared-scripts.js"></script>
+<div id="conditionsModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle" style="margin:0; color:var(--success);">Detalles</h3>
+            <button onclick="closeModal()" class="close-btn">&times;</button>
+        </div>
+        <div id="modalBody" style="color: #ccc; padding: 20px 0;"></div>
+    </div>
+</div>
+
 <script>
-    // Usamos el proxy para evitar problemas de CORS
-    const TARGET_API_URL = 'https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo';
-    const PROXY_API_URL = `https://corsproxy.io/?${TARGET_API_URL}`;
+    const API_URL = 'https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo';
+    const PROXY = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
 
-    const REFRESH_INTERVAL_MS = 10 * 60 * 1000; // 10 minutos
+    function openModal(nombre, contenido) {
+        document.getElementById('modalTitle').textContent = nombre;
+        document.getElementById('modalBody').innerHTML = contenido;
+        document.getElementById('conditionsModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
 
-    const tableBody = document.querySelector('#rates-table tbody');
-    const lastUpdateSpan = document.getElementById('last-update');
-    const nextRefreshSpan = document.getElementById('next-refresh');
-    const refreshButton = document.getElementById('refreshButton');
+    function closeModal() {
+        document.getElementById('conditionsModal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
 
-    /** FUNCIÓN CORREGIDA: Formatea el valor numérico (decimal) como porcentaje. */
-    const formatPercentage = (value) => {
-        if (value === null || value === undefined || isNaN(parseFloat(value))) return '-';
-
-        // Multiplicamos por 100 para convertir el decimal a porcentaje
-        const percentageValue = parseFloat(value) * 100;
-
-        return percentageValue.toLocaleString('es-AR', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }) + '%';
-    };
-
-    /** Formatea la hora actual para el indicador de actualización. */
-    const formatLocalTime = () => {
-        const date = new Date();
-        return date.toLocaleTimeString('es-AR', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        });
-    };
+    window.onclick = (e) => { if (e.target.id === 'conditionsModal') closeModal(); }
 
     async function fetchData(manual = false) {
+        const refreshButton = document.getElementById('refreshButton');
+        const lastUpdateSpan = document.getElementById('last-update');
+        const tableBody = document.querySelector('#rates-table tbody');
+
         refreshButton.disabled = true;
-        lastUpdateSpan.className = '';
-        lastUpdateSpan.textContent = manual ? 'Refrescando manualmente...' : 'Actualizando...';
+        if(manual) lastUpdateSpan.textContent = 'Actualizando...';
 
         try {
-            const response = await fetch(PROXY_API_URL);
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}.`);
-            }
+            const response = await fetch(PROXY(API_URL));
+            const data = await response.json();
 
-            const ratesData = await response.json();
+            // 1. Separar Grupos
+            const conClientes = data.filter(item => item.tnaClientes > 0);
+            const soloNoClientes = data.filter(item => (!item.tnaClientes || item.tnaClientes == 0) && item.tnaNoClientes > 0);
 
-            if (!Array.isArray(ratesData) || ratesData.length === 0) {
-                 tableBody.innerHTML = '<tr><td colspan="4" class="no-data">⚠️ La API devolvió cero entidades válidas. Intente actualizar más tarde.</td></tr>';
-                 lastUpdateSpan.textContent = formatLocalTime();
-                 lastUpdateSpan.className = 'error-message';
-                 return;
-            }
-
-            // Implementación del ordenamiento (Mayor a Menor TNA Clientes)
-            ratesData.sort((a, b) => {
-                const tnaA = parseFloat(a.tnaClientes) || 0;
-                const tnaB = parseFloat(b.tnaClientes) || 0;
-                return tnaB - tnaA;
-            });
+            conClientes.sort((a, b) => b.tnaClientes - a.tnaClientes);
+            soloNoClientes.sort((a, b) => b.tnaNoClientes - a.tnaNoClientes);
 
             tableBody.innerHTML = '';
 
-            ratesData.forEach(item => {
-                const row = tableBody.insertRow();
-                row.className = 'platform-row';
+            // 2. Render Grupo Principal
+            renderRows(conClientes, tableBody);
 
-                // Celda 1: Logo
-                row.insertCell().innerHTML = `<img src="${item.logo}" alt="${item.entidad} logo" class="platform-logo" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGNsYXNzPSJsdWNpZGUgbXVzZXVtLWhvbWUiPjxwYXRoIGQ9Ik02IDIzVjEzIi8+PHBhdGgGZGl0c2E9Ik0xMiAyM1YxMyIvPjxwYXRoIGQ9Ik0xOCAyM1YxMyIvPjxwYXRoIGQ9Ik0yIDZIMThBNC00LTAtMC0xIDQgMTAgVjIySDIiLz48cGF0aCBkPSJNMiAxNnI0LjUgMyA5IDAtNC41LTMgOSAwbDIuNS02LjVjLjktMi4zLTItMy42LTMuNC0xLjFsLTItMS42Yy0xLjQtMS4xLTMuNi0xLjEtNSAwLjlsLTYgNC44Ii8+PC9wYXRoPjwvc3ZnPg=='" />`;
+            // 3. Render Grupo No Clientes (Break)
+            if (soloNoClientes.length > 0) {
+                const divider = tableBody.insertRow();
+                divider.innerHTML = `<td colspan="3" class="section-divider">Tasas para No Clientes</td>`;
+                renderRows(soloNoClientes, tableBody);
+            }
 
-                // Celda 2: Entidad
-                row.insertCell().innerHTML = `<strong>${item.entidad}</strong>`;
-
-                // Celda 3: TNA Clientes (Principal)
-                const tnaClientesCell = row.insertCell();
-                tnaClientesCell.className = 'rate-cell-single tna-clientes';
-                tnaClientesCell.textContent = formatPercentage(item.tnaClientes);
-
-                // Celda 4: TNA No Clientes
-                const tnaNoClientesCell = row.insertCell();
-                tnaNoClientesCell.className = 'rate-cell-single tna-no-clientes';
-                tnaNoClientesCell.textContent = formatPercentage(item.tnaNoClientes);
-            });
-
-            // Usamos la hora local para la actualización ya que la API no proporciona un campo
-            lastUpdateSpan.textContent = formatLocalTime();
+            lastUpdateSpan.textContent = new Date().toLocaleTimeString();
             lastUpdateSpan.className = 'success-message';
-
         } catch (error) {
-            console.error('ERROR CRÍTICO en la carga/procesamiento de datos:', error);
-            lastUpdateSpan.textContent = `❌ ERROR CRÍTICO: Falló la conexión o el formato de datos de la API.`;
-            lastUpdateSpan.className = 'error-message';
-            tableBody.innerHTML = `<tr><td colspan="4" style="color: var(--error); text-align: center; padding: 20px;">Error al cargar los datos. Revisa la Consola. Mensaje: ${error.message}</td></tr>`;
+            console.error(error);
+            lastUpdateSpan.textContent = '❌ Error';
         } finally {
             refreshButton.disabled = false;
         }
     }
 
-    function iniciarRefrescoAutomatico() {
-        fetchData();
-        setInterval(() => fetchData(false), REFRESH_INTERVAL_MS);
+    function renderRows(items, container) {
+        items.forEach(item => {
+            const row = container.insertRow();
+            row.className = 'platform-row';
 
-        const updateNextRefreshTime = () => {
-            const nextTime = new Date(new Date().getTime() + REFRESH_INTERVAL_MS);
-            nextRefreshSpan.textContent = nextTime.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-        };
+            const valCli = item.tnaClientes ? (item.tnaClientes * 100).toFixed(2) : null;
+            const valNoCli = item.tnaNoClientes ? (item.tnaNoClientes * 100).toFixed(2) : null;
 
-        setInterval(updateNextRefreshTime, 60000);
-        updateNextRefreshTime();
+            // Col 1: Logo + Nombre
+            const logoHtml = item.logo ? `<img src="${item.logo}" class="bank-logo" onerror="this.style.display='none'">` : '🏦 ';
+            row.insertCell().innerHTML = `<div style="display:flex; align-items:center;">${logoHtml}<strong>${item.entidad}</strong></div>`;
+
+            // Col 2: TNA Clientes (Grande)
+            row.insertCell().innerHTML = `<div style="text-align: center;" class="tna-principal">${valCli ? valCli + '%' : '-'}</div>`;
+
+            // Col 3: No Clientes (Solo botón si es distinta y mayor a 0)
+            let cellNoCli = row.insertCell();
+            cellNoCli.style.textAlign = 'center';
+
+            if (valNoCli && item.tnaNoClientes > 0 && item.tnaNoClientes !== item.tnaClientes) {
+                const modalHtml = `<p style="color:#888; font-size:0.9rem; margin:0;">TNA No Clientes</p>
+                                   <p style="color:var(--success); font-size:2rem; font-weight:bold; margin:10px 0;">${valNoCli}%</p>`;
+
+                const btn = document.createElement('button');
+                btn.className = 'btn-tna-min';
+                btn.textContent = valNoCli + '%';
+                btn.onclick = () => openModal(item.entidad, modalHtml);
+                cellNoCli.appendChild(btn);
+            } else {
+                cellNoCli.innerHTML = `<span style="color:#333; font-size:0.8rem;">-</span>`;
+            }
+        });
     }
 
-    iniciarRefrescoAutomatico();
+    document.addEventListener('DOMContentLoaded', () => fetchData());
 </script>
-
 </body>
 </html>
