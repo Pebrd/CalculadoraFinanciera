@@ -297,8 +297,14 @@
 
 <script src="shared-scripts.js"></script>
 <script>
+        // Cambia estas líneas en tu <script> de tasas.html
     const TARGET_API_URL = 'https://space.tasas.ar/api/bancos-digitales?include_uri=1';
-    const PROXY_API_URL = `https://corsproxy.io/?${TARGET_API_URL}`;
+
+    // Opción A: Usando AllOrigins (Más estable actualmente)
+    const PROXY_API_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(TARGET_API_URL)}`;
+    
+    // Opción B: Si prefieres seguir con un formato similar al anterior
+    // const PROXY_API_URL = `https://thingproxy.freeboard.io/fetch/${TARGET_API_URL}`;
 
     const REFRESH_INTERVAL_MS = 10 * 60 * 1000; // 10 minutos
 
