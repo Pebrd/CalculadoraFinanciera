@@ -139,26 +139,23 @@
     const API_ARG_DATOS = 'https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/';
     const API_TASAS_AR = 'https://space.tasas.ar/api/bancos-digitales?include_uri=1';
 
-    // Lista de proxies para rotación (en orden de prioridad)
+    // Lista de proxies solo para Tasas.ar
     const PROXIES = [
         (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-        (url) => `https://thingproxy.freeboard.io/fetch/${url}`
+        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
     ];
 
-    // Función inteligente que intenta con varios proxies si uno falla
-    async function fetchWithFallback(url) {
+    // Función específica para Tasas.ar con rotación de proxy
+    async function fetchTasasAr(url) {
         for (let i = 0; i < PROXIES.length; i++) {
             try {
-                const response = await fetch(PROXIES[i](url), { 
-                    signal: AbortSignal.timeout(6000) // Timeout de 6s para no esperar de más
-                });
+                const response = await fetch(PROXIES[i](url), { signal: AbortSignal.timeout(5000) });
                 if (response.ok) return await response.json();
             } catch (err) {
-                console.warn(`Proxy ${i} falló para ${url}, reintentando con el siguiente...`);
+                console.warn(`Proxy ${i} falló para Tasas.ar, probando siguiente...`);
             }
         }
-        throw new Error("Todos los proxies fallaron");
+        throw new Error("No se pudo conectar con Tasas.ar");
     }
 
     async function fetchData(manual = false) {
@@ -167,18 +164,18 @@
         const refreshButton = document.getElementById('refreshButton');
 
         refreshButton.disabled = true;
-        if(manual) lastUpdateSpan.textContent = 'Sincronizando...';
+        if(manual) lastUpdateSpan.textContent = 'Actualizando...';
 
-        // Ejecutamos ambas sin que una bloquee a la otra (Settled)
+        // Lanzamos ambas. ArgentinaDatos va DIRECTO.
         const results = await Promise.allSettled([
-            fetchWithFallback(API_ARG_DATOS),
-            fetchWithFallback(API_TASAS_AR)
+            fetch(API_ARG_DATOS).then(r => r.json()),
+            fetchTasasAr(API_TASAS_AR)
         ]);
 
         let mergedData = [];
         let successCount = 0;
 
-        // Procesar ArgentinaDatos
+        // 1. Procesar ArgentinaDatos (Directo)
         if (results[0].status === 'fulfilled') {
             successCount++;
             results[0].value.forEach(item => {
@@ -189,17 +186,20 @@
                     fecha: item.fecha,
                     fechaLabel: 'Desde',
                     tope: item.tope,
-                    condiciones: item.condiciones
+                    condiciones: item.condiciones || ""
                 });
             });
+        } else {
+            console.error("Error cargando ArgentinaDatos (Directo):", results[0].reason);
         }
 
-        // Procesar Tasas.ar
+        // 2. Procesar Tasas.ar (Con Proxy)
         if (results[1].status === 'fulfilled') {
             successCount++;
             const res = results[1].value;
             res.data.forEach(item => {
                 const nombreNormalizado = item.name.toLowerCase();
+                // Evitar duplicados
                 if (!mergedData.some(d => d.nombre.toLowerCase().includes(nombreNormalizado))) {
                     mergedData.push({
                         nombre: item.name,
@@ -220,9 +220,9 @@
             lastUpdateSpan.textContent = `Sincronizado: ${new Date().toLocaleTimeString()} ${successCount < 2 ? '(Parcial)' : ''}`;
             lastUpdateSpan.className = 'success-message';
         } else {
-            lastUpdateSpan.textContent = '❌ Error de red persistente';
+            lastUpdateSpan.textContent = '❌ Error de conexión total';
             lastUpdateSpan.className = 'error-message';
-            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px;">Los servicios de datos están saturados. Reintenta en unos segundos.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px;">No se pudieron obtener datos. Reintenta en un momento.</td></tr>';
         }
         
         refreshButton.disabled = false;
@@ -245,8 +245,13 @@
                 </div>`;
 
             const formatTope = (t) => t && t > 0 ? `$${Number(t).toLocaleString('es-AR')}` : 'Sin tope';
+            
+            // Sanitización de strings para el modal
+            const nombreSafe = item.nombre.replace(/'/g, "\\'");
+            const condSafe = item.condiciones.replace(/'/g, "\\'").replace(/\n/g, "<br>");
+
             const btn = (item.condiciones && item.condiciones.length > 5) ? 
-                `<button class="btn-condiciones" onclick="openModal('${item.nombre.replace(/'/g, "\\'")}', '${item.condiciones.replace(/'/g, "\\'")}')">Detalles</button>` : '';
+                `<button class="btn-condiciones" onclick="openModal('${nombreSafe}', '${condSafe}')">Detalles</button>` : '';
 
             row.insertCell().innerHTML = `
                 <div style="display:flex; flex-direction:column; align-items:flex-start;">
