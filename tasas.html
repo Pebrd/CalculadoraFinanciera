@@ -139,7 +139,6 @@
     const API_ARG_DATOS = 'https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/';
     const API_TASAS_AR = 'https://space.tasas.ar/api/bancos-digitales?include_uri=1';
 
-    // Usamos proxys para evitar errores de CORS y 403
     const PROXY_ALLORIGINS = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
     const PROXY_CORSPROXY = (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`;
 
@@ -147,131 +146,113 @@
     const lastUpdateSpan = document.getElementById('last-update');
     const refreshButton = document.getElementById('refreshButton');
 
-    function openModal(nombre, condiciones) {
-        document.getElementById('modalTitle').textContent = nombre;
-        document.getElementById('modalBody').innerHTML = `<p>${condiciones}</p>`;
-        document.getElementById('conditionsModal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        document.getElementById('conditionsModal').style.display = 'none';
-        document.body.style.overflow = '';
-    }
-
-    window.onclick = function(event) {
-        const modal = document.getElementById('conditionsModal');
-        if (event.target == modal) closeModal();
-    }
-
-    const formatMaxAmount = (value) => {
-        if (!value || isNaN(parseFloat(value)) || value == 0) return 'Ilimitado';
-        return parseFloat(value).toLocaleString('es-AR', {
-            style: 'currency', currency: 'ARS', minimumFractionDigits: 0
-        });
-    };
-
     async function fetchData(manual = false) {
         refreshButton.disabled = true;
         if(manual) lastUpdateSpan.textContent = 'Sincronizando...';
 
         try {
-            // Llamada paralela a ambas APIs
-            const [resArg, resTasas] = await Promise.all([
+            // Promise.allSettled evita que el error de una API detenga a la otra
+            const results = await Promise.allSettled([
                 fetch(PROXY_ALLORIGINS(API_ARG_DATOS)).then(r => r.json()),
                 fetch(PROXY_CORSPROXY(API_TASAS_AR)).then(r => r.json())
             ]);
 
             let mergedData = [];
+            let sourcesFailed = 0;
 
-            // 1. Procesar ArgentinaDatos
-            resArg.forEach(item => {
-                mergedData.push({
-                    nombre: item.fondo,
-                    tna: parseFloat(item.tna) * 100,
-                    tea: parseFloat(item.tea) * 100,
-                    fecha: item.fecha,
-                    fechaLabel: 'Tasa vigente desde',
-                    tope: item.tope,
-                    condiciones: item.condiciones,
-                    source: 'arg'
-                });
-            });
-
-            // 2. Procesar Tasas.ar (Filtramos Ualá y duplicados)
-            resTasas.data.forEach(item => {
-                const nombreLimpio = item.name.toLowerCase();
-
-                // SACAR A UALÁ DE ESTA API
-                if (nombreLimpio.includes('uala')) return;
-
-                // Evitar duplicados si ya existen por la API anterior
-                const exists = mergedData.some(d => d.nombre.toLowerCase().includes(nombreLimpio));
-
-                if (!exists) {
+            // Procesar ArgentinaDatos (Result index 0)
+            if (results[0].status === 'fulfilled') {
+                results[0].value.forEach(item => {
                     mergedData.push({
-                        nombre: item.name,
-                        tna: parseFloat(item.tna),
-                        tea: item.tea ? parseFloat(item.tea) : null,
-                        fecha: resTasas.last_updated.split('T')[0],
-                        fechaLabel: 'Última actualización',
-                        tope: item.maxAmount,
-                        condiciones: item.tna_conditions && item.tna_conditions.length > 0 ? item.tna_conditions[0].description : "",
-                        source: 'tasas'
+                        nombre: item.fondo,
+                        tna: parseFloat(item.tna) * 100,
+                        tea: parseFloat(item.tea) * 100,
+                        fecha: item.fecha,
+                        fechaLabel: 'Tasa vigente desde',
+                        tope: item.tope,
+                        condiciones: item.condiciones,
+                        source: 'arg'
                     });
-                }
-            });
+                });
+            } else {
+                console.warn('Fallo ArgentinaDatos:', results[0].reason);
+                sourcesFailed++;
+            }
 
-            // Ordenar por TNA de mayor a menor
+            // Procesar Tasas.ar (Result index 1)
+            if (results[1].status === 'fulfilled') {
+                const resTasas = results[1].value;
+                resTasas.data.forEach(item => {
+                    const nombreLimpio = item.name.toLowerCase();
+                    if (nombreLimpio.includes('uala')) return;
+
+                    const exists = mergedData.some(d => d.nombre.toLowerCase().includes(nombreLimpio));
+                    if (!exists) {
+                        mergedData.push({
+                            nombre: item.name,
+                            tna: parseFloat(item.tna),
+                            tea: item.tea ? parseFloat(item.tea) : null,
+                            fecha: resTasas.last_updated.split('T')[0],
+                            fechaLabel: 'Última actualización',
+                            tope: item.maxAmount,
+                            condiciones: item.tna_conditions?.length > 0 ? item.tna_conditions[0].description : "",
+                            source: 'tasas'
+                        });
+                    }
+                });
+            } else {
+                console.warn('Fallo Tasas.ar:', results[1].reason);
+                sourcesFailed++;
+            }
+
+            if (mergedData.length === 0) throw new Error("Ninguna fuente disponible");
+
             mergedData.sort((a, b) => b.tna - a.tna);
+            renderTable(mergedData);
 
-            tableBody.innerHTML = '';
-
-            mergedData.forEach(item => {
-                const row = tableBody.insertRow();
-                row.className = 'platform-row';
-
-                // Col 1: Nombre
-                row.insertCell().innerHTML = `<strong>${item.nombre}</strong>`;
-
-                // Col 2: Fecha con Label dinámico
-                row.insertCell().innerHTML = `
-                    <span class="date-label">${item.fechaLabel}</span>
-                    <span style="font-size: 0.85rem;">${item.fecha}</span>
-                `;
-
-                // Col 3: Tasas
-                row.insertCell().innerHTML = `
-                    <div style="text-align: right;">
-                        <div style="color: var(--success); font-weight: bold; font-size: 1.1rem;">${item.tna.toFixed(2)}%</div>
-                        ${item.tea ? `<div style="color: #666; font-size: 0.75rem;">TEA: ${item.tea.toFixed(2)}%</div>` : ''}
-                    </div>
-                `;
-
-                // Col 4: Tope + Botón Modal condicional
-                let btnHtml = '';
-                if (item.condiciones && item.condiciones.trim() !== "" && item.condiciones !== "null") {
-                    btnHtml = `<button class="btn-condiciones" onclick="openModal('${item.nombre}', '${item.condiciones}')">Ver Detalles</button>`;
-                }
-
-                row.insertCell().innerHTML = `
-                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                        <span style="font-size: 0.75rem; color: #888;">Tope: ${formatMaxAmount(item.tope)}</span>
-                        ${btnHtml}
-                    </div>
-                `;
-            });
-
-            lastUpdateSpan.textContent = new Date().toLocaleTimeString();
-            lastUpdateSpan.className = 'success-message';
+            lastUpdateSpan.textContent = (sourcesFailed > 0) ? 
+                `${new Date().toLocaleTimeString()} (Fuentes parciales)` : 
+                new Date().toLocaleTimeString();
+            lastUpdateSpan.className = (sourcesFailed > 0) ? 'error-message' : 'success-message';
 
         } catch (error) {
             console.error('Error:', error);
-            lastUpdateSpan.textContent = '❌ Error de sincronización';
+            lastUpdateSpan.textContent = '❌ Error de conexión total';
             lastUpdateSpan.className = 'error-message';
         } finally {
             refreshButton.disabled = false;
         }
+    }
+
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+        data.forEach(item => {
+            const row = tableBody.insertRow();
+            row.className = 'platform-row';
+
+            row.insertCell().innerHTML = `<strong>${item.nombre}</strong>`;
+            row.insertCell().innerHTML = `
+                <span class="date-label">${item.fechaLabel}</span>
+                <span style="font-size: 0.85rem;">${item.fecha}</span>
+            `;
+
+            row.insertCell().innerHTML = `
+                <div style="text-align: right;">
+                    <div style="color: var(--success); font-weight: bold; font-size: 1.1rem;">${item.tna.toFixed(2)}%</div>
+                    ${item.tea ? `<div style="color: #666; font-size: 0.75rem;">TEA: ${item.tea.toFixed(2)}%</div>` : ''}
+                </div>
+            `;
+
+            let btnHtml = (item.condiciones && item.condiciones !== "null") ? 
+                `<button class="btn-condiciones" onclick="openModal('${item.nombre}', '${item.condiciones.replace(/'/g, "\\'")}')">Detalles</button>` : '';
+
+            row.insertCell().innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <span style="font-size: 0.75rem; color: #888;">Tope: ${formatMaxAmount(item.tope)}</span>
+                    ${btnHtml}
+                </div>
+            `;
+        });
     }
 
     document.addEventListener('DOMContentLoaded', () => fetchData());
