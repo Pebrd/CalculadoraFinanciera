@@ -139,8 +139,27 @@
     const API_ARG_DATOS = 'https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/';
     const API_TASAS_AR = 'https://space.tasas.ar/api/bancos-digitales?include_uri=1';
 
-    // Usamos corsproxy.io que suele ser más estable para estas APIs
-    const PROXY = (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`;
+    // Lista de proxies para rotación (en orden de prioridad)
+    const PROXIES = [
+        (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        (url) => `https://thingproxy.freeboard.io/fetch/${url}`
+    ];
+
+    // Función inteligente que intenta con varios proxies si uno falla
+    async function fetchWithFallback(url) {
+        for (let i = 0; i < PROXIES.length; i++) {
+            try {
+                const response = await fetch(PROXIES[i](url), { 
+                    signal: AbortSignal.timeout(6000) // Timeout de 6s para no esperar de más
+                });
+                if (response.ok) return await response.json();
+            } catch (err) {
+                console.warn(`Proxy ${i} falló para ${url}, reintentando con el siguiente...`);
+            }
+        }
+        throw new Error("Todos los proxies fallaron");
+    }
 
     async function fetchData(manual = false) {
         const tableBody = document.querySelector('#rates-table tbody');
@@ -150,16 +169,16 @@
         refreshButton.disabled = true;
         if(manual) lastUpdateSpan.textContent = 'Sincronizando...';
 
-        // Intentamos ambas peticiones en paralelo
+        // Ejecutamos ambas sin que una bloquee a la otra (Settled)
         const results = await Promise.allSettled([
-            fetch(PROXY(API_ARG_DATOS)).then(r => { if(!r.ok) throw r; return r.json() }),
-            fetch(PROXY(API_TASAS_AR)).then(r => { if(!r.ok) throw r; return r.json() })
+            fetchWithFallback(API_ARG_DATOS),
+            fetchWithFallback(API_TASAS_AR)
         ]);
 
         let mergedData = [];
         let successCount = 0;
 
-        // 1. Procesar ArgentinaDatos
+        // Procesar ArgentinaDatos
         if (results[0].status === 'fulfilled') {
             successCount++;
             results[0].value.forEach(item => {
@@ -175,13 +194,12 @@
             });
         }
 
-        // 2. Procesar Tasas.ar
+        // Procesar Tasas.ar
         if (results[1].status === 'fulfilled') {
             successCount++;
             const res = results[1].value;
             res.data.forEach(item => {
                 const nombreNormalizado = item.name.toLowerCase();
-                // Evitamos duplicados si ya vino de la primera API
                 if (!mergedData.some(d => d.nombre.toLowerCase().includes(nombreNormalizado))) {
                     mergedData.push({
                         nombre: item.name,
@@ -196,19 +214,15 @@
             });
         }
 
-        // Si al menos una funcionó, mostramos los datos
         if (mergedData.length > 0) {
             mergedData.sort((a, b) => b.tna - a.tna);
             renderTable(mergedData);
-            lastUpdateSpan.textContent = successCount < 2 ? 
-                `Actualizado (${new Date().toLocaleTimeString()} - Parcial)` : 
-                new Date().toLocaleTimeString();
+            lastUpdateSpan.textContent = `Sincronizado: ${new Date().toLocaleTimeString()} ${successCount < 2 ? '(Parcial)' : ''}`;
             lastUpdateSpan.className = 'success-message';
         } else {
-            // Solo aquí mostramos el error total
-            lastUpdateSpan.textContent = '❌ Error: Proxies saturados. Reintenta.';
+            lastUpdateSpan.textContent = '❌ Error de red persistente';
             lastUpdateSpan.className = 'error-message';
-            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px;">No se pudieron obtener datos. Por favor, refresca la página.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px;">Los servicios de datos están saturados. Reintenta en unos segundos.</td></tr>';
         }
         
         refreshButton.disabled = false;
