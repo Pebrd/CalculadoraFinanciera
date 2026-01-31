@@ -139,119 +139,106 @@
     const API_ARG_DATOS = 'https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/';
     const API_TASAS_AR = 'https://space.tasas.ar/api/bancos-digitales?include_uri=1';
 
-    const PROXY_ALLORIGINS = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-    const PROXY_CORSPROXY = (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`;
-
-    const tableBody = document.querySelector('#rates-table tbody');
-    const lastUpdateSpan = document.getElementById('last-update');
-    const refreshButton = document.getElementById('refreshButton');
+    // Usamos corsproxy.io que suele ser más estable para estas APIs
+    const PROXY = (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`;
 
     async function fetchData(manual = false) {
+        const tableBody = document.querySelector('#rates-table tbody');
+        const lastUpdateSpan = document.getElementById('last-update');
+        const refreshButton = document.getElementById('refreshButton');
+
         refreshButton.disabled = true;
         if(manual) lastUpdateSpan.textContent = 'Sincronizando...';
 
-        try {
-            // Promise.allSettled evita que el error de una API detenga a la otra
-            const results = await Promise.allSettled([
-                fetch(PROXY_ALLORIGINS(API_ARG_DATOS)).then(r => r.json()),
-                fetch(PROXY_CORSPROXY(API_TASAS_AR)).then(r => r.json())
-            ]);
+        // Intentamos ambas peticiones en paralelo
+        const results = await Promise.allSettled([
+            fetch(PROXY(API_ARG_DATOS)).then(r => { if(!r.ok) throw r; return r.json() }),
+            fetch(PROXY(API_TASAS_AR)).then(r => { if(!r.ok) throw r; return r.json() })
+        ]);
 
-            let mergedData = [];
-            let sourcesFailed = 0;
+        let mergedData = [];
+        let successCount = 0;
 
-            // Procesar ArgentinaDatos (Result index 0)
-            if (results[0].status === 'fulfilled') {
-                results[0].value.forEach(item => {
+        // 1. Procesar ArgentinaDatos
+        if (results[0].status === 'fulfilled') {
+            successCount++;
+            results[0].value.forEach(item => {
+                mergedData.push({
+                    nombre: item.fondo,
+                    tna: parseFloat(item.tna) * 100,
+                    tea: item.tea ? parseFloat(item.tea) * 100 : null,
+                    fecha: item.fecha,
+                    fechaLabel: 'Desde',
+                    tope: item.tope,
+                    condiciones: item.condiciones
+                });
+            });
+        }
+
+        // 2. Procesar Tasas.ar
+        if (results[1].status === 'fulfilled') {
+            successCount++;
+            const res = results[1].value;
+            res.data.forEach(item => {
+                const nombreNormalizado = item.name.toLowerCase();
+                // Evitamos duplicados si ya vino de la primera API
+                if (!mergedData.some(d => d.nombre.toLowerCase().includes(nombreNormalizado))) {
                     mergedData.push({
-                        nombre: item.fondo,
-                        tna: parseFloat(item.tna) * 100,
-                        tea: parseFloat(item.tea) * 100,
-                        fecha: item.fecha,
-                        fechaLabel: 'Tasa vigente desde',
-                        tope: item.tope,
-                        condiciones: item.condiciones,
-                        source: 'arg'
+                        nombre: item.name,
+                        tna: parseFloat(item.tna),
+                        tea: item.tea ? parseFloat(item.tea) : null,
+                        fecha: res.last_updated ? res.last_updated.split('T')[0] : 'Hoy',
+                        fechaLabel: 'Act.',
+                        tope: item.maxAmount,
+                        condiciones: item.tna_conditions?.[0]?.description || ""
                     });
-                });
-            } else {
-                console.warn('Fallo ArgentinaDatos:', results[0].reason);
-                sourcesFailed++;
-            }
+                }
+            });
+        }
 
-            // Procesar Tasas.ar (Result index 1)
-            if (results[1].status === 'fulfilled') {
-                const resTasas = results[1].value;
-                resTasas.data.forEach(item => {
-                    const nombreLimpio = item.name.toLowerCase();
-                    if (nombreLimpio.includes('uala')) return;
-
-                    const exists = mergedData.some(d => d.nombre.toLowerCase().includes(nombreLimpio));
-                    if (!exists) {
-                        mergedData.push({
-                            nombre: item.name,
-                            tna: parseFloat(item.tna),
-                            tea: item.tea ? parseFloat(item.tea) : null,
-                            fecha: resTasas.last_updated.split('T')[0],
-                            fechaLabel: 'Última actualización',
-                            tope: item.maxAmount,
-                            condiciones: item.tna_conditions?.length > 0 ? item.tna_conditions[0].description : "",
-                            source: 'tasas'
-                        });
-                    }
-                });
-            } else {
-                console.warn('Fallo Tasas.ar:', results[1].reason);
-                sourcesFailed++;
-            }
-
-            if (mergedData.length === 0) throw new Error("Ninguna fuente disponible");
-
+        // Si al menos una funcionó, mostramos los datos
+        if (mergedData.length > 0) {
             mergedData.sort((a, b) => b.tna - a.tna);
             renderTable(mergedData);
-
-            lastUpdateSpan.textContent = (sourcesFailed > 0) ? 
-                `${new Date().toLocaleTimeString()} (Fuentes parciales)` : 
+            lastUpdateSpan.textContent = successCount < 2 ? 
+                `Actualizado (${new Date().toLocaleTimeString()} - Parcial)` : 
                 new Date().toLocaleTimeString();
-            lastUpdateSpan.className = (sourcesFailed > 0) ? 'error-message' : 'success-message';
-
-        } catch (error) {
-            console.error('Error:', error);
-            lastUpdateSpan.textContent = '❌ Error de conexión total';
+            lastUpdateSpan.className = 'success-message';
+        } else {
+            // Solo aquí mostramos el error total
+            lastUpdateSpan.textContent = '❌ Error: Proxies saturados. Reintenta.';
             lastUpdateSpan.className = 'error-message';
-        } finally {
-            refreshButton.disabled = false;
+            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px;">No se pudieron obtener datos. Por favor, refresca la página.</td></tr>';
         }
+        
+        refreshButton.disabled = false;
     }
 
     function renderTable(data) {
+        const tableBody = document.querySelector('#rates-table tbody');
         tableBody.innerHTML = '';
         data.forEach(item => {
             const row = tableBody.insertRow();
             row.className = 'platform-row';
-
+            
             row.insertCell().innerHTML = `<strong>${item.nombre}</strong>`;
+            row.insertCell().innerHTML = `<span style="font-size:0.75rem; color:#666;">${item.fechaLabel}:</span><br><span style="font-size:0.8rem;">${item.fecha}</span>`;
+            
             row.insertCell().innerHTML = `
-                <span class="date-label">${item.fechaLabel}</span>
-                <span style="font-size: 0.85rem;">${item.fecha}</span>
-            `;
+                <div style="text-align:right;">
+                    <div style="color:var(--success); font-weight:bold; font-size:1.1rem;">${item.tna.toFixed(2)}%</div>
+                    ${item.tea ? `<div style="color:#555; font-size:0.7rem;">TEA: ${item.tea.toFixed(2)}%</div>` : ''}
+                </div>`;
+
+            const formatTope = (t) => t && t > 0 ? `$${Number(t).toLocaleString('es-AR')}` : 'Sin tope';
+            const btn = (item.condiciones && item.condiciones.length > 5) ? 
+                `<button class="btn-condiciones" onclick="openModal('${item.nombre.replace(/'/g, "\\'")}', '${item.condiciones.replace(/'/g, "\\'")}')">Detalles</button>` : '';
 
             row.insertCell().innerHTML = `
-                <div style="text-align: right;">
-                    <div style="color: var(--success); font-weight: bold; font-size: 1.1rem;">${item.tna.toFixed(2)}%</div>
-                    ${item.tea ? `<div style="color: #666; font-size: 0.75rem;">TEA: ${item.tea.toFixed(2)}%</div>` : ''}
-                </div>
-            `;
-
-            let btnHtml = (item.condiciones && item.condiciones !== "null") ? 
-                `<button class="btn-condiciones" onclick="openModal('${item.nombre}', '${item.condiciones.replace(/'/g, "\\'")}')">Detalles</button>` : '';
-
-            row.insertCell().innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <span style="font-size: 0.75rem; color: #888;">Tope: ${formatMaxAmount(item.tope)}</span>
-                    ${btnHtml}
-                </div>
-            `;
+                <div style="display:flex; flex-direction:column; align-items:flex-start;">
+                    <span style="font-size:0.7rem; color:#777;">Tope: ${formatTope(item.tope)}</span>
+                    ${btn}
+                </div>`;
         });
     }
 
