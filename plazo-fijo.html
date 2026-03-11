@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plazo Fijo - Pampa Finance</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        .container {
+            max-width: 900px;
+            background: #111;
+            border: 1px solid #222;
+            box-shadow: 0 0 12px rgba(0, 212, 170, 0.05) inset;
+        }
+
+        .main-nav {
+            display: flex; justify-content: center; margin-bottom: 20px;
+            padding: 5px 0; background-color: #000; border-bottom: 1px solid #333; gap: 5px;
+        }
+
+        .main-nav .nav-item {
+            color: #999; text-decoration: none; padding: 8px 15px;
+            border-bottom: 2px solid transparent; transition: all 0.2s; font-size: 0.9em;
+        }
+
+        .main-nav .current-page { color: var(--success); border-bottom-color: var(--success); font-weight: bold; }
+
+        /* --- ESTILOS DEL MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center; z-index: 3000;
+        }
+
+        .modal-content {
+            background: #151515; border: 1px solid var(--success); padding: 25px;
+            max-width: 400px; width: 85%; box-shadow: 0 0 40px rgba(0, 212, 170, 0.15);
+            animation: modalIn 0.3s ease-out;
+            text-align: center;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .close-btn { background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; }
+
+        /* Botón TNA No Clientes Minimalista */
+        .btn-tna-min {
+            padding: 4px 10px; font-size: 0.8rem; background: #222; border: 1px solid #444;
+            color: var(--success); cursor: pointer; transition: all 0.2s;
+            font-weight: bold; border-radius: 4px;
+        }
+        .btn-tna-min:hover { background: var(--success); color: #000; }
+
+        /* Separador de Sección */
+        .section-divider {
+            background: #1a1a1a; color: #666; font-size: 0.75rem;
+            text-align: center; padding: 10px; text-transform: uppercase;
+            letter-spacing: 1px; font-weight: bold;
+        }
+
+        /* Logos y Tasas */
+        .bank-logo { width: 32px; height: 32px; object-fit: contain; margin-right: 15px; }
+        .tna-principal { color: var(--success); font-weight: bold; font-size: 1.4rem; }
+
+        @media (max-width: 600px) {
+            table { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<script src="modern-navigation.js"></script>
+
+<main>
+    <nav class="main-nav">
+        <a href="tasas.html" class="nav-item">Bancos Digitales</a>
+        <a href="plazo-fijo.html" class="nav-item current-page">Plazo Fijo</a>
+    </nav>
+    <h1 class="page-title">Tasas de Plazo Fijo</h1>
+</main>
+
+<div class="container">
+    <div class="controls-and-status">
+        <button id="refreshButton" onclick="fetchData(true)">🔄 Actualizar Datos</button>
+        <div class="status">Sincronizado: <span id="last-update">...</span></div>
+    </div>
+
+    <div class="table-container">
+        <table id="rates-table">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">Entidad</th>
+                    <th style="width: 25%;">TNA Clientes</th>
+                    <th style="width: 25%;">No Clientes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="3" style="text-align:center; padding: 40px;">Cargando bancos...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="conditionsModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle" style="margin:0; color:var(--success);">Detalles</h3>
+            <button onclick="closeModal()" class="close-btn">&times;</button>
+        </div>
+        <div id="modalBody" style="color: #ccc; padding: 20px 0;"></div>
+    </div>
+</div>
+
+<script src="shared-scripts.js"></script>
+<script src="api-service.js"></script>
+<script>
+    function openModal(nombre, contenido) {
+        document.getElementById('modalTitle').textContent = nombre;
+        document.getElementById('modalBody').innerHTML = contenido;
+        document.getElementById('conditionsModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('conditionsModal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    window.onclick = (e) => { if (e.target.id === 'conditionsModal') closeModal(); }
+
+    async function fetchData(manual = false) {
+        const refreshButton = document.getElementById('refreshButton');
+        const lastUpdateSpan = document.getElementById('last-update');
+        const tableBody = document.querySelector('#rates-table tbody');
+
+        refreshButton.disabled = true;
+        if(manual) lastUpdateSpan.textContent = 'Actualizando...';
+
+        try {
+            // Usando ApiService para priorizar datos estáticos y fallback automático
+            const data = await ApiService.getSmartData('plazofijo', ApiService.URLS.ARG_DATOS_PF);
+
+            if (!data) throw new Error("No data received");
+
+            // 1. Separar Grupos
+            const conClientes = data.filter(item => item.tnaClientes > 0);
+            const soloNoClientes = data.filter(item => (!item.tnaClientes || item.tnaClientes == 0) && item.tnaNoClientes > 0);
+
+            conClientes.sort((a, b) => b.tnaClientes - a.tnaClientes);
+            soloNoClientes.sort((a, b) => b.tnaNoClientes - a.tnaNoClientes);
+
+            tableBody.innerHTML = '';
+
+            // 2. Render Grupo Principal
+            renderRows(conClientes, tableBody);
+
+            // 3. Render Grupo No Clientes (Break)
+            if (soloNoClientes.length > 0) {
+                const divider = tableBody.insertRow();
+                divider.innerHTML = `<td colspan="3" class="section-divider">Tasas para No Clientes</td>`;
+                renderRows(soloNoClientes, tableBody);
+            }
+
+            lastUpdateSpan.textContent = CalculadoraFinanciera.Formatters.time();
+            lastUpdateSpan.className = 'success-message';
+        } catch (error) {
+            console.error(error);
+            lastUpdateSpan.textContent = '❌ Error';
+        } finally {
+            refreshButton.disabled = false;
+        }
+    }
+
+    function renderRows(items, container) {
+        items.forEach(item => {
+            const row = container.insertRow();
+            row.className = 'platform-row';
+
+            const valCli = item.tnaClientes ? (item.tnaClientes * 100).toFixed(2) : null;
+            const valNoCli = item.tnaNoClientes ? (item.tnaNoClientes * 100).toFixed(2) : null;
+
+            // Col 1: Logo + Nombre
+            const logoHtml = item.logo ? `<img src="${item.logo}" class="bank-logo" onerror="this.style.display='none'">` : '🏦 ';
+            row.insertCell().innerHTML = `<div style="display:flex; align-items:center;">${logoHtml}<strong>${item.entidad}</strong></div>`;
+
+            // Col 2: TNA Clientes (Grande)
+            row.insertCell().innerHTML = `<div style="text-align: center;" class="tna-principal">${valCli ? valCli + '%' : '-'}</div>`;
+
+            // Col 3: No Clientes (Solo botón si es distinta y mayor a 0)
+            let cellNoCli = row.insertCell();
+            cellNoCli.style.textAlign = 'center';
+
+            if (valNoCli && item.tnaNoClientes > 0 && item.tnaNoClientes !== item.tnaClientes) {
+                const modalHtml = `<p style="color:#888; font-size:0.9rem; margin:0;">TNA No Clientes</p>
+                                   <p style="color:var(--success); font-size:2rem; font-weight:bold; margin:10px 0;">${valNoCli}%</p>`;
+
+                const btn = document.createElement('button');
+                btn.className = 'btn-tna-min';
+                btn.textContent = valNoCli + '%';
+                btn.onclick = () => openModal(item.entidad, modalHtml);
+                cellNoCli.appendChild(btn);
+            } else {
+                cellNoCli.innerHTML = `<span style="color:#333; font-size:0.8rem;">-</span>`;
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => fetchData());
+</script>
+</body>
+</html>

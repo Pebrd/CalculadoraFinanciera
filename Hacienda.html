@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacienda | Mercado de Cañuelas</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        .agro-widgets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .widget-card {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            padding: 10px;
+        }
+        .price-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .price-up { color: var(--success); background: var(--success-glow); }
+        .price-down { color: var(--error); background: var(--error-glow); }
+    </style>
+</head>
+<body>
+<script src="modern-navigation.js"></script>
+
+<main class="main-container">
+    <h1 class="page-title fade-in">Mercado de Hacienda</h1>
+
+    <!-- WIDGETS TRADINGVIEW -->
+    <div class="agro-widgets">
+        <div class="widget-card">
+            <div id="tv-soja"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+            { "symbol": "MATBAROFEX:SOJCONT", "colorTheme": "dark", "isTransparent": true, "width": "100%" }
+            </script>
+        </div>
+        <div class="widget-card">
+            <div id="tv-maiz"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+            { "symbol": "MATBAROFEX:MAICONT", "colorTheme": "dark", "isTransparent": true, "width": "100%" }
+            </script>
+        </div>
+        <div class="widget-card">
+            <div id="tv-trigo"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+            { "symbol": "MATBAROFEX:TRICONT", "colorTheme": "dark", "isTransparent": true, "width": "100%" }
+            </script>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="agro-pill-selector" style="margin-bottom: 0;">
+            <button id="btn-ars" class="agro-pill active">ARS</button>
+            <button id="btn-usd" class="agro-pill">USD (Oficial)</button>
+        </div>
+        <button id="refresh-hacienda" class="btn btn-primary">🔄 Actualizar Precios</button>
+    </div>
+
+    <div class="table-container">
+        <table id="hacienda-table">
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th class="text-right">Precio Hoy</th>
+                    <th class="text-right">Sem. Anterior</th>
+                    <th class="text-right">Cabezas</th>
+                    <th class="text-center">Tendencia</th>
+                </tr>
+            </thead>
+            <tbody id="hacienda-body">
+                <tr><td colspan="5" class="text-center">Cargando datos de Cañuelas...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script src="shared-scripts.js"></script>
+<script src="api-service.js"></script>
+<script>
+const HaciendaPage = {
+    isUSD: false,
+    rawData: [],
+
+    async init() {
+        this.bindEvents();
+        await this.load();
+    },
+
+    bindEvents() {
+        document.getElementById('refresh-hacienda').addEventListener('click', () => this.load());
+        document.getElementById('btn-ars').addEventListener('click', () => {
+            this.isUSD = false;
+            this.updateUI();
+        });
+        document.getElementById('btn-usd').addEventListener('click', () => {
+            this.isUSD = true;
+            this.updateUI();
+        });
+    },
+
+    async load() {
+        const btn = document.getElementById('refresh-hacienda');
+        btn.disabled = true;
+        try {
+            this.rawData = await ApiService.getHacienda();
+            this.render();
+        } catch (e) {
+            console.error(e);
+            document.getElementById('hacienda-body').innerHTML = '<tr><td colspan="5" class="error text-center">Error al conectar con la API de Hacienda</td></tr>';
+        } finally {
+            btn.disabled = false;
+        }
+    },
+
+    updateUI() {
+        document.getElementById('btn-ars').classList.toggle('active', !this.isUSD);
+        document.getElementById('btn-usd').classList.toggle('active', this.isUSD);
+        this.render();
+    },
+
+    render() {
+        const tbody = document.getElementById('hacienda-body');
+        if (!this.rawData || !this.rawData.length) return;
+
+        tbody.innerHTML = '';
+        this.rawData.forEach(item => {
+            const row = tbody.insertRow();
+            
+            const p1 = this.isUSD ? parseFloat(item.precio_semana_1_usd) : parseFloat(item.precio_semana_1);
+            const p2 = this.isUSD ? parseFloat(item.precio_semana_2_usd) : parseFloat(item.precio_semana_2);
+            const diff = p1 - p2;
+
+            row.insertCell().innerHTML = `<strong>${item.categoria}</strong>`;
+            
+            const cellPrice = row.insertCell();
+            cellPrice.className = 'text-right';
+            cellPrice.textContent = CalculadoraFinanciera.Formatters.currency(p1, this.isUSD ? 'USD' : 'ARS');
+
+            const cellPrev = row.insertCell();
+            cellPrev.className = 'text-right';
+            cellPrev.textContent = CalculadoraFinanciera.Formatters.currency(p2, this.isUSD ? 'USD' : 'ARS');
+
+            const cellCabezas = row.insertCell();
+            cellCabezas.className = 'text-right';
+            cellCabezas.textContent = item.cantidad_semana_1 || '-';
+
+            const cellTrend = row.insertCell();
+            cellTrend.className = 'text-center';
+            const trendClass = diff > 0 ? 'price-up' : (diff < 0 ? 'price-down' : '');
+            const icon = diff > 0 ? '▲' : (diff < 0 ? '▼' : '▬');
+            cellTrend.innerHTML = `<span class="price-badge ${trendClass}">${icon} ${Math.abs(diff).toFixed(2)}</span>`;
+        });
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => HaciendaPage.init());
+</script>
+</body>
+</html>

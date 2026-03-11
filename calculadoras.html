@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Calculadoras | Pampa Finance</title>
+    <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        .calc-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .calc-card-modern {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: border-color 0.3s ease;
+            position: relative;
+        }
+
+        .calc-card-modern:hover {
+            border-color: #333;
+        }
+
+        .calc-card-modern h3 {
+            font-size: 1.1rem;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .calc-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .calc-input-group label {
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calc-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .calc-input-wrapper input {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            border: 1px solid #222;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            text-align: right;
+            transition: all 0.2s;
+        }
+
+        .calc-input-wrapper input:focus {
+            border-color: var(--success);
+            box-shadow: 0 0 10px rgba(0, 212, 170, 0.1);
+        }
+
+        .provider-select {
+            background: #111;
+            border: 1px solid #222;
+            color: #888;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .provider-select:hover {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .calc-result-panel {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .calc-result-main {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .calc-result-sub {
+            font-size: 0.85rem;
+            color: #00d4aa;
+            opacity: 0.8;
+        }
+
+        .agro-pill-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .agro-pill {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            background: #111;
+            border: 1px solid #222;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 2px;
+        }
+
+        .agro-pill.active {
+            background: var(--success-glow);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        @media (max-width: 600px) {
+            .calc-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<script src="modern-navigation.js"></script>
+
+<main class="main-container">
+    <h1 class="page-title fade-in">Calculadoras</h1>
+
+    <div class="calc-container">
+        <!-- ARBITRAJE MEP/BLUE -->
+        <section class="calc-card-modern slide-up">
+            <h3>🔄 Arbitraje MEP / Blue</h3>
+            
+            <div class="calc-input-group">
+                <label>Capital Inicial (ARS)</label>
+                <div class="calc-input-wrapper">
+                    <input id="arb-cap" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>
+                    Dólar Compra (MEP)
+                    <select id="select-buy-dolar" class="provider-select">
+                        <option value="">Elegir Proveedor...</option>
+                    </select>
+                </label>
+                <div class="calc-input-wrapper">
+                    <input id="arb-buy" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>
+                    Dólar Venta (Blue)
+                    <select id="select-sell-dolar" class="provider-select">
+                        <option value="">Elegir Proveedor...</option>
+                    </select>
+                </label>
+                <div class="calc-input-wrapper">
+                    <input id="arb-sell" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-result-panel">
+                <div class="result-label">Utilidad Estimada</div>
+                <div id="res-arb-profit" class="calc-result-main">--</div>
+                <div id="res-arb-detail" class="calc-result-sub">Esperando datos...</div>
+            </div>
+        </section>
+
+        <!-- CRIPTO (USDT) -->
+        <section class="calc-card-modern slide-up" style="animation-delay: 0.1s;">
+            <h3>⚡ Dólar Cripto (USDT)</h3>
+
+            <div class="calc-input-group">
+                <label>Capital Inicial (ARS)</label>
+                <div class="calc-input-wrapper">
+                    <input id="usdt-cap" type="text" placeholder="0,00">
+                </div>
+            </div>
+            
+            <div class="calc-input-group">
+                <label>
+                    Compra USDT (ARS)
+                    <select id="select-buy-usdt" class="provider-select">
+                        <option value="">Elegir Exchange...</option>
+                    </select>
+                </label>
+                <div class="calc-input-wrapper">
+                    <input id="usdt-buy" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>
+                    Venta USDT (ARS)
+                    <select id="select-sell-usdt" class="provider-select">
+                        <option value="">Elegir Exchange...</option>
+                    </select>
+                </label>
+                <div class="calc-input-wrapper">
+                    <input id="usdt-sell" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-result-panel">
+                <div class="result-label">Resultado Final</div>
+                <div id="res-usdt-profit" class="calc-result-main">--</div>
+                <div id="res-usdt-detail" class="calc-result-sub">Cantidad: -- USDT</div>
+            </div>
+        </section>
+
+        <!-- AGRO (LIQUIDACIÓN) -->
+        <section class="calc-card-modern slide-up" style="animation-delay: 0.2s;">
+            <h3>🌾 Liquidación de Granos</h3>
+            
+            <div class="agro-pill-selector">
+                <div class="agro-pill active" data-crop="Soja" data-ret="33">Soja</div>
+                <div class="agro-pill" data-crop="Maíz" data-ret="12">Maíz</div>
+                <div class="agro-pill" data-crop="Trigo" data-ret="12">Trigo</div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>Toneladas</label>
+                <div class="calc-input-wrapper">
+                    <input id="agro-tn" type="text" value="100,00">
+                </div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>
+                    Precio USD/tn (Spot/Pizarra)
+                    <select id="select-agro-price" class="provider-select">
+                        <option value="">Cargar Pizarra...</option>
+                    </select>
+                </label>
+                <div class="calc-input-wrapper">
+                    <input id="agro-price" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>Dólar Exportación (Blend)</label>
+                <div class="calc-input-wrapper">
+                    <input id="agro-blend" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-result-panel">
+                <div class="result-label">Neto a Liquidar (ARS)</div>
+                <div id="res-agro-final" class="calc-result-main">--</div>
+                <div id="res-agro-detail" class="calc-result-sub">Retenciones: --%</div>
+            </div>
+        </section>
+
+        <!-- INVERSIONES (PLAZO FIJO) -->
+        <section class="calc-card-modern slide-up" style="animation-delay: 0.3s;">
+            <h3>📈 Plazo Fijo / Inversión</h3>
+
+            <div class="calc-input-group">
+                <label>Capital a Invertir (ARS)</label>
+                <div class="calc-input-wrapper">
+                    <input id="inv-cap" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>
+                    TNA (%)
+                    <select id="select-inv-tna" class="provider-select">
+                        <option value="">Mejores Tasas...</option>
+                    </select>
+                </label>
+                <div class="calc-input-wrapper">
+                    <input id="inv-tna" type="text" placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="calc-input-group">
+                <label>Plazo (Días)</label>
+                <div class="calc-input-wrapper">
+                    <input id="inv-dias" type="text" value="30">
+                </div>
+            </div>
+
+            <div class="calc-result-panel">
+                <div class="result-label">Interés Ganado</div>
+                <div id="res-inv-profit" class="calc-result-main">--</div>
+                <div id="res-inv-tea" class="calc-result-sub">TEA (Efectiva Anual): --%</div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<script src="shared-scripts.js"></script>
+<script src="api-service.js"></script>
+<script>
+/**
+ * Pampa Finance - Calculadoras Logic
+ */
+const Calc = {
+    data: {
+        dolares: [],
+        usdt: {},
+        granos: [],
+        blend: 0
+    },
+
+    async init() {
+        this.setupMasks();
+        this.bindEvents();
+        await this.loadData();
+    },
+
+    async loadData() {
+        try {
+            const [dol, usdt, granos] = await Promise.allSettled([
+                ApiService.getDolares(),
+                ApiService.getUSDT(),
+                ApiService.getGranos()
+            ]);
+            
+            if (dol.status === 'fulfilled') {
+                this.data.dolares = dol.value;
+                this.populateDolarSelects();
+            }
+            if (usdt.status === 'fulfilled') {
+                this.data.usdt = usdt.value.data || usdt.value;
+                this.populateUSDTSelects();
+            }
+            if (granos.status === 'fulfilled') {
+                this.data.granos = granos.value;
+                this.populateAgroSelects();
+            }
+            // Agregar tasas de bancos
+            const pf = await ApiService.getSmartData('plazofijo', 'https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo');
+            if (pf) {
+                this.data.tasas = pf;
+                this.populateInvSelects();
+            }
+
+            // Dólar Blend aproximado (80% Oficial + 20% CCL)
+            const oficial = this.data.dolares.find(d => d.nombre.toLowerCase().includes('oficial'))?.venta;
+            const ccl = this.data.dolares.find(d => d.nombre.toLowerCase().includes('contado'))?.venta;
+            if (oficial && ccl) {
+                this.data.blend = (oficial * 0.8) + (ccl * 0.2);
+                this.setVal('agro-blend', this.data.blend);
+            }
+        } catch (e) {
+            console.error("Error cargando datos:", e);
+        }
+    },
+
+    populateDolarSelects() {
+        const buySelect = document.getElementById('select-buy-dolar');
+        const sellSelect = document.getElementById('select-sell-dolar');
+        
+        // MEPs para compra
+        this.data.dolares.filter(d => d.nombre.toLowerCase().includes('bolsa')).forEach(d => {
+            const opt = new Option(`${d.nombre} ($${d.venta})`, d.venta);
+            buySelect.add(opt);
+        });
+
+        // Blues/CCLs para venta
+        this.data.dolares.filter(d => d.nombre.toLowerCase().includes('blue') || d.nombre.toLowerCase().includes('contado')).forEach(d => {
+            const opt = new Option(`${d.nombre} ($${d.compra})`, d.compra);
+            sellSelect.add(opt);
+        });
+    },
+
+    populateUSDTSelects() {
+        const buySelect = document.getElementById('select-buy-usdt');
+        const sellSelect = document.getElementById('select-sell-usdt');
+        
+        Object.entries(this.data.usdt).forEach(([name, prices]) => {
+            if (prices.ask) buySelect.add(new Option(`${name} ($${prices.ask})`, prices.ask));
+            if (prices.bid) sellSelect.add(new Option(`${name} ($${prices.bid})`, prices.bid));
+        });
+    },
+
+    populateAgroSelects() {
+        const agroSelect = document.getElementById('select-agro-price');
+        // Agrupar por grano
+        const latest = {};
+        this.data.granos.forEach(g => {
+            if (!latest[g.grano] || new Date(g.fecha) > new Date(latest[g.grano].fecha)) {
+                latest[g.grano] = g;
+            }
+        });
+
+        Object.values(latest).forEach(g => {
+            agroSelect.add(new Option(`${g.grano} (${g.camara})`, g.valor));
+        });
+    },
+
+    populateInvSelects() {
+        const invSelect = document.getElementById('select-inv-tna');
+        const banks = this.data.tasas
+            .filter(t => t.tnaClientes > 0)
+            .sort((a, b) => b.tnaClientes - a.tnaClientes);
+
+        banks.forEach(b => {
+            const tna = (b.tnaClientes * 100).toFixed(2);
+            invSelect.add(new Option(`${b.entidad} (${tna}%)`, tna));
+        });
+    },
+
+    setupMasks() {
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', (e) => {
+                let val = e.target.value.replace(/[^\d]/g, '');
+                if (val !== '') {
+                    if (val.length < 3) val = val.padStart(3, '0');
+                    const integerPart = val.slice(0, -2).replace(/^0+/, '') || '0';
+                    const decimalPart = val.slice(-2);
+                    e.target.value = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + decimalPart;
+                }
+                this.calculateAll();
+            });
+        });
+    },
+
+    bindEvents() {
+        document.getElementById('select-buy-dolar').addEventListener('change', (e) => this.setVal('arb-buy', parseFloat(e.target.value)));
+        document.getElementById('select-sell-dolar').addEventListener('change', (e) => this.setVal('arb-sell', parseFloat(e.target.value)));
+        document.getElementById('select-buy-usdt').addEventListener('change', (e) => this.setVal('usdt-buy', parseFloat(e.target.value)));
+        document.getElementById('select-sell-usdt').addEventListener('change', (e) => this.setVal('usdt-sell', parseFloat(e.target.value)));
+        document.getElementById('select-agro-price').addEventListener('change', (e) => {
+            const arsPrice = parseFloat(e.target.value);
+            // Convertir a USD usando el oficial si es pizarra en ARS
+            const oficial = this.data.dolares.find(d => d.nombre.toLowerCase().includes('oficial'))?.venta || 1;
+            this.setVal('agro-price', arsPrice / oficial);
+        });
+        document.getElementById('select-inv-tna').addEventListener('change', (e) => this.setVal('inv-tna', parseFloat(e.target.value)));
+
+        document.querySelectorAll('.agro-pill').forEach(pill => {
+            pill.addEventListener('click', (e) => {
+                document.querySelectorAll('.agro-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                this.calculateAll();
+            });
+        });
+    },
+
+    getVal(id) {
+        const raw = document.getElementById(id).value;
+        if (!raw) return 0;
+        return parseFloat(raw.replace(/\./g, '').replace(',', '.')) || 0;
+    },
+
+    setVal(id, val) {
+        if (!val) return;
+        const input = document.getElementById(id);
+        const fixed = (Math.round(val * 100) / 100).toFixed(2).replace('.', '');
+        let v = fixed;
+        if (v.length < 3) v = v.padStart(3, '0');
+        const integerPart = v.slice(0, -2).replace(/^0+/, '') || '0';
+        const decimalPart = v.slice(-2);
+        input.value = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + decimalPart;
+        this.calculateAll();
+    },
+
+    calculateAll() {
+        this.calcArbitraje();
+        this.calcUSDT();
+        this.calcAgro();
+        this.calcInversion();
+    },
+
+    calcArbitraje() {
+        const cap = this.getVal('arb-cap');
+        const buy = this.getVal('arb-buy');
+        const sell = this.getVal('arb-sell');
+        if (!cap || !buy || !sell) return;
+
+        const usd = cap / buy;
+        const total = usd * sell;
+        const profit = total - cap;
+        const pct = (profit / cap) * 100;
+
+        document.getElementById('res-arb-profit').textContent = CalculadoraFinanciera.Formatters.currency(profit);
+        document.getElementById('res-arb-detail').textContent = `Rinde ${pct.toFixed(2)}% | Final: ${CalculadoraFinanciera.Formatters.currency(total)}`;
+    },
+
+    calcUSDT() {
+        const cap = this.getVal('usdt-cap');
+        const buy = this.getVal('usdt-buy');
+        const sell = this.getVal('usdt-sell');
+        if (!cap || !buy) return;
+
+        const usdt = cap / buy;
+        const total = usdt * sell;
+        const profit = total - cap;
+        
+        document.getElementById('res-usdt-profit').textContent = CalculadoraFinanciera.Formatters.currency(profit);
+        document.getElementById('res-usdt-detail').textContent = `Cantidad: ${usdt.toFixed(2)} USDT | Final: ${CalculadoraFinanciera.Formatters.currency(total)}`;
+    },
+
+    calcAgro() {
+        const tn = this.getVal('agro-tn');
+        const priceUsd = this.getVal('agro-price');
+        const blend = this.getVal('agro-blend');
+        const activePill = document.querySelector('.agro-pill.active');
+        const ret = parseFloat(activePill.dataset.ret);
+        if (!priceUsd || !blend) return;
+
+        const totalUsd = tn * priceUsd;
+        const netUsd = totalUsd * (1 - (ret / 100));
+        const finalArs = netUsd * blend;
+
+        document.getElementById('res-agro-final').textContent = CalculadoraFinanciera.Formatters.currency(finalArs);
+        document.getElementById('res-agro-detail').textContent = `Retenciones: ${ret}% ($${((totalUsd * (ret/100)) * blend).toLocaleString()})`;
+    },
+
+    calcInversion() {
+        const cap = this.getVal('inv-cap');
+        const tna = this.getVal('inv-tna');
+        const dias = document.getElementById('inv-dias').value.replace(/[^\d]/g, '') || 30;
+        if (!tna) return;
+
+        const tnaDec = tna / 100;
+        const tea = (Math.pow(1 + (tnaDec / 12), 12) - 1) * 100;
+        
+        document.getElementById('res-inv-tea').textContent = `${tea.toFixed(2)}%`;
+
+        if (cap) {
+            const profit = cap * tnaDec * (parseInt(dias) / 365);
+            document.getElementById('res-inv-profit').textContent = CalculadoraFinanciera.Formatters.currency(profit);
+        }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => Calc.init());
+</script>
+</body>
+</html>
