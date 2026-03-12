@@ -1,180 +1,180 @@
 {
-  "last_updated": "2026-03-12T12:38:48.127Z",
+  "last_updated": "2026-03-12T13:15:28.181Z",
   "data": {
     "buenbit": {
-      "ask": 1468.8,
-      "totalAsk": 1470.2688,
-      "bid": 1435.78,
-      "totalBid": 1434.3442,
-      "time": 1773319074
+      "ask": 1472.27,
+      "totalAsk": 1473.7423,
+      "bid": 1439.17,
+      "totalBid": 1437.7308,
+      "time": 1773321294
     },
     "ripio": {
-      "ask": 1462.21,
-      "totalAsk": 1462.21,
-      "bid": 1443.07,
-      "totalBid": 1435.8546,
-      "time": 1773319075
+      "ask": 1459.58,
+      "totalAsk": 1459.58,
+      "bid": 1442.59,
+      "totalBid": 1435.377,
+      "time": 1773321295
     },
     "ripioexchange": {
       "ask": 1459.3,
       "totalAsk": 1466.5965,
-      "bid": 1457.9,
-      "totalBid": 1450.6105,
-      "time": 1773319104
+      "bid": 1457.1,
+      "totalBid": 1449.8145,
+      "time": 1773321324
     },
     "satoshitango": {
-      "ask": 1491.24,
-      "totalAsk": 1498.6962,
-      "bid": 1464.6,
-      "totalBid": 1457.277,
-      "time": 1773319078
+      "ask": 1488.54,
+      "totalAsk": 1495.9827,
+      "bid": 1461.94,
+      "totalBid": 1454.6303,
+      "time": 1773321298
     },
     "universalcoins": {
       "ask": 1485,
       "totalAsk": 1488.7125,
       "bid": 1430,
       "totalBid": 1426.425,
-      "time": 1773319119
+      "time": 1773321279
     },
     "decrypto": {
       "ask": 1469,
       "totalAsk": 1474.1415,
       "bid": 1431,
       "totalBid": 1425.9915,
-      "time": 1773319095
+      "time": 1773321315
     },
     "letsbit": {
-      "ask": 1476.9844,
-      "totalAsk": 1476.9844,
-      "bid": 1443.2274,
-      "totalBid": 1443.2274,
-      "time": 1773319080
+      "ask": 1476.2483,
+      "totalAsk": 1476.2483,
+      "bid": 1442.4441,
+      "totalBid": 1442.4441,
+      "time": 1773321300
     },
     "binancep2p": {
-      "ask": 1460.8,
-      "totalAsk": 1460.8,
-      "bid": 1455,
-      "totalBid": 1455,
-      "time": 1773319116
+      "ask": 1459.28,
+      "totalAsk": 1459.28,
+      "bid": 1453.44,
+      "totalBid": 1453.44,
+      "time": 1773321272
     },
     "fiwind": {
-      "ask": 1468,
-      "totalAsk": 1468,
+      "ask": 1470,
+      "totalAsk": 1470,
       "bid": 1455,
       "totalBid": 1455,
-      "time": 1773319068
+      "time": 1773321288
     },
     "lemoncash": {
       "ask": 1469,
       "totalAsk": 1476.345,
       "bid": 1409,
       "totalBid": 1401.955,
-      "time": 1773319076
+      "time": 1773321296
     },
     "okexp2p": {
-      "ask": 1464,
-      "totalAsk": 1464,
-      "bid": 1455.65,
-      "totalBid": 1455.65,
-      "time": 1773319114
+      "ask": 1461,
+      "totalAsk": 1461,
+      "bid": 1457,
+      "totalBid": 1457,
+      "time": 1773321317
     },
     "vitawallet": {
-      "ask": 1474.9154,
-      "totalAsk": 1474.9154,
-      "bid": 1447.0247,
-      "totalBid": 1447.0247,
-      "time": 1773319077
+      "ask": 1475.2181,
+      "totalAsk": 1475.2181,
+      "bid": 1447.3218,
+      "totalBid": 1447.3218,
+      "time": 1773321297
     },
     "belo": {
-      "ask": 1468,
-      "totalAsk": 1468,
+      "ask": 1466,
+      "totalAsk": 1466,
       "bid": 1446,
       "totalBid": 1446,
-      "time": 1773319125
+      "time": 1773321285
     },
     "huobip2p": {
       "ask": 0,
       "totalAsk": 0,
       "bid": 1100,
       "totalBid": 1100,
-      "time": 1773319080
+      "time": 1773321300
     },
     "tiendacrypto": {
       "ask": 1475,
       "totalAsk": 1475,
       "bid": 1435,
       "totalBid": 1435,
-      "time": 1773319076
+      "time": 1773321296
     },
     "bybitp2p": {
-      "ask": 1461,
-      "totalAsk": 1461,
+      "ask": 1459.5,
+      "totalAsk": 1459.5,
       "bid": 1500,
       "totalBid": 1500,
-      "time": 1773319094
+      "time": 1773321276
     },
     "kucoinp2p": {
       "ask": 1465,
       "totalAsk": 1465,
       "bid": 1466,
       "totalBid": 1466,
-      "time": 1773319099
+      "time": 1773321319
     },
     "saldo": {
-      "ask": 1461.2299,
-      "totalAsk": 1461.2299,
-      "bid": 1434.9969,
-      "totalBid": 1434.9969,
-      "time": 1773319073
+      "ask": 1461.1381,
+      "totalAsk": 1461.1381,
+      "bid": 1435.0872,
+      "totalBid": 1435.0872,
+      "time": 1773321293
     },
     "kriptonmarket": {
-      "ask": 1473.19,
-      "totalAsk": 1473.19,
-      "bid": 1439.58,
-      "totalBid": 1439.58,
-      "time": 1773319126
+      "ask": 1474.2,
+      "totalAsk": 1474.2,
+      "bid": 1440.56,
+      "totalBid": 1440.56,
+      "time": 1773321286
     },
     "astropay": {
-      "ask": 1486.4997,
-      "totalAsk": 1486.4997,
-      "bid": 1427.6537,
-      "totalBid": 1427.6537,
-      "time": 1773319126
+      "ask": 1486.6483,
+      "totalAsk": 1486.6483,
+      "bid": 1427.7963,
+      "totalBid": 1427.7963,
+      "time": 1773321286
     },
     "bitgetp2p": {
-      "ask": 1466.4,
-      "totalAsk": 1466.4,
-      "bid": 1460,
-      "totalBid": 1460,
-      "time": 1773319106
+      "ask": 1465,
+      "totalAsk": 1465,
+      "bid": 1458,
+      "totalBid": 1458,
+      "time": 1773321288
     },
     "pluscrypto": {
       "ask": 1475,
       "totalAsk": 1475,
       "bid": 1435,
       "totalBid": 1435,
-      "time": 1773319088
+      "time": 1773321308
     },
     "bybit": {
       "ask": 1477.9781,
       "totalAsk": 1477.9781,
       "bid": 1432.1393,
       "totalBid": 1432.1393,
-      "time": 1773319102
+      "time": 1773321289
     },
     "eluter": {
-      "ask": 1476.4107,
-      "totalAsk": 1491.1748,
-      "bid": 1429.4431,
-      "totalBid": 1415.1487,
-      "time": 1773319075
+      "ask": 1476.3371,
+      "totalAsk": 1491.1004,
+      "bid": 1430.441,
+      "totalBid": 1416.1366,
+      "time": 1773321295
     },
     "binance": {
-      "ask": 1461.5,
-      "totalAsk": 1462.5961,
-      "bid": 1461.4,
-      "totalBid": 1445.7009,
-      "time": 1773319081
+      "ask": 1462.2,
+      "totalAsk": 1463.2966,
+      "bid": 1462.1,
+      "totalBid": 1446.3934,
+      "time": 1773321301
     },
     "paydecep2p": {
       "ask": 1600,
@@ -188,91 +188,91 @@
       "totalAsk": 1483.3411,
       "bid": 1454.2,
       "totalBid": 1439.8034,
-      "time": 1773319085
+      "time": 1773321304
     },
     "trubit": {
       "ask": 1454,
       "totalAsk": 1461.27,
-      "bid": 1432.8,
-      "totalBid": 1425.636,
-      "time": 1773319093
+      "bid": 1434.11,
+      "totalBid": 1426.9394,
+      "time": 1773321313
     },
     "bingxp2p": {
-      "ask": 1461.9,
-      "totalAsk": 1461.9,
-      "bid": 1456,
-      "totalBid": 1456,
-      "time": 1773319096
+      "ask": 1461.99,
+      "totalAsk": 1461.99,
+      "bid": 1456.21,
+      "totalBid": 1456.21,
+      "time": 1773321316
     },
     "bitsoalpha": {
-      "ask": 1454.87,
-      "totalAsk": 1463.5992,
-      "bid": 1453.19,
-      "totalBid": 1444.4709,
-      "time": 1773319106
+      "ask": 1455.78,
+      "totalAsk": 1464.5147,
+      "bid": 1455,
+      "totalBid": 1446.27,
+      "time": 1773321327
     },
     "lemoncashp2p": {
-      "ask": 1460,
-      "totalAsk": 1481.9,
-      "bid": 1438.5,
-      "totalBid": 1416.9225,
-      "time": 1773319076
+      "ask": 1472.99,
+      "totalAsk": 1495.0848,
+      "bid": 1438.15,
+      "totalBid": 1416.5778,
+      "time": 1773321236
     },
     "cocoscrypto": {
       "ask": 1466.0019,
       "totalAsk": 1466.0019,
       "bid": 1446.0023,
       "totalBid": 1446.0023,
-      "time": 1773319127
+      "time": 1773321287
     },
     "coinexp2p": {
       "ask": 0,
       "totalAsk": 0,
       "bid": 1440.1,
       "totalBid": 1440.1,
-      "time": 1773319105
+      "time": 1773321325
     },
     "cryptomktpro": {
-      "ask": 1474.61,
-      "totalAsk": 1490.7266,
+      "ask": 1473.97,
+      "totalAsk": 1490.0796,
       "bid": 1460.06,
       "totalBid": 1444.1883,
-      "time": 1773319075
+      "time": 1773321295
     },
     "wallbit": {
-      "ask": 1476.14,
-      "totalAsk": 1476.14,
-      "bid": 1432.28,
-      "totalBid": 1432.28,
-      "time": 1773319084
+      "ask": 1476.29,
+      "totalAsk": 1476.29,
+      "bid": 1432.47,
+      "totalBid": 1432.47,
+      "time": 1773321304
     },
     "mexcp2p": {
       "ask": 1463.5,
       "totalAsk": 1463.5,
       "bid": 1455,
       "totalBid": 1455,
-      "time": 1773319075
+      "time": 1773321297
     },
     "weexp2p": {
       "ask": 0,
       "totalAsk": 0,
       "bid": 1440,
       "totalBid": 1440,
-      "time": 1773319124
+      "time": 1773321284
     },
     "mexc": {
-      "ask": 1490.5351,
-      "totalAsk": 1490.5351,
-      "bid": 1476.4506,
-      "totalBid": 1475.7124,
-      "time": 1773319123
+      "ask": 1491.2019,
+      "totalAsk": 1491.2019,
+      "bid": 1476.6686,
+      "totalBid": 1475.9303,
+      "time": 1773321282
     },
     "peanut": {
       "ask": 1470.58,
       "totalAsk": 1470.58,
       "bid": 1439.3,
       "totalBid": 1439.3,
-      "time": 1773319076
+      "time": 1773321296
     }
   }
 }
