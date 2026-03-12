@@ -93,22 +93,13 @@ async function fetchNews() {
                     const pubDate = getTag('pubDate');
                     const description = getTag('description').replace(/<[^>]*>?/gm, '').substring(0, 200);
                     
-                    // Extraer imagen si existe (en content:encoded o media:content o enclosure)
-                    let image = null;
-                    const mediaMatch = item.match(/<media:content[^>]*url="(.*?)"/);
-                    const enclosureMatch = item.match(/<enclosure[^>]*url="(.*?)"/);
-                    const imgInContent = item.match(/<img[^>]*src="(.*?)"/);
-                    
-                    image = (mediaMatch ? mediaMatch[1] : (enclosureMatch ? enclosureMatch[1] : (imgInContent ? imgInContent[1] : null)));
-
                     return {
                         source: feed.name,
                         category: category,
                         title,
                         link,
                         date: new Date(pubDate).getTime(),
-                        description: description + (description.length >= 200 ? '...' : ''),
-                        image
+                        description: description + (description.length >= 200 ? '...' : '')
                     };
                 }).filter(a => a.title && a.link);
 
