@@ -1,60 +1,76 @@
-# 🏦 Pampa Finance - Calculadora Financiera & Agro
+# 🏦 Pampa Finance - Terminal de Inteligencia Financiera
 
-![Version](https://img.shields.io/badge/version-2.0.0-success)
-![License](https://img.shields.io/badge/license-MIT-blue)
+![Version](https://img.shields.io/badge/version-2.1.0-success)
 ![Build](https://img.shields.io/github/actions/workflow/status/SantiSanti/CalculadoraFinanciera-main/fetch-data.yml)
+![PWA](https://img.shields.io/badge/PWA-Ready-orange)
 
-Pampa Finance es una plataforma web interactiva y responsive diseñada para centralizar cotizaciones financieras, índices agropecuarios y herramientas de cálculo en tiempo real para el mercado argentino.
-
-## 🚀 Características Principales
-
-- **Cotizaciones en Tiempo Real:** Dólar (Oficial, Blue, MEP, CCL, Cripto), USDT P2P y Tasas de Plazo Fijo.
-- **Mercado Agropecuario:** Integración con MatbaRofex y Mercado de Hacienda de Cañuelas.
-- **Calculadoras Inteligentes:** 
-    - Arbitraje MEP/Blue con selección de proveedores.
-    - Dólar Cripto con cálculo de utilidad sobre capital inicial.
-    - Liquidación de Granos (Soja, Maíz, Trigo) considerando Retenciones y Dólar Blend (80/20).
-    - Inversiones con cálculo de TNA vs TEA (Interés Compuesto).
-- **Diseño Ultra-Clean:** Interfaz moderna, modo oscuro forzado y optimización total para móviles.
-
-## 🛠️ Arquitectura Técnica
-
-El proyecto utiliza una arquitectura de **"Static Backend"** para garantizar confiabilidad y velocidad:
-
-1.  **GitHub Actions (The Worker):** Un flujo de trabajo automatizado se ejecuta cada 60 minutos, consulta múltiples APIs (DolarAPI, CriptoYa, ArgentinaDatos, DeCampoACampo) y guarda los resultados como archivos JSON estáticos en el repositorio.
-2.  **API Service Layer:** Una capa de abstracción en JavaScript (`api-service.js`) que maneja la lógica de:
-    - Priorizar datos estáticos (velocidad de CDN).
-    - Fallback a APIs en vivo (si los datos estáticos fallan).
-    - Rotación de proxies para evitar bloqueos por CORS.
-3.  **Frontend Vanilla:** Construido con HTML5, CSS3 (Variables y Grid) y JS puro para mantener un peso mínimo y máxima compatibilidad.
-
-## 📂 Estructura del Proyecto
-
-```text
-├── .github/workflows/  # Automatización de captura de datos
-├── data/               # "Base de datos" JSON estática
-├── scripts/            # Scripts de Node.js para el fetcher
-├── api-service.js      # Cerebro de comunicación con datos
-├── shared-styles.css   # Sistema de diseño unificado
-├── index.html          # Dashboard de cotizaciones
-├── calculadoras.html   # Herramientas de cálculo
-└── Hacienda.html       # Datos del mercado agro
-```
-
-## 🔧 Instalación y Desarrollo Local
-
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/SantiSanti/CalculadoraFinanciera-main.git
-   ```
-2. Abrí cualquier archivo `.html` en tu navegador. No requiere un servidor web complejo, pero se recomienda usar la extensión "Live Server" en VS Code.
-
-## 📈 APIs Utilizadas
-
-- **DolarAPI:** Cotizaciones oficiales y paralelas del dólar.
-- **CriptoYa:** Precios de USDT en exchanges locales y globales.
-- **ArgentinaDatos:** Tasas de Plazo Fijo, FCIs y precios de Pizarra.
-- **DeCampoACampo:** Precios del Mercado de Hacienda de Cañuelas.
+**Pampa Finance** es una plataforma de análisis y cálculo financiero diseñada para el mercado argentino. Combina una interfaz de usuario minimalista de alta velocidad con un backend automatizado basado en GitHub Actions, garantizando precisión bancaria y disponibilidad constante.
 
 ---
-Desarrollado con ❤️ para el ecosistema financiero argentino.
+
+## 🛠️ Funcionamiento Técnico (Arquitectura "Backendless")
+
+La plataforma opera bajo un modelo de **Sincronización Asincrónica**:
+
+1.  **Ingesta de Datos (The Worker):** Un flujo de trabajo de GitHub Actions (`scripts/fetch_data.js`) se ejecuta cada hora. Consulta APIs oficiales y privadas (DolarAPI, CriptoYa, AcaBase, BCRA), procesa los JSON y los guarda en la carpeta `/data/`.
+2.  **API Service Layer (`api-service.js`):** El frontend no consulta directamente a las APIs externas (evitando errores de CORS y latencia). En su lugar:
+    - Intenta cargar el archivo estático desde el repositorio (Velocidad de CDN).
+    - Si falla, realiza un fetch en vivo a la API original.
+    - Como última instancia, utiliza una rotación de Proxies (CORS-Proxy, AllOrigins).
+3.  **PWA & Cache (`sw.js`):** Utiliza Service Workers para cachear activos estáticos y datos financieros. La plataforma es **totalmente funcional offline** con los últimos datos sincronizados.
+
+---
+
+## 📐 Fórmulas y Metodología de Cálculo
+
+Pampa Finance utiliza estándares normativos para sus herramientas de cálculo:
+
+### 1. Inversiones (Plazo Fijo / TNA)
+Para la **TEA (Tasa Efectiva Anual)**, implementamos la fórmula de transparencia del BCRA, que contempla la capitalización compuesta sobre subperiodos de 30 días:
+
+$$TEA = \left[ \left( 1 + \frac{TNA \times 30}{365} \right)^{\frac{365}{30}} - 1 \right] \times 100$$
+
+*   **Ganancia Simple:** $Capital \times \left( \frac{TNA}{100} \right) \times \left( \frac{Días}{365} \right)$
+
+### 2. Arbitraje (Bancos vs MEP/Blue)
+Calcula el rendimiento neto de un ciclo de compra y venta de divisas:
+
+$$Utilidad = \left( \frac{Capital}{PrecioCompra} \times PrecioVenta \right) - Capital$$
+
+### 3. Dólar Cripto (USDT)
+Determina la eficiencia de compra en exchanges y el arbitraje implícito:
+
+*   **Cantidad USDT:** $Capital / PrecioCompra_{ARS}$
+*   **Final ARS:** $Cantidad USDT \times PrecioVenta_{ARS}$
+
+### 4. Liquidación de Granos (Agro)
+Utiliza los valores de la **Pizarra de Rosario (AcaBase)** en pesos y aplica las Derechos de Exportación (DEX) actuales:
+
+*   **Liquidación Neta:** $(Toneladas \times PrecioPizarra) \times (1 - \frac{DEX}{100})$
+*   **Conversión teórica (USD Blend):** $LiquidaciónNeta_{ARS} / DólarBlend$
+    *   *Dólar Blend:* Calculado automáticamente como un ponderado (80% Oficial + 20% CCL).
+
+---
+
+## 📊 Fuentes de Información
+
+| Categoría | Proveedor | Frecuencia |
+| :--- | :--- | :--- |
+| Dólares | DolarAPI.com | 5 min |
+| Bancos / USDT | CriptoYa.com | Real-time |
+| Granos (Pizarra) | AcaBase | Diario |
+| Hacienda | DeCampoACampo (Cañuelas) | Diario |
+| Indicadores (IPC/UVA) | ArgentinaDatos / BCRA | Mensual/Diario |
+
+---
+
+## 📱 Instalación
+
+Pampa Finance es una **Progressive Web App**. 
+1. Accede desde tu móvil.
+2. Selecciona "Compartir" o el menú de tres puntos.
+3. Elige **"Agregar a la pantalla de inicio"**.
+4. Disfruta de la experiencia de una app nativa sin consumo de almacenamiento excesivo.
+
+---
+Desarrollado con precisión para el ecosistema financiero argentino. 🇦🇷
