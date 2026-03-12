@@ -1,12 +1,36 @@
 {
-  "last_updated": "2026-03-12T00:29:00.533Z",
+  "last_updated": "2026-03-12T00:32:57.389Z",
   "articles": [
+    {
+      "source": "Ámbito",
+      "category": "Política",
+      "title": "La Libertad Avanza afirmó que no aceptará el aumento para senadores",
+      "link": "https://www.ambito.com/politica/la-libertad-avanza-afirmo-que-no-aceptara-el-aumento-senadores-n6254986",
+      "date": 1773274980000,
+      "description": "Los sueldos de los legisladores están atados a las paritarias de los trabajadores del Congreso, quiénes acordaron una actualización. Tras conocerse el número, el bloque del oficialismo quiere evitar l..."
+    },
+    {
+      "source": "Investing.com",
+      "category": "Mercados",
+      "title": "Morgan Stanley limita los reembolsos de su fondo de crédito privado ante el aumento de las retiradas",
+      "link": "https://es.investing.com/news/stock-market-news/morgan-stanley-limita-los-reembolsos-de-su-fondo-de-credito-privado-ante-el-aumento-de-las-retiradas-3557760",
+      "date": 1773274383000,
+      "description": ""
+    },
     {
       "source": "Investing.com",
       "category": "Mercados",
       "title": "El negocio de fibra de Google se fusionará con Astound Broadband",
       "link": "https://es.investing.com/news/stock-market-news/el-negocio-de-fibra-de-google-se-fusionara-con-astound-broadband-3557756",
       "date": 1773274274000,
+      "description": ""
+    },
+    {
+      "source": "Investing.com",
+      "category": "Mercados",
+      "title": "Trabajadores estatales de la aviación civil paralizarán los aeropuertos de Argentina",
+      "link": "https://es.investing.com/news/stock-market-news/trabajadores-estatales-de-la-aviacion-civil-paralizaran-los-aeropuertos-de-argentina-3557757",
+      "date": 1773273659000,
       "description": ""
     },
     {
@@ -212,18 +236,18 @@
     {
       "source": "Ámbito",
       "category": "Política",
-      "title": "Arde la interna en la Sociedad Rural: Nicolás Pino contestó criticas de su vice y anticipó que evalúa la reelección",
-      "link": "https://www.ambito.com/politica/interna-la-sociedad-rural-nicolas-pino-contesto-criticas-su-vice-y-anticipo-que-evalua-la-reeleccion-n6254912",
-      "date": 1773264060000,
-      "description": "El titular de la SRA respondió a su vice Marcos Pereda tras anunciar su candidatura y dijo que productores le piden seguir."
-    },
-    {
-      "source": "Ámbito",
-      "category": "Política",
       "title": "ATE anunció un paro que afectará vuelos durante el fin de semana largo",
       "link": "https://www.ambito.com/politica/ate-anuncio-un-paro-que-afectara-vuelos-el-fin-semana-largo-n6254916",
       "date": 1773264060000,
       "description": "La medida fue convocada en reclamo por aumentos salariales acordados pero aún no pagados. Se realizará entre el 18 y el 24 de marzo y afectará vuelos en franjas horarias específicas en todo el país."
+    },
+    {
+      "source": "Ámbito",
+      "category": "Política",
+      "title": "Arde la interna en la Sociedad Rural: Nicolás Pino contestó criticas de su vice y anticipó que evalúa la reelección",
+      "link": "https://www.ambito.com/politica/interna-la-sociedad-rural-nicolas-pino-contesto-criticas-su-vice-y-anticipo-que-evalua-la-reeleccion-n6254912",
+      "date": 1773264060000,
+      "description": "El titular de la SRA respondió a su vice Marcos Pereda tras anunciar su candidatura y dijo que productores le piden seguir."
     },
     {
       "source": "Ámbito",
@@ -250,28 +274,12 @@
       "description": "Se trata de Gastón Ricardo, fundador del grupo GR, que detectó que las sembradoras modernas requieren más potencia hidráulica que la disponible en muchos equipos; avanzó en un desarrollo conjunto con ..."
     },
     {
-      "source": "Investing.com",
-      "category": "Mercados",
-      "title": "Microsoft abrirá en Uruguay el primer laboratorio de IA con enfoque social de Suramérica",
-      "link": "https://es.investing.com/news/stock-market-news/microsoft-abrira-en-uruguay-el-primer-laboratorio-de-ia-con-enfoque-social-de-suramerica-3557606",
-      "date": 1773263349000,
-      "description": ""
-    },
-    {
       "source": "La Nación",
       "category": "Economía",
       "title": "A contramano del mundo: rebotaron las acciones argentinas hasta 6% en medio de la tensión en Medio Oriente",
       "link": "https://www.lanacion.com.ar/economia/dolar/a-contramano-del-mundo-rebotan-las-acciones-argentinas-hasta-6-en-medio-de-la-tension-en-medio-nid11032026/",
       "date": 1773263324000,
       "description": "Impulsados por las petroleras, los papeles locales subieron en la Bolsa porteña y en Wall Street; el dólar cerró a la baja"
-    },
-    {
-      "source": "Investing.com",
-      "category": "Mercados",
-      "title": "¿Petróleo a 130 dólares? La IA revela la mejor inversión para el shock petrolero",
-      "link": "https://es.investing.com/news/stock-market-news/petroleo-a-130-dolares-la-ia-revela-las-mejor-inversion-para-el-shock-petrolero-3557576",
-      "date": 1773263288000,
-      "description": ""
     },
     {
       "source": "La Nación",
@@ -488,6 +496,14 @@
       "link": "https://www.lanacion.com.ar/economia/nueva-critica-de-sturzenegger-a-paolo-rocca-por-que-operar-con-reglas-diferentes-en-la-argentina-nid11032026/",
       "date": 1773253085000,
       "description": "El ministro de Desregulación y Transformación del Estado dijo que el titular de Techint “demostró que en el mundo puede operar como un emprendedor de clase mundial”"
+    },
+    {
+      "source": "Ámbito",
+      "category": "Política",
+      "title": "El Gobierno blinda a Manuel Adorni y lo muestra activo en su agenda en Nueva York",
+      "link": "https://www.ambito.com/politica/el-gobierno-blinda-manuel-adorni-y-lo-muestra-activo-su-agenda-nueva-york-n6254838",
+      "date": 1773252960000,
+      "description": "El jefe de Gabinete multiplicó reuniones con gobernadores y empresarios en el marco de la Argentina Week. En la Casa Rosada buscan reforzar su rol político luego de la controversia por el viaje de su ..."
     },
     {
       "source": "Ámbito",
@@ -784,22 +800,6 @@
       "link": "https://www.ambito.com/economia/plazo-fijo-como-operan-los-principales-bancos-hoy-miercoles-11-marzo-n6254683",
       "date": 1773239280000,
       "description": "Las tasas para depósitos a 30 días muestran diferencias entre entidades. Qué pagan hoy los principales bancos y dónde aparecen los rendimientos más altos."
-    },
-    {
-      "source": "Ámbito",
-      "category": "Economía",
-      "title": "El gobierno define un nuevo aumento en la tarifa de gas tras el cambio estacional",
-      "link": "https://www.ambito.com/economia/el-gobierno-define-un-nuevo-aumento-la-tarifa-gas-el-cambio-estacional-n6254700",
-      "date": 1773239220000,
-      "description": "La resolución de la secretaría de Energía cambia el esquema de 2018 y busca que las actualizaciones reflejen el consumo real de los hogares."
-    },
-    {
-      "source": "El Economista",
-      "category": "Economía",
-      "title": "Plazos Fijos en Argentina: cu�nto pod�s ganar hoy con tu inversi�n",
-      "link": "https://eleconomista.com.ar/economia/plazos-fijos-argentina-cuanto-podes-ganar-hoy-tu-inversion-n93280",
-      "date": 1773239100000,
-      "description": "Conoc� cu�nto pagan los bancos por invertir en plazos fijos, y c�mo qued� el ranking actualizado a la fecha de hoy."
     }
   ]
 }

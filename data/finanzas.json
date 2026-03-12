@@ -1,0 +1,1203 @@
+{
+  "last_updated": "2026-03-12T00:32:46.641Z",
+  "data": {
+    "dolares": [
+      {
+        "moneda": "USD",
+        "casa": "oficial",
+        "nombre": "Oficial",
+        "compra": 1365,
+        "venta": 1415,
+        "fechaActualizacion": "2026-03-11T17:00:00.000Z"
+      },
+      {
+        "moneda": "USD",
+        "casa": "blue",
+        "nombre": "Blue",
+        "compra": 1395,
+        "venta": 1415,
+        "fechaActualizacion": "2026-03-11T20:58:00.000Z"
+      },
+      {
+        "moneda": "USD",
+        "casa": "bolsa",
+        "nombre": "Bolsa",
+        "compra": 1409.5,
+        "venta": 1414.7,
+        "fechaActualizacion": "2026-03-11T20:58:00.000Z"
+      },
+      {
+        "moneda": "USD",
+        "casa": "contadoconliqui",
+        "nombre": "Contado con liquidación",
+        "compra": 1454.3,
+        "venta": 1455.7,
+        "fechaActualizacion": "2026-03-11T20:58:00.000Z"
+      },
+      {
+        "moneda": "USD",
+        "casa": "mayorista",
+        "nombre": "Mayorista",
+        "compra": 1387,
+        "venta": 1396,
+        "fechaActualizacion": "2026-03-11T16:21:00.000Z",
+        "variacion": -0.29
+      },
+      {
+        "moneda": "USD",
+        "casa": "cripto",
+        "nombre": "Cripto",
+        "compra": 1457.7,
+        "venta": 1457.8,
+        "fechaActualizacion": "2026-03-11T20:58:00.000Z"
+      },
+      {
+        "moneda": "USD",
+        "casa": "tarjeta",
+        "nombre": "Tarjeta",
+        "compra": 1774.5,
+        "venta": 1839.5,
+        "fechaActualizacion": "2026-03-11T17:00:00.000Z"
+      }
+    ],
+    "usdt": {
+      "buenbit": {
+        "ask": 1469.57,
+        "totalAsk": 1471.0396,
+        "bid": 1436.53,
+        "totalBid": 1435.0935,
+        "time": 1773275518
+      },
+      "ripio": {
+        "ask": 1466.33,
+        "totalAsk": 1466.33,
+        "bid": 1442.3,
+        "totalBid": 1435.0885,
+        "time": 1773275565
+      },
+      "ripioexchange": {
+        "ask": 1458.1,
+        "totalAsk": 1465.3905,
+        "bid": 1457.5,
+        "totalBid": 1450.2125,
+        "time": 1773275539
+      },
+      "satoshitango": {
+        "ask": 1490.27,
+        "totalAsk": 1497.7213,
+        "bid": 1463.64,
+        "totalBid": 1456.3218,
+        "time": 1773275512
+      },
+      "universalcoins": {
+        "ask": 1485,
+        "totalAsk": 1488.7125,
+        "bid": 1430,
+        "totalBid": 1426.425,
+        "time": 1773275559
+      },
+      "decrypto": {
+        "ask": 1469,
+        "totalAsk": 1474.1415,
+        "bid": 1431,
+        "totalBid": 1425.9915,
+        "time": 1773275521
+      },
+      "letsbit": {
+        "ask": 1477.6906,
+        "totalAsk": 1477.6906,
+        "bid": 1443.8322,
+        "totalBid": 1443.8322,
+        "time": 1773275526
+      },
+      "binancep2p": {
+        "ask": 1461.6,
+        "totalAsk": 1461.6,
+        "bid": 1456.5,
+        "totalBid": 1456.5,
+        "time": 1773275511
+      },
+      "fiwind": {
+        "ask": 1465,
+        "totalAsk": 1465,
+        "bid": 1452,
+        "totalBid": 1452,
+        "time": 1773275508
+      },
+      "lemoncash": {
+        "ask": 1469,
+        "totalAsk": 1476.345,
+        "bid": 1409,
+        "totalBid": 1401.955,
+        "time": 1773275514
+      },
+      "okexp2p": {
+        "ask": 1459.95,
+        "totalAsk": 1459.95,
+        "bid": 1456.27,
+        "totalBid": 1456.27,
+        "time": 1773275545
+      },
+      "vitawallet": {
+        "ask": 1475.6809,
+        "totalAsk": 1475.6809,
+        "bid": 1447.7757,
+        "totalBid": 1447.7757,
+        "time": 1773275514
+      },
+      "belo": {
+        "ask": 1470,
+        "totalAsk": 1470,
+        "bid": 1448,
+        "totalBid": 1448,
+        "time": 1773275565
+      },
+      "huobip2p": {
+        "ask": 0,
+        "totalAsk": 0,
+        "bid": 1100,
+        "totalBid": 1100,
+        "time": 1773251992
+      },
+      "tiendacrypto": {
+        "ask": 1475,
+        "totalAsk": 1475,
+        "bid": 1435,
+        "totalBid": 1435,
+        "time": 1773275513
+      },
+      "bybitp2p": {
+        "ask": 1458.6,
+        "totalAsk": 1458.6,
+        "bid": 1500,
+        "totalBid": 1500,
+        "time": 1773275550
+      },
+      "kucoinp2p": {
+        "ask": 1465,
+        "totalAsk": 1465,
+        "bid": 1450.05,
+        "totalBid": 1450.05,
+        "time": 1773275538
+      },
+      "saldo": {
+        "ask": 1459.5825,
+        "totalAsk": 1459.5825,
+        "bid": 1433.355,
+        "totalBid": 1433.355,
+        "time": 1773275510
+      },
+      "kriptonmarket": {
+        "ask": 1470.17,
+        "totalAsk": 1470.17,
+        "bid": 1436.62,
+        "totalBid": 1436.62,
+        "time": 1773275565
+      },
+      "astropay": {
+        "ask": 1486.4997,
+        "totalAsk": 1486.4997,
+        "bid": 1427.6537,
+        "totalBid": 1427.6537,
+        "time": 1773275566
+      },
+      "bitgetp2p": {
+        "ask": 1461,
+        "totalAsk": 1461,
+        "bid": 1455.25,
+        "totalBid": 1455.25,
+        "time": 1773275545
+      },
+      "pluscrypto": {
+        "ask": 1475,
+        "totalAsk": 1475,
+        "bid": 1435,
+        "totalBid": 1435,
+        "time": 1773275516
+      },
+      "bybit": {
+        "ask": 1477.9781,
+        "totalAsk": 1477.9781,
+        "bid": 1432.1393,
+        "totalBid": 1432.1393,
+        "time": 1773275536
+      },
+      "eluter": {
+        "ask": 1476.4107,
+        "totalAsk": 1491.1748,
+        "bid": 1429.0522,
+        "totalBid": 1414.7617,
+        "time": 1773275513
+      },
+      "binance": {
+        "ask": 1462,
+        "totalAsk": 1463.0965,
+        "bid": 1461.9,
+        "totalBid": 1446.1955,
+        "time": 1773275534
+      },
+      "paydecep2p": {
+        "ask": 1600,
+        "totalAsk": 1604.8,
+        "bid": 1475,
+        "totalBid": 1470.575,
+        "time": 1766147160
+      },
+      "eldoradop2p": {
+        "ask": 1469,
+        "totalAsk": 1483.5431,
+        "bid": 1446,
+        "totalBid": 1431.6846,
+        "time": 1773275540
+      },
+      "trubit": {
+        "ask": 1454,
+        "totalAsk": 1461.27,
+        "bid": 1433.94,
+        "totalBid": 1426.7703,
+        "time": 1773275561
+      },
+      "bingxp2p": {
+        "ask": 1460,
+        "totalAsk": 1460,
+        "bid": 1455.85,
+        "totalBid": 1455.85,
+        "time": 1773275460
+      },
+      "bitsoalpha": {
+        "ask": 1454.8,
+        "totalAsk": 1463.5288,
+        "bid": 1454,
+        "totalBid": 1445.276,
+        "time": 1773275553
+      },
+      "lemoncashp2p": {
+        "ask": 1460,
+        "totalAsk": 1481.9,
+        "bid": 1440,
+        "totalBid": 1418.4,
+        "time": 1773275453
+      },
+      "cocoscrypto": {
+        "ask": 1466.0019,
+        "totalAsk": 1466.0019,
+        "bid": 1446.0023,
+        "totalBid": 1446.0023,
+        "time": 1773275507
+      },
+      "coinexp2p": {
+        "ask": 0,
+        "totalAsk": 0,
+        "bid": 1440.1,
+        "totalBid": 1440.1,
+        "time": 1773275448
+      },
+      "cryptomktpro": {
+        "ask": 1480.68,
+        "totalAsk": 1496.8629,
+        "bid": 1460.06,
+        "totalBid": 1444.1883,
+        "time": 1773275512
+      },
+      "wallbit": {
+        "ask": 1476.29,
+        "totalAsk": 1476.29,
+        "bid": 1433.06,
+        "totalBid": 1433.06,
+        "time": 1773275513
+      },
+      "mexcp2p": {
+        "ask": 1459.8,
+        "totalAsk": 1459.8,
+        "bid": 1455,
+        "totalBid": 1455,
+        "time": 1773275540
+      },
+      "weexp2p": {
+        "ask": 0,
+        "totalAsk": 0,
+        "bid": 1445,
+        "totalBid": 1445,
+        "time": 1773275562
+      },
+      "mexc": {
+        "ask": 1481.701,
+        "totalAsk": 1481.701,
+        "bid": 1468.6444,
+        "totalBid": 1467.9101,
+        "time": 1773275561
+      },
+      "peanut": {
+        "ask": 1470.58,
+        "totalAsk": 1470.58,
+        "bid": 1439.3,
+        "totalBid": 1439.3,
+        "time": 1773275565
+      }
+    },
+    "bancostodos": {
+      "andina": {
+        "ask": 1445,
+        "totalAsk": 1445,
+        "bid": 1380,
+        "totalBid": 1380,
+        "time": 1773275460
+      },
+      "bapro": {
+        "ask": 1425,
+        "totalAsk": 1425,
+        "bid": 1375,
+        "totalBid": 1375,
+        "time": 1772653219
+      },
+      "bbva": {
+        "ask": 1420,
+        "totalAsk": 1420,
+        "bid": 1370,
+        "totalBid": 1370,
+        "time": 1773275514
+      },
+      "bna": {
+        "ask": 1415,
+        "totalAsk": 1415,
+        "bid": 1365,
+        "totalBid": 1365,
+        "time": 1773275477
+      },
+      "brubank": {
+        "ask": 1472,
+        "totalAsk": 1472,
+        "bid": 1420,
+        "totalBid": 1420,
+        "time": 1766167200
+      },
+      "bytelime": {
+        "ask": 1420,
+        "totalAsk": 1420,
+        "bid": 1370,
+        "totalBid": 1370,
+        "time": 1773275455
+      },
+      "ciudad": {
+        "ask": 1470,
+        "totalAsk": 1470,
+        "bid": 1410,
+        "totalBid": 1410,
+        "time": 1769713010
+      },
+      "columbia": {
+        "ask": 1284,
+        "totalAsk": 1284,
+        "bid": 1249,
+        "totalBid": 1249,
+        "time": 1752752543
+      },
+      "comafi": {
+        "ask": 1430,
+        "totalAsk": 1430,
+        "bid": 1370,
+        "totalBid": 1370,
+        "time": 1773275566
+      },
+      "galicia": {
+        "ask": 1470,
+        "totalAsk": 1470,
+        "bid": 1420,
+        "totalBid": 1420,
+        "time": 1766167200
+      },
+      "hipotecario": {
+        "ask": 1435,
+        "totalAsk": 1435,
+        "bid": 1395,
+        "totalBid": 1395,
+        "time": 1773275433
+      },
+      "icbc": {
+        "ask": 1435,
+        "totalAsk": 1435,
+        "bid": 1375,
+        "totalBid": 1375,
+        "time": 1773275460
+      },
+      "macro": {
+        "ask": 1485,
+        "totalAsk": 1485,
+        "bid": 1415,
+        "totalBid": 1415,
+        "time": 1766167200
+      },
+      "mariva": {
+        "ask": 1430,
+        "totalAsk": 1430,
+        "bid": 1370,
+        "totalBid": 1370,
+        "time": 1773275532
+      },
+      "patagonia": {
+        "ask": 1425,
+        "totalAsk": 1425,
+        "bid": 1375,
+        "totalBid": 1375,
+        "time": 1773275478
+      },
+      "piano": {
+        "ask": 1480,
+        "totalAsk": 1480,
+        "bid": 1430,
+        "totalBid": 1430,
+        "time": 1766167200
+      },
+      "plazacambio": {
+        "ask": 1415,
+        "totalAsk": 1415,
+        "bid": 1370,
+        "totalBid": 1370,
+        "time": 1773275414
+      },
+      "pluscambio": {
+        "ask": 1420,
+        "totalAsk": 1420,
+        "bid": 1370,
+        "totalBid": 1370,
+        "time": 1773275463
+      },
+      "prex": {
+        "ask": 1415,
+        "totalAsk": 1415,
+        "bid": 1365,
+        "totalBid": 1365,
+        "time": 1773275459
+      },
+      "santander": {
+        "ask": 1470,
+        "totalAsk": 1470,
+        "bid": 1420,
+        "totalBid": 1420,
+        "time": 1760724000
+      },
+      "supervielle": {
+        "ask": 1425,
+        "totalAsk": 1425,
+        "bid": 1385,
+        "totalBid": 1385,
+        "time": 1773275462
+      },
+      "triacambio": {
+        "ask": 1420,
+        "totalAsk": 1420,
+        "bid": 1370,
+        "totalBid": 1370,
+        "time": 1773275419
+      }
+    },
+    "argentinadatos_fci": [
+      {
+        "fondo": "BELO",
+        "tna": 0.205,
+        "tea": 0.2275,
+        "tope": null,
+        "fecha": "2026-03-11",
+        "condiciones": null,
+        "condicionesCorto": null
+      },
+      {
+        "fondo": "BNA",
+        "tna": 0.2,
+        "tea": 0.2213,
+        "tope": 2000000,
+        "fecha": "2026-03-11",
+        "condiciones": "Válido en la República Argentina exclusivo para clientes de cartera consumo titulares o cotitulares de una cuenta sueldo. No se remuneran cuentas en estado bloqueado y/o con embargos vigentes.",
+        "condicionesCorto": "Clientes que perciban sus haberes a través del BNA."
+      },
+      {
+        "fondo": "BRUBANK",
+        "tna": 0.27,
+        "tea": 0.3098,
+        "tope": 750000,
+        "fecha": "2025-08-06",
+        "condiciones": null,
+        "condicionesCorto": null
+      },
+      {
+        "fondo": "CARREFOUR BANCO",
+        "tna": 0.3,
+        "tea": 0.3497,
+        "tope": null,
+        "fecha": "2026-03-11",
+        "condiciones": "Permite ingresar $ 4.228.800 / mes",
+        "condicionesCorto": "Permite ingresar $ 4.228.800 / mes"
+      },
+      {
+        "fondo": "CRESIUM",
+        "tna": 0.2332,
+        "tea": 0.2625,
+        "tope": null,
+        "fecha": "2026-03-11",
+        "condiciones": null,
+        "condicionesCorto": "Solo Personas Jurídicas."
+      },
+      {
+        "fondo": "FIWIND",
+        "tna": 0.24,
+        "tea": 0.2711,
+        "tope": 750000,
+        "fecha": "2026-03-11",
+        "condiciones": null,
+        "condicionesCorto": null
+      },
+      {
+        "fondo": "MONTEMAR PAY",
+        "tna": 0.25,
+        "tea": 0.2839,
+        "tope": null,
+        "fecha": "2026-02-17",
+        "condiciones": null,
+        "condicionesCorto": null
+      },
+      {
+        "fondo": "NARANJA X",
+        "tna": 0.25,
+        "tea": 0.2807,
+        "tope": 1000000,
+        "fecha": "2026-01-26",
+        "condiciones": null,
+        "condicionesCorto": null
+      },
+      {
+        "fondo": "SUPERVIELLE",
+        "tna": 0.197,
+        "tea": 0.2177,
+        "tope": 1000000,
+        "fecha": "2026-02-28",
+        "condiciones": null,
+        "condicionesCorto": "Solo Clientes Plan Sueldo."
+      },
+      {
+        "fondo": "UALA",
+        "tna": 0.23,
+        "tea": 0.2585,
+        "tope": 1000000,
+        "fecha": "2026-02-12",
+        "condiciones": null,
+        "condicionesCorto": null
+      },
+      {
+        "fondo": "UALA PLUS 1",
+        "tna": 0.26,
+        "tea": 0.2968,
+        "tope": 1000000,
+        "fecha": "2026-02-12",
+        "condiciones": "Si sumás $250.000 en ciertas operaciones este mes (invertir desde la app en dólares, acciones, bonos y CEDEARs; consumos con tarjeta de crédito; cobrar con Ualá Bis), el próximo tu tasa sube hasta 27% TNA. Acordate que las tasas pueden variar.",
+        "condicionesCorto": "Acumulá $250.000 entre inversiones, consumos con tarjeta y cobros con Ualá Bis para acceder a la tasa Plus 1 el próximo mes"
+      },
+      {
+        "fondo": "UALA PLUS 2",
+        "tna": 0.29,
+        "tea": 0.3363,
+        "tope": 1000000,
+        "fecha": "2026-02-12",
+        "condiciones": "Si sumás $500.000 en ciertas operaciones este mes (invertir desde la app en dólares, acciones, bonos y CEDEARs; consumos con tarjeta de crédito; cobrar con Ualá Bis), el próximo tu tasa sube hasta 30% TNA. Acordate que las tasas pueden variar.",
+        "condicionesCorto": "Acumulá $500.000 entre inversiones, consumos con tarjeta y cobros con Ualá Bis para acceder a la tasa Plus 2 el próximo mes"
+      }
+    ],
+    "acabase_granos": {
+      "result": {
+        "resultCode": 600,
+        "value": [
+          {
+            "producto": "GI",
+            "nombre": "GIRASOL   ",
+            "puerto": "RS",
+            "importe": 528580,
+            "cierre": null,
+            "dif": -6080,
+            "fecha": "11/03/2026",
+            "hora": "10:27"
+          },
+          {
+            "producto": "MZ",
+            "nombre": "MAIZ      ",
+            "puerto": "RS",
+            "importe": 247600,
+            "cierre": null,
+            "dif": -3400,
+            "fecha": "11/03/2026",
+            "hora": "10:26"
+          },
+          {
+            "producto": "SG",
+            "nombre": "SORGO     ",
+            "puerto": "RS",
+            "importe": 264290,
+            "cierre": null,
+            "dif": 790,
+            "fecha": "11/03/2026",
+            "hora": "10:29"
+          },
+          {
+            "producto": "SO",
+            "nombre": "SOJA      ",
+            "puerto": "RS",
+            "importe": 461500,
+            "cierre": null,
+            "dif": -3500,
+            "fecha": "11/03/2026",
+            "hora": "10:29"
+          },
+          {
+            "producto": "TR",
+            "nombre": "TRIGO     ",
+            "puerto": "RS",
+            "importe": 254550,
+            "cierre": null,
+            "dif": -5450,
+            "fecha": "11/03/2026",
+            "hora": "10:25"
+          }
+        ],
+        "isCompressed": 0,
+        "resultSize": 704,
+        "domain": null,
+        "lastUpdatedDateData": "2026-03-11T21:32:50-03:00"
+      }
+    },
+    "plazofijo": [
+      {
+        "entidad": "BANCO DE LA NACION ARGENTINA",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00011.png",
+        "tnaClientes": null,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO SANTANDER ARGENTINA S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00072.png",
+        "tnaClientes": 0.23,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO DE GALICIA Y BUENOS AIRES S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00007.png",
+        "tnaClientes": 0.23,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO DE LA PROVINCIA DE BUENOS AIRES",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00014.png",
+        "tnaClientes": 0.25,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO BBVA ARGENTINA S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00017.png",
+        "tnaClientes": 0.23,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO MACRO S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00285.png",
+        "tnaClientes": 0.27,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "Banco GGAL SA",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00150.png",
+        "tnaClientes": null,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO CREDICOOP COOPERATIVO LIMITADO",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00191.png",
+        "tnaClientes": 0.22,
+        "tnaNoClientes": 0.22,
+        "enlace": "https://www.bancocredicoop.coop/personas/solicitud-de-plazo-fijo"
+      },
+      {
+        "entidad": "INDUSTRIAL AND COMMERCIAL BANK OF CHINA (ARGENTINA) S.A.U.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00015.png",
+        "tnaClientes": null,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO DE LA CIUDAD DE BUENOS AIRES",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00029.png",
+        "tnaClientes": 0.21,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "Otros bancos que informan tasa de plazo fijo online para no clientes",
+        "logo": "https://www.bcra.gob.ar/undefined",
+        "tnaClientes": null,
+        "tnaNoClientes": null,
+        "enlace": null
+      },
+      {
+        "entidad": "BANCO BICA S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00426.png",
+        "tnaClientes": 0.31,
+        "tnaNoClientes": 0.31,
+        "enlace": "https://plazofijo.bancobica.com.ar/"
+      },
+      {
+        "entidad": "BANCO CMF S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00319.png",
+        "tnaClientes": 0.33,
+        "tnaNoClientes": 0.33,
+        "enlace": "https://www.bancocmf.com.ar/plazo-fijo-web-2/"
+      },
+      {
+        "entidad": "BANCO COMAFI SOCIEDAD ANONIMA",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00299.png",
+        "tnaClientes": 0.24,
+        "tnaNoClientes": 0.24,
+        "enlace": "https://plazofijodigital.comafi.com.ar/#/simulator/form"
+      },
+      {
+        "entidad": "BANCO DE COMERCIO S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00432.png",
+        "tnaClientes": 0.27,
+        "tnaNoClientes": 0.27,
+        "enlace": "https://bancodecomercio.com.ar/plazo-fijo-web"
+      },
+      {
+        "entidad": "BANCO DE CORRIENTES S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00094.png",
+        "tnaClientes": 0.24,
+        "tnaNoClientes": 0.24,
+        "enlace": "https://aplicativos.bancodecorrientes.com.ar/sitio/clientes_solicitud-pf.php"
+      },
+      {
+        "entidad": "BANCO DE FORMOSA S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00315.png",
+        "tnaClientes": 0.21,
+        "tnaNoClientes": 0.21,
+        "enlace": "https://www.bancoformosa.com.ar/simulador-plazo-fijo.aspx"
+      },
+      {
+        "entidad": "BANCO DE LA PROVINCIA DE CORDOBA S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00020.png",
+        "tnaClientes": 0.29,
+        "tnaNoClientes": 0.29,
+        "enlace": "https://www.bancor.com.ar/737_plazofijovirtual"
+      },
+      {
+        "entidad": "BANCO DEL CHUBUT S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00083.png",
+        "tnaClientes": 0.26,
+        "tnaNoClientes": 0.26,
+        "enlace": "https://www.bancochubut.com.ar/webinstitucional/personas/inversiones/inversionesbch/plazo_fijo_noclientes"
+      },
+      {
+        "entidad": "BANCO DEL SOL S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00310.png",
+        "tnaClientes": 0.29,
+        "tnaNoClientes": 0.29,
+        "enlace": "https://www.bancodelsol.com/"
+      },
+      {
+        "entidad": "BANCO DINO S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00448.png",
+        "tnaClientes": 0.27,
+        "tnaNoClientes": 0.27,
+        "enlace": "https://bancodino.com/personas/plazo-fijo/"
+      },
+      {
+        "entidad": "BANCO HIPOTECARIO S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00044.png",
+        "tnaClientes": 0.26,
+        "tnaNoClientes": null,
+        "enlace": "https://buhobank.com/onboarding/"
+      },
+      {
+        "entidad": "BANCO JULIO SOCIEDAD ANONIMA",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00305.png",
+        "tnaClientes": null,
+        "tnaNoClientes": null,
+        "enlace": "https://plazofijo.bancojulio.com.ar"
+      },
+      {
+        "entidad": "BANCO MARIVA S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00254.png",
+        "tnaClientes": 0.29,
+        "tnaNoClientes": 0.29,
+        "enlace": "https://pfweb.mariva.com.ar/"
+      },
+      {
+        "entidad": "BANCO MASVENTAS S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00341.png",
+        "tnaClientes": 0.24,
+        "tnaNoClientes": 0.25,
+        "enlace": "https://www.bancomasventas.com.ar/personas/inversiones/plazo-fijo-web"
+      },
+      {
+        "entidad": "BANCO MERIDIAN S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00281.png",
+        "tnaClientes": 0.32,
+        "tnaNoClientes": 0.32,
+        "enlace": "https://www.bancomeridian.com.ar/OnlineTermDeposit/Simulation"
+      },
+      {
+        "entidad": "BANCO PROVINCIA DE TIERRA DEL FUEGO",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00268.png",
+        "tnaClientes": 0.25,
+        "tnaNoClientes": 0.21,
+        "enlace": "https://www.btf.com.ar/contacto/solicitud_pf_web/"
+      },
+      {
+        "entidad": "BANCO VOII S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00312.png",
+        "tnaClientes": 0.33,
+        "tnaNoClientes": 0.33,
+        "enlace": "https://www.voii.com.ar/plazo-fijo-web/"
+      },
+      {
+        "entidad": "BIBANK S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00147.png",
+        "tnaClientes": 0.28,
+        "tnaNoClientes": 0.28,
+        "enlace": "https://bibank.com.ar/plazo-fijo-personas/"
+      },
+      {
+        "entidad": "CRÃDITO REGIONAL COMPAÃÃA FINANCIERA S.A.U.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/65203.png",
+        "tnaClientes": 0.33,
+        "tnaNoClientes": 0.33,
+        "enlace": "https://www.creditoregional.com.ar/solplazofijoweb.html"
+      },
+      {
+        "entidad": "REBA COMPAÃIA FINANCIERA S.A.",
+        "logo": "https://www.bcra.gob.ar/archivos/Imagenes/logosbancos/45072.png",
+        "tnaClientes": 0.3,
+        "tnaNoClientes": 0.3,
+        "enlace": "https://www.reba.com.ar/plazo-fijo/?utm_source=web&utm_medium=bcra&utm_campaign=cantidad-visitas-bcra&utm_id=plazo-fijo-bcra"
+      },
+      {
+        "entidad": "UALA",
+        "logo": "https://icons.com.ar/icons/bancos-apps/uala.svg",
+        "tnaClientes": 0.27,
+        "tnaNoClientes": 0.27,
+        "enlace": "https://www.uala.com.ar/inversiones/plazo-fijo"
+      }
+    ],
+    "hacienda": {
+      "hoy": "11/03/2026",
+      "semana_pasada": {
+        "hasta": "10/03",
+        "desde": "03/03"
+      },
+      "cotizacion_semana_repasada": "1413.83",
+      "cotizacion_blue_semana_repasada": "1407.83",
+      "cotizacion_semana_pasada": "1430.83",
+      "cotizacion_blue_semana_pasada": "1396.67",
+      "cotizacion_semana_actual": "1418.00",
+      "cotizacion_blue_semana_actual": "1395.00",
+      "data": [
+        {
+          "categoria": "Novillitos hasta 390 Kg.",
+          "cantidad_semana_1": 447,
+          "cantidad_semana_2": 2350,
+          "precio_semana_1": 5077,
+          "precio_semana_2": 5360,
+          "precio_semana_1_formatted": "5.077",
+          "precio_semana_2_formatted": "5.360",
+          "precio_semana_1_usd": 3.58,
+          "precio_semana_2_usd": 3.75,
+          "precio_semana_1_usd_formatted": "3,58",
+          "precio_semana_2_usd_formatted": "3,75",
+          "precio_semana_1_blue": 3.64,
+          "precio_semana_2_blue": 3.84,
+          "precio_semana_1_blue_formatted": "3,64",
+          "precio_semana_2_blue_formatted": "3,84",
+          "variacion_precio_semana_1": -283,
+          "variacion_precio_semana_2": -8,
+          "variacion_precio_semana_1_formatted": "-283,00",
+          "variacion_precio_semana_2_formatted": "-8,00",
+          "variacion_precio_semana_1_usd": -0.17,
+          "variacion_precio_semana_2_usd": -0.05,
+          "variacion_precio_semana_1_usd_formatted": "-0,17",
+          "variacion_precio_semana_2_usd_formatted": "-0,05",
+          "variacion_precio_semana_1_blue": -0.2,
+          "variacion_precio_semana_2_blue": 0,
+          "variacion_precio_semana_1_blue_formatted": "-0,20",
+          "variacion_precio_semana_2_blue_formatted": "0,00",
+          "variacion_precio_usd_semana_1": -0.17,
+          "variacion_precio_usd_semana_2": -0.05,
+          "variacion_precio_blue_semana_1": -0.2,
+          "variacion_precio_blue_semana_2": 0,
+          "cantidad_semana_3": 1495,
+          "precio_semana_3": 5368,
+          "precio_semana_3_usd": 3.8,
+          "precio_semana_3_blue": 3.84
+        },
+        {
+          "categoria": "Novillitos 391/430 Kg.",
+          "cantidad_semana_1": 392,
+          "cantidad_semana_2": 2274,
+          "precio_semana_1": 4818,
+          "precio_semana_2": 4952,
+          "precio_semana_1_formatted": "4.818",
+          "precio_semana_2_formatted": "4.952",
+          "precio_semana_1_usd": 3.4,
+          "precio_semana_2_usd": 3.46,
+          "precio_semana_1_usd_formatted": "3,40",
+          "precio_semana_2_usd_formatted": "3,46",
+          "precio_semana_1_blue": 3.45,
+          "precio_semana_2_blue": 3.55,
+          "precio_semana_1_blue_formatted": "3,45",
+          "precio_semana_2_blue_formatted": "3,55",
+          "variacion_precio_semana_1": -134,
+          "variacion_precio_semana_2": -235,
+          "variacion_precio_semana_1_formatted": "-134,00",
+          "variacion_precio_semana_2_formatted": "-235,00",
+          "variacion_precio_semana_1_usd": -0.06,
+          "variacion_precio_semana_2_usd": -0.21,
+          "variacion_precio_semana_1_usd_formatted": "-0,06",
+          "variacion_precio_semana_2_usd_formatted": "-0,21",
+          "variacion_precio_semana_1_blue": -0.1,
+          "variacion_precio_semana_2_blue": -0.16,
+          "variacion_precio_semana_1_blue_formatted": "-0,10",
+          "variacion_precio_semana_2_blue_formatted": "-0,16",
+          "variacion_precio_usd_semana_1": -0.06,
+          "variacion_precio_usd_semana_2": -0.21,
+          "variacion_precio_blue_semana_1": -0.1,
+          "variacion_precio_blue_semana_2": -0.16,
+          "cantidad_semana_3": 1473,
+          "precio_semana_3": 5187,
+          "precio_semana_3_usd": 3.67,
+          "precio_semana_3_blue": 3.71
+        },
+        {
+          "categoria": "Novillos 431/460 Kg.",
+          "cantidad_semana_1": 163,
+          "cantidad_semana_2": 1016,
+          "precio_semana_1": 4785,
+          "precio_semana_2": 4822,
+          "precio_semana_1_formatted": "4.785",
+          "precio_semana_2_formatted": "4.822",
+          "precio_semana_1_usd": 3.37,
+          "precio_semana_2_usd": 3.37,
+          "precio_semana_1_usd_formatted": "3,37",
+          "precio_semana_2_usd_formatted": "3,37",
+          "precio_semana_1_blue": 3.43,
+          "precio_semana_2_blue": 3.45,
+          "precio_semana_1_blue_formatted": "3,43",
+          "precio_semana_2_blue_formatted": "3,45",
+          "variacion_precio_semana_1": -37,
+          "variacion_precio_semana_2": -81,
+          "variacion_precio_semana_1_formatted": "-37,00",
+          "variacion_precio_semana_2_formatted": "-81,00",
+          "variacion_precio_semana_1_usd": 0,
+          "variacion_precio_semana_2_usd": -0.1,
+          "variacion_precio_semana_1_usd_formatted": "0,00",
+          "variacion_precio_semana_2_usd_formatted": "-0,10",
+          "variacion_precio_semana_1_blue": -0.02,
+          "variacion_precio_semana_2_blue": -0.06,
+          "variacion_precio_semana_1_blue_formatted": "-0,02",
+          "variacion_precio_semana_2_blue_formatted": "-0,06",
+          "variacion_precio_usd_semana_1": 0,
+          "variacion_precio_usd_semana_2": -0.1,
+          "variacion_precio_blue_semana_1": -0.02,
+          "variacion_precio_blue_semana_2": -0.06,
+          "cantidad_semana_3": 639,
+          "precio_semana_3": 4903,
+          "precio_semana_3_usd": 3.47,
+          "precio_semana_3_blue": 3.51
+        },
+        {
+          "categoria": "Novillos 461/490 Kg.",
+          "cantidad_semana_1": 274,
+          "cantidad_semana_2": 1197,
+          "precio_semana_1": 4768,
+          "precio_semana_2": 4783,
+          "precio_semana_1_formatted": "4.768",
+          "precio_semana_2_formatted": "4.783",
+          "precio_semana_1_usd": 3.36,
+          "precio_semana_2_usd": 3.34,
+          "precio_semana_1_usd_formatted": "3,36",
+          "precio_semana_2_usd_formatted": "3,34",
+          "precio_semana_1_blue": 3.42,
+          "precio_semana_2_blue": 3.42,
+          "precio_semana_1_blue_formatted": "3,42",
+          "precio_semana_2_blue_formatted": "3,42",
+          "variacion_precio_semana_1": -15,
+          "variacion_precio_semana_2": -107,
+          "variacion_precio_semana_1_formatted": "-15,00",
+          "variacion_precio_semana_2_formatted": "-107,00",
+          "variacion_precio_semana_1_usd": 0.02,
+          "variacion_precio_semana_2_usd": -0.12,
+          "variacion_precio_semana_1_usd_formatted": "0,02",
+          "variacion_precio_semana_2_usd_formatted": "-0,12",
+          "variacion_precio_semana_1_blue": 0,
+          "variacion_precio_semana_2_blue": -0.08,
+          "variacion_precio_semana_1_blue_formatted": "0,00",
+          "variacion_precio_semana_2_blue_formatted": "-0,08",
+          "variacion_precio_usd_semana_1": 0.02,
+          "variacion_precio_usd_semana_2": -0.12,
+          "variacion_precio_blue_semana_1": 0,
+          "variacion_precio_blue_semana_2": -0.08,
+          "cantidad_semana_3": 921,
+          "precio_semana_3": 4890,
+          "precio_semana_3_usd": 3.46,
+          "precio_semana_3_blue": 3.5
+        },
+        {
+          "categoria": "Vaquillonas hasta 390 Kg.",
+          "cantidad_semana_1": 736,
+          "cantidad_semana_2": 5830,
+          "precio_semana_1": 5066,
+          "precio_semana_2": 5289,
+          "precio_semana_1_formatted": "5.066",
+          "precio_semana_2_formatted": "5.289",
+          "precio_semana_1_usd": 3.57,
+          "precio_semana_2_usd": 3.7,
+          "precio_semana_1_usd_formatted": "3,57",
+          "precio_semana_2_usd_formatted": "3,70",
+          "precio_semana_1_blue": 3.63,
+          "precio_semana_2_blue": 3.79,
+          "precio_semana_1_blue_formatted": "3,63",
+          "precio_semana_2_blue_formatted": "3,79",
+          "variacion_precio_semana_1": -223,
+          "variacion_precio_semana_2": -6,
+          "variacion_precio_semana_1_formatted": "-223,00",
+          "variacion_precio_semana_2_formatted": "-6,00",
+          "variacion_precio_semana_1_usd": -0.13,
+          "variacion_precio_semana_2_usd": -0.05,
+          "variacion_precio_semana_1_usd_formatted": "-0,13",
+          "variacion_precio_semana_2_usd_formatted": "-0,05",
+          "variacion_precio_semana_1_blue": -0.16,
+          "variacion_precio_semana_2_blue": 0,
+          "variacion_precio_semana_1_blue_formatted": "-0,16",
+          "variacion_precio_semana_2_blue_formatted": "0,00",
+          "variacion_precio_usd_semana_1": -0.13,
+          "variacion_precio_usd_semana_2": -0.05,
+          "variacion_precio_blue_semana_1": -0.16,
+          "variacion_precio_blue_semana_2": 0,
+          "cantidad_semana_3": 4138,
+          "precio_semana_3": 5295,
+          "precio_semana_3_usd": 3.75,
+          "precio_semana_3_blue": 3.79
+        },
+        {
+          "categoria": "Vacas Buenas",
+          "cantidad_semana_1": 824,
+          "cantidad_semana_2": 3219,
+          "precio_semana_1": 3351,
+          "precio_semana_2": 3523,
+          "precio_semana_1_formatted": "3.351",
+          "precio_semana_2_formatted": "3.523",
+          "precio_semana_1_usd": 2.36,
+          "precio_semana_2_usd": 2.46,
+          "precio_semana_1_usd_formatted": "2,36",
+          "precio_semana_2_usd_formatted": "2,46",
+          "precio_semana_1_blue": 2.4,
+          "precio_semana_2_blue": 2.52,
+          "precio_semana_1_blue_formatted": "2,40",
+          "precio_semana_2_blue_formatted": "2,52",
+          "variacion_precio_semana_1": -172,
+          "variacion_precio_semana_2": -145,
+          "variacion_precio_semana_1_formatted": "-172,00",
+          "variacion_precio_semana_2_formatted": "-145,00",
+          "variacion_precio_semana_1_usd": -0.1,
+          "variacion_precio_semana_2_usd": -0.13,
+          "variacion_precio_semana_1_usd_formatted": "-0,10",
+          "variacion_precio_semana_2_usd_formatted": "-0,13",
+          "variacion_precio_semana_1_blue": -0.12,
+          "variacion_precio_semana_2_blue": -0.11,
+          "variacion_precio_semana_1_blue_formatted": "-0,12",
+          "variacion_precio_semana_2_blue_formatted": "-0,11",
+          "variacion_precio_usd_semana_1": -0.1,
+          "variacion_precio_usd_semana_2": -0.13,
+          "variacion_precio_blue_semana_1": -0.12,
+          "variacion_precio_blue_semana_2": -0.11,
+          "cantidad_semana_3": 2742,
+          "precio_semana_3": 3668,
+          "precio_semana_3_usd": 2.59,
+          "precio_semana_3_blue": 2.63
+        },
+        {
+          "categoria": "Vacas Regulares",
+          "cantidad_semana_1": 1516,
+          "cantidad_semana_2": 5016,
+          "precio_semana_1": 2810,
+          "precio_semana_2": 2971,
+          "precio_semana_1_formatted": "2.810",
+          "precio_semana_2_formatted": "2.971",
+          "precio_semana_1_usd": 1.98,
+          "precio_semana_2_usd": 2.08,
+          "precio_semana_1_usd_formatted": "1,98",
+          "precio_semana_2_usd_formatted": "2,08",
+          "precio_semana_1_blue": 2.01,
+          "precio_semana_2_blue": 2.13,
+          "precio_semana_1_blue_formatted": "2,01",
+          "precio_semana_2_blue_formatted": "2,13",
+          "variacion_precio_semana_1": -161,
+          "variacion_precio_semana_2": -11,
+          "variacion_precio_semana_1_formatted": "-161,00",
+          "variacion_precio_semana_2_formatted": "-11,00",
+          "variacion_precio_semana_1_usd": -0.1,
+          "variacion_precio_semana_2_usd": -0.03,
+          "variacion_precio_semana_1_usd_formatted": "-0,10",
+          "variacion_precio_semana_2_usd_formatted": "-0,03",
+          "variacion_precio_semana_1_blue": -0.12,
+          "variacion_precio_semana_2_blue": -0.01,
+          "variacion_precio_semana_1_blue_formatted": "-0,12",
+          "variacion_precio_semana_2_blue_formatted": "-0,01",
+          "variacion_precio_usd_semana_1": -0.1,
+          "variacion_precio_usd_semana_2": -0.03,
+          "variacion_precio_blue_semana_1": -0.12,
+          "variacion_precio_blue_semana_2": -0.01,
+          "cantidad_semana_3": 4295,
+          "precio_semana_3": 2982,
+          "precio_semana_3_usd": 2.11,
+          "precio_semana_3_blue": 2.14
+        },
+        {
+          "categoria": "Vacas Conserva",
+          "cantidad_semana_1": 385,
+          "cantidad_semana_2": 1292,
+          "precio_semana_1": 2311,
+          "precio_semana_2": 2546,
+          "precio_semana_1_formatted": "2.311",
+          "precio_semana_2_formatted": "2.546",
+          "precio_semana_1_usd": 1.63,
+          "precio_semana_2_usd": 1.78,
+          "precio_semana_1_usd_formatted": "1,63",
+          "precio_semana_2_usd_formatted": "1,78",
+          "precio_semana_1_blue": 1.66,
+          "precio_semana_2_blue": 1.82,
+          "precio_semana_1_blue_formatted": "1,66",
+          "precio_semana_2_blue_formatted": "1,82",
+          "variacion_precio_semana_1": -235,
+          "variacion_precio_semana_2": 39,
+          "variacion_precio_semana_1_formatted": "-235,00",
+          "variacion_precio_semana_2_formatted": "39,00",
+          "variacion_precio_semana_1_usd": -0.15,
+          "variacion_precio_semana_2_usd": 0.01,
+          "variacion_precio_semana_1_usd_formatted": "-0,15",
+          "variacion_precio_semana_2_usd_formatted": "0,01",
+          "variacion_precio_semana_1_blue": -0.16,
+          "variacion_precio_semana_2_blue": 0.03,
+          "variacion_precio_semana_1_blue_formatted": "-0,16",
+          "variacion_precio_semana_2_blue_formatted": "0,03",
+          "variacion_precio_usd_semana_1": -0.15,
+          "variacion_precio_usd_semana_2": 0.01,
+          "variacion_precio_blue_semana_1": -0.16,
+          "variacion_precio_blue_semana_2": 0.03,
+          "cantidad_semana_3": 1011,
+          "precio_semana_3": 2507,
+          "precio_semana_3_usd": 1.77,
+          "precio_semana_3_blue": 1.79
+        }
+      ]
+    }
+  }
+}
