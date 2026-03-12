@@ -2,16 +2,18 @@ name: Fetch Data
 
 on:
   schedule:
-    # Lunes a Viernes: 10:00 - 17:00 ART (13:00 - 20:00 UTC) Cada 15 min
-    - cron: '*/15 13-20 * * 1-5'
-    # Lunes a Viernes: Resto del tiempo (0-12, 21-23 UTC) Cada 40 min
-    - cron: '0,40 0-12,21-23 * * 1-5'
-    # Fines de semana: Cada 1.5 horas (90 min)
-    - cron: '0 0,3,6,9,12,15,18,21 * * 0,6'
-    - cron: '30 1,4,7,10,13,16,19,22 * * 0,6'
+    # 1. COTIZACIONES: Cada 5 min (Lunes-Viernes 10-17 ART / 13-20 UTC)
+    - cron: '*/5 13-20 * * 1-5'
+    
+    # 2. PIZARRA: Cada 30 min (Lunes-Viernes 10-17 ART / 13-20 UTC)
+    # (Ya está cubierto por el de 5 min, el script puede manejarlo o usamos un cron separado)
+    - cron: '*/30 * * * *'
+    
+    # 3. TASAS/CAÑUELAS/NOTICIAS: 4 veces al día (Cada 6 horas)
+    - cron: '0 0,6,12,18 * * *'
+
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -29,24 +31,36 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch data
-        run: node scripts/fetch_data.js
+      - name: Fetch Financial Data
+        run: |
+          # Determinar qué modo usar basado en la hora/minuto
+          # (Lógica simple: si el minuto es divisible por 30, hacemos pizarra. 
+          # Si la hora es divisible por 6, hacemos rates/news/all)
+          
+          MINUTE=$(date +%-M)
+          HOUR=$(date +%-H)
+          DAY=$(date +%u)
 
-      - name: Check for changes
-        id: git-check
+          if [ $((HOUR % 6)) -eq 0 ] && [ "$MINUTE" -eq 0 ]; then
+            echo "Running FULL UPDATE"
+            node scripts/fetch_data.js --all
+          elif [ $((MINUTE % 30)) -eq 0 ]; then
+            echo "Running AGRO + QUOTES update"
+            node scripts/fetch_data.js --agro
+            node scripts/fetch_data.js --quotes
+          else
+            echo "Running QUOTES update only"
+            node scripts/fetch_data.js --quotes
+          fi
+
+      - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/*.json
-          git status --porcelain
           if [ -n "$(git status --porcelain)" ]; then
-            echo "changes=true" >> $GITHUB_OUTPUT
+            git commit -m "chore: update financial data [skip ci]"
+            git push
           else
-            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
           fi
-
-      - name: Commit and push changes
-        if: steps.git-check.outputs.changes == 'true'
-        run: |
-          git commit -m "chore: update static data [skip ci]"
-          git push
