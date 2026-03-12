@@ -316,12 +316,7 @@ const IndexPage = {
 
         tbody.innerHTML = sorted.map(item => `
             <tr>
-                <td>
-                    <div class="entity-info">
-                        ${item.logo ? `<img src="${item.logo}" class="entity-logo">` : '<div class="entity-logo"></div>'}
-                        ${item.entity}
-                    </div>
-                </td>
+                <td>${item.entity}</td>
                 <td class="text-right ${item.ask === bestAsk.ask ? 'highlight-buy' : ''}">${CalculadoraFinanciera.Formatters.currency(item.ask)}</td>
                 <td class="text-right ${item.bid === bestBid.bid ? 'highlight-sell' : ''}">${CalculadoraFinanciera.Formatters.currency(item.bid)}</td>
             </tr>

@@ -1,71 +1,47 @@
 /* ========================================================== */
-/* === ESTILOS COMPARTIDOS - CALCULADORA FINANCIERA === */
-/* === VERSIÓN MODERNA - MINIMALISTA CON GLOW EFFECTS === */
+/* === ESTILOS COMPARTIDOS - PAMPA FINANCE (NAV INFERIOR) === */
 /* ========================================================== */
 
-/* === PALETA DE COLORES SERIA Y MODERNA (MODO OSCURO FORZADO) === */
 :root {
   --primary: #1a1a1a;
-  --secondary: #2a2a2a;
-  --accent: #3a3a3a;
   --surface: #0f0f0f;
   --surface-elevated: #151515;
-
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
-  --text-muted: #666666;
-  --text-accent: #e0e0e0;
-
   --success: #00d4aa;
   --success-glow: rgba(0, 212, 170, 0.15);
-  --error: #ff4757;
-  --error-glow: rgba(255, 71, 87, 0.15);
-  --warning: #ffa502;
   --info: #3742fa;
-  --info-glow: rgba(55, 66, 250, 0.15);
-
   --buy: #00d4aa;
   --buy-glow: rgba(0, 212, 170, 0.1);
   --sell: #3742fa;
   --sell-glow: rgba(55, 66, 250, 0.1);
-
-  --glow-primary: 0 0 20px rgba(255, 255, 255, 0.05);
   --max-width: 1200px;
-  --padding-mobile: 16px;
+  --padding-mobile: 15px;
   --padding-desktop: 24px;
-  --border-radius: 4px;
-
-  --transition-fast: 0.2s ease-out;
-  --transition-normal: 0.3s ease-out;
 }
 
-* { box-sizing: border-box; }
-
-html {
-  background: var(--surface) !important;
-  min-height: 100vh;
-}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
   background: var(--surface);
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   margin: 0;
   padding: 0;
-  line-height: 1.6;
-  overflow-x: hidden;
+  line-height: 1.5;
 }
 
-/* === NAVEGACIÓN === */
+/* === NAVEGACIÓN INFERIOR (ESTILO ORIGINAL PERO ABAJO) === */
 .nav-container {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   z-index: 2000;
   background: rgba(10, 10, 10, 0.98);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid #1a1a1a;
+  border-top: 1px solid #1a1a1a;
   height: 60px;
-  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -80,67 +56,33 @@ nav {
   align-items: center;
 }
 
-@media (min-width: 768px) {
-    nav { padding: 0 var(--padding-desktop); }
-}
-
 .nav-header-group {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .nav-brand {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 900;
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
-  white-space: nowrap;
+  letter-spacing: 0px;
 }
 
-.nav-menu { 
-    display: flex; 
-    list-style: none; 
-    gap: 5px; 
-    margin: 0; 
-    padding: 0; 
-}
-
-.nav-link {
-  padding: 8px 12px;
-  color: #888;
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.nav-icon { font-size: 1.1rem; }
-
-.nav-link:hover, .nav-link.active { 
-    color: var(--success); 
-    background: rgba(255,255,255,0.03);
-    border-radius: 4px;
-}
-
-/* Hamburguesa */
+/* Botón Hamburguesa */
 .nav-toggle {
-    display: none;
+    display: flex;
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
     width: 40px;
     height: 40px;
-    position: relative;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    z-index: 2100;
 }
 
 .nav-toggle span {
@@ -156,289 +98,105 @@ nav {
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
 .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 1024px) {
-    .nav-toggle { display: flex; }
-    
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: #050505;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 2050;
-    }
-
-    .nav-menu.mobile-hidden {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-50px);
-    }
-
-    .nav-menu.mobile-visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    .nav-link {
-        font-size: 1.4rem;
-        padding: 15px 30px;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .nav-icon { font-size: 1.8rem; }
-}
-
-@keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-30px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.slide-in-left {
-    animation: slideInLeft 0.5s forwards;
-}
-
-/* === GRID DE PRECIOS PRINCIPAL (DÓLARES) === */
-.dolar-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 40px;
-}
-
-.dolar-card {
+/* Menú que se abre */
+.nav-menu {
+    position: fixed;
+    bottom: 60px; /* Sobre la barra */
+    left: 0;
+    width: 100%;
     background: #0a0a0a;
-    border: 1px solid #1a1a1a;
+    border-top: 1px solid #1a1a1a;
+    list-style: none;
     padding: 20px;
-    text-align: center;
-    transition: transform 0.2s;
-}
-
-.dolar-card:hover { border-color: #333; }
-
-.dolar-name {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: #555;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-}
-
-.dolar-price {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #fff;
-}
-
-.dolar-sub {
-    font-size: 0.75rem;
-    color: #444;
-    margin-top: 5px;
-}
-
-/* === CARDS DE ENTIDADES (BANCOS / EXCHANGES) === */
-.price-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.price-card {
-    background: #0a0a0a;
-    border: 1px solid #1a1a1a;
-    padding: 20px;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1999;
 }
 
-.price-card-header {
+.nav-menu.mobile-hidden {
+    transform: translateY(110%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav-menu.mobile-visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav-link {
+    color: #888;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
-    border-bottom: 1px solid #151515;
-    padding-bottom: 12px;
+    border-radius: 4px;
 }
 
-.price-card-header img {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #111;
+.nav-link.active { color: var(--success); background: rgba(0, 212, 170, 0.05); }
+
+@media (min-width: 900px) {
+    .nav-container { top: 0; bottom: auto; border-top: none; border-bottom: 1px solid #1a1a1a; }
+    .nav-menu {
+        position: static;
+        flex-direction: row;
+        width: auto;
+        background: none;
+        border: none;
+        padding: 0;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+    .nav-toggle { display: none; }
+    .nav-link { font-size: 0.85rem; padding: 8px 15px; }
 }
 
-.entity-name {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: #fff;
-}
-
-.price-row-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.price-block {
-    display: flex;
-    flex-direction: column;
-}
-
-.price-type {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    color: #444;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.price-val {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-.price-val.highlight-buy { color: var(--success); }
-.price-val.highlight-sell { color: var(--info); }
-
-/* === SUMMARY PILLS (MEJOR COMPRA/VENTA) === */
-.summary-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-}
-
-.summary-pill {
-    flex: 1;
-    min-width: 250px;
-    background: #0a0a0a;
-    border: 1px solid #1a1a1a;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.summary-pill.best-buy { border-left: 4px solid var(--success); }
-.summary-pill.best-sell { border-left: 4px solid var(--info); }
-
-.summary-label {
-    font-size: 0.75rem;
-    color: #555;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.summary-val {
-    text-align: right;
-}
-
-.summary-price {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #fff;
-    display: block;
-}
-
-.summary-name {
-    font-size: 0.7rem;
-    color: #888;
-}
-
-/* === UTILIDADES GENERALES === */
+/* === CONTENEDOR PRINCIPAL === */
 .main-container {
     max-width: var(--max-width);
-    margin: 40px auto;
-    padding: 0 var(--padding-desktop);
+    margin: 0 auto;
+    padding: 20px var(--padding-mobile) 80px var(--padding-mobile);
 }
 
-.page-title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    letter-spacing: -1.5px;
-    margin-bottom: 40px;
-    text-align: center;
+@media (min-width: 768px) {
+    .main-container { padding: 40px var(--padding-desktop); }
 }
 
-.section-title {
-    font-size: 1.2rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 40px 0 20px 0;
-    color: #333;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+/* === DÓLARES (CARDS RECUADRADAS) === */
+.quote-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+@media (min-width: 768px) { .quote-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
+
+.quote-card {
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    padding: 15px;
+    border-radius: 4px;
 }
 
-.section-title::after {
-    content: '';
-    flex-grow: 1;
-    height: 1px;
-    background: #151515;
+/* === TABLAS (SIN ICONOS, SIN SCROLL) === */
+.compact-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.compact-table td, .compact-table th { 
+    padding: 10px 5px; 
+    font-size: 0.8rem; 
+    border-bottom: 1px solid #111;
 }
+.entity-logo { display: none !important; }
+.text-right { text-align: right; }
 
-.btn {
-    background: #111;
-    border: 1px solid #222;
-    color: #888;
-    padding: 8px 16px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-decoration: none;
-    font-family: inherit;
-}
-
-.btn:hover { border-color: #444; color: #fff; background: #151515; }
-
-.btn-sm {
-    padding: 4px 10px;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.btn-primary {
-    background: var(--success-glow);
-    border-color: var(--success);
-    color: var(--success);
-}
-
-.btn-primary:hover {
-    background: var(--success);
-    color: #000;
-}
-
-.loading {
-    height: 4px;
-    width: 100%;
-    background: linear-gradient(to right, var(--success), var(--info));
-    background-size: 200% 100%;
-    animation: loading-bar 2s infinite linear;
-}
-
-@keyframes loading-bar {
-    0% { background-position: 100% 0; }
-    100% { background-position: -100% 0; }
-}
-
-@media (max-width: 768px) {
-    .page-title { font-size: 1.8rem; }
-    .price-card-grid { grid-template-columns: 1fr; }
-}
+/* === CALCULADORAS RESPONSIVAS === */
+.calc-container { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 800px) { .calc-container { grid-template-columns: 1fr 1fr; } }
+.calc-card-modern { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 20px; }
+.calc-input-wrapper input { width: 100%; padding: 10px; background: #000; border: 1px solid #222; color: #fff; text-align: right; font-size: 1rem; }
