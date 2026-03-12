@@ -1,0 +1,64 @@
+{
+  "last_updated": "2026-03-12T00:15:11.901Z",
+  "data": {
+    "result": {
+      "resultCode": 600,
+      "value": [
+        {
+          "producto": "GI",
+          "nombre": "GIRASOL   ",
+          "puerto": "RS",
+          "importe": 528580,
+          "cierre": null,
+          "dif": -6080,
+          "fecha": "11/03/2026",
+          "hora": "10:27"
+        },
+        {
+          "producto": "MZ",
+          "nombre": "MAIZ      ",
+          "puerto": "RS",
+          "importe": 247600,
+          "cierre": null,
+          "dif": -3400,
+          "fecha": "11/03/2026",
+          "hora": "10:26"
+        },
+        {
+          "producto": "SG",
+          "nombre": "SORGO     ",
+          "puerto": "RS",
+          "importe": 264290,
+          "cierre": null,
+          "dif": 790,
+          "fecha": "11/03/2026",
+          "hora": "10:29"
+        },
+        {
+          "producto": "SO",
+          "nombre": "SOJA      ",
+          "puerto": "RS",
+          "importe": 461500,
+          "cierre": null,
+          "dif": -3500,
+          "fecha": "11/03/2026",
+          "hora": "10:29"
+        },
+        {
+          "producto": "TR",
+          "nombre": "TRIGO     ",
+          "puerto": "RS",
+          "importe": 254550,
+          "cierre": null,
+          "dif": -5450,
+          "fecha": "11/03/2026",
+          "hora": "10:25"
+        }
+      ],
+      "isCompressed": 0,
+      "resultSize": 704,
+      "domain": null,
+      "lastUpdatedDateData": "2026-03-11T21:15:11-03:00"
+    }
+  }
+}

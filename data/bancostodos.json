@@ -1,0 +1,159 @@
+{
+  "last_updated": "2026-03-12T00:15:09.589Z",
+  "data": {
+    "andina": {
+      "ask": 1445,
+      "totalAsk": 1445,
+      "bid": 1380,
+      "totalBid": 1380,
+      "time": 1773273658
+    },
+    "bapro": {
+      "ask": 1425,
+      "totalAsk": 1425,
+      "bid": 1375,
+      "totalBid": 1375,
+      "time": 1772653219
+    },
+    "bbva": {
+      "ask": 1420,
+      "totalAsk": 1420,
+      "bid": 1370,
+      "totalBid": 1370,
+      "time": 1773273713
+    },
+    "bna": {
+      "ask": 1415,
+      "totalAsk": 1415,
+      "bid": 1365,
+      "totalBid": 1365,
+      "time": 1773273676
+    },
+    "brubank": {
+      "ask": 1472,
+      "totalAsk": 1472,
+      "bid": 1420,
+      "totalBid": 1420,
+      "time": 1766167200
+    },
+    "bytelime": {
+      "ask": 1420,
+      "totalAsk": 1420,
+      "bid": 1370,
+      "totalBid": 1370,
+      "time": 1773273655
+    },
+    "ciudad": {
+      "ask": 1470,
+      "totalAsk": 1470,
+      "bid": 1410,
+      "totalBid": 1410,
+      "time": 1769713010
+    },
+    "columbia": {
+      "ask": 1284,
+      "totalAsk": 1284,
+      "bid": 1249,
+      "totalBid": 1249,
+      "time": 1752752543
+    },
+    "comafi": {
+      "ask": 1430,
+      "totalAsk": 1430,
+      "bid": 1370,
+      "totalBid": 1370,
+      "time": 1773273765
+    },
+    "galicia": {
+      "ask": 1470,
+      "totalAsk": 1470,
+      "bid": 1420,
+      "totalBid": 1420,
+      "time": 1766167200
+    },
+    "hipotecario": {
+      "ask": 1435,
+      "totalAsk": 1435,
+      "bid": 1395,
+      "totalBid": 1395,
+      "time": 1773273632
+    },
+    "icbc": {
+      "ask": 1435,
+      "totalAsk": 1435,
+      "bid": 1375,
+      "totalBid": 1375,
+      "time": 1773273659
+    },
+    "macro": {
+      "ask": 1485,
+      "totalAsk": 1485,
+      "bid": 1415,
+      "totalBid": 1415,
+      "time": 1766167200
+    },
+    "mariva": {
+      "ask": 1430,
+      "totalAsk": 1430,
+      "bid": 1370,
+      "totalBid": 1370,
+      "time": 1773273730
+    },
+    "patagonia": {
+      "ask": 1425,
+      "totalAsk": 1425,
+      "bid": 1375,
+      "totalBid": 1375,
+      "time": 1773273677
+    },
+    "piano": {
+      "ask": 1480,
+      "totalAsk": 1480,
+      "bid": 1430,
+      "totalBid": 1430,
+      "time": 1766167200
+    },
+    "plazacambio": {
+      "ask": 1415,
+      "totalAsk": 1415,
+      "bid": 1370,
+      "totalBid": 1370,
+      "time": 1773273613
+    },
+    "pluscambio": {
+      "ask": 1420,
+      "totalAsk": 1420,
+      "bid": 1370,
+      "totalBid": 1370,
+      "time": 1773273662
+    },
+    "prex": {
+      "ask": 1415,
+      "totalAsk": 1415,
+      "bid": 1365,
+      "totalBid": 1365,
+      "time": 1773273659
+    },
+    "santander": {
+      "ask": 1470,
+      "totalAsk": 1470,
+      "bid": 1420,
+      "totalBid": 1420,
+      "time": 1760724000
+    },
+    "supervielle": {
+      "ask": 1425,
+      "totalAsk": 1425,
+      "bid": 1385,
+      "totalBid": 1385,
+      "time": 1773273661
+    },
+    "triacambio": {
+      "ask": 1420,
+      "totalAsk": 1420,
+      "bid": 1370,
+      "totalBid": 1370,
+      "time": 1773273619
+    }
+  }
+}
