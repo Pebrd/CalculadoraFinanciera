@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-12T09:10:26.183Z",
+  "last_updated": "2026-03-12T10:08:39.340Z",
   "data": {
     "andina": {
       "ask": 1445,
       "totalAsk": 1445,
       "bid": 1380,
       "totalBid": 1380,
-      "time": 1773306102
+      "time": 1773309717
     },
     "bapro": {
       "ask": 1425,
@@ -20,14 +20,14 @@
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773306139
+      "time": 1773309749
     },
     "bna": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773306112
+      "time": 1773309724
     },
     "brubank": {
       "ask": 1472,
@@ -41,7 +41,7 @@
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773306066
+      "time": 1773309667
     },
     "ciudad": {
       "ask": 1470,
@@ -62,7 +62,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773306199
+      "time": 1773309802
     },
     "galicia": {
       "ask": 1470,
@@ -76,14 +76,14 @@
       "totalAsk": 1415,
       "bid": 1375,
       "totalBid": 1375,
-      "time": 1773306051
+      "time": 1773309654
     },
     "icbc": {
       "ask": 1435,
       "totalAsk": 1435,
       "bid": 1375,
       "totalBid": 1375,
-      "time": 1773306129
+      "time": 1773309744
     },
     "macro": {
       "ask": 1485,
@@ -97,14 +97,14 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773306154
+      "time": 1773309756
     },
     "patagonia": {
       "ask": 1425,
       "totalAsk": 1425,
       "bid": 1375,
       "totalBid": 1375,
-      "time": 1773306111
+      "time": 1773309714
     },
     "piano": {
       "ask": 1480,
@@ -118,21 +118,21 @@
       "totalAsk": 1415,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773306019
+      "time": 1773309619
     },
     "pluscambio": {
       "ask": 1420,
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773306089
+      "time": 1773309692
     },
     "prex": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773306063
+      "time": 1773309663
     },
     "santander": {
       "ask": 1470,
@@ -146,14 +146,14 @@
       "totalAsk": 1425,
       "bid": 1385,
       "totalBid": 1385,
-      "time": 1773306082
+      "time": 1773309685
     },
     "triacambio": {
       "ask": 1420,
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773306025
+      "time": 1773309626
     }
   }
 }
