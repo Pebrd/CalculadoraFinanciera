@@ -59,46 +59,62 @@ const ApiService = {
         throw new Error(`All fetch attempts failed for ${url}`);
     },
 
+    // Datos consolidados cargados al inicio
+    _coreData: null,
+    _lastUpdated: null,
+
     /**
-     * Obtiene datos intentando primero el archivo estático (GitHub Actions)
-     * y luego cayendo a la API real.
+     * Carga el bundle consolidado de finanzas (una sola descarga)
      */
-    async getSmartData(apiName, fallbackUrl, useProxy = false) {
-        const staticUrl = `${this.URLS.STATIC_DATA}${apiName}.json`;
-        
-        // 1. Intentar cache en memoria
-        const cached = window.CalculadoraFinanciera?.Cache.get(apiName);
-        if (cached) return cached;
-
-        let data = null;
-
-        // 2. Intentar datos estáticos (GitHub Actions)
+    async init() {
+        if (this._coreData) return this._coreData;
         try {
-            const res = await fetch(staticUrl);
+            const res = await fetch(`${this.URLS.STATIC_DATA}finanzas.json`);
             if (res.ok) {
                 const payload = await res.json();
-                // Importante: extraemos .data porque nuestro script de fetch_data lo guarda así
-                data = payload.data; 
-                console.log(`[ApiService] ${apiName} cargado desde datos estáticos`);
+                this._coreData = payload.data;
+                this._lastUpdated = new Date(payload.last_updated);
+                console.log('[ApiService] Bundle finanzas.json cargado correctamente');
             }
         } catch (e) {
-            console.warn(`[ApiService] No se pudo cargar dato estático para ${apiName}`);
+            console.warn('[ApiService] No se pudo cargar el bundle consolidado');
         }
+        return this._coreData;
+    },
 
-        // 3. Fallback a API en vivo
+    /**
+     * Obtiene datos intentando primero el archivo estático (GitHub Actions)
+     * y si es viejo (> 10 min) o no existe, cae a la API real.
+     */
+    async getSmartData(apiName, fallbackUrl, useProxy = false) {
+        // Asegurar que el bundle esté cargado
+        if (!this._coreData) await this.init();
+
+        // 1. Intentar cache en memoria (primero el bundle, luego el cache manual)
+        let data = this._coreData ? this._coreData[apiName] : null;
         if (!data) {
-            try {
-                data = await this.fetchWithProxy(fallbackUrl, useProxy);
-                console.log(`[ApiService] ${apiName} cargado en vivo`);
-            } catch (e) {
-                console.error(`[ApiService] Error total cargando ${apiName}:`, e);
-                throw e;
-            }
+            data = window.CalculadoraFinanciera?.Cache.get(apiName);
         }
 
-        // 4. Guardar en cache
-        if (data && window.CalculadoraFinanciera?.Cache) {
-            window.CalculadoraFinanciera.Cache.set(apiName, data);
+        // 2. Verificar frescura (si pasaron > 10 min desde el último update estático)
+        const isOld = this._lastUpdated && (new Date() - this._lastUpdated > 10 * 60 * 1000);
+
+        // 3. Si no hay data o es vieja, intentar fetch en vivo (Background update)
+        if (!data || isOld) {
+            try {
+                const liveData = await this.fetchWithProxy(fallbackUrl, useProxy);
+                console.log(`[ApiService] ${apiName} actualizado en vivo (Motivo: ${!data ? 'No estático' : 'Dato viejo'})`);
+                data = liveData;
+                
+                // Actualizar caches
+                if (this._coreData) this._coreData[apiName] = data;
+                if (window.CalculadoraFinanciera?.Cache) {
+                    window.CalculadoraFinanciera.Cache.set(apiName, data);
+                }
+            } catch (e) {
+                console.warn(`[ApiService] Falló fetch en vivo para ${apiName}, usando dato disponible.`);
+                if (!data) throw e;
+            }
         }
 
         return data;

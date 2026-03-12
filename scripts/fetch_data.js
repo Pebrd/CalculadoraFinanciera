@@ -130,11 +130,48 @@ async function fetchNews() {
 }
 
 async function main() {
+    const coreFinanzas = {
+        last_updated: new Date().toISOString(),
+        data: {}
+    };
+
     for (const [name, url] of Object.entries(APIS)) {
-        await fetchData(name, url);
+        console.log(`Fetching ${name} from ${url}...`);
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                }
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            
+            const payload = {
+                last_updated: new Date().toISOString(),
+                data: data
+            };
+
+            fs.writeFileSync(
+                path.join(DATA_DIR, `${name}.json`), 
+                JSON.stringify(payload, null, 2)
+            );
+            
+            // Guardar en el bundle consolidado
+            coreFinanzas.data[name] = data;
+            console.log(`Successfully saved ${name}.json`);
+        } catch (error) {
+            console.error(`Error fetching ${name}:`, error.message);
+        }
         // Pequeño delay para no saturar APIs
         await new Promise(resolve => setTimeout(resolve, 500));
     }
+
+    // Guardar el bundle consolidado para carga ultra-rápida
+    fs.writeFileSync(
+        path.join(DATA_DIR, 'finanzas.json'),
+        JSON.stringify(coreFinanzas, null, 2)
+    );
+    console.log('Successfully saved consolidated finanzas.json');
 
     await fetchNews();
 }
