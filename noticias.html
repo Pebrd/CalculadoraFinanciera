@@ -174,22 +174,6 @@
 <script src="shared-scripts.js"></script>
 <script>
 const NewsPage = {
-    feeds: {
-        economia: [
-            { name: 'Ámbito', url: 'https://www.ambito.com/rss/pages/economia.xml' },
-            { name: 'El Economista', url: 'https://eleconomista.com.ar/economia/feed/' },
-            { name: 'iProfesional', url: 'https://www.iprofesional.com/rss/economia.xml' }
-        ],
-        finanzas: [
-            { name: 'Ámbito', url: 'https://www.ambito.com/rss/pages/finanzas.xml' },
-            { name: 'iProfesional', url: 'https://www.iprofesional.com/rss/finanzas.xml' },
-            { name: 'Cronista', url: 'https://www.cronista.com/files/rss/mercados.xml' }
-        ],
-        politica: [
-            { name: 'Ámbito', url: 'https://www.ambito.com/rss/pages/politica.xml' },
-            { name: 'Derecha Diario', url: 'https://derechadiario.com.ar/rss/cat/politica' }
-        ]
-    },
     allArticles: [],
     filteredArticles: [],
     currentPage: 1,
@@ -238,62 +222,21 @@ const NewsPage = {
     },
 
     async load() {
-        let urls = [];
-        Object.values(this.feeds).forEach(cat => {
-            cat.forEach(f => urls.push(f));
-        });
-
-        const results = await Promise.allSettled(urls.map(f => this.fetchRSS(f)));
-        
-        this.allArticles = results
-            .filter(r => r.status === 'fulfilled')
-            .flatMap(r => r.value)
-            .sort((a, b) => b.date - a.date);
-
-        // Deduplicación por título
-        const seen = new Set();
-        this.allArticles = this.allArticles.filter(a => {
-            const k = a.title.trim().toLowerCase();
-            return seen.has(k) ? false : seen.add(k);
-        });
-
-        this.applyFilters();
-    },
-
-    async fetchRSS(source) {
         try {
-            const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(source.url)}`;
-            const res = await fetch(proxy);
-            const data = await res.json();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data.contents, "text/xml");
+            // Cargar el JSON pre-procesado por GitHub Actions
+            const response = await fetch('data/news.json');
+            if (!response.ok) throw new Error('No se pudo cargar el feed de noticias');
             
-            return Array.from(doc.querySelectorAll('item')).map(item => {
-                const desc = item.querySelector('description')?.textContent || '';
-                const content = item.querySelector('encoded')?.textContent || desc;
-                const imgMatch = content.match(/<img.*?src="(.*?)"/);
-                
-                return {
-                    source: source.name,
-                    title: item.querySelector('title')?.textContent,
-                    link: item.querySelector('link')?.textContent,
-                    date: new Date(item.querySelector('pubDate')?.textContent),
-                    description: desc.replace(/<[^>]*>?/gm, '').substring(0, 180).trim() + '...',
-                    image: imgMatch ? imgMatch[1] : null,
-                    category: this.guessCategory(source.url)
-                };
-            });
-        } catch (e) {
-            console.warn(`Error fetching ${source.name}:`, e);
-            return [];
-        }
-    },
+            const result = await response.json();
+            this.allArticles = result.articles;
 
-    guessCategory(url) {
-        if (url.includes('economia')) return 'Economía';
-        if (url.includes('finanzas') || url.includes('mercados')) return 'Mercados';
-        if (url.includes('politica')) return 'Política';
-        return 'General';
+            this.applyFilters();
+        } catch (e) {
+            console.error('Error cargando noticias:', e);
+            document.getElementById('news-container').innerHTML = 
+                '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #555;">' +
+                'Error al conectar con el servidor de noticias. Por favor, intenta más tarde.</div>';
+        }
     },
 
     applyFilters() {
@@ -302,7 +245,7 @@ const NewsPage = {
 
         this.filteredArticles = this.allArticles.filter(a => {
             const matchCat = cat === 'all' || a.category.toLowerCase().includes(cat);
-            const matchSearch = !query || a.title.toLowerCase().includes(query) || a.description.toLowerCase().includes(query);
+            const matchSearch = !query || a.title.toLowerCase().includes(query) || (a.description && a.description.toLowerCase().includes(query));
             return matchCat && matchSearch;
         });
 
@@ -310,6 +253,7 @@ const NewsPage = {
     },
 
     getReadingTime(text) {
+        if (!text) return 1;
         const wordsPerMinute = 200;
         const noOfWords = text.split(/\s/g).length;
         const minutes = noOfWords / wordsPerMinute;
@@ -340,9 +284,9 @@ const NewsPage = {
                 <div class="news-content">
                     <div class="news-category">${a.category}</div>
                     <h3><a href="${a.link}" target="_blank" rel="noopener">${a.title}</a></h3>
-                    <p>${a.description}</p>
+                    <p>${a.description || 'Haga clic para leer más en el sitio original.'}</p>
                     <div class="news-meta">
-                        <span><span class="source-tag">${a.source}</span> • ${a.date.toLocaleDateString('es-AR')}</span>
+                        <span><span class="source-tag">${a.source}</span> • ${new Date(a.date).toLocaleDateString('es-AR')}</span>
                         <span>⏱️ ${this.getReadingTime(a.description) + 1} min</span>
                     </div>
                 </div>

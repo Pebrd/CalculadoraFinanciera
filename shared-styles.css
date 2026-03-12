@@ -286,9 +286,33 @@ nav {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: inherit;
 }
 
-.btn:hover { border-color: var(--success); color: #fff; }
+.btn:hover { border-color: #444; color: #fff; background: #151515; }
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: var(--success-glow);
+    border-color: var(--success);
+    color: var(--success);
+}
+
+.btn-primary:hover {
+    background: var(--success);
+    color: #000;
+}
 
 .loading {
     height: 4px;
