@@ -4,142 +4,230 @@
     <link rel="manifest" href="manifest.json">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Cotizaciones Bancarias y Cripto</title>
+    <title>Cotizaciones | Pampa Finance</title>
     <link rel="icon" type="image/png" href="img/logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared-styles.css">
+    <style>
+        .quote-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .quote-card {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .quote-card:hover {
+            border-color: var(--success);
+            transform: translateY(-2px);
+        }
+        .quote-title {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .quote-values {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .quote-main-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+        .quote-sub-val {
+            font-size: 0.9rem;
+            color: #444;
+            font-weight: 600;
+        }
+        .bank-table-container {
+            background: #050505;
+            border: 1px solid #111;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .best-banner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .best-card {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #151515;
+        }
+        .best-card.buy { border-left: 4px solid var(--buy); background: var(--buy-glow); }
+        .best-card.sell { border-left: 4px solid var(--sell); background: var(--sell-glow); }
+        
+        .compact-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .compact-table th {
+            text-align: left;
+            font-size: 0.65rem;
+            color: #444;
+            padding: 10px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #111;
+            cursor: pointer;
+            user-select: none;
+        }
+        .compact-table th:hover { color: var(--success); }
+        .compact-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #0a0a0a;
+            font-size: 0.9rem;
+        }
+        .entity-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .entity-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #111;
+        }
+        .sort-icon { font-size: 0.6rem; margin-left: 5px; opacity: 0.5; }
+    </style>
 </head>
 <body>
 <script src="modern-navigation.js"></script>
-<main class="main-container">
-    <h1 class="page-title fade-in">Cotizaciones Bancarias y Cripto</h1>
 
-    <div class="table-block-container new-table-container">
-        <section class="data-section" id="dolar-section">
-            <div class="data-header">
-                <strong>💵 Cotizaciones del dólar</strong>
-                <button id="reload-btn-dolar" class="btn btn-sm">Recargar</button>
-            </div>
-            <div class="data-grid">
-                <div class="data-item" id="oficial">Oficial<br><span>--</span></div>
-                <div class="data-item" id="blue">Blue<br><span>--</span></div>
-                <div class="data-item" id="mep">MEP<br><span>--</span></div>
-                <div class="data-item" id="ccl">CCL<br><span>--</span></div>
-                <div class="data-item" id="cripto">Cripto<br><span>--</span></div>
-            </div>
-            <div id="last-update-dolar" class="last-update">Esperando actualización...</div>
-            <div class="fuente">Fuente: DolarAPI.com</div>
-        </section>
+<main class="main-container">
+    <h1 class="page-title fade-in">Cotizaciones</h1>
+
+    <!-- DASHBOARD DOLARES -->
+    <div id="dolar-cards" class="quote-grid">
+        <div class="quote-card skeleton" style="height: 100px;"></div>
+        <div class="quote-card skeleton" style="height: 100px;"></div>
+        <div class="quote-card skeleton" style="height: 100px;"></div>
+        <div class="quote-card skeleton" style="height: 100px;"></div>
+    </div>
+    <div class="section-footer" style="margin-bottom: 40px; text-align: right;">
+        <span id="last-update-dolar" class="text-secondary" style="font-size: 0.7rem;">Sincronizando...</span>
+        <p class="fuente">Fuente: DolarAPI.com</p>
     </div>
 
-    <div class="table-block-container new-table-container slide-up">
-        <h2 class="section-title">📊 Dólar (USD/ARS) Bancos</h2>
-
-        <div id="summary-banner-usd" class="summary-banner">
-            <div class="best-deal best-buy" id="best-buy-deal-usd">
-                <h3>💰 Mejor Compra</h3>
-                <p id="best-buy-info-usd">Cargando...</p>
+    <!-- SECCION BANCOS -->
+    <div class="bank-table-container slide-up">
+        <h2 class="section-title">Dólar Bancario</h2>
+        
+        <div class="best-banner">
+            <div class="best-card buy">
+                <div class="price-label">Mejor Compra</div>
+                <div id="best-buy-usd" class="quote-main-val" style="font-size: 1.4rem;">--</div>
+                <div id="best-buy-name-usd" class="quote-sub-val">...</div>
             </div>
-            <div class="best-deal best-sell" id="best-sell-deal-usd">
-                <h3>💸 Mejor Venta</h3>
-                <p id="best-sell-info-usd">Cargando...</p>
+            <div class="best-card sell">
+                <div class="price-label">Mejor Venta</div>
+                <div id="best-sell-usd" class="quote-main-val" style="font-size: 1.4rem;">--</div>
+                <div id="best-sell-name-usd" class="quote-sub-val">...</div>
             </div>
-        </div>
-
-        <div class="controls">
-            <button id="refresh-button-usd" class="btn btn-primary glow-effect">🔄 Actualizar Ahora</button>
-            <span id="last-updated-usd" class="text-secondary">Última actualización: --:--:--</span>
         </div>
 
         <div class="table-container">
-            <table id="quotation-table">
+            <table class="compact-table" id="table-usd">
                 <thead>
                     <tr>
-                        <th style="text-align: left;">Entidad</th>
-                        <th id="sort-ask" class="sortable">Compra (Ask)</th>
-                        <th id="sort-bid" class="sortable">Venta (Bid)</th>
+                        <th data-sort="entity">Entidad <span class="sort-icon">↕</span></th>
+                        <th data-sort="ask" class="text-right">Compra <span class="sort-icon">↕</span></th>
+                        <th data-sort="bid" class="text-right">Venta <span class="sort-icon">↕</span></th>
                     </tr>
                 </thead>
-                <tbody id="quotation-body-usd">
-                    <tr><td colspan="3">Cargando cotizaciones...</td></tr>
+                <tbody id="bank-body-usd">
+                    <tr><td colspan="3" class="text-center">Sincronizando bancos...</td></tr>
                 </tbody>
             </table>
         </div>
-        <p class="footer" style="text-align: center; margin-top: 10px; font-size: 0.8em; color: #666;">
-            Datos de CriptoYa y ComparaDolar.
-        </p>
+        <div class="section-footer">
+            <span id="last-update-usd" class="text-secondary" style="font-size: 0.7rem;">Sincronizando...</span>
+            <p class="fuente">Datos de CriptoYa y ComparaDolar. Los valores son informativos.</p>
+        </div>
     </div>
 
-    <div class="table-block-container new-table-container slide-up">
-        <h2 class="section-title">💸 Cotización USDT/ARS</h2>
-
-        <div id="summary-banner-usdt" class="summary-banner">
-            <div class="best-deal best-buy" id="best-buy-deal-usdt">
-                <h3>💰 Compra más Barata</h3>
-                <p id="best-buy-info-usdt">Cargando...</p>
+    <!-- SECCION CRYPTO -->
+    <div class="bank-table-container slide-up">
+        <h2 class="section-title">Dólar Cripto (USDT)</h2>
+        
+        <div class="best-banner">
+            <div class="best-card buy">
+                <div class="price-label">Compra más barata</div>
+                <div id="best-buy-usdt" class="quote-main-val" style="font-size: 1.4rem;">--</div>
+                <div id="best-buy-name-usdt" class="quote-sub-val">...</div>
             </div>
-            <div class="best-deal best-sell" id="best-sell-deal-usdt">
-                <h3>🚀 Venta más Cara</h3>
-                <p id="best-sell-info-usdt">Cargando...</p>
+            <div class="best-card sell">
+                <div class="price-label">Venta más cara</div>
+                <div id="best-sell-usdt" class="quote-main-val" style="font-size: 1.4rem;">--</div>
+                <div id="best-sell-name-usdt" class="quote-sub-val">...</div>
             </div>
         </div>
 
-        <div class="controls">
-            <button class="btn btn-primary glow-effect" id="manual-update-button-usdt">🔄 Actualizar Precios</button>
-            <span class="text-secondary" id="last-update-time-usdt">Última actualización: Cargando...</span>
-        </div>
-
-        <div class="table-scroll-container">
-            <table class="price-table">
+        <div class="table-container">
+            <table class="compact-table" id="table-usdt">
                 <thead>
                     <tr>
-                        <th style="text-align: left;">Exchange</th>
-                        <th class="sortable" data-sort-by="ask">Compra (Ask)</th>
-                        <th class="sortable" data-sort-by="bid">Venta (Bid)</th>
+                        <th data-sort="entity">Exchange <span class="sort-icon">↕</span></th>
+                        <th data-sort="ask" class="text-right">Compra <span class="sort-icon">↕</span></th>
+                        <th data-sort="bid" class="text-right">Venta <span class="sort-icon">↕</span></th>
                     </tr>
                 </thead>
-                <tbody id="price-table-body-usdt">
-                    <tr><td colspan="3">Cargando cotizaciones...</td></tr>
+                <tbody id="crypto-body-usdt">
+                    <tr><td colspan="3" class="text-center">Sincronizando exchanges...</td></tr>
                 </tbody>
             </table>
+        </div>
+        <div class="section-footer">
+            <span id="last-update-usdt" class="text-secondary" style="font-size: 0.7rem;">Sincronizando...</span>
+            <p class="fuente">Valores P2P y Directos de CriptoYa. Actualizado cada 5 min.</p>
         </div>
     </div>
 </main>
 
-<div id="api-status" class="api-status">
-    <!-- Status indicators filled by shared-scripts.js -->
-</div>
-
 <script src="shared-scripts.js"></script>
 <script src="api-service.js"></script>
 <script>
-/**
- * Logic for Index Page
- */
 const IndexPage = {
-    currentSortUsd: { column: 'ask', direction: 1 },
-    currentSortUsdt: { column: 'ask', direction: 1 },
+    data: { usd: [], usdt: [] },
+    sort: {
+        usd: { col: 'ask', dir: 1 },
+        usdt: { col: 'ask', dir: 1 }
+    },
 
     async init() {
         this.bindEvents();
         await this.loadAll();
-        // Auto refresh every 5 minutes
         setInterval(() => this.loadAll(), 300000);
     },
 
     bindEvents() {
-        document.getElementById('reload-btn-dolar')?.addEventListener('click', () => this.loadDolares());
-        document.getElementById('refresh-button-usd')?.addEventListener('click', () => this.loadBancos());
-        document.getElementById('manual-update-button-usdt')?.addEventListener('click', () => this.loadUSDT());
-        
-        document.getElementById('sort-ask')?.addEventListener('click', () => this.handleSortUsd('ask'));
-        document.getElementById('sort-bid')?.addEventListener('click', () => this.handleSortUsd('bid'));
-        
-        document.querySelectorAll('.price-table .sortable').forEach(header => {
-            header.addEventListener('click', () => this.handleSortUsdt(header.dataset.sortBy));
+        document.querySelectorAll('#table-usd th[data-sort]').forEach(th => {
+            th.addEventListener('click', () => this.handleSort('usd', th.dataset.sort));
         });
+        document.querySelectorAll('#table-usdt th[data-sort]').forEach(th => {
+            th.addEventListener('click', () => this.handleSort('usdt', th.dataset.sort));
+        });
+    },
+
+    handleSort(type, col) {
+        if (this.sort[type].col === col) this.sort[type].dir *= -1;
+        else { this.sort[type].col = col; this.sort[type].dir = 1; }
+        this.renderTable(type === 'usd' ? 'bank-body-usd' : 'crypto-body-usdt', this.data[type], type);
     },
 
     async loadAll() {
@@ -151,159 +239,107 @@ const IndexPage = {
     },
 
     async loadDolares() {
-        const last = document.getElementById("last-update-dolar");
         try {
             const data = await ApiService.getDolares();
-            const map = {
-                oficial: data.find(d => d.nombre.toLowerCase().includes("oficial")),
-                blue: data.find(d => d.nombre.toLowerCase().includes("blue")),
-                mep: data.find(d => d.nombre.toLowerCase().includes("bolsa")),
-                ccl: data.find(d => d.nombre.toLowerCase().includes("contado con liqui")),
-                cripto: data.find(d => d.nombre.toLowerCase().includes("cripto"))
-            };
+            const container = document.getElementById('dolar-cards');
             
-            Object.entries(map).forEach(([k, v]) => {
-                const el = document.querySelector(`#${k} span`);
-                if (v && el) {
-                    el.textContent = `C: ${v.compra.toFixed(2)} | V: ${v.venta.toFixed(2)}`;
-                }
-            });
-            last.textContent = "Actualizado: " + CalculadoraFinanciera.Formatters.time();
-        } catch (e) {
-            console.error("Error loadDolares:", e);
-            last.innerHTML = '<span class="error">Error</span>';
-        }
+            const mapping = [
+                { key: 'oficial', name: 'Oficial' },
+                { key: 'blue', name: 'Blue' },
+                { key: 'bolsa', name: 'MEP' },
+                { key: 'liqui', name: 'CCL' }
+            ];
+
+            container.innerHTML = mapping.map(item => {
+                const val = data.find(d => d.nombre.toLowerCase().includes(item.key)) || { compra: 0, venta: 0 };
+                return `
+                    <div class="quote-card fade-in">
+                        <div class="quote-title">${item.name} <span>ARS</span></div>
+                        <div class="quote-values">
+                            <div class="quote-main-val">${val.venta.toFixed(0)}</div>
+                            <div class="quote-sub-val">C: ${val.compra.toFixed(0)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('last-update-dolar').textContent = 'Última actualización: ' + CalculadoraFinanciera.Formatters.time();
+        } catch (e) {}
     },
 
     async loadBancos() {
-        const tableBody = document.getElementById('quotation-body-usd');
         try {
             const { criptoya, comparadolar } = await ApiService.getBancos();
             let allData = [];
 
-            // Procesar CriptoYa
             if (criptoya) {
                 for (const [name, prices] of Object.entries(criptoya)) {
                     if (prices.ask && prices.bid) {
-                        allData.push({ entity: name, ask: prices.ask, bid: prices.bid, source: 'CriptoYa' });
+                        allData.push({ entity: name, ask: prices.ask, bid: prices.bid, logo: null });
                     }
                 }
             }
 
-            // Integrar ComparaDolar para logos y entidades faltantes
             if (comparadolar) {
                 comparadolar.forEach(item => {
                     const existing = allData.find(d => d.entity.toLowerCase().includes(item.prettyName.toLowerCase()));
-                    if (existing) {
-                        existing.logoUrl = item.logoUrl;
-                    } else if (item.ask && item.bid) {
-                        allData.push({ entity: item.prettyName, ask: item.ask, bid: item.bid, logoUrl: item.logoUrl, source: 'ComparaDolar' });
-                    }
+                    if (existing) existing.logo = item.logoUrl;
+                    else allData.push({ entity: item.prettyName, ask: item.ask, bid: item.bid, logo: item.logoUrl });
                 });
             }
 
-            this.renderBancosTable(allData);
-            this.updateSummary('usd', allData);
-            document.getElementById('last-updated-usd').textContent = `Última actualización: ${CalculadoraFinanciera.Formatters.time()}`;
-        } catch (e) {
-            console.error("Error loadBancos:", e);
-            tableBody.innerHTML = '<tr><td colspan="3" class="error">Error al cargar datos</td></tr>';
-        }
-    },
-
-    renderBancosTable(data) {
-        const tableBody = document.getElementById('quotation-body-usd');
-        tableBody.innerHTML = '';
-        
-        const sorted = data.sort((a, b) => (a[this.currentSortUsd.column] - b[this.currentSortUsd.column]) * this.currentSortUsd.direction);
-        
-        const bestAsk = Math.min(...data.map(d => d.ask));
-        const bestBid = Math.max(...data.map(d => d.bid));
-
-        sorted.forEach(item => {
-            const row = tableBody.insertRow();
-            const nameCell = row.insertCell();
-            nameCell.style.textAlign = 'left';
-            nameCell.innerHTML = `${item.logoUrl ? `<img src="${item.logoUrl}" width="20" style="vertical-align:middle;margin-right:8px;">` : ''} ${item.entity}`;
-            
-            const askCell = row.insertCell();
-            askCell.textContent = CalculadoraFinanciera.Formatters.currency(item.ask);
-            if (item.ask === bestAsk) askCell.classList.add('highlight-buy');
-            
-            const bidCell = row.insertCell();
-            bidCell.textContent = CalculadoraFinanciera.Formatters.currency(item.bid);
-            if (item.bid === bestBid) bidCell.classList.add('highlight-sell');
-        });
+            this.data.usd = allData;
+            this.renderTable('bank-body-usd', allData, 'usd');
+            document.getElementById('last-update-usd').textContent = 'Última actualización: ' + CalculadoraFinanciera.Formatters.time();
+        } catch (e) {}
     },
 
     async loadUSDT() {
-        const tableBody = document.getElementById('price-table-body-usdt');
         try {
-            const rawData = await ApiService.getUSDT();
-            // Si viene de getSmartData, la data real está en .data
-            const data = rawData.data || rawData;
-            
-            const processed = [];
-            for (const [name, values] of Object.entries(data)) {
-                if (values.ask && values.bid) {
-                    processed.push({ exchange: name, ask: parseFloat(values.ask), bid: parseFloat(values.bid) });
-                }
-            }
-            
-            this.renderUsdtTable(processed);
-            this.updateSummary('usdt', processed, 'exchange');
-            document.getElementById('last-update-time-usdt').textContent = `Última actualización: ${CalculadoraFinanciera.Formatters.time()}`;
-        } catch (e) {
-            console.error("Error loadUSDT:", e);
-            tableBody.innerHTML = '<tr><td colspan="3" class="error">Error al cargar datos</td></tr>';
-        }
+            const data = await ApiService.getUSDT();
+            const processed = Object.entries(data).map(([name, v]) => ({
+                entity: name.charAt(0).toUpperCase() + name.slice(1),
+                ask: parseFloat(v.ask),
+                bid: parseFloat(v.bid)
+            })).filter(v => v.ask > 0);
+
+            this.data.usdt = processed;
+            this.renderTable('crypto-body-usdt', processed, 'usdt');
+            document.getElementById('last-update-usdt').textContent = 'Última actualización: ' + CalculadoraFinanciera.Formatters.time();
+        } catch (e) {}
     },
 
-    renderUsdtTable(data) {
-        const tableBody = document.getElementById('price-table-body-usdt');
-        tableBody.innerHTML = '';
+    renderTable(containerId, data, type) {
+        const tbody = document.getElementById(containerId);
+        const s = this.sort[type];
         
-        const sorted = data.sort((a, b) => (a[this.currentSortUsdt.column] - b[this.currentSortUsdt.column]) * this.currentSortUsdt.direction);
-        const bestAsk = Math.min(...data.map(d => d.ask));
-        const bestBid = Math.max(...data.map(d => d.bid));
-
-        sorted.forEach(item => {
-            const row = tableBody.insertRow();
-            const nameCell = row.insertCell();
-            nameCell.style.textAlign = 'left';
-            nameCell.textContent = item.exchange.charAt(0).toUpperCase() + item.exchange.slice(1);
-            
-            const askCell = row.insertCell();
-            askCell.textContent = CalculadoraFinanciera.Formatters.currency(item.ask);
-            if (item.ask === bestAsk) askCell.classList.add('highlight-buy');
-            
-            const bidCell = row.insertCell();
-            bidCell.textContent = CalculadoraFinanciera.Formatters.currency(item.bid);
-            if (item.bid === bestBid) bidCell.classList.add('highlight-sell');
+        const sorted = [...data].sort((a, b) => {
+            const valA = a[s.col];
+            const valB = b[s.col];
+            if (typeof valA === 'string') return valA.localeCompare(valB) * s.dir;
+            return (valA - valB) * s.dir;
         });
-    },
-
-    updateSummary(type, data, nameKey = 'entity') {
-        const bestAsk = data.reduce((min, curr) => (curr.ask < min.ask) ? curr : min, data[0]);
-        const bestBid = data.reduce((max, curr) => (curr.bid > max.bid) ? curr : max, data[0]);
         
-        const buyInfo = document.getElementById(`best-buy-info-${type}`);
-        const sellInfo = document.getElementById(`best-sell-info-${type}`);
-        
-        if (bestAsk) buyInfo.innerHTML = `${bestAsk[nameKey]}: <br>${CalculadoraFinanciera.Formatters.currency(bestAsk.ask)}`;
-        if (bestBid) sellInfo.innerHTML = `${bestBid[nameKey]}: <br>${CalculadoraFinanciera.Formatters.currency(bestBid.bid)}`;
-    },
+        const bestAsk = [...data].sort((a,b) => a.ask - b.ask)[0];
+        const bestBid = [...data].sort((a,b) => b.bid - a.bid)[0];
 
-    handleSortUsd(col) {
-        if (this.currentSortUsd.column === col) this.currentSortUsd.direction *= -1;
-        else { this.currentSortUsd.column = col; this.currentSortUsd.direction = 1; }
-        this.loadBancos();
-    },
+        // Update Banners
+        document.getElementById(`best-buy-${type}`).textContent = CalculadoraFinanciera.Formatters.currency(bestAsk.ask);
+        document.getElementById(`best-buy-name-${type}`).textContent = bestAsk.entity;
+        document.getElementById(`best-sell-${type}`).textContent = CalculadoraFinanciera.Formatters.currency(bestBid.bid);
+        document.getElementById(`best-sell-name-${type}`).textContent = bestBid.entity;
 
-    handleSortUsdt(col) {
-        if (this.currentSortUsdt.column === col) this.currentSortUsdt.direction *= -1;
-        else { this.currentSortUsdt.column = col; this.currentSortUsdt.direction = 1; }
-        this.loadUSDT();
+        tbody.innerHTML = sorted.map(item => `
+            <tr>
+                <td>
+                    <div class="entity-info">
+                        ${item.logo ? `<img src="${item.logo}" class="entity-logo">` : '<div class="entity-logo"></div>'}
+                        ${item.entity}
+                    </div>
+                </td>
+                <td class="text-right ${item.ask === bestAsk.ask ? 'highlight-buy' : ''}">${CalculadoraFinanciera.Formatters.currency(item.ask)}</td>
+                <td class="text-right ${item.bid === bestBid.bid ? 'highlight-sell' : ''}">${CalculadoraFinanciera.Formatters.currency(item.bid)}</td>
+            </tr>
+        `).join('');
     }
 };
 

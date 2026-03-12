@@ -7,7 +7,7 @@ const APIS = {
     'bancostodos': 'https://criptoya.com/api/bancostodos',
     'comparadolar': 'https://api2.comparadolar.ar/usd',
     'argentinadatos_fci': 'https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/',
-    'argentinadatos_granos': 'https://api.argentinadatos.com/v1/finanzas/indices/pizarra',
+    'acabase_granos': 'https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase',
     'plazofijo': 'https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo',
     'hacienda': 'https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo'
 };

@@ -17,7 +17,7 @@ const ApiService = {
         ARG_DATOS_FCI: 'https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/',
         TASAS_AR: 'https://space.tasas.ar/api/bancos-digitales?include_uri=1',
         ARG_DATOS_PF: 'https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo',
-        ARG_DATOS_GRANOS: 'https://api.argentinadatos.com/v1/finanzas/indices/pizarra',
+        ACABASE_GRANOS: 'https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase',
         HACIENDA: 'https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo',
         // Datos estáticos generados por GitHub Actions
         STATIC_DATA: './data/'
@@ -143,6 +143,12 @@ const ApiService = {
         const data = await this.getSmartData('hacienda', this.URLS.HACIENDA, true);
         // decampoacampo devuelve { status: "success", data: [...] }
         return data?.data || data;
+    },
+
+    async getGranos() {
+        const data = await this.getSmartData('acabase_granos', this.URLS.ACABASE_GRANOS, true);
+        // AcaBase devuelve { result: { value: [...] } }
+        return data?.result?.value || [];
     }
 };
 

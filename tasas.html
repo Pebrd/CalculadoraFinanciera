@@ -4,256 +4,223 @@
     <link rel="manifest" href="manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparación de TNA - Pampa Finance</title>
+    <title>Tasas y Rendimientos | Pampa Finance</title>
     <link rel="stylesheet" href="shared-styles.css">
     <style>
-        /* === ESTILOS ESPECÍFICOS DE TASAS === */
-        .container {
-            max-width: 900px;
-            background: #111;
-            border: 1px solid #222;
-            box-shadow: 0 0 12px rgba(0, 212, 170, 0.05) inset;
-        }
-
-        .main-nav {
+        .sub-nav {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
-            padding: 5px 0;
-            background-color: #000;
-            border-bottom: 1px solid #333;
-            gap: 5px;
+            gap: 10px;
+            margin-bottom: 30px;
         }
-
-        .main-nav .nav-item {
-            color: #999;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-            font-size: 0.9em;
+        .rates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
-
-        .main-nav .current-page {
+        .rate-card {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: border-color 0.2s;
+        }
+        .rate-card:hover {
+            border-color: var(--success);
+        }
+        .rate-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #151515;
+            padding-bottom: 12px;
+        }
+        .bank-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .rate-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tna-value {
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--success);
-            border-bottom-color: var(--success);
-            font-weight: bold;
+        }
+        .tea-value {
+            font-size: 0.8rem;
+            color: #555;
+        }
+        .rate-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #444;
+        }
+        .btn-details {
+            background: transparent;
+            border: 1px solid #222;
+            color: #666;
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-details:hover {
+            border-color: var(--success);
+            color: var(--success);
         }
 
-        /* --- ESTILOS DEL MODAL (POP-UP) --- */
+        /* Modal Overlays */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(8px);
-            display: none;
-            align-items: center; justify-content: center;
-            z-index: 3000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px);
+            display: none; align-items: center; justify-content: center; z-index: 3000;
         }
-
         .modal-content {
-            background: #151515;
-            border: 1px solid var(--success);
-            padding: 25px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 0 40px rgba(0, 212, 170, 0.15);
-            animation: modalIn 0.3s ease-out;
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;
-        }
-
-        .close-btn { background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; }
-
-        .btn-condiciones {
-            padding: 6px 12px; font-size: 0.75rem; background: #222;
-            border: 1px solid #444; color: var(--success); cursor: pointer;
-            transition: all 0.2s; text-transform: uppercase; font-weight: bold; margin-top: 5px;
-        }
-
-        .btn-condiciones:hover { background: var(--success); color: #000; }
-
-        .date-label { display: block; font-size: 0.65rem; color: #666; text-transform: uppercase; margin-bottom: 2px; }
-
-        @media (max-width: 600px) {
-            table { min-width: 100%; }
-            th:nth-child(2), td:nth-child(2) { display: none; } /* Oculta vigencia en móviles */
+            background: #0a0a0a; border: 1px solid var(--success); padding: 30px;
+            max-width: 450px; width: 90%; text-align: center;
         }
     </style>
 </head>
 <body>
-
 <script src="modern-navigation.js"></script>
 
-<main>
-    <nav class="main-nav">
-        <a href="tasas.html" class="nav-item current-page">Bancos Digitales</a>
-        <a href="plazo-fijo.html" class="nav-item">Plazo Fijo</a>
-    </nav>
-    <h1 class="page-title">Tasas de Bancos y Fintechs</h1>
+<main class="main-container">
+    <h1 class="page-title fade-in">Rendimientos ARS</h1>
+
+    <div class="sub-nav">
+        <a href="tasas.html" class="agro-pill active">Bancos Digitales</a>
+        <a href="plazo-fijo.html" class="agro-pill">Plazo Fijo</a>
+    </div>
+
+    <div class="controls">
+        <button id="refresh-btn" class="btn btn-sm">🔄 Sincronizar Tasas</button>
+        <div id="sync-status" class="text-secondary" style="font-size: 0.8rem;">Actualizando...</div>
+    </div>
+
+    <div id="rates-container" class="rates-grid">
+        <!-- Skeletons -->
+        <div class="loading" style="grid-column: 1/-1; height: 200px;"></div>
+    </div>
 </main>
 
-<div class="container">
-    <div class="controls-and-status">
-        <button id="refreshButton" onclick="fetchData(true)">🔄 Actualizar Datos</button>
-        <div class="status">
-            Sincronizado: <span id="last-update">...</span>
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table id="rates-table">
-            <thead>
-                <tr>
-                    <th style="width: 35%;">Institución</th>
-                    <th style="width: 25%;">Vigencia</th>
-                    <th style="width: 20%;">Tasa (TNA)</th>
-                    <th style="width: 20%;">Condiciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td colspan="4" style="text-align:center; padding: 40px;">Consolidando datos de múltiples fuentes...</td></tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div id="conditionsModal" class="modal-overlay">
+<div id="details-modal" class="modal-overlay">
     <div class="modal-content">
-        <div class="modal-header">
-            <h3 id="modalTitle" style="margin:0; color:var(--success);">Detalles</h3>
-            <button onclick="closeModal()" class="close-btn">&times;</button>
-        </div>
-        <div id="modalBody" style="color: #ccc; line-height: 1.6; font-size: 0.9rem;"></div>
+        <h3 id="modal-title" style="color: var(--success); margin-bottom: 15px;"></h3>
+        <div id="modal-body" style="color: #888; line-height: 1.6; margin-bottom: 20px;"></div>
+        <button onclick="closeModal()" class="btn btn-sm">Cerrar</button>
     </div>
 </div>
 
 <script src="shared-scripts.js"></script>
 <script src="api-service.js"></script>
 <script>
-    function openModal(nombre, contenido) {
-        document.getElementById('modalTitle').textContent = nombre;
-        document.getElementById('modalBody').innerHTML = contenido;
-        document.getElementById('conditionsModal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
+const TasasPage = {
+    async init() {
+        this.bindEvents();
+        await this.load();
+    },
 
-    function closeModal() {
-        document.getElementById('conditionsModal').style.display = 'none';
-        document.body.style.overflow = '';
-    }
+    bindEvents() {
+        document.getElementById('refresh-btn').addEventListener('click', () => this.load());
+        window.onclick = (e) => { if (e.target.id === 'details-modal') closeModal(); };
+    },
 
-    window.onclick = (e) => { if (e.target.id === 'conditionsModal') closeModal(); }
-
-    async function fetchData(manual = false) {
-        const tableBody = document.querySelector('#rates-table tbody');
-        const lastUpdateSpan = document.getElementById('last-update');
-        const refreshButton = document.getElementById('refreshButton');
-
-        refreshButton.disabled = true;
-        if(manual) lastUpdateSpan.textContent = 'Actualizando...';
+    async load() {
+        const container = document.getElementById('rates-container');
+        const status = document.getElementById('sync-status');
+        container.innerHTML = '<div class="loading" style="grid-column: 1/-1; height: 200px;"></div>';
 
         try {
             const { argDatos, tasasAr } = await ApiService.getTasas();
+            let merged = [];
 
-            let mergedData = [];
-            let successCount = 0;
-
-            // 1. Procesar ArgentinaDatos
             if (argDatos) {
-                successCount++;
                 argDatos.forEach(item => {
-                    mergedData.push({
-                        nombre: item.fondo,
+                    merged.push({
+                        name: item.fondo,
                         tna: parseFloat(item.tna) * 100,
                         tea: item.tea ? parseFloat(item.tea) * 100 : null,
-                        fecha: item.fecha,
-                        fechaLabel: 'Desde',
-                        tope: item.tope,
-                        condiciones: item.condiciones || ""
+                        date: item.fecha,
+                        conditions: item.condiciones || "",
+                        limit: item.tope
                     });
                 });
             }
 
-            // 2. Procesar Tasas.ar
             if (tasasAr) {
-                successCount++;
                 tasasAr.data.forEach(item => {
-                    const nombreNormalizado = item.name.toLowerCase();
-                    // Evitar duplicados
-                    if (!mergedData.some(d => d.nombre.toLowerCase().includes(nombreNormalizado))) {
-                        mergedData.push({
-                            nombre: item.name,
+                    if (!merged.some(d => d.name.toLowerCase().includes(item.name.toLowerCase()))) {
+                        merged.push({
+                            name: item.name,
                             tna: parseFloat(item.tna),
                             tea: item.tea ? parseFloat(item.tea) : null,
-                            fecha: tasasAr.last_updated ? tasasAr.last_updated.split('T')[0] : 'Hoy',
-                            fechaLabel: 'Act.',
-                            tope: item.maxAmount,
-                            condiciones: item.tna_conditions?.[0]?.description || ""
+                            date: 'Hoy',
+                            conditions: item.tna_conditions?.[0]?.description || "",
+                            limit: item.maxAmount
                         });
                     }
                 });
             }
 
-            if (mergedData.length > 0) {
-                mergedData.sort((a, b) => b.tna - a.tna);
-                renderTable(mergedData);
-                lastUpdateSpan.textContent = `Sincronizado: ${CalculadoraFinanciera.Formatters.time()} ${successCount < 2 ? '(Parcial)' : ''}`;
-                lastUpdateSpan.className = 'success-message';
-            } else {
-                throw new Error("No data merged");
-            }
-        } catch (error) {
-            console.error(error);
-            lastUpdateSpan.textContent = '❌ Error de conexión total';
-            lastUpdateSpan.className = 'error-message';
-            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px;">No se pudieron obtener datos.</td></tr>';
-        } finally {
-            refreshButton.disabled = false;
+            merged.sort((a, b) => b.tna - a.tna);
+            this.render(merged);
+            status.textContent = `Sincronizado: ${CalculadoraFinanciera.Formatters.time()}`;
+        } catch (e) {
+            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--error);">Error al cargar tasas.</div>';
         }
+    },
+
+    render(data) {
+        const container = document.getElementById('rates-container');
+        container.innerHTML = data.map(item => {
+            const icon = ApiService.getIcon ? ApiService.getIcon(item.name) : null;
+            return `
+                <div class="rate-card fade-in">
+                    <div class="rate-header">
+                        ${icon ? `<img src="${icon}" width="24" height="24" style="border-radius:50%;">` : '🏦'}
+                        <span class="bank-name">${item.name}</span>
+                    </div>
+                    <div class="rate-body">
+                        <div>
+                            <div class="tna-value">${item.tna.toFixed(2)}%</div>
+                            <div class="text-secondary" style="font-size: 0.7rem; font-weight: 700;">TNA</div>
+                        </div>
+                        ${item.tea ? `
+                        <div style="text-align: right;">
+                            <div class="tea-value">TEA: ${item.tea.toFixed(2)}%</div>
+                        </div>` : ''}
+                    </div>
+                    <div class="rate-footer">
+                        <span>Actualizado: ${item.date}</span>
+                        ${item.conditions ? `<button class="btn-details" onclick="openModal('${item.name}', '${item.conditions.replace(/'/g, "\\'")}')">Detalles</button>` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
+};
 
-    function renderTable(data) {
-        const tableBody = document.querySelector('#rates-table tbody');
-        tableBody.innerHTML = '';
-        data.forEach(item => {
-            const row = tableBody.insertRow();
-            row.className = 'platform-row';
-            
-            row.insertCell().innerHTML = `<strong>${item.nombre}</strong>`;
-            row.insertCell().innerHTML = `<span style="font-size:0.75rem; color:#666;">${item.fechaLabel}:</span><br><span style="font-size:0.8rem;">${item.fecha}</span>`;
-            
-            row.insertCell().innerHTML = `
-                <div style="text-align:right;">
-                    <div style="color:var(--success); font-weight:bold; font-size:1.1rem;">${item.tna.toFixed(2)}%</div>
-                    ${item.tea ? `<div style="color:#555; font-size:0.7rem;">TEA: ${item.tea.toFixed(2)}%</div>` : ''}
-                </div>`;
+function openModal(title, body) {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-body').textContent = body;
+    document.getElementById('details-modal').style.display = 'flex';
+}
 
-            const formatTope = (t) => t && t > 0 ? `$${Number(t).toLocaleString('es-AR')}` : 'Sin tope';
-            
-            const nombreSafe = item.nombre.replace(/'/g, "\\'");
-            const condSafe = item.condiciones.replace(/'/g, "\\'").replace(/\n/g, "<br>");
+function closeModal() {
+    document.getElementById('details-modal').style.display = 'none';
+}
 
-            const btn = (item.condiciones && item.condiciones.length > 5) ? 
-                `<button class="btn-condiciones" onclick="openModal('${nombreSafe}', '${condSafe}')">Detalles</button>` : '';
-
-            row.insertCell().innerHTML = `
-                <div style="display:flex; flex-direction:column; align-items:flex-start;">
-                    <span style="font-size:0.7rem; color:#777;">Tope: ${formatTope(item.tope)}</span>
-                    ${btn}
-                </div>`;
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => fetchData());
+document.addEventListener('DOMContentLoaded', () => TasasPage.init());
 </script>
 </body>
 </html>
