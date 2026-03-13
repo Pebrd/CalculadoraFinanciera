@@ -84,7 +84,8 @@ const ApiService = {
 
     /**
      * Obtiene datos intentando primero el archivo estático (GitHub Actions)
-     * y si es viejo (> 10 min) o no existe, cae a la API real.
+     * y si es viejo (> 30 min) o no existe, cae a la API real.
+     * Optimizado para mostrar datos locales inmediatamente.
      */
     async getSmartData(apiName, fallbackUrl, useProxy = false) {
         // Asegurar que el bundle esté cargado
@@ -96,28 +97,41 @@ const ApiService = {
             data = window.CalculadoraFinanciera?.Cache.get(apiName);
         }
 
-        // 2. Verificar frescura (si pasaron > 10 min desde el último update estático)
-        const isOld = this._lastUpdated && (new Date() - this._lastUpdated > 10 * 60 * 1000);
+        // 2. Verificar frescura (si pasaron > 30 min desde el último update estático)
+        const isOld = this._lastUpdated && (new Date() - this._lastUpdated > 30 * 60 * 1000);
 
-        // 3. Si no hay data o es vieja, intentar fetch en vivo (Background update)
-        if (!data || isOld) {
-            try {
-                const liveData = await this.fetchWithProxy(fallbackUrl, useProxy);
-                console.log(`[ApiService] ${apiName} actualizado en vivo (Motivo: ${!data ? 'No estático' : 'Dato viejo'})`);
-                data = liveData;
-                
-                // Actualizar caches
-                if (this._coreData) this._coreData[apiName] = data;
-                if (window.CalculadoraFinanciera?.Cache) {
-                    window.CalculadoraFinanciera.Cache.set(apiName, data);
-                }
-            } catch (e) {
-                console.warn(`[ApiService] Falló fetch en vivo para ${apiName}, usando dato disponible.`);
-                if (!data) throw e;
+        // 3. Si hay datos locales, retornarlos inmediatamente
+        if (data) {
+            // Actualizar en background si está viejo (sin esperar)
+            if (isOld) {
+                this._updateInBackground(apiName, fallbackUrl, useProxy);
             }
+            return data;
         }
 
-        return data;
+        // 4. Si no hay datos locales, intentar fetch en vivo
+        try {
+            const liveData = await this.fetchWithProxy(fallbackUrl, useProxy);
+            console.log(`[ApiService] ${apiName} actualizado en vivo`);
+            return liveData;
+        } catch (e) {
+            console.warn(`[ApiService] Falló fetch para ${apiName}`);
+            return null;
+        }
+    },
+
+    // Actualiza en background sin bloquear
+    async _updateInBackground(apiName, fallbackUrl, useProxy) {
+        try {
+            const liveData = await this.fetchWithProxy(fallbackUrl, useProxy);
+            console.log(`[ApiService] ${apiName} actualizado en background`);
+            if (this._coreData) this._coreData[apiName] = liveData;
+            if (window.CalculadoraFinanciera?.Cache) {
+                window.CalculadoraFinanciera.Cache.set(apiName, liveData);
+            }
+        } catch (e) {
+            // Silencioso - no bloquea la UI
+        }
     },
 
     // --- Métodos específicos ---
