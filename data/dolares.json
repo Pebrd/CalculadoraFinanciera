@@ -1,62 +1,51 @@
 {
-  "last_updated": "2026-03-13T03:01:14.725Z",
-  "data": [
-    {
-      "moneda": "USD",
-      "casa": "oficial",
-      "nombre": "Oficial",
-      "compra": 1365,
-      "venta": 1415,
-      "fechaActualizacion": "2026-03-12T17:00:00.000Z"
-    },
-    {
-      "moneda": "USD",
-      "casa": "blue",
-      "nombre": "Blue",
-      "compra": 1400,
-      "venta": 1420,
-      "fechaActualizacion": "2026-03-12T20:57:00.000Z"
-    },
-    {
-      "moneda": "USD",
-      "casa": "bolsa",
-      "nombre": "Bolsa",
-      "compra": 1403.4,
-      "venta": 1424.2,
-      "fechaActualizacion": "2026-03-12T20:57:00.000Z"
-    },
-    {
-      "moneda": "USD",
-      "casa": "contadoconliqui",
-      "nombre": "Contado con liquidación",
-      "compra": 1457.5,
-      "venta": 1458.8,
-      "fechaActualizacion": "2026-03-12T20:57:00.000Z"
-    },
-    {
-      "moneda": "USD",
-      "casa": "mayorista",
-      "nombre": "Mayorista",
-      "compra": 1385.5,
-      "venta": 1394.5,
-      "fechaActualizacion": "2026-03-12T15:46:00.000Z",
-      "variacion": -0.11
-    },
-    {
-      "moneda": "USD",
-      "casa": "cripto",
-      "nombre": "Cripto",
-      "compra": 1462.2,
-      "venta": 1462.3,
-      "fechaActualizacion": "2026-03-12T20:57:00.000Z"
-    },
-    {
-      "moneda": "USD",
-      "casa": "tarjeta",
-      "nombre": "Tarjeta",
-      "compra": 1774.5,
-      "venta": 1839.5,
-      "fechaActualizacion": "2026-03-12T17:00:00.000Z"
-    }
-  ]
+  "oficial": {
+    "name": "Oficial",
+    "buy": 1365,
+    "sell": 1415,
+    "variacion": 0,
+    "timestamp": "2026-03-13T00:13:58.383808"
+  },
+  "blue": {
+    "name": "Blue",
+    "buy": 1400,
+    "sell": 1420,
+    "variacion": 0,
+    "timestamp": "2026-03-13T00:13:58.383821"
+  },
+  "bolsa": {
+    "name": "Bolsa",
+    "buy": 1403.4,
+    "sell": 1424.2,
+    "variacion": 0,
+    "timestamp": "2026-03-13T00:13:58.383824"
+  },
+  "contadoconliquidaci\u00f3n": {
+    "name": "Contado con liquidaci\u00f3n",
+    "buy": 1457.5,
+    "sell": 1458.8,
+    "variacion": 0,
+    "timestamp": "2026-03-13T00:13:58.383827"
+  },
+  "mayorista": {
+    "name": "Mayorista",
+    "buy": 1385.5,
+    "sell": 1394.5,
+    "variacion": -0.11,
+    "timestamp": "2026-03-13T00:13:58.383828"
+  },
+  "cripto": {
+    "name": "Cripto",
+    "buy": 1462.2,
+    "sell": 1462.3,
+    "variacion": 0,
+    "timestamp": "2026-03-13T00:13:58.383830"
+  },
+  "tarjeta": {
+    "name": "Tarjeta",
+    "buy": 1774.5,
+    "sell": 1839.5,
+    "variacion": 0,
+    "timestamp": "2026-03-13T00:13:58.383835"
+  }
 }
