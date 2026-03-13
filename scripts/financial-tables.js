@@ -41,8 +41,12 @@ const FinancialTables = {
     },
     
     renderStocksTable(data, containerId) {
+        console.log('renderStocksTable called with data:', data, 'containerId:', containerId);
         const container = document.getElementById(containerId);
-        if (!container) return;
+        if (!container) {
+            console.error('Container not found:', containerId);
+            return;
+        }
         
         let html = '<table class="fin-table"><thead><tr><th>Acción</th><th>Precio</th><th>Cambio</th><th>%</th></tr></thead><tbody>';
         
@@ -62,8 +66,12 @@ const FinancialTables = {
     },
     
     renderCommoditiesTable(data, containerId) {
+        console.log('renderCommoditiesTable called with data:', data, 'containerId:', containerId);
         const container = document.getElementById(containerId);
-        if (!container) return;
+        if (!container) {
+            console.error('Container not found:', containerId);
+            return;
+        }
         
         let html = '<table class="fin-table"><thead><tr><th>Commodity</th><th>Precio</th><th>Cambio</th><th>%</th></tr></thead><tbody>';
         
@@ -100,11 +108,14 @@ const FinancialTables = {
     },
     
     async init() {
+        console.log('FinancialTables.init() called');
         const [stocks, commodities, indices] = await Promise.all([
             this.loadStocksData(),
             this.loadCommoditiesData(),
             this.loadIndicesData()
         ]);
+        
+        console.log('Data loaded - stocks:', stocks, 'commodities:', commodities, 'indices:', indices);
         
         this.renderStocksTable(stocks, 'stocks-table');
         this.renderCommoditiesTable(commodities, 'commodities-table');
