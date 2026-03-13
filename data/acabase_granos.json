@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-12T00:35:22.635Z",
+  "last_updated": "2026-03-13T18:30:21.016Z",
   "data": {
     "result": {
       "resultCode": 600,
@@ -8,57 +8,57 @@
           "producto": "GI",
           "nombre": "GIRASOL   ",
           "puerto": "RS",
-          "importe": 528580,
+          "importe": 540345,
           "cierre": null,
-          "dif": -6080,
-          "fecha": "11/03/2026",
-          "hora": "10:27"
+          "dif": -585,
+          "fecha": "13/03/2026",
+          "hora": "10:23"
         },
         {
           "producto": "MZ",
           "nombre": "MAIZ      ",
           "puerto": "RS",
-          "importe": 247600,
+          "importe": 256320,
           "cierre": null,
-          "dif": -3400,
-          "fecha": "11/03/2026",
-          "hora": "10:26"
+          "dif": 6020,
+          "fecha": "13/03/2026",
+          "hora": "10:22"
         },
         {
           "producto": "SG",
           "nombre": "SORGO     ",
           "puerto": "RS",
-          "importe": 264290,
+          "importe": 263245,
           "cierre": null,
-          "dif": 790,
-          "fecha": "11/03/2026",
-          "hora": "10:29"
+          "dif": -285,
+          "fecha": "13/03/2026",
+          "hora": "10:25"
         },
         {
           "producto": "SO",
           "nombre": "SOJA      ",
           "puerto": "RS",
-          "importe": 461500,
+          "importe": 470000,
           "cierre": null,
-          "dif": -3500,
-          "fecha": "11/03/2026",
-          "hora": "10:29"
+          "dif": 5000,
+          "fecha": "13/03/2026",
+          "hora": "10:24"
         },
         {
           "producto": "TR",
           "nombre": "TRIGO     ",
           "puerto": "RS",
-          "importe": 254550,
+          "importe": 253000,
           "cierre": null,
-          "dif": -5450,
-          "fecha": "11/03/2026",
-          "hora": "10:25"
+          "dif": -800,
+          "fecha": "13/03/2026",
+          "hora": "10:21"
         }
       ],
       "isCompressed": 0,
-      "resultSize": 704,
+      "resultSize": 701,
       "domain": null,
-      "lastUpdatedDateData": "2026-03-11T21:35:22-03:00"
+      "lastUpdatedDateData": "2026-03-13T15:30:20-03:00"
     }
   }
 }
