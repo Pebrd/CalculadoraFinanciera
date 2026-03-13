@@ -1,84 +1,484 @@
 {
-  "last_updated": "2026-03-13T00:34:06.041144",
+  "last_updated": "2026-03-13T00:52:50.415313",
   "articles": [
     {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "El principal activo del Gobierno pierde brillo: examen para Milei y Caputo",
+      "link": "https://eleconomista.com.ar/economia/el-principal-activo-gobierno-pierde-brillo-examen-milei-caputo-n93335",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "Incertidumbre por la guerra, con inflaci\u00f3n local sostenida y una buena licitaci\u00f3n",
+      "link": "https://eleconomista.com.ar/finanzas/incertidumbre-guerra-inflacion-local-sostenida-una-buena-licitacion-n93334",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "Adorni y el costo de la moral como pol\u00edtica de Estado",
+      "link": "https://eleconomista.com.ar/politica/adorni-costo-moral-como-politica-estado-n93333",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "Mauricio Macri re\u00fane al PRO en una cumbre existencial para relanzar el partido",
+      "link": "https://eleconomista.com.ar/politica/mauricio-macri-reune-pro-una-cumbre-existencial-relanzar-partido-n93332",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "Caputo explic\u00f3 por qu\u00e9 la inflaci\u00f3n no baja hace 9 meses",
+      "link": "https://eleconomista.com.ar/economia/caputo-explico-inflacion-baja-hace-9-meses-n93330",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "El intr\u00edngulis de la tasa de inter\u00e9s de los juicios laborales",
+      "link": "https://eleconomista.com.ar/economia/el-intringulis-tasa-interes-juicios-laborales-n93329",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "Caputo negocia un pr\u00e9stamo bilateral para pagar la deuda y en Wall Street preguntan por la tolerancia social a la econom\u00eda de Milei",
+      "link": "https://eleconomista.com.ar/finanzas/caputo-negocia-prestamo-bilateral-pagar-deuda-wall-street-preguntan-tolerancia-social-economia-milei-n93328",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "Netflix convirti\u00f3 a los jugadores del Atl\u00e9tico de Madrid en Peaky Blinders",
+      "link": "https://eleconomista.com.ar/deportes/atletico-madrid-peaky-blinders-netflix-jugadores-n93331",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "Chery confirm\u00f3 su pr\u00f3ximo lanzamiento: un SUV h\u00edbrido-enchufable",
+      "link": "https://eleconomista.com.ar/autos/chery-confirmo-su-proximo-lanzamiento-suv-hibrido-enchufable-n93327",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Ultimas",
+      "category": "Nacional",
+      "title": "El que avisa no traiciona",
+      "link": "https://eleconomista.com.ar/tech/el-avisa-traiciona-n93325",
+      "date": 1773373968569,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "El principal activo del Gobierno pierde brillo: examen para Milei y Caputo",
+      "link": "https://eleconomista.com.ar/economia/el-principal-activo-gobierno-pierde-brillo-examen-milei-caputo-n93335",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "Caputo explic\u00f3 por qu\u00e9 la inflaci\u00f3n no baja hace 9 meses",
+      "link": "https://eleconomista.com.ar/economia/caputo-explico-inflacion-baja-hace-9-meses-n93330",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "El intr\u00edngulis de la tasa de inter\u00e9s de los juicios laborales",
+      "link": "https://eleconomista.com.ar/economia/el-intringulis-tasa-interes-juicios-laborales-n93329",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "El problema no es solo el d\u00f3lar, es la productividad",
+      "link": "https://eleconomista.com.ar/economia/el-problema-dolar-productividad-n93326",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "Prepagas: cu\u00e1nto cobra cada empresa y cu\u00e1l es la m\u00e1s barata",
+      "link": "https://eleconomista.com.ar/economia/prepagas-cuanto-cobra-cada-empresa-mas-barata-n93321",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "Crisis en electrodom\u00e9sticos: multinacional abre m\u00e1s de 100 retiros voluntarios",
+      "link": "https://eleconomista.com.ar/economia/crisis-electrodomesticos-multinacional-abre-mas-100-retiros-voluntarios-n93320",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "Inflaci\u00f3n de febrero y una \"sorpresa positiva\": el IPC podr\u00eda marcar 2,3% y desatar el festejo oficial",
+      "link": "https://eleconomista.com.ar/economia/inflacion-febrero-una-sorpresa-positiva-ipc-podria-marcar-23-desatar-festejo-oficial-n93315",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "Plazos fijos en bancos: cu\u00e1nto hay que invertir para ganar $200.000 por mes",
+      "link": "https://eleconomista.com.ar/economia/plazos-fijos-bancos-cuanto-hay-invertir-ganar-200000-mes-n93310",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "CAPUTO: \"La gente realmente no tiene idea de lo que se viene\"",
+      "link": "https://eleconomista.com.ar/economia/caputo-la-gente-realmente-tiene-idea-lo-viene-n93305",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Economia",
+      "category": "Nacional",
+      "title": "D\u00f3lar hoy: a cu\u00e1nto cotiza este jueves 12 de marzo",
+      "link": "https://eleconomista.com.ar/economia/dolar-hoy-cuanto-cotiza-jueves-12-marzo-n93301",
+      "date": 1773373968811,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "Incertidumbre por la guerra, con inflaci\u00f3n local sostenida y una buena licitaci\u00f3n",
+      "link": "https://eleconomista.com.ar/finanzas/incertidumbre-guerra-inflacion-local-sostenida-una-buena-licitacion-n93334",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "Caputo negocia un pr\u00e9stamo bilateral para pagar la deuda y en Wall Street preguntan por la tolerancia social a la econom\u00eda de Milei",
+      "link": "https://eleconomista.com.ar/finanzas/caputo-negocia-prestamo-bilateral-pagar-deuda-wall-street-preguntan-tolerancia-social-economia-milei-n93328",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "El mundo sigue inquieto y la Argentina contin\u00faa recuperando",
+      "link": "https://eleconomista.com.ar/finanzas/el-mundo-sigue-inquieto-argentina-continua-recuperando-n93295",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "El impacto que el ataque a Ir\u00e1n tendr\u00e1 sobre la econom\u00eda argentina, seg\u00fan dos expertos",
+      "link": "https://eleconomista.com.ar/finanzas/el-impacto-ataque-iran-tendra-sobre-economia-argentina-dos-expertos-n93271",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "Vuelve el inter\u00e9s por colocarse en inversiones riesgosas",
+      "link": "https://eleconomista.com.ar/finanzas/vuelve-interes-colocarse-inversiones-riesgosas-n93263",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "Volatilidad hist\u00f3rica: los drones sobre el estrecho tuvieron patas cortas",
+      "link": "https://eleconomista.com.ar/finanzas/volatilidad-historica-drones-sobre-estrecho-tuvieron-patas-cortas-n93228",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "La guerra abre una ventana de oportunidad para la Argentina",
+      "link": "https://eleconomista.com.ar/finanzas/la-guerra-abre-una-ventana-oportunidad-argentina-n93179",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "Buitres con espuma en la boca: Argentina sigue pagando al contado",
+      "link": "https://eleconomista.com.ar/finanzas/buitres-espuma-boca-argentina-sigue-pagando-contado-n93142",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "Adcap crea un Comit\u00e9 de Asesores y designa a Miguel Kiguel como presidente",
+      "link": "https://eleconomista.com.ar/finanzas/adcap-crea-comite-asesores-designa-miguel-kiguel-como-presidente-n93137",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Finanzas",
+      "category": "Nacional",
+      "title": "Hubo un d\u00eda m\u00e1s tranquilo, pero la Bolsa argentina sigue sin enterarse",
+      "link": "https://eleconomista.com.ar/finanzas/hubo-dia-mas-tranquilo-pero-bolsa-argentina-sigue-enterarse-n93106",
+      "date": 1773373969063,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "Empresas familiares: el desaf\u00edo de profesionalizar cuando la empresa crece",
+      "link": "https://eleconomista.com.ar/negocios/empresas-familiares-desafio-profesionalizar-cuando-empresa-crece-n93297",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "Estall\u00f3 la pol\u00e9mica por precios distintos para el mismo producto en Mercado Libre: qu\u00e9 dijo la empresa",
+      "link": "https://eleconomista.com.ar/negocios/estallo-polemica-precios-distintos-mismo-producto-mercado-libre-dijo-empresa-n93256",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "\"WAIT & SEE\": el plan de las empresas argentinas ante la reforma laboral",
+      "link": "https://eleconomista.com.ar/negocios/wait-see-plan-empresas-argentinas-reforma-laboral-n93236",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "Yerba mate: qui\u00e9n lidera el ranking y cu\u00e1nto vende cada marca",
+      "link": "https://eleconomista.com.ar/negocios/yerba-mate-quien-lidera-ranking-cuanto-vende-cada-marca-n93161",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "\u00bfMomento de comprar? Por qu\u00e9 el real estate premium en Argentina vive su mejor arranque en a\u00f1os",
+      "link": "https://eleconomista.com.ar/negocios/momento-comprar-real-estate-premium-argentina-vive-su-mejor-arranque-anos-n93158",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "\u00bfTen\u00e9s un negocio...o te creaste un empleo exigente?",
+      "link": "https://eleconomista.com.ar/negocios/tenes-negocioo-te-creaste-empleo-exigente-n93155",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "Los Agentes de IA llegaron con la era de la \"Eficiencia Brutal\"",
+      "link": "https://eleconomista.com.ar/negocios/los-agentes-ia-llegaron-era-eficiencia-brutal-n93108",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "La empresa colmena y el liderazgo de contraste: el precio invisible de la armon\u00eda",
+      "link": "https://eleconomista.com.ar/negocios/la-empresa-colmena-liderazgo-contraste-precio-invisible-armonia-n93096",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "Ual\u00e1 recibe US$ 195 millones de un gigante global y dispara su valuaci\u00f3n a US$ 3.200 millones",
+      "link": "https://eleconomista.com.ar/negocios/uala-recibe-us-195-millones-gigante-global-dispara-su-valuacion-us-3200-millones-n93087",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Negocios",
+      "category": "Nacional",
+      "title": "Cr\u00e9ditos hipotecarios: Banco Ciudad capta $99.000 millones y sorprende al mercado",
+      "link": "https://eleconomista.com.ar/negocios/creditos-hipotecarios-banco-ciudad-capta-99000-millones-sorprende-mercado-n93086",
+      "date": 1773373969307,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Fatiga del cr\u00e9dito y niveles de morosidad como en 2001: la advertencia del presidente del Banco Provincia",
+      "link": "https://eleconomista.com.ar/agro/fatiga-credito-niveles-morosidad-como-2001-advertencia-presidente-banco-provincia-n93313",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Nicol\u00e1s Pino: \"Hay un solo objetivo: que los productores est\u00e9n cada d\u00eda mejor y que podamos producir m\u00e1s\"",
+      "link": "https://eleconomista.com.ar/agro/nicolas-pino-hay-objetivo-productores-esten-cada-dia-mejor-podamos-producir-mas-n93302",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "R\u00e9cord mundial en Expoagro: rematan 38.145 cabezas en un d\u00eda",
+      "link": "https://eleconomista.com.ar/agro/record-mundial-expoagro-rematan-38145-cabezas-dia-n93276",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Furiase en Expoagro: \"Este es un a\u00f1o especial para invertir, sin brecha cambiaria y estabilidad macro\"",
+      "link": "https://eleconomista.com.ar/agro/furiase-expoagro-este-ano-especial-invertir-brecha-cambiaria-estabilidad-macro-n93268",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Nicol\u00e1s Pino: \"El campo hoy sabe que no nos cambiar\u00e1n las reglas de un d\u00eda para el otro\"",
+      "link": "https://eleconomista.com.ar/agro/nicolas-pino-el-campo-hoy-sabe-nos-cambiaran-reglas-dia-otro-n93222",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Guerra en Medio Oriente dispara un insumo clave del campo",
+      "link": "https://eleconomista.com.ar/agro/guerra-medio-oriente-dispara-insumo-clave-campo-n93119",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Bioceres quiebra y estalla la guerra entre sus accionistas",
+      "link": "https://eleconomista.com.ar/agro/bioceres-quiebra-estalla-guerra-sus-accionistas-n93075",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "GRIPE AVIAR: tercer brote en una provincia clave y se agrava el golpe exportador",
+      "link": "https://eleconomista.com.ar/agro/gripe-aviar-tercer-brote-una-provincia-clave-agrava-golpe-exportador-n93051",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Fuerte desplome y golpe al BCRA: \u00bfqu\u00e9 pas\u00f3 con los d\u00f3lares del campo en febrero?",
+      "link": "https://eleconomista.com.ar/agro/fuerte-desplome-golpe-bcra-que-paso-dolares-campo-febrero-n92987",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
+      "source": "El Economista Agro",
+      "category": "Nacional",
+      "title": "Ma\u00edz en riesgo: la plaga que avanza en todo el pa\u00eds y preocupa al campo",
+      "link": "https://eleconomista.com.ar/agro/maiz-riesgo-plaga-avanza-todo-pais-preocupa-campo-n92986",
+      "date": 1773373969555,
+      "description": ""
+    },
+    {
       "source": "Bloomberg",
-      "category": "Mercados",
+      "category": "Internacional",
+      "title": "MTR CEO: Cautiously Optimistic About 2026 Revenue",
+      "link": "https://www.bloomberg.com/news/videos/2026-03-13/mtr-ceo-cautiously-optimistic-about-2026-revenue-video",
+      "date": 1773373970415,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Internacional",
+      "title": "Iran War Impact: Philippines Sees 16% Power Price Jump",
+      "link": "https://www.bloomberg.com/news/videos/2026-03-13/iran-war-impact-philippines-sees-16-power-price-jump-video",
+      "date": 1773373970415,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Internacional",
+      "title": "China Consumption Start to Year Seen as Worst Ever Outside Covid",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-13/china-consumption-start-to-year-seen-as-worst-ever-outside-covid",
+      "date": 1773373970415,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Internacional",
+      "title": "Trump and Iran Strike Defiant Tone as Oil Markets See Little Relief",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-12/trump-iran-strike-defiant-tone-as-oil-markets-see-little-relief",
+      "date": 1773373970415,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Internacional",
       "title": "Brent Oil Trades Near $100 as Iran Vows to Keep Hormuz Closed",
       "link": "https://www.bloomberg.com/news/articles/2026-03-12/latest-oil-market-news-and-analysis-for-march-13",
-      "date": 1773372845228,
+      "date": 1773373970415,
       "description": ""
     },
     {
       "source": "Bloomberg",
-      "category": "Mercados",
+      "category": "Internacional",
+      "title": "UAE Cuts Partners\u2019 Crude Shipments With Flows Sent to Fujairah",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-13/uae-cuts-partners-crude-shipments-with-flows-sent-to-fujairah",
+      "date": 1773373970415,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Internacional",
+      "title": "Treasuries Fear Gauge Surges to Nine-Month High on War Risks",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-13/treasuries-fear-gauge-surges-to-nine-month-high-on-war-risks",
+      "date": 1773373970415,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Internacional",
       "title": "How Australia\u2019s Pension System Became One of the World\u2019s Largest",
       "link": "https://www.bloomberg.com/news/articles/2026-03-13/how-australia-s-superannuation-became-one-of-world-s-largest-pension-systems",
-      "date": 1773372845228,
+      "date": 1773373970415,
       "description": ""
     },
     {
       "source": "Bloomberg",
-      "category": "Mercados",
+      "category": "Internacional",
       "title": "Asia Markets at Risk Due to Oil Dependency: BCA Research",
       "link": "https://www.bloomberg.com/news/videos/2026-03-13/asia-markets-at-risk-due-to-oil-dependency-rca-research-video",
-      "date": 1773372845228,
+      "date": 1773373970415,
       "description": ""
     },
     {
       "source": "Bloomberg",
-      "category": "Mercados",
-      "title": "Gold Set for Weekly Drop as Mideast War Keeps Oil Prices High",
-      "link": "https://www.bloomberg.com/news/articles/2026-03-12/gold-steadies-after-two-day-drop-as-oil-prices-rally-further",
-      "date": 1773372845228,
-      "description": ""
-    },
-    {
-      "source": "Bloomberg",
-      "category": "Mercados",
-      "title": "Australian Retirement Trust CIO on Investment Strategy",
-      "link": "https://www.bloomberg.com/news/videos/2026-03-13/australian-retirement-trust-cio-on-investment-strategy-video",
-      "date": 1773372845228,
-      "description": ""
-    },
-    {
-      "source": "Bloomberg",
-      "category": "Mercados",
-      "title": "Asian Stocks Trim Earlier Losses, Oil Rally Cools: Markets Wrap",
-      "link": "https://www.bloomberg.com/news/articles/2026-03-12/asian-stocks-bonds-to-echo-us-drop-as-crude-rises-markets-wrap",
-      "date": 1773372845228,
-      "description": ""
-    },
-    {
-      "source": "Bloomberg",
-      "category": "Mercados",
-      "title": "Gas Shortage, Harsh Summer Lure Bulls to India Power Utilities",
-      "link": "https://www.bloomberg.com/news/newsletters/2026-03-13/adani-power-tata-power-jsw-energy-shares-rally-coal-india-hits-16-month-high",
-      "date": 1773372845228,
-      "description": ""
-    },
-    {
-      "source": "Bloomberg",
-      "category": "Mercados",
-      "title": "Philippines Braces for Iran War Hit on Labor After Jobless Surge",
-      "link": "https://www.bloomberg.com/news/articles/2026-03-13/philippines-braces-for-iran-war-hit-on-labor-after-jobless-surge",
-      "date": 1773372845228,
-      "description": ""
-    },
-    {
-      "source": "Bloomberg",
-      "category": "Mercados",
-      "title": "Xiaomi\u2019s Memory, EV Woes Hand Short Sellers $1.8 Billion Payout",
-      "link": "https://www.bloomberg.com/news/articles/2026-03-12/xiaomi-s-memory-ev-woes-hand-short-sellers-1-8-billion-payout",
-      "date": 1773372845228,
-      "description": ""
-    },
-    {
-      "source": "Bloomberg",
-      "category": "Mercados",
-      "title": "Aluminum Near Four-Year High as War Risks Smelter Closures",
-      "link": "https://www.bloomberg.com/news/articles/2026-03-13/aluminum-near-four-year-high-as-war-risks-smelter-closures",
-      "date": 1773372845228,
+      "category": "Internacional",
+      "title": "Philippines Seeks Oil Law Review as High Prices Threaten Nation",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-13/philippines-seeks-oil-law-review-as-high-prices-threaten-nation",
+      "date": 1773373970415,
       "description": ""
     }
   ]

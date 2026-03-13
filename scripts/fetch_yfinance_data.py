@@ -13,10 +13,16 @@ from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
-# RSS Feeds - using sources that work without blocking
+# RSS Feeds - Argentine (Nacional) and International (Internacional)
 RSS_FEEDS = {
-    "bloomberg": "https://feeds.bloomberg.com/markets/news.rss",
-    "reuters": "https://www.reutersagency.com/feed/?best-topics=markets"
+    # Nacional - Argentine financial news
+    "el_economista_ultimas": {"url": "https://eleconomista.com.ar/ultimas-noticias/feed/", "category": "Nacional"},
+    "el_economista_economia": {"url": "https://eleconomista.com.ar/economia/feed/", "category": "Nacional"},
+    "el_economista_finanzas": {"url": "https://eleconomista.com.ar/finanzas/feed/", "category": "Nacional"},
+    "el_economista_negocios": {"url": "https://eleconomista.com.ar/negocios/feed/", "category": "Nacional"},
+    "el_economista_agro": {"url": "https://eleconomista.com.ar/agro/feed/", "category": "Nacional"},
+    # Internacional - International news
+    "bloomberg": {"url": "https://feeds.bloomberg.com/markets/news.rss", "category": "Internacional"}
 }
 
 # YFinance - Argentina stocks
@@ -130,13 +136,15 @@ def fetch_rss_news():
     """Fetch RSS feeds and return parsed news in compatible format"""
     articles = []
     
-    for name, url in RSS_FEEDS.items():
+    for name, config in RSS_FEEDS.items():
+        url = config["url"]
+        category = config["category"]
         try:
             feed = feedparser.parse(url)
             for entry in feed.entries[:10]:  # Max 10 per source
                 articles.append({
-                    "source": name.capitalize(),
-                    "category": "Mercados",
+                    "source": name.replace("_", " ").title(),
+                    "category": category,
                     "title": entry.get("title", "")[:200],
                     "link": entry.get("link", ""),
                     "date": int(datetime.datetime.now().timestamp() * 1000),
