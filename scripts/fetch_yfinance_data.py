@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Unified Data Fetcher
-Fetches all financial data from multiple sources + RSS News + Briefing
+Fetches all financial data from multiple sources + RSS News
 """
 
 import yfinance as yf
@@ -9,9 +9,13 @@ import json
 import datetime
 import requests
 import feedparser
+import signal
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
+
+MAX_ARTICLES_PER_SOURCE = 10
+FETCH_TIMEOUT_SECONDS = 10
 
 # RSS Feeds - Argentine (Nacional) and International (Internacional)
 RSS_FEEDS = {
@@ -132,6 +136,35 @@ def fetch_criptoya_usdt():
         print(f"Error fetching criptoya USDT: {e}")
     return {}
 
+def fetch_rss_with_timeout(url, timeout=10):
+    """Fetch RSS feed with timeout using signal-based approach"""
+    def timeout_handler(signum, frame):
+        raise TimeoutError(f"Request timed out after {timeout} seconds")
+    
+    old_handler = signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(timeout)
+    try:
+        feed = feedparser.parse(url)
+        signal.alarm(0)
+        return feed
+    finally:
+        signal.signal(signal.SIGALRM, old_handler)
+
+
+def parse_feed_date(entry):
+    """Extract publication date from feed entry, return timestamp in milliseconds"""
+    for date_field in ("published", "updated", "dc:date"):
+        date_str = entry.get(date_field)
+        if date_str:
+            try:
+                parsed = feedparser.parse_datetime(date_str)
+                if parsed:
+                    return int(parsed.timestamp() * 1000)
+            except Exception:
+                pass
+    return int(datetime.datetime.now().timestamp() * 1000)
+
+
 def fetch_rss_news():
     """Fetch RSS feeds and return parsed news in compatible format"""
     articles = []
@@ -140,16 +173,20 @@ def fetch_rss_news():
         url = config["url"]
         category = config["category"]
         try:
-            feed = feedparser.parse(url)
-            for entry in feed.entries[:10]:  # Max 10 per source
+            feed = fetch_rss_with_timeout(url, FETCH_TIMEOUT_SECONDS)
+            for entry in feed.entries[:MAX_ARTICLES_PER_SOURCE]:
+                description = entry.get("summary", "") or entry.get("description", "") or ""
+                description = description[:300] if description else ""
                 articles.append({
                     "source": name.replace("_", " ").title(),
                     "category": category,
                     "title": entry.get("title", "")[:200],
                     "link": entry.get("link", ""),
-                    "date": int(datetime.datetime.now().timestamp() * 1000),
-                    "description": ""
+                    "date": parse_feed_date(entry),
+                    "description": description
                 })
+        except TimeoutError as e:
+            print(f"Timeout fetching RSS {name}: {e}")
         except Exception as e:
             print(f"Error fetching RSS {name}: {e}")
     
@@ -157,54 +194,6 @@ def fetch_rss_news():
         "last_updated": datetime.datetime.now().isoformat(),
         "articles": articles
     }
-
-def generate_briefing(dolares, indices, commodities, stocks, news):
-    """Generate market briefing"""
-    
-    # Get key data
-    merval = indices.get("^MERV", {})
-    blue = dolares.get("blue", {})
-    oficial = dolares.get("oficial", {})
-    
-    # Calculate CCL brecha
-    ccl = dolares.get("contadoconliquidacion", dolares.get("contadoconliquidez", {}))
-    brecha = 0
-    if oficial and ccl and oficial.get("sell") and ccl.get("sell"):
-        brecha = ((ccl["sell"] / oficial["sell"]) - 1) * 100
-    
-    # Find biggest movers in commodities
-    big_movers = []
-    for symbol, data in commodities.items():
-        if data.get("pct_change", 0) > 3:
-            big_movers.append({"name": data["name"], "change": data["pct_change"]})
-    
-    # Find biggest stock movers
-    stock_movers = []
-    for symbol, data in stocks.items():
-        if abs(data.get("pct_change", 0)) > 3:
-            stock_movers.append({"name": data["name"], "change": data["pct_change"]})
-    
-    # Top news - handle both old and new format
-    news_articles = news.get("articles", news) if isinstance(news, dict) else news
-    top_news = [n["title"][:100] for n in news_articles[:5]]
-    
-    briefing = {
-        "market": {
-            "merval": merval.get("price", 0),
-            "merval_change": merval.get("pct_change", 0),
-            "blue": blue.get("sell", 0),
-            "oficial": oficial.get("sell", 0),
-            "brecha": round(brecha, 1)
-        },
-        "alerts": {
-            "commodities": big_movers[:5],
-            "stocks": stock_movers[:5]
-        },
-        "top_news": top_news,
-        "timestamp": datetime.datetime.now().isoformat()
-    }
-    
-    return briefing
 
 def main():
     """Main function to fetch and save all data"""
@@ -223,9 +212,6 @@ def main():
     print("Fetching RSS news...")
     news = fetch_rss_news()
     
-    print("Generating briefing...")
-    briefing = generate_briefing(dolares, indices, commodities, stocks, news)
-    
     # Create unified bundle
     bundle = {
         "last_updated": datetime.datetime.now().isoformat(),
@@ -236,8 +222,7 @@ def main():
             "dolares": dolares,
             "bancos": bancos,
             "usdt": usdt,
-            "news": news,
-            "briefing": briefing
+            "news": news
         }
     }
     
@@ -254,11 +239,6 @@ def main():
         json.dump(indices, f, indent=2)
     with open(DATA_DIR / "dolares.json", "w") as f:
         json.dump(dolares, f, indent=2)
-    with open(DATA_DIR / "news.json", "w") as f:
-        json.dump(news, f, indent=2)
-    with open(DATA_DIR / "briefing.json", "w") as f:
-        json.dump(briefing, f, indent=2)
-    
     print("Data saved to data/ directory")
 
 if __name__ == "__main__":
