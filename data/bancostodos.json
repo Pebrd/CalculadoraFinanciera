@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-13T03:31:48.958Z",
+  "last_updated": "2026-03-13T03:34:33.412Z",
   "data": {
     "andina": {
       "ask": 1395,
       "totalAsk": 1395,
       "bid": 1345,
       "totalBid": 1345,
-      "time": 1773370907
+      "time": 1773372709
     },
     "bapro": {
       "ask": 1425,
@@ -62,7 +62,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773370992
+      "time": 1773372794
     },
     "galicia": {
       "ask": 1470,
@@ -97,7 +97,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773370950
+      "time": 1773372751
     },
     "patagonia": {
       "ask": 1425,
