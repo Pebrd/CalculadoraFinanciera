@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-13T02:52:20.368Z",
+  "last_updated": "2026-03-13T03:01:14.900Z",
   "data": {
     "andina": {
       "ask": 1395,
@@ -20,14 +20,14 @@
       "totalAsk": 1425,
       "bid": 1375,
       "totalBid": 1375,
-      "time": 1773369058
+      "time": 1773370859
     },
     "bna": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773369068
+      "time": 1773370870
     },
     "brubank": {
       "ask": 1472,
@@ -41,7 +41,7 @@
       "totalAsk": 1420,
       "bid": 1380,
       "totalBid": 1380,
-      "time": 1773369059
+      "time": 1773370859
     },
     "ciudad": {
       "ask": 1470,
@@ -118,7 +118,7 @@
       "totalAsk": 1415,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773369034
+      "time": 1773370834
     },
     "pluscambio": {
       "ask": 1420,
@@ -132,7 +132,7 @@
       "totalAsk": 1415,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773369053
+      "time": 1773370853
     },
     "santander": {
       "ask": 1470,
@@ -153,7 +153,7 @@
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773369061
+      "time": 1773370862
     }
   }
 }
