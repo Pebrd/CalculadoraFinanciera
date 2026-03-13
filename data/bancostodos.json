@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-13T03:01:14.900Z",
+  "last_updated": "2026-03-13T03:14:55.730Z",
   "data": {
     "andina": {
       "ask": 1395,
       "totalAsk": 1395,
       "bid": 1345,
       "totalBid": 1345,
-      "time": 1773369106
+      "time": 1773370907
     },
     "bapro": {
       "ask": 1425,
@@ -62,7 +62,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773369191
+      "time": 1773370992
     },
     "galicia": {
       "ask": 1470,
@@ -76,14 +76,14 @@
       "totalAsk": 1420,
       "bid": 1380,
       "totalBid": 1380,
-      "time": 1773369095
+      "time": 1773370896
     },
     "icbc": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1355,
       "totalBid": 1355,
-      "time": 1773369093
+      "time": 1773370895
     },
     "macro": {
       "ask": 1485,
@@ -97,14 +97,14 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773369149
+      "time": 1773370950
     },
     "patagonia": {
       "ask": 1425,
       "totalAsk": 1425,
       "bid": 1375,
       "totalBid": 1375,
-      "time": 1773369099
+      "time": 1773370900
     },
     "piano": {
       "ask": 1480,
@@ -125,7 +125,7 @@
       "totalAsk": 1420,
       "bid": 1380,
       "totalBid": 1380,
-      "time": 1773369091
+      "time": 1773370892
     },
     "prex": {
       "ask": 1415,
@@ -146,7 +146,7 @@
       "totalAsk": 1424,
       "bid": 1384,
       "totalBid": 1384,
-      "time": 1773369085
+      "time": 1773370886
     },
     "triacambio": {
       "ask": 1420,
