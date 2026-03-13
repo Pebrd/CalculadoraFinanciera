@@ -5,6 +5,8 @@
 
 const FinancialTables = {
     
+    console.log('FinancialTables module loaded');
+    
     async loadStocksData() {
         try {
             const response = await fetch('./data/yfinance_stocks.json');
@@ -111,5 +113,3 @@ const FinancialTables = {
 };
 
 document.addEventListener('DOMContentLoaded', () => FinancialTables.init());
-
-export default FinancialTables;
