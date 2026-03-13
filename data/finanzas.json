@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-13T19:58:53.882Z",
+  "last_updated": "2026-03-13T20:30:46.835Z",
   "data": {
     "dolares": [
       {
@@ -16,23 +16,23 @@
         "nombre": "Blue",
         "compra": 1395,
         "venta": 1415,
-        "fechaActualizacion": "2026-03-13T18:59:00.000Z"
+        "fechaActualizacion": "2026-03-13T19:56:00.000Z"
       },
       {
         "moneda": "USD",
         "casa": "bolsa",
         "nombre": "Bolsa",
-        "compra": 1420.6,
-        "venta": 1421.9,
-        "fechaActualizacion": "2026-03-13T18:59:00.000Z"
+        "compra": 1416.4,
+        "venta": 1427.2,
+        "fechaActualizacion": "2026-03-13T19:56:00.000Z"
       },
       {
         "moneda": "USD",
         "casa": "contadoconliqui",
         "nombre": "Contado con liquidación",
-        "compra": 1466.1,
-        "venta": 1466.9,
-        "fechaActualizacion": "2026-03-13T18:59:00.000Z"
+        "compra": 1471.2,
+        "venta": 1472.6,
+        "fechaActualizacion": "2026-03-13T19:56:00.000Z"
       },
       {
         "moneda": "USD",
@@ -47,9 +47,9 @@
         "moneda": "USD",
         "casa": "cripto",
         "nombre": "Cripto",
-        "compra": 1471.2,
-        "venta": 1471.3,
-        "fechaActualizacion": "2026-03-13T18:59:00.000Z"
+        "compra": 1471.7,
+        "venta": 1471.8,
+        "fechaActualizacion": "2026-03-13T19:56:00.000Z"
       },
       {
         "moneda": "USD",
@@ -62,95 +62,95 @@
     ],
     "usdt": {
       "buenbit": {
-        "ask": 1484.84,
-        "totalAsk": 1486.3248,
-        "bid": 1451.46,
-        "totalBid": 1450.0085,
-        "time": 1773431921
+        "ask": 1481.85,
+        "totalAsk": 1483.3318,
+        "bid": 1448.54,
+        "totalBid": 1447.0915,
+        "time": 1773433842
       },
       "ripio": {
-        "ask": 1467.06,
-        "totalAsk": 1467.06,
-        "bid": 1441.97,
-        "totalBid": 1434.7602,
-        "time": 1773431904
+        "ask": 1464.51,
+        "totalAsk": 1464.51,
+        "bid": 1446.26,
+        "totalBid": 1439.0287,
+        "time": 1773433824
       },
       "ripioexchange": {
-        "ask": 1466.9,
-        "totalAsk": 1474.2345,
-        "bid": 1456.8,
-        "totalBid": 1449.516,
-        "time": 1773431890
+        "ask": 1464.9,
+        "totalAsk": 1472.2245,
+        "bid": 1460.5,
+        "totalBid": 1453.1975,
+        "time": 1773433811
       },
       "satoshitango": {
-        "ask": 1480.71,
-        "totalAsk": 1488.1135,
-        "bid": 1454.25,
-        "totalBid": 1446.9787,
-        "time": 1773431905
+        "ask": 1481.43,
+        "totalAsk": 1488.8371,
+        "bid": 1465.33,
+        "totalBid": 1458.0033,
+        "time": 1773433825
       },
       "universalcoins": {
         "ask": 1485,
         "totalAsk": 1488.7125,
         "bid": 1430,
         "totalBid": 1426.425,
-        "time": 1773431929
+        "time": 1773433788
       },
       "decrypto": {
         "ask": 1470.56,
         "totalAsk": 1475.707,
         "bid": 1434.16,
         "totalBid": 1429.1404,
-        "time": 1773431913
+        "time": 1773433834
       },
       "letsbit": {
-        "ask": 1479.8389,
-        "totalAsk": 1479.8389,
-        "bid": 1445.9937,
-        "totalBid": 1445.9937,
-        "time": 1773431880
+        "ask": 1478.225,
+        "totalAsk": 1478.225,
+        "bid": 1444.2586,
+        "totalBid": 1444.2586,
+        "time": 1773433799
       },
       "binancep2p": {
-        "ask": 1462.09,
-        "totalAsk": 1462.09,
-        "bid": 1456.11,
-        "totalBid": 1456.11,
-        "time": 1773431915
+        "ask": 1463,
+        "totalAsk": 1463,
+        "bid": 1458.75,
+        "totalBid": 1458.75,
+        "time": 1773433835
       },
       "fiwind": {
-        "ask": 1468,
-        "totalAsk": 1468,
-        "bid": 1454,
-        "totalBid": 1454,
-        "time": 1773431930
+        "ask": 1467,
+        "totalAsk": 1467,
+        "bid": 1453,
+        "totalBid": 1453,
+        "time": 1773433789
       },
       "lemoncash": {
         "ask": 1475,
         "totalAsk": 1482.375,
         "bid": 1415,
         "totalBid": 1407.925,
-        "time": 1773431888
+        "time": 1773433809
       },
       "okexp2p": {
-        "ask": 1459.96,
-        "totalAsk": 1459.96,
-        "bid": 1456,
-        "totalBid": 1456,
-        "time": 1773431885
+        "ask": 1460,
+        "totalAsk": 1460,
+        "bid": 1458,
+        "totalBid": 1458,
+        "time": 1773433827
       },
       "vitawallet": {
-        "ask": 1485.9069,
-        "totalAsk": 1485.9069,
-        "bid": 1457.8084,
-        "totalBid": 1457.8084,
-        "time": 1773431889
+        "ask": 1482.9523,
+        "totalAsk": 1482.9523,
+        "bid": 1454.9097,
+        "totalBid": 1454.9097,
+        "time": 1773433810
       },
       "belo": {
         "ask": 1476,
         "totalAsk": 1476,
         "bid": 1456,
         "totalBid": 1456,
-        "time": 1773431928
+        "time": 1773433787
       },
       "huobip2p": {
         "ask": 0,
@@ -164,77 +164,77 @@
         "totalAsk": 1480,
         "bid": 1440,
         "totalBid": 1440,
-        "time": 1773431887
+        "time": 1773433807
       },
       "bybitp2p": {
-        "ask": 1461,
-        "totalAsk": 1461,
-        "bid": 1459,
-        "totalBid": 1459,
-        "time": 1773431929
+        "ask": 1462.6,
+        "totalAsk": 1462.6,
+        "bid": 1460,
+        "totalBid": 1460,
+        "time": 1773433837
       },
       "kucoinp2p": {
-        "ask": 1463,
-        "totalAsk": 1463,
+        "ask": 1446,
+        "totalAsk": 1446,
         "bid": 1450,
         "totalBid": 1450,
-        "time": 1773431931
+        "time": 1773433821
       },
       "saldo": {
-        "ask": 1468.9984,
-        "totalAsk": 1468.9984,
-        "bid": 1438.5923,
-        "totalBid": 1438.5923,
-        "time": 1773431890
+        "ask": 1467.3265,
+        "totalAsk": 1467.3265,
+        "bid": 1438.5385,
+        "totalBid": 1438.5385,
+        "time": 1773433810
       },
       "kriptonmarket": {
-        "ask": 1472.69,
-        "totalAsk": 1472.69,
-        "bid": 1439.09,
-        "totalBid": 1439.09,
-        "time": 1773431885
+        "ask": 1471.68,
+        "totalAsk": 1471.68,
+        "bid": 1438.1,
+        "totalBid": 1438.1,
+        "time": 1773433806
       },
       "astropay": {
-        "ask": 1518.8911,
-        "totalAsk": 1518.8911,
-        "bid": 1458.7466,
-        "totalBid": 1458.7466,
-        "time": 1773431929
+        "ask": 1517.5892,
+        "totalAsk": 1517.5892,
+        "bid": 1457.5135,
+        "totalBid": 1457.5135,
+        "time": 1773433788
       },
       "bitgetp2p": {
-        "ask": 1455.99,
-        "totalAsk": 1455.99,
-        "bid": 1455,
-        "totalBid": 1455,
-        "time": 1773431919
+        "ask": 1461,
+        "totalAsk": 1461,
+        "bid": 1457.25,
+        "totalBid": 1457.25,
+        "time": 1773433818
       },
       "pluscrypto": {
         "ask": 1480,
         "totalAsk": 1480,
         "bid": 1440,
         "totalBid": 1440,
-        "time": 1773431924
+        "time": 1773433844
       },
       "bybit": {
         "ask": 1482.9723,
         "totalAsk": 1482.9723,
         "bid": 1437.1343,
         "totalBid": 1437.1343,
-        "time": 1773431860
+        "time": 1773433770
       },
       "eluter": {
-        "ask": 1481.93,
-        "totalAsk": 1496.7493,
-        "bid": 1434.6975,
-        "totalBid": 1420.3505,
-        "time": 1773431886
+        "ask": 1482.9313,
+        "totalAsk": 1497.7606,
+        "bid": 1434.2148,
+        "totalBid": 1419.8726,
+        "time": 1773433806
       },
       "binance": {
-        "ask": 1472.1,
-        "totalAsk": 1473.2041,
-        "bid": 1472,
-        "totalBid": 1456.187,
-        "time": 1773431898
+        "ask": 1469.5,
+        "totalAsk": 1470.6021,
+        "bid": 1469.4,
+        "totalBid": 1453.615,
+        "time": 1773433818
       },
       "paydecep2p": {
         "ask": 1600,
@@ -244,95 +244,95 @@
         "time": 1766147160
       },
       "eldoradop2p": {
-        "ask": 1465.74,
-        "totalAsk": 1480.2508,
-        "bid": 1446.11,
-        "totalBid": 1431.7935,
-        "time": 1773431893
+        "ask": 1465.7,
+        "totalAsk": 1480.2104,
+        "bid": 1448.3,
+        "totalBid": 1433.9618,
+        "time": 1773433820
       },
       "trubit": {
         "ask": 1457,
         "totalAsk": 1464.285,
-        "bid": 1441.38,
-        "totalBid": 1434.1731,
-        "time": 1773431898
+        "bid": 1440.43,
+        "totalBid": 1433.2278,
+        "time": 1773433818
       },
       "bingxp2p": {
-        "ask": 1459,
-        "totalAsk": 1459,
-        "bid": 1454.25,
-        "totalBid": 1454.25,
-        "time": 1773431913
+        "ask": 1459.6,
+        "totalAsk": 1459.6,
+        "bid": 1455.3,
+        "totalBid": 1455.3,
+        "time": 1773433833
       },
       "bitsoalpha": {
-        "ask": 1462.38,
-        "totalAsk": 1471.1543,
-        "bid": 1461.04,
-        "totalBid": 1452.2738,
-        "time": 1773431916
+        "ask": 1460.75,
+        "totalAsk": 1469.5145,
+        "bid": 1459.71,
+        "totalBid": 1450.9517,
+        "time": 1773433839
       },
       "lemoncashp2p": {
-        "ask": 1450,
-        "totalAsk": 1471.75,
-        "bid": 1445,
-        "totalBid": 1423.325,
-        "time": 1773431851
+        "ask": 1448,
+        "totalAsk": 1469.72,
+        "bid": 1450,
+        "totalBid": 1428.25,
+        "time": 1773433822
       },
       "cocoscrypto": {
         "ask": 1482.0047,
         "totalAsk": 1482.0047,
         "bid": 1457.0035,
         "totalBid": 1457.0035,
-        "time": 1773431930
+        "time": 1773433789
       },
       "coinexp2p": {
         "ask": 0,
         "totalAsk": 0,
-        "bid": 1442,
-        "totalBid": 1442,
-        "time": 1773431930
+        "bid": 1442.1,
+        "totalBid": 1442.1,
+        "time": 1773433789
       },
       "cryptomktpro": {
-        "ask": 1484.61,
-        "totalAsk": 1500.8359,
-        "bid": 1448.59,
-        "totalBid": 1432.843,
-        "time": 1773431885
+        "ask": 1483.5,
+        "totalAsk": 1499.7138,
+        "bid": 1448.52,
+        "totalBid": 1432.7737,
+        "time": 1773433805
       },
       "wallbit": {
         "ask": 1481.14,
         "totalAsk": 1481.14,
-        "bid": 1443.06,
-        "totalBid": 1443.06,
-        "time": 1773431892
+        "bid": 1440.12,
+        "totalBid": 1440.12,
+        "time": 1773433812
       },
       "mexcp2p": {
-        "ask": 1458.8,
-        "totalAsk": 1458.8,
+        "ask": 1462.39,
+        "totalAsk": 1462.39,
         "bid": 1455,
         "totalBid": 1455,
-        "time": 1773431907
+        "time": 1773433820
       },
       "weexp2p": {
         "ask": 0,
         "totalAsk": 0,
         "bid": 1451,
         "totalBid": 1451,
-        "time": 1773431918
+        "time": 1773433809
       },
       "mexc": {
-        "ask": 1493.4289,
-        "totalAsk": 1493.4289,
+        "ask": 1493.652,
+        "totalAsk": 1493.652,
         "bid": 1479.2899,
         "totalBid": 1478.5503,
-        "time": 1773431909
+        "time": 1773433829
       },
       "peanut": {
         "ask": 1475.56,
         "totalAsk": 1475.56,
         "bid": 1444.32,
         "totalBid": 1444.32,
-        "time": 1773431886
+        "time": 1773433806
       }
     },
     "bancostodos": {
@@ -341,7 +341,7 @@
         "totalAsk": 1410,
         "bid": 1360,
         "totalBid": 1360,
-        "time": 1773431457
+        "time": 1773433264
       },
       "bapro": {
         "ask": 1425,
@@ -355,14 +355,14 @@
         "totalAsk": 1425,
         "bid": 1375,
         "totalBid": 1375,
-        "time": 1773431471
+        "time": 1773433275
       },
       "bna": {
         "ask": 1420,
         "totalAsk": 1420,
         "bid": 1370,
         "totalBid": 1370,
-        "time": 1773431465
+        "time": 1773433269
       },
       "brubank": {
         "ask": 1472,
@@ -376,7 +376,7 @@
         "totalAsk": 1430,
         "bid": 1380,
         "totalBid": 1380,
-        "time": 1773431414
+        "time": 1773433816
       },
       "ciudad": {
         "ask": 1470,
@@ -397,7 +397,7 @@
         "totalAsk": 1425,
         "bid": 1365,
         "totalBid": 1365,
-        "time": 1773431660
+        "time": 1773433464
       },
       "galicia": {
         "ask": 1470,
@@ -411,14 +411,14 @@
         "totalAsk": 1420,
         "bid": 1380,
         "totalBid": 1380,
-        "time": 1773431468
+        "time": 1773433271
       },
       "icbc": {
         "ask": 1445,
         "totalAsk": 1445,
         "bid": 1385,
         "totalBid": 1385,
-        "time": 1773431465
+        "time": 1773433268
       },
       "macro": {
         "ask": 1485,
@@ -432,7 +432,7 @@
         "totalAsk": 1430,
         "bid": 1370,
         "totalBid": 1370,
-        "time": 1773431595
+        "time": 1773433398
       },
       "patagonia": {
         "ask": 1425,
@@ -453,21 +453,21 @@
         "totalAsk": 1415,
         "bid": 1370,
         "totalBid": 1370,
-        "time": 1773431412
+        "time": 1773433814
       },
       "pluscambio": {
         "ask": 1430,
         "totalAsk": 1430,
         "bid": 1380,
         "totalBid": 1380,
-        "time": 1773431427
+        "time": 1773433838
       },
       "prex": {
         "ask": 1410,
         "totalAsk": 1410,
         "bid": 1360,
         "totalBid": 1360,
-        "time": 1773431444
+        "time": 1773433255
       },
       "santander": {
         "ask": 1470,
@@ -481,14 +481,14 @@
         "totalAsk": 1420,
         "bid": 1380,
         "totalBid": 1380,
-        "time": 1773431462
+        "time": 1773433266
       },
       "triacambio": {
         "ask": 1415,
         "totalAsk": 1415,
         "bid": 1370,
         "totalBid": 1370,
-        "time": 1773431407
+        "time": 1773433814
       }
     },
     "argentinadatos_fci": [
@@ -659,7 +659,7 @@
         "isCompressed": 0,
         "resultSize": 701,
         "domain": null,
-        "lastUpdatedDateData": "2026-03-13T15:30:20-03:00"
+        "lastUpdatedDateData": "2026-03-13T17:30:44-03:00"
       }
     },
     "plazofijo": [
@@ -898,8 +898,8 @@
       "cotizacion_blue_semana_repasada": "1405.83",
       "cotizacion_semana_pasada": "1426.83",
       "cotizacion_blue_semana_pasada": "1395.83",
-      "cotizacion_semana_actual": "1418.00",
-      "cotizacion_blue_semana_actual": "1390.00",
+      "cotizacion_semana_actual": "1416.00",
+      "cotizacion_blue_semana_actual": "1395.00",
       "data": [
         {
           "categoria": "Novillitos hasta 390 Kg.",
@@ -909,29 +909,29 @@
           "precio_semana_2": 5278,
           "precio_semana_1_formatted": "5.281",
           "precio_semana_2_formatted": "5.278",
-          "precio_semana_1_usd": 3.72,
+          "precio_semana_1_usd": 3.73,
           "precio_semana_2_usd": 3.7,
-          "precio_semana_1_usd_formatted": "3,72",
+          "precio_semana_1_usd_formatted": "3,73",
           "precio_semana_2_usd_formatted": "3,70",
-          "precio_semana_1_blue": 3.8,
+          "precio_semana_1_blue": 3.79,
           "precio_semana_2_blue": 3.78,
-          "precio_semana_1_blue_formatted": "3,80",
+          "precio_semana_1_blue_formatted": "3,79",
           "precio_semana_2_blue_formatted": "3,78",
           "variacion_precio_semana_1": 3,
           "variacion_precio_semana_2": -87,
           "variacion_precio_semana_1_formatted": "3,00",
           "variacion_precio_semana_2_formatted": "-87,00",
-          "variacion_precio_semana_1_usd": 0.02,
+          "variacion_precio_semana_1_usd": 0.03,
           "variacion_precio_semana_2_usd": -0.06,
-          "variacion_precio_semana_1_usd_formatted": "0,02",
+          "variacion_precio_semana_1_usd_formatted": "0,03",
           "variacion_precio_semana_2_usd_formatted": "-0,06",
-          "variacion_precio_semana_1_blue": 0.02,
+          "variacion_precio_semana_1_blue": 0.01,
           "variacion_precio_semana_2_blue": -0.06,
-          "variacion_precio_semana_1_blue_formatted": "0,02",
+          "variacion_precio_semana_1_blue_formatted": "0,01",
           "variacion_precio_semana_2_blue_formatted": "-0,06",
-          "variacion_precio_usd_semana_1": 0.02,
+          "variacion_precio_usd_semana_1": 0.03,
           "variacion_precio_usd_semana_2": -0.06,
-          "variacion_precio_blue_semana_1": 0.02,
+          "variacion_precio_blue_semana_1": 0.01,
           "variacion_precio_blue_semana_2": -0.06,
           "cantidad_semana_3": 1870,
           "precio_semana_3": 5365,
@@ -950,9 +950,9 @@
           "precio_semana_2_usd": 3.45,
           "precio_semana_1_usd_formatted": "3,44",
           "precio_semana_2_usd_formatted": "3,45",
-          "precio_semana_1_blue": 3.51,
+          "precio_semana_1_blue": 3.49,
           "precio_semana_2_blue": 3.52,
-          "precio_semana_1_blue_formatted": "3,51",
+          "precio_semana_1_blue_formatted": "3,49",
           "precio_semana_2_blue_formatted": "3,52",
           "variacion_precio_semana_1": -48,
           "variacion_precio_semana_2": -102,
@@ -962,13 +962,13 @@
           "variacion_precio_semana_2_usd": -0.07,
           "variacion_precio_semana_1_usd_formatted": "-0,01",
           "variacion_precio_semana_2_usd_formatted": "-0,07",
-          "variacion_precio_semana_1_blue": -0.01,
+          "variacion_precio_semana_1_blue": -0.03,
           "variacion_precio_semana_2_blue": -0.08,
-          "variacion_precio_semana_1_blue_formatted": "-0,01",
+          "variacion_precio_semana_1_blue_formatted": "-0,03",
           "variacion_precio_semana_2_blue_formatted": "-0,08",
           "variacion_precio_usd_semana_1": -0.01,
           "variacion_precio_usd_semana_2": -0.07,
-          "variacion_precio_blue_semana_1": -0.01,
+          "variacion_precio_blue_semana_1": -0.03,
           "variacion_precio_blue_semana_2": -0.08,
           "cantidad_semana_3": 1707,
           "precio_semana_3": 5022,
@@ -983,29 +983,29 @@
           "precio_semana_2": 4816,
           "precio_semana_1_formatted": "4.766",
           "precio_semana_2_formatted": "4.816",
-          "precio_semana_1_usd": 3.36,
+          "precio_semana_1_usd": 3.37,
           "precio_semana_2_usd": 3.38,
-          "precio_semana_1_usd_formatted": "3,36",
+          "precio_semana_1_usd_formatted": "3,37",
           "precio_semana_2_usd_formatted": "3,38",
-          "precio_semana_1_blue": 3.43,
+          "precio_semana_1_blue": 3.42,
           "precio_semana_2_blue": 3.45,
-          "precio_semana_1_blue_formatted": "3,43",
+          "precio_semana_1_blue_formatted": "3,42",
           "precio_semana_2_blue_formatted": "3,45",
           "variacion_precio_semana_1": -50,
           "variacion_precio_semana_2": -58,
           "variacion_precio_semana_1_formatted": "-50,00",
           "variacion_precio_semana_2_formatted": "-58,00",
-          "variacion_precio_semana_1_usd": -0.02,
+          "variacion_precio_semana_1_usd": -0.0099999999999998,
           "variacion_precio_semana_2_usd": -0.04,
-          "variacion_precio_semana_1_usd_formatted": "-0,02",
+          "variacion_precio_semana_1_usd_formatted": "-0,01",
           "variacion_precio_semana_2_usd_formatted": "-0,04",
-          "variacion_precio_semana_1_blue": -0.02,
+          "variacion_precio_semana_1_blue": -0.03,
           "variacion_precio_semana_2_blue": -0.04,
-          "variacion_precio_semana_1_blue_formatted": "-0,02",
+          "variacion_precio_semana_1_blue_formatted": "-0,03",
           "variacion_precio_semana_2_blue_formatted": "-0,04",
-          "variacion_precio_usd_semana_1": -0.02,
+          "variacion_precio_usd_semana_1": -0.0099999999999998,
           "variacion_precio_usd_semana_2": -0.04,
-          "variacion_precio_blue_semana_1": -0.02,
+          "variacion_precio_blue_semana_1": -0.03,
           "variacion_precio_blue_semana_2": -0.04,
           "cantidad_semana_3": 869,
           "precio_semana_3": 4874,
@@ -1020,29 +1020,29 @@
           "precio_semana_2": 4765,
           "precio_semana_1_formatted": "4.512",
           "precio_semana_2_formatted": "4.765",
-          "precio_semana_1_usd": 3.18,
+          "precio_semana_1_usd": 3.19,
           "precio_semana_2_usd": 3.34,
-          "precio_semana_1_usd_formatted": "3,18",
+          "precio_semana_1_usd_formatted": "3,19",
           "precio_semana_2_usd_formatted": "3,34",
-          "precio_semana_1_blue": 3.25,
+          "precio_semana_1_blue": 3.23,
           "precio_semana_2_blue": 3.41,
-          "precio_semana_1_blue_formatted": "3,25",
+          "precio_semana_1_blue_formatted": "3,23",
           "precio_semana_2_blue_formatted": "3,41",
           "variacion_precio_semana_1": -253,
           "variacion_precio_semana_2": -51,
           "variacion_precio_semana_1_formatted": "-253,00",
           "variacion_precio_semana_2_formatted": "-51,00",
-          "variacion_precio_semana_1_usd": -0.16,
+          "variacion_precio_semana_1_usd": -0.15,
           "variacion_precio_semana_2_usd": -0.04,
-          "variacion_precio_semana_1_usd_formatted": "-0,16",
+          "variacion_precio_semana_1_usd_formatted": "-0,15",
           "variacion_precio_semana_2_usd_formatted": "-0,04",
-          "variacion_precio_semana_1_blue": -0.16,
+          "variacion_precio_semana_1_blue": -0.18,
           "variacion_precio_semana_2_blue": -0.04,
-          "variacion_precio_semana_1_blue_formatted": "-0,16",
+          "variacion_precio_semana_1_blue_formatted": "-0,18",
           "variacion_precio_semana_2_blue_formatted": "-0,04",
-          "variacion_precio_usd_semana_1": -0.16,
+          "variacion_precio_usd_semana_1": -0.15,
           "variacion_precio_usd_semana_2": -0.04,
-          "variacion_precio_blue_semana_1": -0.16,
+          "variacion_precio_blue_semana_1": -0.18,
           "variacion_precio_blue_semana_2": -0.04,
           "cantidad_semana_3": 1224,
           "precio_semana_3": 4816,
@@ -1057,29 +1057,29 @@
           "precio_semana_2": 5255,
           "precio_semana_1_formatted": "5.211",
           "precio_semana_2_formatted": "5.255",
-          "precio_semana_1_usd": 3.67,
+          "precio_semana_1_usd": 3.68,
           "precio_semana_2_usd": 3.68,
-          "precio_semana_1_usd_formatted": "3,67",
+          "precio_semana_1_usd_formatted": "3,68",
           "precio_semana_2_usd_formatted": "3,68",
-          "precio_semana_1_blue": 3.75,
+          "precio_semana_1_blue": 3.74,
           "precio_semana_2_blue": 3.76,
-          "precio_semana_1_blue_formatted": "3,75",
+          "precio_semana_1_blue_formatted": "3,74",
           "precio_semana_2_blue_formatted": "3,76",
           "variacion_precio_semana_1": -44,
           "variacion_precio_semana_2": -26,
           "variacion_precio_semana_1_formatted": "-44,00",
           "variacion_precio_semana_2_formatted": "-26,00",
-          "variacion_precio_semana_1_usd": -0.01,
+          "variacion_precio_semana_1_usd": 0,
           "variacion_precio_semana_2_usd": -0.03,
-          "variacion_precio_semana_1_usd_formatted": "-0,01",
+          "variacion_precio_semana_1_usd_formatted": "0,00",
           "variacion_precio_semana_2_usd_formatted": "-0,03",
-          "variacion_precio_semana_1_blue": -0.0099999999999998,
+          "variacion_precio_semana_1_blue": -0.02,
           "variacion_precio_semana_2_blue": -0.02,
-          "variacion_precio_semana_1_blue_formatted": "-0,01",
+          "variacion_precio_semana_1_blue_formatted": "-0,02",
           "variacion_precio_semana_2_blue_formatted": "-0,02",
-          "variacion_precio_usd_semana_1": -0.01,
+          "variacion_precio_usd_semana_1": 0,
           "variacion_precio_usd_semana_2": -0.03,
-          "variacion_precio_blue_semana_1": -0.0099999999999998,
+          "variacion_precio_blue_semana_1": -0.02,
           "variacion_precio_blue_semana_2": -0.02,
           "cantidad_semana_3": 4592,
           "precio_semana_3": 5281,
@@ -1094,29 +1094,29 @@
           "precio_semana_2": 3359,
           "precio_semana_1_formatted": "3.280",
           "precio_semana_2_formatted": "3.359",
-          "precio_semana_1_usd": 2.31,
+          "precio_semana_1_usd": 2.32,
           "precio_semana_2_usd": 2.35,
-          "precio_semana_1_usd_formatted": "2,31",
+          "precio_semana_1_usd_formatted": "2,32",
           "precio_semana_2_usd_formatted": "2,35",
-          "precio_semana_1_blue": 2.36,
+          "precio_semana_1_blue": 2.35,
           "precio_semana_2_blue": 2.41,
-          "precio_semana_1_blue_formatted": "2,36",
+          "precio_semana_1_blue_formatted": "2,35",
           "precio_semana_2_blue_formatted": "2,41",
           "variacion_precio_semana_1": -79,
           "variacion_precio_semana_2": -326,
           "variacion_precio_semana_1_formatted": "-79,00",
           "variacion_precio_semana_2_formatted": "-326,00",
-          "variacion_precio_semana_1_usd": -0.04,
+          "variacion_precio_semana_1_usd": -0.03,
           "variacion_precio_semana_2_usd": -0.24,
-          "variacion_precio_semana_1_usd_formatted": "-0,04",
+          "variacion_precio_semana_1_usd_formatted": "-0,03",
           "variacion_precio_semana_2_usd_formatted": "-0,24",
-          "variacion_precio_semana_1_blue": -0.05,
+          "variacion_precio_semana_1_blue": -0.06,
           "variacion_precio_semana_2_blue": -0.23,
-          "variacion_precio_semana_1_blue_formatted": "-0,05",
+          "variacion_precio_semana_1_blue_formatted": "-0,06",
           "variacion_precio_semana_2_blue_formatted": "-0,23",
-          "variacion_precio_usd_semana_1": -0.04,
+          "variacion_precio_usd_semana_1": -0.03,
           "variacion_precio_usd_semana_2": -0.24,
-          "variacion_precio_blue_semana_1": -0.05,
+          "variacion_precio_blue_semana_1": -0.06,
           "variacion_precio_blue_semana_2": -0.23,
           "cantidad_semana_3": 3568,
           "precio_semana_3": 3685,
@@ -1131,9 +1131,9 @@
           "precio_semana_2": 2986,
           "precio_semana_1_formatted": "2.814",
           "precio_semana_2_formatted": "2.986",
-          "precio_semana_1_usd": 1.98,
+          "precio_semana_1_usd": 1.99,
           "precio_semana_2_usd": 2.09,
-          "precio_semana_1_usd_formatted": "1,98",
+          "precio_semana_1_usd_formatted": "1,99",
           "precio_semana_2_usd_formatted": "2,09",
           "precio_semana_1_blue": 2.02,
           "precio_semana_2_blue": 2.14,
@@ -1143,15 +1143,15 @@
           "variacion_precio_semana_2": 94,
           "variacion_precio_semana_1_formatted": "-172,00",
           "variacion_precio_semana_2_formatted": "94,00",
-          "variacion_precio_semana_1_usd": -0.11,
+          "variacion_precio_semana_1_usd": -0.1,
           "variacion_precio_semana_2_usd": 0.06,
-          "variacion_precio_semana_1_usd_formatted": "-0,11",
+          "variacion_precio_semana_1_usd_formatted": "-0,10",
           "variacion_precio_semana_2_usd_formatted": "0,06",
           "variacion_precio_semana_1_blue": -0.12,
           "variacion_precio_semana_2_blue": 0.07,
           "variacion_precio_semana_1_blue_formatted": "-0,12",
           "variacion_precio_semana_2_blue_formatted": "0,07",
-          "variacion_precio_usd_semana_1": -0.11,
+          "variacion_precio_usd_semana_1": -0.1,
           "variacion_precio_usd_semana_2": 0.06,
           "variacion_precio_blue_semana_1": -0.12,
           "variacion_precio_blue_semana_2": 0.07,
