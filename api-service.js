@@ -141,16 +141,7 @@ const ApiService = {
     },
 
     async getBancos() {
-        // Combinamos CriptoYa y ComparaDolar
-        const [criptoya, comparadolar] = await Promise.allSettled([
-            this.fetchWithProxy(this.URLS.CRIPTOYA_BANCOS),
-            this.fetchWithProxy(this.URLS.COMPARADOLAR)
-        ]);
-
-        return {
-            criptoya: criptoya.status === 'fulfilled' ? criptoya.value : null,
-            comparadolar: comparadolar.status === 'fulfilled' ? comparadolar.value : null
-        };
+        return this.getSmartData('bancostodos', this.URLS.CRIPTOYA_BANCOS);
     },
 
     async getUSDT() {
