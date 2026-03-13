@@ -1,62 +1,85 @@
-[
-  {
-    "title": "Brent Oil Trades Near $100 as Iran Vows to Keep Hormuz Closed",
-    "link": "https://www.bloomberg.com/news/articles/2026-03-12/latest-oil-market-news-and-analysis-for-march-13",
-    "source": "bloomberg",
-    "published": "Thu, 12 Mar 2026 22:05:31 GMT"
-  },
-  {
-    "title": "How Australia\u2019s Pension System Became One of the World\u2019s Largest",
-    "link": "https://www.bloomberg.com/news/articles/2026-03-13/how-australia-s-superannuation-became-one-of-world-s-largest-pension-systems",
-    "source": "bloomberg",
-    "published": "Fri, 13 Mar 2026 03:19:41 GMT"
-  },
-  {
-    "title": "Asia Markets at Risk Due to Oil Dependency: BCA Research",
-    "link": "https://www.bloomberg.com/news/videos/2026-03-13/asia-markets-at-risk-due-to-oil-dependency-rca-research-video",
-    "source": "bloomberg",
-    "published": "Fri, 13 Mar 2026 02:35:58 GMT"
-  },
-  {
-    "title": "Gold Set for Weekly Drop as Mideast War Keeps Oil Prices High",
-    "link": "https://www.bloomberg.com/news/articles/2026-03-12/gold-steadies-after-two-day-drop-as-oil-prices-rally-further",
-    "source": "bloomberg",
-    "published": "Thu, 12 Mar 2026 22:20:17 GMT"
-  },
-  {
-    "title": "Australian Retirement Trust CIO on Investment Strategy",
-    "link": "https://www.bloomberg.com/news/videos/2026-03-13/australian-retirement-trust-cio-on-investment-strategy-video",
-    "source": "bloomberg",
-    "published": "Fri, 13 Mar 2026 02:52:39 GMT"
-  },
-  {
-    "title": "Asian Stocks Trim Earlier Losses, Oil Rally Cools: Markets Wrap",
-    "link": "https://www.bloomberg.com/news/articles/2026-03-12/asian-stocks-bonds-to-echo-us-drop-as-crude-rises-markets-wrap",
-    "source": "bloomberg",
-    "published": "Thu, 12 Mar 2026 22:27:20 GMT"
-  },
-  {
-    "title": "Gas Shortage, Harsh Summer Lure Bulls to India Power Utilities",
-    "link": "https://www.bloomberg.com/news/newsletters/2026-03-13/adani-power-tata-power-jsw-energy-shares-rally-coal-india-hits-16-month-high",
-    "source": "bloomberg",
-    "published": "Fri, 13 Mar 2026 02:51:28 GMT"
-  },
-  {
-    "title": "Philippines Braces for Iran War Hit on Labor After Jobless Surge",
-    "link": "https://www.bloomberg.com/news/articles/2026-03-13/philippines-braces-for-iran-war-hit-on-labor-after-jobless-surge",
-    "source": "bloomberg",
-    "published": "Fri, 13 Mar 2026 02:43:43 GMT"
-  },
-  {
-    "title": "Xiaomi\u2019s Memory, EV Woes Hand Short Sellers $1.8 Billion Payout",
-    "link": "https://www.bloomberg.com/news/articles/2026-03-12/xiaomi-s-memory-ev-woes-hand-short-sellers-1-8-billion-payout",
-    "source": "bloomberg",
-    "published": "Thu, 12 Mar 2026 23:30:00 GMT"
-  },
-  {
-    "title": "Aluminum Near Four-Year High as War Risks Smelter Closures",
-    "link": "https://www.bloomberg.com/news/articles/2026-03-13/aluminum-near-four-year-high-as-war-risks-smelter-closures",
-    "source": "bloomberg",
-    "published": "Fri, 13 Mar 2026 02:33:59 GMT"
-  }
-]
+{
+  "last_updated": "2026-03-13T00:31:05.438177",
+  "articles": [
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Brent Oil Trades Near $100 as Iran Vows to Keep Hormuz Closed",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-12/latest-oil-market-news-and-analysis-for-march-13",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "How Australia\u2019s Pension System Became One of the World\u2019s Largest",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-13/how-australia-s-superannuation-became-one-of-world-s-largest-pension-systems",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Asia Markets at Risk Due to Oil Dependency: BCA Research",
+      "link": "https://www.bloomberg.com/news/videos/2026-03-13/asia-markets-at-risk-due-to-oil-dependency-rca-research-video",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Gold Set for Weekly Drop as Mideast War Keeps Oil Prices High",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-12/gold-steadies-after-two-day-drop-as-oil-prices-rally-further",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Australian Retirement Trust CIO on Investment Strategy",
+      "link": "https://www.bloomberg.com/news/videos/2026-03-13/australian-retirement-trust-cio-on-investment-strategy-video",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Asian Stocks Trim Earlier Losses, Oil Rally Cools: Markets Wrap",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-12/asian-stocks-bonds-to-echo-us-drop-as-crude-rises-markets-wrap",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Gas Shortage, Harsh Summer Lure Bulls to India Power Utilities",
+      "link": "https://www.bloomberg.com/news/newsletters/2026-03-13/adani-power-tata-power-jsw-energy-shares-rally-coal-india-hits-16-month-high",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Philippines Braces for Iran War Hit on Labor After Jobless Surge",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-13/philippines-braces-for-iran-war-hit-on-labor-after-jobless-surge",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Xiaomi\u2019s Memory, EV Woes Hand Short Sellers $1.8 Billion Payout",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-12/xiaomi-s-memory-ev-woes-hand-short-sellers-1-8-billion-payout",
+      "date": 1773372664592,
+      "description": ""
+    },
+    {
+      "source": "Bloomberg",
+      "category": "Mercados",
+      "title": "Aluminum Near Four-Year High as War Risks Smelter Closures",
+      "link": "https://www.bloomberg.com/news/articles/2026-03-13/aluminum-near-four-year-high-as-war-risks-smelter-closures",
+      "date": 1773372664592,
+      "description": ""
+    }
+  ]
+}

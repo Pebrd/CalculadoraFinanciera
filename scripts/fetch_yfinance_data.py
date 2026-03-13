@@ -127,23 +127,28 @@ def fetch_criptoya_usdt():
     return {}
 
 def fetch_rss_news():
-    """Fetch RSS feeds and return parsed news"""
-    all_news = []
+    """Fetch RSS feeds and return parsed news in compatible format"""
+    articles = []
     
     for name, url in RSS_FEEDS.items():
         try:
             feed = feedparser.parse(url)
             for entry in feed.entries[:10]:  # Max 10 per source
-                all_news.append({
+                articles.append({
+                    "source": name.capitalize(),
+                    "category": "Mercados",
                     "title": entry.get("title", "")[:200],
                     "link": entry.get("link", ""),
-                    "source": name,
-                    "published": entry.get("published", "")
+                    "date": int(datetime.datetime.now().timestamp() * 1000),
+                    "description": ""
                 })
         except Exception as e:
             print(f"Error fetching RSS {name}: {e}")
     
-    return all_news
+    return {
+        "last_updated": datetime.datetime.now().isoformat(),
+        "articles": articles
+    }
 
 def generate_briefing(dolares, indices, commodities, stocks, news):
     """Generate market briefing"""
@@ -171,8 +176,9 @@ def generate_briefing(dolares, indices, commodities, stocks, news):
         if abs(data.get("pct_change", 0)) > 3:
             stock_movers.append({"name": data["name"], "change": data["pct_change"]})
     
-    # Top news
-    top_news = [n["title"][:100] for n in news[:5]]
+    # Top news - handle both old and new format
+    news_articles = news.get("articles", news) if isinstance(news, dict) else news
+    top_news = [n["title"][:100] for n in news_articles[:5]]
     
     briefing = {
         "market": {
