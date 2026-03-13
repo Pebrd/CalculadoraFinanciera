@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-13T00:31:05.438219",
+  "last_updated": "2026-03-13T00:34:06.041196",
   "data": {
     "yfinance_stocks": {
       "GGAL.BA": {
@@ -7,170 +7,170 @@
         "price": 6295.0,
         "change": -280.0,
         "pct_change": -4.26,
-        "timestamp": "2026-03-13T00:30:57.495796"
+        "timestamp": "2026-03-13T00:33:58.633081"
       },
       "YPFD.BA": {
         "name": "YPF",
         "price": 55950.0,
         "change": -1000.0,
         "pct_change": -1.76,
-        "timestamp": "2026-03-13T00:30:57.699550"
+        "timestamp": "2026-03-13T00:33:58.833105"
       },
       "PAMP.BA": {
         "name": "Pampa Energ\u00eda",
         "price": 4802.5,
         "change": -97.5,
         "pct_change": -1.99,
-        "timestamp": "2026-03-13T00:30:57.890230"
+        "timestamp": "2026-03-13T00:33:59.027213"
       },
       "TECO2.BA": {
         "name": "Telecom Argentina",
         "price": 3400.0,
         "change": -165.0,
         "pct_change": -4.63,
-        "timestamp": "2026-03-13T00:30:58.095153"
+        "timestamp": "2026-03-13T00:33:59.226709"
       },
       "BBVA.BA": {
         "name": "BBVA Argentina",
         "price": 30340.0,
         "change": -1560.0,
         "pct_change": -4.89,
-        "timestamp": "2026-03-13T00:30:58.297929"
+        "timestamp": "2026-03-13T00:33:59.416484"
       },
       "SUPV.BA": {
         "name": "Grupo Supervielle",
         "price": 2587.5,
         "change": -125.0,
         "pct_change": -4.61,
-        "timestamp": "2026-03-13T00:30:58.494545"
+        "timestamp": "2026-03-13T00:33:59.610630"
       },
       "BMA.BA": {
         "name": "Banco Macro",
         "price": 10310.0,
         "change": -530.0,
         "pct_change": -4.89,
-        "timestamp": "2026-03-13T00:30:58.930546"
+        "timestamp": "2026-03-13T00:33:59.815673"
       },
       "CEPU.BA": {
         "name": "Central Puerto",
         "price": 2271.0,
         "change": -38.0,
         "pct_change": -1.65,
-        "timestamp": "2026-03-13T00:30:59.125148"
+        "timestamp": "2026-03-13T00:34:00.014300"
       },
       "MIRG.BA": {
         "name": "Mirgor",
         "price": 19200.0,
         "change": -25.0,
         "pct_change": -0.13,
-        "timestamp": "2026-03-13T00:30:59.325331"
+        "timestamp": "2026-03-13T00:34:00.208738"
       },
       "LOMA.BA": {
         "name": "Loma Negra",
         "price": 3000.0,
         "change": -82.5,
         "pct_change": -2.68,
-        "timestamp": "2026-03-13T00:30:59.523562"
+        "timestamp": "2026-03-13T00:34:00.397438"
       },
       "ALUA.BA": {
         "name": "Aluminio",
         "price": 844.0,
         "change": -32.5,
         "pct_change": -3.71,
-        "timestamp": "2026-03-13T00:30:59.732384"
+        "timestamp": "2026-03-13T00:34:00.602529"
       },
       "TXAR.BA": {
         "name": "Ternium Argentina",
         "price": 645.5,
         "change": -21.0,
         "pct_change": -3.15,
-        "timestamp": "2026-03-13T00:30:59.935453"
+        "timestamp": "2026-03-13T00:34:00.805871"
       },
       "EDN.BA": {
         "name": "Edenor",
         "price": 2001.0,
         "change": -25.0,
         "pct_change": -1.23,
-        "timestamp": "2026-03-13T00:31:00.128522"
+        "timestamp": "2026-03-13T00:34:00.989879"
       },
       "CRES.BA": {
         "name": "Cresud",
         "price": 1733.0,
         "change": 19.0,
         "pct_change": 1.11,
-        "timestamp": "2026-03-13T00:31:00.335349"
+        "timestamp": "2026-03-13T00:34:01.196176"
       },
       "AGRO.BA": {
         "name": "Agro",
         "price": 49.1,
         "change": -1.9,
         "pct_change": -3.73,
-        "timestamp": "2026-03-13T00:31:00.544862"
+        "timestamp": "2026-03-13T00:34:01.406690"
       },
       "TGSU2.BA": {
         "name": "TGS",
         "price": 8970.0,
         "change": -150.0,
         "pct_change": -1.64,
-        "timestamp": "2026-03-13T00:31:00.759820"
+        "timestamp": "2026-03-13T00:34:01.609773"
       },
       "MOLI.BA": {
         "name": "Molinos",
         "price": 2845.0,
         "change": -80.0,
         "pct_change": -2.74,
-        "timestamp": "2026-03-13T00:31:00.962822"
+        "timestamp": "2026-03-13T00:34:01.805635"
       },
       "CECO2.BA": {
         "name": "Ceco2",
         "price": 399.5,
         "change": -5.5,
         "pct_change": -1.36,
-        "timestamp": "2026-03-13T00:31:01.157971"
+        "timestamp": "2026-03-13T00:34:01.997597"
       }
     },
     "yfinance_commodities": {
       "GC=F": {
         "name": "Gold",
-        "price": 5115.2,
-        "change": -52.2,
-        "pct_change": -1.01,
-        "timestamp": "2026-03-13T00:31:01.344079"
+        "price": 5114.9,
+        "change": -52.5,
+        "pct_change": -1.02,
+        "timestamp": "2026-03-13T00:34:02.187132"
       },
       "CL=F": {
         "name": "WTI Crude Oil",
-        "price": 96.01,
-        "change": 8.76,
-        "pct_change": 10.04,
-        "timestamp": "2026-03-13T00:31:01.527194"
+        "price": 95.86,
+        "change": 8.61,
+        "pct_change": 9.87,
+        "timestamp": "2026-03-13T00:34:02.372982"
       },
       "BZ=F": {
         "name": "Brent Crude",
-        "price": 97.14,
-        "change": 5.16,
-        "pct_change": 5.61,
-        "timestamp": "2026-03-13T00:31:01.713585"
+        "price": 97.24,
+        "change": 5.26,
+        "pct_change": 5.72,
+        "timestamp": "2026-03-13T00:34:02.554322"
       },
       "ZS=F": {
         "name": "Soybeans",
-        "price": 1225.5,
-        "change": 25.0,
-        "pct_change": 2.08,
-        "timestamp": "2026-03-13T00:31:01.895938"
+        "price": 1226.25,
+        "change": 25.75,
+        "pct_change": 2.14,
+        "timestamp": "2026-03-13T00:34:02.735091"
       },
       "ZC=F": {
         "name": "Corn",
         "price": 462.75,
         "change": 18.5,
         "pct_change": 4.16,
-        "timestamp": "2026-03-13T00:31:02.085866"
+        "timestamp": "2026-03-13T00:34:02.915302"
       },
       "ZW=F": {
         "name": "Wheat",
-        "price": 601.5,
-        "change": 13.0,
-        "pct_change": 2.21,
-        "timestamp": "2026-03-13T00:31:02.265832"
+        "price": 601.75,
+        "change": 13.25,
+        "pct_change": 2.25,
+        "timestamp": "2026-03-13T00:34:03.109257"
       }
     },
     "yfinance_indices": {
@@ -179,7 +179,7 @@
         "price": 2695423.75,
         "change": -75211.25,
         "pct_change": -2.71,
-        "timestamp": "2026-03-13T00:31:02.455215"
+        "timestamp": "2026-03-13T00:34:03.296333"
       }
     },
     "dolares": {
@@ -188,60 +188,60 @@
         "buy": 1365,
         "sell": 1415,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:31:02.599006"
+        "timestamp": "2026-03-13T00:34:03.390810"
       },
       "blue": {
         "name": "Blue",
         "buy": 1400,
         "sell": 1420,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:31:02.599018"
+        "timestamp": "2026-03-13T00:34:03.390822"
       },
       "bolsa": {
         "name": "Bolsa",
         "buy": 1403.4,
         "sell": 1424.2,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:31:02.599022"
+        "timestamp": "2026-03-13T00:34:03.390825"
       },
       "contadoconliquidaci\u00f3n": {
         "name": "Contado con liquidaci\u00f3n",
         "buy": 1457.5,
         "sell": 1458.8,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:31:02.599025"
+        "timestamp": "2026-03-13T00:34:03.390828"
       },
       "mayorista": {
         "name": "Mayorista",
         "buy": 1385.5,
         "sell": 1394.5,
         "variacion": -0.11,
-        "timestamp": "2026-03-13T00:31:02.599026"
+        "timestamp": "2026-03-13T00:34:03.390829"
       },
       "cripto": {
         "name": "Cripto",
         "buy": 1462.2,
         "sell": 1462.3,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:31:02.599028"
+        "timestamp": "2026-03-13T00:34:03.390831"
       },
       "tarjeta": {
         "name": "Tarjeta",
         "buy": 1774.5,
         "sell": 1839.5,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:31:02.599030"
+        "timestamp": "2026-03-13T00:34:03.390833"
       }
     },
     "bancos": {
-      "timestamp": "2026-03-13T00:31:03.065216",
+      "timestamp": "2026-03-13T00:34:03.798719",
       "data": {
         "andina": {
           "ask": 1395,
           "totalAsk": 1395,
           "bid": 1345,
           "totalBid": 1345,
-          "time": 1773370907
+          "time": 1773372709
         },
         "bapro": {
           "ask": 1425,
@@ -262,7 +262,7 @@
           "totalAsk": 1415,
           "bid": 1365,
           "totalBid": 1365,
-          "time": 1773370870
+          "time": 1773372671
         },
         "brubank": {
           "ask": 1472,
@@ -297,7 +297,7 @@
           "totalAsk": 1430,
           "bid": 1370,
           "totalBid": 1370,
-          "time": 1773370992
+          "time": 1773372794
         },
         "galicia": {
           "ask": 1470,
@@ -307,18 +307,18 @@
           "time": 1766167200
         },
         "hipotecario": {
-          "ask": 1420,
-          "totalAsk": 1420,
-          "bid": 1380,
-          "totalBid": 1380,
-          "time": 1773370896
+          "ask": 1415,
+          "totalAsk": 1415,
+          "bid": 1375,
+          "totalBid": 1375,
+          "time": 1773372697
         },
         "icbc": {
           "ask": 1415,
           "totalAsk": 1415,
           "bid": 1355,
           "totalBid": 1355,
-          "time": 1773370895
+          "time": 1773372696
         },
         "macro": {
           "ask": 1485,
@@ -332,14 +332,14 @@
           "totalAsk": 1430,
           "bid": 1370,
           "totalBid": 1370,
-          "time": 1773370950
+          "time": 1773372751
         },
         "patagonia": {
           "ask": 1425,
           "totalAsk": 1425,
           "bid": 1375,
           "totalBid": 1375,
-          "time": 1773370900
+          "time": 1773372700
         },
         "piano": {
           "ask": 1480,
@@ -360,7 +360,7 @@
           "totalAsk": 1420,
           "bid": 1380,
           "totalBid": 1380,
-          "time": 1773370892
+          "time": 1773372693
         },
         "prex": {
           "ask": 1415,
@@ -381,7 +381,7 @@
           "totalAsk": 1424,
           "bid": 1384,
           "totalBid": 1384,
-          "time": 1773370886
+          "time": 1773372687
         },
         "triacambio": {
           "ask": 1420,
@@ -393,182 +393,182 @@
       }
     },
     "usdt": {
-      "timestamp": "2026-03-13T00:31:03.531389",
+      "timestamp": "2026-03-13T00:34:04.234467",
       "data": {
         "buenbit": {
-          "ask": 1474.46,
-          "totalAsk": 1475.9345,
-          "bid": 1441.31,
-          "totalBid": 1439.8687,
-          "time": 1773372630
+          "ask": 1474.44,
+          "totalAsk": 1475.9144,
+          "bid": 1441.29,
+          "totalBid": 1439.8487,
+          "time": 1773372810
         },
         "ripio": {
-          "ask": 1461.5,
-          "totalAsk": 1461.5,
-          "bid": 1441.59,
-          "totalBid": 1434.382,
-          "time": 1773372655
+          "ask": 1461.35,
+          "totalAsk": 1461.35,
+          "bid": 1441.49,
+          "totalBid": 1434.2825,
+          "time": 1773372835
         },
         "ripioexchange": {
-          "ask": 1459.3,
-          "totalAsk": 1466.5965,
+          "ask": 1459.2,
+          "totalAsk": 1466.496,
           "bid": 1456.1,
           "totalBid": 1448.8195,
-          "time": 1773372632
+          "time": 1773372812
         },
         "satoshitango": {
-          "ask": 1461.44,
-          "totalAsk": 1468.7472,
-          "bid": 1435.31,
-          "totalBid": 1428.1335,
-          "time": 1773372658
+          "ask": 1453.11,
+          "totalAsk": 1460.3755,
+          "bid": 1443.59,
+          "totalBid": 1436.372,
+          "time": 1773372838
         },
         "universalcoins": {
           "ask": 1485,
           "totalAsk": 1488.7125,
           "bid": 1430,
           "totalBid": 1426.425,
-          "time": 1773372639
+          "time": 1773372819
         },
         "decrypto": {
           "ask": 1475.61,
           "totalAsk": 1480.7746,
           "bid": 1439.085,
           "totalBid": 1434.0482,
-          "time": 1773372615
+          "time": 1773372795
         },
         "letsbit": {
-          "ask": 1475.7237,
-          "totalAsk": 1475.7237,
-          "bid": 1441.9979,
-          "totalBid": 1441.9979,
-          "time": 1773372605
+          "ask": 1475.734,
+          "totalAsk": 1475.734,
+          "bid": 1442.0277,
+          "totalBid": 1442.0277,
+          "time": 1773372785
         },
         "binancep2p": {
           "ask": 1460.9,
           "totalAsk": 1460.9,
           "bid": 1454,
           "totalBid": 1454,
-          "time": 1773372638
+          "time": 1773372818
         },
         "fiwind": {
           "ask": 1463,
           "totalAsk": 1463,
           "bid": 1450,
           "totalBid": 1450,
-          "time": 1773372648
+          "time": 1773372828
         },
         "lemoncash": {
-          "ask": 1468.9398,
-          "totalAsk": 1476.2845,
-          "bid": 1408.9422,
-          "totalBid": 1401.8975,
-          "time": 1773372656
+          "ask": 1468.9383,
+          "totalAsk": 1476.283,
+          "bid": 1408.9408,
+          "totalBid": 1401.8961,
+          "time": 1773372836
         },
         "okexp2p": {
           "ask": 1462.5,
           "totalAsk": 1462.5,
-          "bid": 1452.4,
-          "totalBid": 1452.4,
-          "time": 1773372647
+          "bid": 1452.7,
+          "totalBid": 1452.7,
+          "time": 1773372827
         },
         "vitawallet": {
-          "ask": 1475.8732,
-          "totalAsk": 1475.8732,
-          "bid": 1447.9644,
-          "totalBid": 1447.9644,
-          "time": 1773372657
+          "ask": 1475.6811,
+          "totalAsk": 1475.6811,
+          "bid": 1447.776,
+          "totalBid": 1447.776,
+          "time": 1773372837
         },
         "belo": {
           "ask": 1470,
           "totalAsk": 1470,
           "bid": 1450,
           "totalBid": 1450,
-          "time": 1773372645
+          "time": 1773372825
         },
         "huobip2p": {
           "ask": 0,
           "totalAsk": 0,
-          "bid": 976.77,
-          "totalBid": 976.77,
-          "time": 1773351705
+          "bid": 1100,
+          "totalBid": 1100,
+          "time": 1773372803
         },
         "tiendacrypto": {
           "ask": 1475,
           "totalAsk": 1475,
           "bid": 1435,
           "totalBid": 1435,
-          "time": 1773372656
+          "time": 1773372836
         },
         "bybitp2p": {
           "ask": 1458,
           "totalAsk": 1458,
           "bid": 1500,
           "totalBid": 1500,
-          "time": 1773372632
+          "time": 1773372821
         },
         "kucoinp2p": {
           "ask": 1465,
           "totalAsk": 1465,
           "bid": 1466,
           "totalBid": 1466,
-          "time": 1773372635
+          "time": 1773372815
         },
         "saldo": {
-          "ask": 1462.8273,
-          "totalAsk": 1462.8273,
-          "bid": 1437.2078,
-          "totalBid": 1437.2078,
-          "time": 1773372653
+          "ask": 1462.744,
+          "totalAsk": 1462.744,
+          "bid": 1437.1563,
+          "totalBid": 1437.1563,
+          "time": 1773372833
         },
         "kriptonmarket": {
           "ask": 1468.15,
           "totalAsk": 1468.15,
           "bid": 1434.65,
           "totalBid": 1434.65,
-          "time": 1773372645
+          "time": 1773372825
         },
         "astropay": {
-          "ask": 1487.1793,
-          "totalAsk": 1487.1793,
-          "bid": 1428.3062,
-          "totalBid": 1428.3062,
-          "time": 1773372646
+          "ask": 1487.6254,
+          "totalAsk": 1487.6254,
+          "bid": 1428.7347,
+          "totalBid": 1428.7347,
+          "time": 1773372826
         },
         "bitgetp2p": {
           "ask": 1458.1,
           "totalAsk": 1458.1,
           "bid": 1455,
           "totalBid": 1455,
-          "time": 1773372655
+          "time": 1773372832
         },
         "pluscrypto": {
           "ask": 1475,
           "totalAsk": 1475,
           "bid": 1435,
           "totalBid": 1435,
-          "time": 1773372608
+          "time": 1773372788
         },
         "bybit": {
           "ask": 1477.9781,
           "totalAsk": 1477.9781,
           "bid": 1432.1393,
           "totalBid": 1432.1393,
-          "time": 1773372605
+          "time": 1773372773
         },
         "eluter": {
           "ask": 1476.5674,
           "totalAsk": 1491.3331,
           "bid": 1430.3757,
           "totalBid": 1416.0719,
-          "time": 1773372655
+          "time": 1773372835
         },
         "binance": {
-          "ask": 1462.6,
-          "totalAsk": 1463.697,
-          "bid": 1462.5,
-          "totalBid": 1446.7891,
-          "time": 1773372607
+          "ask": 1462.5,
+          "totalAsk": 1463.5969,
+          "bid": 1462.4,
+          "totalBid": 1446.6902,
+          "time": 1773372787
         },
         "paydecep2p": {
           "ask": 1600,
@@ -582,103 +582,103 @@
           "totalAsk": 1481.5233,
           "bid": 1450.1,
           "totalBid": 1435.744,
-          "time": 1773372639
+          "time": 1773372787
         },
         "trubit": {
           "ask": 1457,
           "totalAsk": 1464.285,
-          "bid": 1435.19,
-          "totalBid": 1428.014,
-          "time": 1773372613
+          "bid": 1434.53,
+          "totalBid": 1427.3573,
+          "time": 1773372793
         },
         "bingxp2p": {
           "ask": 1461,
           "totalAsk": 1461,
           "bid": 1455.571,
           "totalBid": 1455.571,
-          "time": 1773372616
+          "time": 1773372796
         },
         "bitsoalpha": {
-          "ask": 1454.62,
-          "totalAsk": 1463.3477,
-          "bid": 1454.32,
-          "totalBid": 1445.5941,
-          "time": 1773372633
+          "ask": 1454.47,
+          "totalAsk": 1463.1968,
+          "bid": 1453.68,
+          "totalBid": 1444.9579,
+          "time": 1773372813
         },
         "lemoncashp2p": {
           "ask": 1470,
           "totalAsk": 1492.05,
           "bid": 1450,
           "totalBid": 1428.25,
-          "time": 1773372656
+          "time": 1773372776
         },
         "cocoscrypto": {
           "ask": 1469.9951,
           "totalAsk": 1469.9951,
           "bid": 1447.0015,
           "totalBid": 1447.0015,
-          "time": 1773372647
+          "time": 1773372827
         },
         "coinexp2p": {
           "ask": 0,
           "totalAsk": 0,
           "bid": 1440.03,
           "totalBid": 1440.03,
-          "time": 1773372565
+          "time": 1773372805
         },
         "cryptomktpro": {
-          "ask": 1474.97,
-          "totalAsk": 1491.0905,
+          "ask": 1474.53,
+          "totalAsk": 1490.6457,
           "bid": 1460,
           "totalBid": 1444.1289,
-          "time": 1773372655
+          "time": 1773372835
         },
         "wallbit": {
-          "ask": 1476.44,
-          "totalAsk": 1476.44,
-          "bid": 1433.45,
-          "totalBid": 1433.45,
-          "time": 1773372605
+          "ask": 1476.29,
+          "totalAsk": 1476.29,
+          "bid": 1433.55,
+          "totalBid": 1433.55,
+          "time": 1773372784
         },
         "mexcp2p": {
           "ask": 1462.4,
           "totalAsk": 1462.4,
           "bid": 2000,
           "totalBid": 2000,
-          "time": 1773372643
+          "time": 1773372794
         },
         "weexp2p": {
           "ask": 0,
           "totalAsk": 0,
           "bid": 1440,
           "totalBid": 1440,
-          "time": 1773372654
+          "time": 1773372834
         },
         "mexc": {
           "ask": 1491.4243,
           "totalAsk": 1491.4243,
           "bid": 1483.4594,
           "totalBid": 1482.7177,
-          "time": 1773372642
+          "time": 1773372822
         },
         "peanut": {
           "ask": 1470.58,
           "totalAsk": 1470.58,
           "bid": 1439.3,
           "totalBid": 1439.3,
-          "time": 1773372656
+          "time": 1773372836
         }
       }
     },
     "news": {
-      "last_updated": "2026-03-13T00:31:05.438177",
+      "last_updated": "2026-03-13T00:34:06.041144",
       "articles": [
         {
           "source": "Bloomberg",
           "category": "Mercados",
           "title": "Brent Oil Trades Near $100 as Iran Vows to Keep Hormuz Closed",
           "link": "https://www.bloomberg.com/news/articles/2026-03-12/latest-oil-market-news-and-analysis-for-march-13",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -686,7 +686,7 @@
           "category": "Mercados",
           "title": "How Australia\u2019s Pension System Became One of the World\u2019s Largest",
           "link": "https://www.bloomberg.com/news/articles/2026-03-13/how-australia-s-superannuation-became-one-of-world-s-largest-pension-systems",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -694,7 +694,7 @@
           "category": "Mercados",
           "title": "Asia Markets at Risk Due to Oil Dependency: BCA Research",
           "link": "https://www.bloomberg.com/news/videos/2026-03-13/asia-markets-at-risk-due-to-oil-dependency-rca-research-video",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -702,7 +702,7 @@
           "category": "Mercados",
           "title": "Gold Set for Weekly Drop as Mideast War Keeps Oil Prices High",
           "link": "https://www.bloomberg.com/news/articles/2026-03-12/gold-steadies-after-two-day-drop-as-oil-prices-rally-further",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -710,7 +710,7 @@
           "category": "Mercados",
           "title": "Australian Retirement Trust CIO on Investment Strategy",
           "link": "https://www.bloomberg.com/news/videos/2026-03-13/australian-retirement-trust-cio-on-investment-strategy-video",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -718,7 +718,7 @@
           "category": "Mercados",
           "title": "Asian Stocks Trim Earlier Losses, Oil Rally Cools: Markets Wrap",
           "link": "https://www.bloomberg.com/news/articles/2026-03-12/asian-stocks-bonds-to-echo-us-drop-as-crude-rises-markets-wrap",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -726,7 +726,7 @@
           "category": "Mercados",
           "title": "Gas Shortage, Harsh Summer Lure Bulls to India Power Utilities",
           "link": "https://www.bloomberg.com/news/newsletters/2026-03-13/adani-power-tata-power-jsw-energy-shares-rally-coal-india-hits-16-month-high",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -734,7 +734,7 @@
           "category": "Mercados",
           "title": "Philippines Braces for Iran War Hit on Labor After Jobless Surge",
           "link": "https://www.bloomberg.com/news/articles/2026-03-13/philippines-braces-for-iran-war-hit-on-labor-after-jobless-surge",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -742,7 +742,7 @@
           "category": "Mercados",
           "title": "Xiaomi\u2019s Memory, EV Woes Hand Short Sellers $1.8 Billion Payout",
           "link": "https://www.bloomberg.com/news/articles/2026-03-12/xiaomi-s-memory-ev-woes-hand-short-sellers-1-8-billion-payout",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         },
         {
@@ -750,7 +750,7 @@
           "category": "Mercados",
           "title": "Aluminum Near Four-Year High as War Risks Smelter Closures",
           "link": "https://www.bloomberg.com/news/articles/2026-03-13/aluminum-near-four-year-high-as-war-risks-smelter-closures",
-          "date": 1773372664592,
+          "date": 1773372845228,
           "description": ""
         }
       ]
@@ -767,11 +767,11 @@
         "commodities": [
           {
             "name": "WTI Crude Oil",
-            "change": 10.04
+            "change": 9.87
           },
           {
             "name": "Brent Crude",
-            "change": 5.61
+            "change": 5.72
           },
           {
             "name": "Corn",
@@ -808,7 +808,7 @@
         "Gold Set for Weekly Drop as Mideast War Keeps Oil Prices High",
         "Australian Retirement Trust CIO on Investment Strategy"
       ],
-      "timestamp": "2026-03-13T00:31:05.438216"
+      "timestamp": "2026-03-13T00:34:06.041193"
     }
   }
 }
