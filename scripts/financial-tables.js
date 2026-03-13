@@ -1,16 +1,42 @@
 /**
  * Financial Tables Display Module
+ * Optimizado para cache y actualización
  */
 
 (function() {
+    var cacheBust = 't=' + Date.now();
+    var lastUpdateTime = null;
+
     function loadData(url) {
-        return fetch(url).then(function(response) {
+        var separator = url.indexOf('?') >= 0 ? '&' : '?';
+        return fetch(url + separator + cacheBust).then(function(response) {
             if (!response.ok) throw new Error('Failed to load ' + url);
             return response.json();
         }).catch(function(error) {
             console.error('Error:', url, error);
             return {};
         });
+    }
+
+    function formatTimestamp(isoString) {
+        var date = new Date(isoString);
+        var now = new Date();
+        var diff = Math.floor((now - date) / 1000);
+        
+        if (diff < 60) return 'Hace ' + diff + 's';
+        if (diff < 3600) return 'Hace ' + Math.floor(diff / 60) + 'min';
+        return date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function getLatestTimestamp(dataObj) {
+        var timestamps = [];
+        Object.keys(dataObj).forEach(function(key) {
+            if (dataObj[key].timestamp) {
+                timestamps.push(new Date(dataObj[key].timestamp));
+            }
+        });
+        if (timestamps.length === 0) return null;
+        return new Date(Math.max.apply(null, timestamps));
     }
 
     function sortData(data, key, direction) {
@@ -34,7 +60,7 @@
         return '';
     }
 
-    function renderTable(data, containerId, defaultSort, defaultDir) {
+    function renderTable(data, containerId, defaultSort, defaultDir, timestamp) {
         var container = document.getElementById(containerId);
         if (!container) return;
         if (!data || Object.keys(data).length === 0) {
@@ -45,8 +71,15 @@
         var sortKey = defaultSort || 'name';
         var sortDir = defaultDir || 'asc';
         var sortedKeys = sortData(data, sortKey, sortDir);
+        
+        var timeStr = timestamp ? formatTimestamp(timestamp) : '';
 
-        var html = '<table class="fin-table" data-container="' + containerId + '">';
+        var html = '<div class="table-header">';
+        if (timeStr) {
+            html += '<span class="last-update">↻ ' + timeStr + '</span>';
+        }
+        html += '</div>';
+        html += '<table class="fin-table" data-container="' + containerId + '">';
         html += '<thead><tr>';
         html += '<th data-sort="name" data-dir="asc">Nombre' + getSortArrow('name', sortKey, sortDir) + '</th>';
         html += '<th data-sort="price" data-dir="desc">Precio' + getSortArrow('price', sortKey, sortDir) + '</th>';
@@ -69,7 +102,6 @@
         html += '</tbody></table>';
         container.innerHTML = html;
 
-        // Add click handlers for sorting
         container.querySelectorAll('th').forEach(function(th) {
             th.style.cursor = 'pointer';
             th.style.userSelect = 'none';
@@ -78,24 +110,39 @@
                 var currentDir = th.dataset.dir;
                 var newDir = currentDir === 'asc' ? 'desc' : 'asc';
                 var currentData = window.currentData[containerId];
-                renderTable(currentData, containerId, sortField, newDir);
+                renderTable(currentData, containerId, sortField, newDir, window.lastTimestamps[containerId]);
             });
         });
 
-        // Store data for re-sorting
         if (!window.currentData) window.currentData = {};
+        if (!window.lastTimestamps) window.lastTimestamps = {};
         window.currentData[containerId] = data;
+        window.lastTimestamps[containerId] = timestamp;
     }
 
     function init() {
+        cacheBust = 't=' + Date.now();
+        
         Promise.all([
             loadData('./data/yfinance_stocks.json'),
             loadData('./data/yfinance_commodities.json')
         ]).then(function(results) {
-            renderTable(results[0], 'stocks-table', 'name', 'asc');
-            renderTable(results[1], 'commodities-table', 'name', 'asc');
+            var stocksData = results[0];
+            var commoditiesData = results[1];
+            
+            var stocksTimestamp = getLatestTimestamp(stocksData);
+            var commoditiesTimestamp = getLatestTimestamp(commoditiesData);
+            
+            renderTable(stocksData, 'stocks-table', 'name', 'asc', stocksTimestamp ? stocksTimestamp.toISOString() : null);
+            renderTable(commoditiesData, 'commodities-table', 'name', 'asc', commoditiesTimestamp ? commoditiesTimestamp.toISOString() : null);
         });
     }
+
+    // Auto-refresh cada 5 minutos
+    setInterval(function() {
+        console.log('Refrescando datos...');
+        init();
+    }, 5 * 60 * 1000);
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
