@@ -2,8 +2,8 @@ name: Fetch Financial Data
 
 on:
   schedule:
-    # Run every hour during market hours (Argentina time)
-    - cron: '0 12-21 * * 1-5'  # 9am-6pm ART, Monday-Friday
+    # Run every 15 minutes during market hours (Argentina time)
+    - cron: '0,15,30,45 12-21 * * 1-5'  # 9am-6pm ART, Monday-Friday, every 15min
     # Run also at market close
     - cron: '0 0 * * 1-5'
   workflow_dispatch:  # Allow manual trigger
