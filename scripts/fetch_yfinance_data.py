@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 """
 Unified Data Fetcher
-Fetches all financial data from multiple sources
+Fetches all financial data from multiple sources + RSS News + Briefing
 """
 
 import yfinance as yf
 import json
 import datetime
 import requests
+import feedparser
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
+
+# RSS Feeds - using sources that work without blocking
+RSS_FEEDS = {
+    "bloomberg": "https://feeds.bloomberg.com/markets/news.rss",
+    "reuters": "https://www.reutersagency.com/feed/?best-topics=markets"
+}
 
 # YFinance - Argentina stocks
 ARGENTINA_STOCKS = {
@@ -119,6 +126,72 @@ def fetch_criptoya_usdt():
         print(f"Error fetching criptoya USDT: {e}")
     return {}
 
+def fetch_rss_news():
+    """Fetch RSS feeds and return parsed news"""
+    all_news = []
+    
+    for name, url in RSS_FEEDS.items():
+        try:
+            feed = feedparser.parse(url)
+            for entry in feed.entries[:10]:  # Max 10 per source
+                all_news.append({
+                    "title": entry.get("title", "")[:200],
+                    "link": entry.get("link", ""),
+                    "source": name,
+                    "published": entry.get("published", "")
+                })
+        except Exception as e:
+            print(f"Error fetching RSS {name}: {e}")
+    
+    return all_news
+
+def generate_briefing(dolares, indices, commodities, stocks, news):
+    """Generate market briefing"""
+    
+    # Get key data
+    merval = indices.get("^MERV", {})
+    blue = dolares.get("blue", {})
+    oficial = dolares.get("oficial", {})
+    
+    # Calculate CCL brecha
+    ccl = dolares.get("contadoconliquidacion", dolares.get("contadoconliquidez", {}))
+    brecha = 0
+    if oficial and ccl and oficial.get("sell") and ccl.get("sell"):
+        brecha = ((ccl["sell"] / oficial["sell"]) - 1) * 100
+    
+    # Find biggest movers in commodities
+    big_movers = []
+    for symbol, data in commodities.items():
+        if data.get("pct_change", 0) > 3:
+            big_movers.append({"name": data["name"], "change": data["pct_change"]})
+    
+    # Find biggest stock movers
+    stock_movers = []
+    for symbol, data in stocks.items():
+        if abs(data.get("pct_change", 0)) > 3:
+            stock_movers.append({"name": data["name"], "change": data["pct_change"]})
+    
+    # Top news
+    top_news = [n["title"][:100] for n in news[:5]]
+    
+    briefing = {
+        "market": {
+            "merval": merval.get("price", 0),
+            "merval_change": merval.get("pct_change", 0),
+            "blue": blue.get("sell", 0),
+            "oficial": oficial.get("sell", 0),
+            "brecha": round(brecha, 1)
+        },
+        "alerts": {
+            "commodities": big_movers[:5],
+            "stocks": stock_movers[:5]
+        },
+        "top_news": top_news,
+        "timestamp": datetime.datetime.now().isoformat()
+    }
+    
+    return briefing
+
 def main():
     """Main function to fetch and save all data"""
     DATA_DIR.mkdir(exist_ok=True)
@@ -133,6 +206,12 @@ def main():
     bancos = fetch_criptoya_bancos()
     usdt = fetch_criptoya_usdt()
     
+    print("Fetching RSS news...")
+    news = fetch_rss_news()
+    
+    print("Generating briefing...")
+    briefing = generate_briefing(dolares, indices, commodities, stocks, news)
+    
     # Create unified bundle
     bundle = {
         "last_updated": datetime.datetime.now().isoformat(),
@@ -142,7 +221,9 @@ def main():
             "yfinance_indices": indices,
             "dolares": dolares,
             "bancos": bancos,
-            "usdt": usdt
+            "usdt": usdt,
+            "news": news,
+            "briefing": briefing
         }
     }
     
@@ -159,6 +240,10 @@ def main():
         json.dump(indices, f, indent=2)
     with open(DATA_DIR / "dolares.json", "w") as f:
         json.dump(dolares, f, indent=2)
+    with open(DATA_DIR / "news.json", "w") as f:
+        json.dump(news, f, indent=2)
+    with open(DATA_DIR / "briefing.json", "w") as f:
+        json.dump(briefing, f, indent=2)
     
     print("Data saved to data/ directory")
 
