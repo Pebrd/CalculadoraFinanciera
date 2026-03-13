@@ -239,6 +239,8 @@ def main():
         json.dump(indices, f, indent=2)
     with open(DATA_DIR / "dolares.json", "w") as f:
         json.dump(dolares, f, indent=2)
+    with open(DATA_DIR / "news.json", "w") as f:
+        json.dump(news, f, indent=2)
     print("Data saved to data/ directory")
 
 if __name__ == "__main__":

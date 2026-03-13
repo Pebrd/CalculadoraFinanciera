@@ -4,48 +4,48 @@
     "buy": 1365,
     "sell": 1415,
     "variacion": 0,
-    "timestamp": "2026-03-13T00:34:03.390810"
+    "timestamp": "2026-03-13T01:08:39.568001"
   },
   "blue": {
     "name": "Blue",
     "buy": 1400,
     "sell": 1420,
     "variacion": 0,
-    "timestamp": "2026-03-13T00:34:03.390822"
+    "timestamp": "2026-03-13T01:08:39.568014"
   },
   "bolsa": {
     "name": "Bolsa",
     "buy": 1403.4,
     "sell": 1424.2,
     "variacion": 0,
-    "timestamp": "2026-03-13T00:34:03.390825"
+    "timestamp": "2026-03-13T01:08:39.568017"
   },
   "contadoconliquidaci\u00f3n": {
     "name": "Contado con liquidaci\u00f3n",
     "buy": 1457.5,
     "sell": 1458.8,
     "variacion": 0,
-    "timestamp": "2026-03-13T00:34:03.390828"
+    "timestamp": "2026-03-13T01:08:39.568021"
   },
   "mayorista": {
     "name": "Mayorista",
     "buy": 1385.5,
     "sell": 1394.5,
     "variacion": -0.11,
-    "timestamp": "2026-03-13T00:34:03.390829"
+    "timestamp": "2026-03-13T01:08:39.568023"
   },
   "cripto": {
     "name": "Cripto",
     "buy": 1462.2,
     "sell": 1462.3,
     "variacion": 0,
-    "timestamp": "2026-03-13T00:34:03.390831"
+    "timestamp": "2026-03-13T01:08:39.568025"
   },
   "tarjeta": {
     "name": "Tarjeta",
     "buy": 1774.5,
     "sell": 1839.5,
     "variacion": 0,
-    "timestamp": "2026-03-13T00:34:03.390833"
+    "timestamp": "2026-03-13T01:08:39.568027"
   }
 }

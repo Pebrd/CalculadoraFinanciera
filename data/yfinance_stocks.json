@@ -4,125 +4,125 @@
     "price": 6295.0,
     "change": -280.0,
     "pct_change": -4.26,
-    "timestamp": "2026-03-13T00:33:58.633081"
+    "timestamp": "2026-03-13T01:08:34.401773"
   },
   "YPFD.BA": {
     "name": "YPF",
     "price": 55950.0,
     "change": -1000.0,
     "pct_change": -1.76,
-    "timestamp": "2026-03-13T00:33:58.833105"
+    "timestamp": "2026-03-13T01:08:34.595233"
   },
   "PAMP.BA": {
     "name": "Pampa Energ\u00eda",
     "price": 4802.5,
     "change": -97.5,
     "pct_change": -1.99,
-    "timestamp": "2026-03-13T00:33:59.027213"
+    "timestamp": "2026-03-13T01:08:34.791455"
   },
   "TECO2.BA": {
     "name": "Telecom Argentina",
     "price": 3400.0,
     "change": -165.0,
     "pct_change": -4.63,
-    "timestamp": "2026-03-13T00:33:59.226709"
+    "timestamp": "2026-03-13T01:08:34.999204"
   },
   "BBVA.BA": {
     "name": "BBVA Argentina",
     "price": 30340.0,
     "change": -1560.0,
     "pct_change": -4.89,
-    "timestamp": "2026-03-13T00:33:59.416484"
+    "timestamp": "2026-03-13T01:08:35.201531"
   },
   "SUPV.BA": {
     "name": "Grupo Supervielle",
     "price": 2587.5,
     "change": -125.0,
     "pct_change": -4.61,
-    "timestamp": "2026-03-13T00:33:59.610630"
+    "timestamp": "2026-03-13T01:08:35.400902"
   },
   "BMA.BA": {
     "name": "Banco Macro",
     "price": 10310.0,
     "change": -530.0,
     "pct_change": -4.89,
-    "timestamp": "2026-03-13T00:33:59.815673"
+    "timestamp": "2026-03-13T01:08:35.602425"
   },
   "CEPU.BA": {
     "name": "Central Puerto",
     "price": 2271.0,
     "change": -38.0,
     "pct_change": -1.65,
-    "timestamp": "2026-03-13T00:34:00.014300"
+    "timestamp": "2026-03-13T01:08:35.805807"
   },
   "MIRG.BA": {
     "name": "Mirgor",
     "price": 19200.0,
     "change": -25.0,
     "pct_change": -0.13,
-    "timestamp": "2026-03-13T00:34:00.208738"
+    "timestamp": "2026-03-13T01:08:36.003467"
   },
   "LOMA.BA": {
     "name": "Loma Negra",
     "price": 3000.0,
     "change": -82.5,
     "pct_change": -2.68,
-    "timestamp": "2026-03-13T00:34:00.397438"
+    "timestamp": "2026-03-13T01:08:36.193878"
   },
   "ALUA.BA": {
     "name": "Aluminio",
     "price": 844.0,
     "change": -32.5,
     "pct_change": -3.71,
-    "timestamp": "2026-03-13T00:34:00.602529"
+    "timestamp": "2026-03-13T01:08:36.398759"
   },
   "TXAR.BA": {
     "name": "Ternium Argentina",
     "price": 645.5,
     "change": -21.0,
     "pct_change": -3.15,
-    "timestamp": "2026-03-13T00:34:00.805871"
+    "timestamp": "2026-03-13T01:08:36.599311"
   },
   "EDN.BA": {
     "name": "Edenor",
     "price": 2001.0,
     "change": -25.0,
     "pct_change": -1.23,
-    "timestamp": "2026-03-13T00:34:00.989879"
+    "timestamp": "2026-03-13T01:08:36.786695"
   },
   "CRES.BA": {
     "name": "Cresud",
     "price": 1733.0,
     "change": 19.0,
     "pct_change": 1.11,
-    "timestamp": "2026-03-13T00:34:01.196176"
+    "timestamp": "2026-03-13T01:08:36.997453"
   },
   "AGRO.BA": {
     "name": "Agro",
     "price": 49.1,
     "change": -1.9,
     "pct_change": -3.73,
-    "timestamp": "2026-03-13T00:34:01.406690"
+    "timestamp": "2026-03-13T01:08:37.208762"
   },
   "TGSU2.BA": {
     "name": "TGS",
     "price": 8970.0,
     "change": -150.0,
     "pct_change": -1.64,
-    "timestamp": "2026-03-13T00:34:01.609773"
+    "timestamp": "2026-03-13T01:08:37.473617"
   },
   "MOLI.BA": {
     "name": "Molinos",
     "price": 2845.0,
     "change": -80.0,
     "pct_change": -2.74,
-    "timestamp": "2026-03-13T00:34:01.805635"
+    "timestamp": "2026-03-13T01:08:37.678701"
   },
   "CECO2.BA": {
     "name": "Ceco2",
     "price": 399.5,
     "change": -5.5,
     "pct_change": -1.36,
-    "timestamp": "2026-03-13T00:34:01.997597"
+    "timestamp": "2026-03-13T01:08:37.865077"
   }
 }

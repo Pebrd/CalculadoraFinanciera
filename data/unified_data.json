@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-13T00:34:06.041196",
+  "last_updated": "2026-03-13T01:08:43.501261",
   "data": {
     "yfinance_stocks": {
       "GGAL.BA": {
@@ -7,170 +7,170 @@
         "price": 6295.0,
         "change": -280.0,
         "pct_change": -4.26,
-        "timestamp": "2026-03-13T00:33:58.633081"
+        "timestamp": "2026-03-13T01:08:34.401773"
       },
       "YPFD.BA": {
         "name": "YPF",
         "price": 55950.0,
         "change": -1000.0,
         "pct_change": -1.76,
-        "timestamp": "2026-03-13T00:33:58.833105"
+        "timestamp": "2026-03-13T01:08:34.595233"
       },
       "PAMP.BA": {
         "name": "Pampa Energ\u00eda",
         "price": 4802.5,
         "change": -97.5,
         "pct_change": -1.99,
-        "timestamp": "2026-03-13T00:33:59.027213"
+        "timestamp": "2026-03-13T01:08:34.791455"
       },
       "TECO2.BA": {
         "name": "Telecom Argentina",
         "price": 3400.0,
         "change": -165.0,
         "pct_change": -4.63,
-        "timestamp": "2026-03-13T00:33:59.226709"
+        "timestamp": "2026-03-13T01:08:34.999204"
       },
       "BBVA.BA": {
         "name": "BBVA Argentina",
         "price": 30340.0,
         "change": -1560.0,
         "pct_change": -4.89,
-        "timestamp": "2026-03-13T00:33:59.416484"
+        "timestamp": "2026-03-13T01:08:35.201531"
       },
       "SUPV.BA": {
         "name": "Grupo Supervielle",
         "price": 2587.5,
         "change": -125.0,
         "pct_change": -4.61,
-        "timestamp": "2026-03-13T00:33:59.610630"
+        "timestamp": "2026-03-13T01:08:35.400902"
       },
       "BMA.BA": {
         "name": "Banco Macro",
         "price": 10310.0,
         "change": -530.0,
         "pct_change": -4.89,
-        "timestamp": "2026-03-13T00:33:59.815673"
+        "timestamp": "2026-03-13T01:08:35.602425"
       },
       "CEPU.BA": {
         "name": "Central Puerto",
         "price": 2271.0,
         "change": -38.0,
         "pct_change": -1.65,
-        "timestamp": "2026-03-13T00:34:00.014300"
+        "timestamp": "2026-03-13T01:08:35.805807"
       },
       "MIRG.BA": {
         "name": "Mirgor",
         "price": 19200.0,
         "change": -25.0,
         "pct_change": -0.13,
-        "timestamp": "2026-03-13T00:34:00.208738"
+        "timestamp": "2026-03-13T01:08:36.003467"
       },
       "LOMA.BA": {
         "name": "Loma Negra",
         "price": 3000.0,
         "change": -82.5,
         "pct_change": -2.68,
-        "timestamp": "2026-03-13T00:34:00.397438"
+        "timestamp": "2026-03-13T01:08:36.193878"
       },
       "ALUA.BA": {
         "name": "Aluminio",
         "price": 844.0,
         "change": -32.5,
         "pct_change": -3.71,
-        "timestamp": "2026-03-13T00:34:00.602529"
+        "timestamp": "2026-03-13T01:08:36.398759"
       },
       "TXAR.BA": {
         "name": "Ternium Argentina",
         "price": 645.5,
         "change": -21.0,
         "pct_change": -3.15,
-        "timestamp": "2026-03-13T00:34:00.805871"
+        "timestamp": "2026-03-13T01:08:36.599311"
       },
       "EDN.BA": {
         "name": "Edenor",
         "price": 2001.0,
         "change": -25.0,
         "pct_change": -1.23,
-        "timestamp": "2026-03-13T00:34:00.989879"
+        "timestamp": "2026-03-13T01:08:36.786695"
       },
       "CRES.BA": {
         "name": "Cresud",
         "price": 1733.0,
         "change": 19.0,
         "pct_change": 1.11,
-        "timestamp": "2026-03-13T00:34:01.196176"
+        "timestamp": "2026-03-13T01:08:36.997453"
       },
       "AGRO.BA": {
         "name": "Agro",
         "price": 49.1,
         "change": -1.9,
         "pct_change": -3.73,
-        "timestamp": "2026-03-13T00:34:01.406690"
+        "timestamp": "2026-03-13T01:08:37.208762"
       },
       "TGSU2.BA": {
         "name": "TGS",
         "price": 8970.0,
         "change": -150.0,
         "pct_change": -1.64,
-        "timestamp": "2026-03-13T00:34:01.609773"
+        "timestamp": "2026-03-13T01:08:37.473617"
       },
       "MOLI.BA": {
         "name": "Molinos",
         "price": 2845.0,
         "change": -80.0,
         "pct_change": -2.74,
-        "timestamp": "2026-03-13T00:34:01.805635"
+        "timestamp": "2026-03-13T01:08:37.678701"
       },
       "CECO2.BA": {
         "name": "Ceco2",
         "price": 399.5,
         "change": -5.5,
         "pct_change": -1.36,
-        "timestamp": "2026-03-13T00:34:01.997597"
+        "timestamp": "2026-03-13T01:08:37.865077"
       }
     },
     "yfinance_commodities": {
       "GC=F": {
         "name": "Gold",
-        "price": 5114.9,
-        "change": -52.5,
-        "pct_change": -1.02,
-        "timestamp": "2026-03-13T00:34:02.187132"
+        "price": 5115.8,
+        "change": -51.6,
+        "pct_change": -1.0,
+        "timestamp": "2026-03-13T01:08:38.052741"
       },
       "CL=F": {
         "name": "WTI Crude Oil",
-        "price": 95.86,
-        "change": 8.61,
-        "pct_change": 9.87,
-        "timestamp": "2026-03-13T00:34:02.372982"
+        "price": 95.73,
+        "change": 8.48,
+        "pct_change": 9.72,
+        "timestamp": "2026-03-13T01:08:38.237186"
       },
       "BZ=F": {
         "name": "Brent Crude",
-        "price": 97.24,
-        "change": 5.26,
-        "pct_change": 5.72,
-        "timestamp": "2026-03-13T00:34:02.554322"
+        "price": 100.46,
+        "change": 8.48,
+        "pct_change": 9.22,
+        "timestamp": "2026-03-13T01:08:38.423807"
       },
       "ZS=F": {
         "name": "Soybeans",
-        "price": 1226.25,
-        "change": 25.75,
-        "pct_change": 2.14,
-        "timestamp": "2026-03-13T00:34:02.735091"
+        "price": 1213.0,
+        "change": 12.5,
+        "pct_change": 1.04,
+        "timestamp": "2026-03-13T01:08:38.616300"
       },
       "ZC=F": {
         "name": "Corn",
-        "price": 462.75,
-        "change": 18.5,
-        "pct_change": 4.16,
-        "timestamp": "2026-03-13T00:34:02.915302"
+        "price": 448.25,
+        "change": 4.0,
+        "pct_change": 0.9,
+        "timestamp": "2026-03-13T01:08:39.041636"
       },
       "ZW=F": {
         "name": "Wheat",
-        "price": 601.75,
-        "change": 13.25,
-        "pct_change": 2.25,
-        "timestamp": "2026-03-13T00:34:03.109257"
+        "price": 592.25,
+        "change": 3.75,
+        "pct_change": 0.64,
+        "timestamp": "2026-03-13T01:08:39.228400"
       }
     },
     "yfinance_indices": {
@@ -179,7 +179,7 @@
         "price": 2695423.75,
         "change": -75211.25,
         "pct_change": -2.71,
-        "timestamp": "2026-03-13T00:34:03.296333"
+        "timestamp": "2026-03-13T01:08:39.420133"
       }
     },
     "dolares": {
@@ -188,60 +188,60 @@
         "buy": 1365,
         "sell": 1415,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:34:03.390810"
+        "timestamp": "2026-03-13T01:08:39.568001"
       },
       "blue": {
         "name": "Blue",
         "buy": 1400,
         "sell": 1420,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:34:03.390822"
+        "timestamp": "2026-03-13T01:08:39.568014"
       },
       "bolsa": {
         "name": "Bolsa",
         "buy": 1403.4,
         "sell": 1424.2,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:34:03.390825"
+        "timestamp": "2026-03-13T01:08:39.568017"
       },
       "contadoconliquidaci\u00f3n": {
         "name": "Contado con liquidaci\u00f3n",
         "buy": 1457.5,
         "sell": 1458.8,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:34:03.390828"
+        "timestamp": "2026-03-13T01:08:39.568021"
       },
       "mayorista": {
         "name": "Mayorista",
         "buy": 1385.5,
         "sell": 1394.5,
         "variacion": -0.11,
-        "timestamp": "2026-03-13T00:34:03.390829"
+        "timestamp": "2026-03-13T01:08:39.568023"
       },
       "cripto": {
         "name": "Cripto",
         "buy": 1462.2,
         "sell": 1462.3,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:34:03.390831"
+        "timestamp": "2026-03-13T01:08:39.568025"
       },
       "tarjeta": {
         "name": "Tarjeta",
         "buy": 1774.5,
         "sell": 1839.5,
         "variacion": 0,
-        "timestamp": "2026-03-13T00:34:03.390833"
+        "timestamp": "2026-03-13T01:08:39.568027"
       }
     },
     "bancos": {
-      "timestamp": "2026-03-13T00:34:03.798719",
+      "timestamp": "2026-03-13T01:08:40.102233",
       "data": {
         "andina": {
           "ask": 1395,
           "totalAsk": 1395,
           "bid": 1345,
           "totalBid": 1345,
-          "time": 1773372709
+          "time": 1773374511
         },
         "bapro": {
           "ask": 1425,
@@ -255,14 +255,14 @@
           "totalAsk": 1425,
           "bid": 1375,
           "totalBid": 1375,
-          "time": 1773372661
+          "time": 1773374462
         },
         "bna": {
           "ask": 1415,
           "totalAsk": 1415,
           "bid": 1365,
           "totalBid": 1365,
-          "time": 1773372671
+          "time": 1773374472
         },
         "brubank": {
           "ask": 1472,
@@ -276,7 +276,7 @@
           "totalAsk": 1420,
           "bid": 1380,
           "totalBid": 1380,
-          "time": 1773372660
+          "time": 1773374460
         },
         "ciudad": {
           "ask": 1470,
@@ -297,7 +297,7 @@
           "totalAsk": 1430,
           "bid": 1370,
           "totalBid": 1370,
-          "time": 1773372794
+          "time": 1773374596
         },
         "galicia": {
           "ask": 1470,
@@ -307,18 +307,18 @@
           "time": 1766167200
         },
         "hipotecario": {
-          "ask": 1415,
-          "totalAsk": 1415,
-          "bid": 1375,
-          "totalBid": 1375,
-          "time": 1773372697
+          "ask": 1420,
+          "totalAsk": 1420,
+          "bid": 1380,
+          "totalBid": 1380,
+          "time": 1773374498
         },
         "icbc": {
           "ask": 1415,
           "totalAsk": 1415,
           "bid": 1355,
           "totalBid": 1355,
-          "time": 1773372696
+          "time": 1773374498
         },
         "macro": {
           "ask": 1485,
@@ -332,14 +332,14 @@
           "totalAsk": 1430,
           "bid": 1370,
           "totalBid": 1370,
-          "time": 1773372751
+          "time": 1773374552
         },
         "patagonia": {
           "ask": 1425,
           "totalAsk": 1425,
           "bid": 1375,
           "totalBid": 1375,
-          "time": 1773372700
+          "time": 1773374501
         },
         "piano": {
           "ask": 1480,
@@ -353,21 +353,21 @@
           "totalAsk": 1415,
           "bid": 1370,
           "totalBid": 1370,
-          "time": 1773372634
+          "time": 1773374435
         },
         "pluscambio": {
           "ask": 1420,
           "totalAsk": 1420,
           "bid": 1380,
           "totalBid": 1380,
-          "time": 1773372693
+          "time": 1773374494
         },
         "prex": {
           "ask": 1415,
           "totalAsk": 1415,
           "bid": 1365,
           "totalBid": 1365,
-          "time": 1773372659
+          "time": 1773374459
         },
         "santander": {
           "ask": 1470,
@@ -381,194 +381,194 @@
           "totalAsk": 1424,
           "bid": 1384,
           "totalBid": 1384,
-          "time": 1773372687
+          "time": 1773374488
         },
         "triacambio": {
           "ask": 1420,
           "totalAsk": 1420,
           "bid": 1370,
           "totalBid": 1370,
-          "time": 1773372662
+          "time": 1773374462
         }
       }
     },
     "usdt": {
-      "timestamp": "2026-03-13T00:34:04.234467",
+      "timestamp": "2026-03-13T01:08:40.704051",
       "data": {
         "buenbit": {
-          "ask": 1474.44,
-          "totalAsk": 1475.9144,
-          "bid": 1441.29,
-          "totalBid": 1439.8487,
-          "time": 1773372810
+          "ask": 1474.42,
+          "totalAsk": 1475.8944,
+          "bid": 1441.27,
+          "totalBid": 1439.8287,
+          "time": 1773374911
         },
         "ripio": {
-          "ask": 1461.35,
-          "totalAsk": 1461.35,
-          "bid": 1441.49,
-          "totalBid": 1434.2825,
-          "time": 1773372835
+          "ask": 1458.2,
+          "totalAsk": 1458.2,
+          "bid": 1441.24,
+          "totalBid": 1434.0338,
+          "time": 1773374875
         },
         "ripioexchange": {
-          "ask": 1459.2,
-          "totalAsk": 1466.496,
-          "bid": 1456.1,
-          "totalBid": 1448.8195,
-          "time": 1773372812
+          "ask": 1458.1,
+          "totalAsk": 1465.3905,
+          "bid": 1457.1,
+          "totalBid": 1449.8145,
+          "time": 1773374912
         },
         "satoshitango": {
-          "ask": 1453.11,
-          "totalAsk": 1460.3755,
-          "bid": 1443.59,
-          "totalBid": 1436.372,
-          "time": 1773372838
+          "ask": 1461.42,
+          "totalAsk": 1468.7271,
+          "bid": 1435.29,
+          "totalBid": 1428.1136,
+          "time": 1773374878
         },
         "universalcoins": {
           "ask": 1485,
           "totalAsk": 1488.7125,
           "bid": 1430,
           "totalBid": 1426.425,
-          "time": 1773372819
+          "time": 1773374919
         },
         "decrypto": {
           "ask": 1475.61,
           "totalAsk": 1480.7746,
           "bid": 1439.085,
           "totalBid": 1434.0482,
-          "time": 1773372795
+          "time": 1773374895
         },
         "letsbit": {
           "ask": 1475.734,
           "totalAsk": 1475.734,
           "bid": 1442.0277,
           "totalBid": 1442.0277,
-          "time": 1773372785
+          "time": 1773374885
         },
         "binancep2p": {
-          "ask": 1460.9,
-          "totalAsk": 1460.9,
-          "bid": 1454,
-          "totalBid": 1454,
-          "time": 1773372818
+          "ask": 1460.94,
+          "totalAsk": 1460.94,
+          "bid": 1453.73,
+          "totalBid": 1453.73,
+          "time": 1773374869
         },
         "fiwind": {
           "ask": 1463,
           "totalAsk": 1463,
           "bid": 1450,
           "totalBid": 1450,
-          "time": 1773372828
+          "time": 1773374868
         },
         "lemoncash": {
-          "ask": 1468.9383,
-          "totalAsk": 1476.283,
-          "bid": 1408.9408,
-          "totalBid": 1401.8961,
-          "time": 1773372836
+          "ask": 1468.8854,
+          "totalAsk": 1476.2298,
+          "bid": 1408.8901,
+          "totalBid": 1401.8456,
+          "time": 1773374876
         },
         "okexp2p": {
-          "ask": 1462.5,
-          "totalAsk": 1462.5,
+          "ask": 1462.49,
+          "totalAsk": 1462.49,
           "bid": 1452.7,
           "totalBid": 1452.7,
-          "time": 1773372827
+          "time": 1773374897
         },
         "vitawallet": {
-          "ask": 1475.6811,
-          "totalAsk": 1475.6811,
-          "bid": 1447.776,
-          "totalBid": 1447.776,
-          "time": 1773372837
+          "ask": 1475.8608,
+          "totalAsk": 1475.8608,
+          "bid": 1447.9523,
+          "totalBid": 1447.9523,
+          "time": 1773374877
         },
         "belo": {
           "ask": 1470,
           "totalAsk": 1470,
           "bid": 1450,
           "totalBid": 1450,
-          "time": 1773372825
+          "time": 1773374865
         },
         "huobip2p": {
           "ask": 0,
           "totalAsk": 0,
           "bid": 1100,
           "totalBid": 1100,
-          "time": 1773372803
+          "time": 1773374873
         },
         "tiendacrypto": {
           "ask": 1475,
           "totalAsk": 1475,
           "bid": 1435,
           "totalBid": 1435,
-          "time": 1773372836
+          "time": 1773374876
         },
         "bybitp2p": {
           "ask": 1458,
           "totalAsk": 1458,
           "bid": 1500,
           "totalBid": 1500,
-          "time": 1773372821
+          "time": 1773374908
         },
         "kucoinp2p": {
           "ask": 1465,
           "totalAsk": 1465,
           "bid": 1466,
           "totalBid": 1466,
-          "time": 1773372815
+          "time": 1773374915
         },
         "saldo": {
-          "ask": 1462.744,
-          "totalAsk": 1462.744,
-          "bid": 1437.1563,
-          "totalBid": 1437.1563,
-          "time": 1773372833
+          "ask": 1463.2057,
+          "totalAsk": 1463.2057,
+          "bid": 1437.4016,
+          "totalBid": 1437.4016,
+          "time": 1773374873
         },
         "kriptonmarket": {
           "ask": 1468.15,
           "totalAsk": 1468.15,
           "bid": 1434.65,
           "totalBid": 1434.65,
-          "time": 1773372825
+          "time": 1773374866
         },
         "astropay": {
-          "ask": 1487.6254,
-          "totalAsk": 1487.6254,
-          "bid": 1428.7347,
-          "totalBid": 1428.7347,
-          "time": 1773372826
+          "ask": 1487.4767,
+          "totalAsk": 1487.4767,
+          "bid": 1428.5918,
+          "totalBid": 1428.5918,
+          "time": 1773374866
         },
         "bitgetp2p": {
           "ask": 1458.1,
           "totalAsk": 1458.1,
           "bid": 1455,
           "totalBid": 1455,
-          "time": 1773372832
+          "time": 1773374889
         },
         "pluscrypto": {
           "ask": 1475,
           "totalAsk": 1475,
           "bid": 1435,
           "totalBid": 1435,
-          "time": 1773372788
+          "time": 1773374888
         },
         "bybit": {
           "ask": 1477.9781,
           "totalAsk": 1477.9781,
           "bid": 1432.1393,
           "totalBid": 1432.1393,
-          "time": 1773372773
+          "time": 1773374842
         },
         "eluter": {
-          "ask": 1476.5674,
-          "totalAsk": 1491.3331,
-          "bid": 1430.3757,
-          "totalBid": 1416.0719,
-          "time": 1773372835
+          "ask": 1476.5171,
+          "totalAsk": 1491.2823,
+          "bid": 1432.6779,
+          "totalBid": 1418.3511,
+          "time": 1773374875
         },
         "binance": {
-          "ask": 1462.5,
-          "totalAsk": 1463.5969,
-          "bid": 1462.4,
-          "totalBid": 1446.6902,
-          "time": 1773372787
+          "ask": 1462.7,
+          "totalAsk": 1463.797,
+          "bid": 1462.6,
+          "totalBid": 1446.888,
+          "time": 1773374887
         },
         "paydecep2p": {
           "ask": 1600,
@@ -578,237 +578,582 @@
           "time": 1766147160
         },
         "eldoradop2p": {
-          "ask": 1467,
-          "totalAsk": 1481.5233,
+          "ask": 1466.9,
+          "totalAsk": 1481.4223,
           "bid": 1450.1,
           "totalBid": 1435.744,
-          "time": 1773372787
+          "time": 1773374902
         },
         "trubit": {
           "ask": 1457,
           "totalAsk": 1464.285,
-          "bid": 1434.53,
-          "totalBid": 1427.3573,
-          "time": 1773372793
+          "bid": 1435.15,
+          "totalBid": 1427.9742,
+          "time": 1773374893
         },
         "bingxp2p": {
           "ask": 1461,
           "totalAsk": 1461,
-          "bid": 1455.571,
-          "totalBid": 1455.571,
-          "time": 1773372796
+          "bid": 1455.621,
+          "totalBid": 1455.621,
+          "time": 1773374836
         },
         "bitsoalpha": {
-          "ask": 1454.47,
-          "totalAsk": 1463.1968,
-          "bid": 1453.68,
-          "totalBid": 1444.9579,
-          "time": 1773372813
+          "ask": 1454.39,
+          "totalAsk": 1463.1163,
+          "bid": 1453.27,
+          "totalBid": 1444.5504,
+          "time": 1773374914
         },
         "lemoncashp2p": {
-          "ask": 1470,
-          "totalAsk": 1492.05,
+          "ask": 1472,
+          "totalAsk": 1494.08,
           "bid": 1450,
           "totalBid": 1428.25,
-          "time": 1773372776
+          "time": 1773374876
         },
         "cocoscrypto": {
           "ask": 1469.9951,
           "totalAsk": 1469.9951,
           "bid": 1447.0015,
           "totalBid": 1447.0015,
-          "time": 1773372827
+          "time": 1773374867
         },
         "coinexp2p": {
           "ask": 0,
           "totalAsk": 0,
           "bid": 1440.03,
           "totalBid": 1440.03,
-          "time": 1773372805
+          "time": 1773374905
         },
         "cryptomktpro": {
-          "ask": 1474.53,
-          "totalAsk": 1490.6457,
+          "ask": 1474.55,
+          "totalAsk": 1490.6659,
           "bid": 1460,
           "totalBid": 1444.1289,
-          "time": 1773372835
+          "time": 1773374875
         },
         "wallbit": {
-          "ask": 1476.29,
-          "totalAsk": 1476.29,
-          "bid": 1433.55,
-          "totalBid": 1433.55,
-          "time": 1773372784
+          "ask": 1476.44,
+          "totalAsk": 1476.44,
+          "bid": 1433.45,
+          "totalBid": 1433.45,
+          "time": 1773374885
         },
         "mexcp2p": {
           "ask": 1462.4,
           "totalAsk": 1462.4,
           "bid": 2000,
           "totalBid": 2000,
-          "time": 1773372794
+          "time": 1773374896
         },
         "weexp2p": {
           "ask": 0,
           "totalAsk": 0,
           "bid": 1440,
           "totalBid": 1440,
-          "time": 1773372834
+          "time": 1773374904
         },
         "mexc": {
           "ask": 1491.4243,
           "totalAsk": 1491.4243,
           "bid": 1483.4594,
           "totalBid": 1482.7177,
-          "time": 1773372822
+          "time": 1773374862
         },
         "peanut": {
           "ask": 1470.58,
           "totalAsk": 1470.58,
           "bid": 1439.3,
           "totalBid": 1439.3,
-          "time": 1773372836
+          "time": 1773374876
         }
       }
     },
     "news": {
-      "last_updated": "2026-03-13T00:34:06.041144",
+      "last_updated": "2026-03-13T01:08:43.501199",
       "articles": [
         {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "El principal activo del Gobierno pierde brillo: examen para Milei y Caputo",
+          "link": "https://eleconomista.com.ar/economia/el-principal-activo-gobierno-pierde-brillo-examen-milei-caputo-n93335",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2024/12/crop/6756fd1f3db45__950x512.webp\" /><p>La desinflaci\u00f3n se revirti\u00f3. La recuperaci\u00f3n en pausa y la cucarda pol\u00edtica, en duda. Lo que viene por delante.</p>"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "Incertidumbre por la guerra, con inflaci\u00f3n local sostenida y una buena licitaci\u00f3n",
+          "link": "https://eleconomista.com.ar/finanzas/incertidumbre-guerra-inflacion-local-sostenida-una-buena-licitacion-n93334",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a6f128618a6__950x512.webp\" /><p>Pas\u00f3 de todo. El r\u00e9gimen iran\u00ed meti\u00f3 m\u00e1s presi\u00f3n, avis\u00f3 que el petr\u00f3leo puede llegar a US$ 200 d\u00f3lares. Hubo un atentado en EE.UU. y drones sobre California. Eso gener\u00f3 un salto para el petr\u00f3leo y el alumini"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "Adorni y el costo de la moral como pol\u00edtica de Estado",
+          "link": "https://eleconomista.com.ar/politica/adorni-costo-moral-como-politica-estado-n93333",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b157a6e0f00__950x512.webp\" /><p>El viaje del jefe de Gabinete a la Argentina Week desat\u00f3 una nueva pol\u00e9mica en el Gobierno. El episodio expone una tensi\u00f3n inc\u00f3moda para el oficialismo.</p>"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "Mauricio Macri re\u00fane al PRO en una cumbre existencial para relanzar el partido",
+          "link": "https://eleconomista.com.ar/politica/mauricio-macri-reune-pro-una-cumbre-existencial-relanzar-partido-n93332",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b3314272844__950x512.webp?v=1773351494\" /><p>El encuentro ser\u00e1 el pr\u00f3ximo jueves en Parque Norte. La dirigencia espera un discurso con \"visi\u00f3n de futuro\" por parte del expresidente. Tambi\u00e9n participar\u00e1n los gobernadores y legisladores del "
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "Caputo explic\u00f3 por qu\u00e9 la inflaci\u00f3n no baja hace 9 meses",
+          "link": "https://eleconomista.com.ar/economia/caputo-explico-inflacion-baja-hace-9-meses-n93330",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2025/10/crop/68f8d5cb13105__950x512.webp\" /><p>La inflaci\u00f3n de febrero fue 2,9% y lleva nueve meses sin bajar. Caputo lo atribuy\u00f3 a la correcci\u00f3n de precios relativos y defendi\u00f3 el programa econ\u00f3mico.</p>"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "El intr\u00edngulis de la tasa de inter\u00e9s de los juicios laborales",
+          "link": "https://eleconomista.com.ar/economia/el-intringulis-tasa-interes-juicios-laborales-n93329",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a8923ea8e3b__950x512.webp\" /><p>Para los nuevos juicios se aplicar\u00e1 inflaci\u00f3n m\u00e1s un 3% anual. Para el stock se aplicar\u00e1 la tasa de inter\u00e9s bancaria pasiva que determine el Banco Central, con un tope de inflaci\u00f3n m\u00e1s 3% anual y un piso del"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "Caputo negocia un pr\u00e9stamo bilateral para pagar la deuda y en Wall Street preguntan por la tolerancia social a la econom\u00eda de Milei",
+          "link": "https://eleconomista.com.ar/finanzas/caputo-negocia-prestamo-bilateral-pagar-deuda-wall-street-preguntan-tolerancia-social-economia-milei-n93328",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2025/11/crop/691f708a396c1__950x512.webp\" /><p>El team econ\u00f3mico insisti\u00f3 en que se van a financiar con los d\u00f3lares locales. \"No venimos a pedirle plata a Wall Street\", reiteraron.</p>"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "Netflix convirti\u00f3 a los jugadores del Atl\u00e9tico de Madrid en Peaky Blinders",
+          "link": "https://eleconomista.com.ar/deportes/atletico-madrid-peaky-blinders-netflix-jugadores-n93331",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b3293de5303__950x512.webp?v=1773351230\" /><p>Griezmann, Koke y otras figuras del equipo espa\u00f1ol abandonaron las camisetas para ponerse las boinas de la familia Shelby en una megaproducci\u00f3n sin precedentes</p>"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "Chery confirm\u00f3 su pr\u00f3ximo lanzamiento: un SUV h\u00edbrido-enchufable",
+          "link": "https://eleconomista.com.ar/autos/chery-confirmo-su-proximo-lanzamiento-suv-hibrido-enchufable-n93327",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b327674ef31__950x512.webp\" /><p>La marca china aprovecha su presencia en ExpoAgro 2026 para adelantar la llegada de un nuevo modelo mediano. \u00bfC\u00f3mo es y qu\u00e9 tecnolog\u00eda trae?</p>"
+        },
+        {
+          "source": "El Economista Ultimas",
+          "category": "Nacional",
+          "title": "El que avisa no traiciona",
+          "link": "https://eleconomista.com.ar/tech/el-avisa-traiciona-n93325",
+          "date": 1773374920985,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b178ae2fb07__950x512.webp\" /><p>La propuesta de aplicar bonos catastr\u00f3ficos a la Inteligencia Artificial est\u00e1 ganando fuerza. Suena ingenioso. Sin embargo, es absurdo.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "El principal activo del Gobierno pierde brillo: examen para Milei y Caputo",
+          "link": "https://eleconomista.com.ar/economia/el-principal-activo-gobierno-pierde-brillo-examen-milei-caputo-n93335",
+          "date": 1773374921231,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2024/12/crop/6756fd1f3db45__950x512.webp\" /><p>La desinflaci\u00f3n se revirti\u00f3. La recuperaci\u00f3n en pausa y la cucarda pol\u00edtica, en duda. Lo que viene por delante.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "Caputo explic\u00f3 por qu\u00e9 la inflaci\u00f3n no baja hace 9 meses",
+          "link": "https://eleconomista.com.ar/economia/caputo-explico-inflacion-baja-hace-9-meses-n93330",
+          "date": 1773374921231,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2025/10/crop/68f8d5cb13105__950x512.webp\" /><p>La inflaci\u00f3n de febrero fue 2,9% y lleva nueve meses sin bajar. Caputo lo atribuy\u00f3 a la correcci\u00f3n de precios relativos y defendi\u00f3 el programa econ\u00f3mico.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "El intr\u00edngulis de la tasa de inter\u00e9s de los juicios laborales",
+          "link": "https://eleconomista.com.ar/economia/el-intringulis-tasa-interes-juicios-laborales-n93329",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a8923ea8e3b__950x512.webp\" /><p>Para los nuevos juicios se aplicar\u00e1 inflaci\u00f3n m\u00e1s un 3% anual. Para el stock se aplicar\u00e1 la tasa de inter\u00e9s bancaria pasiva que determine el Banco Central, con un tope de inflaci\u00f3n m\u00e1s 3% anual y un piso del"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "El problema no es solo el d\u00f3lar, es la productividad",
+          "link": "https://eleconomista.com.ar/economia/el-problema-dolar-productividad-n93326",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b1c6329ca7e__950x512.webp\" /><p>Las devaluaciones pueden mejorar la competitividad de precios en el corto plazo, pero si la estructura productiva no cambia, el efecto desaparece r\u00e1pidamente.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "Prepagas: cu\u00e1nto cobra cada empresa y cu\u00e1l es la m\u00e1s barata",
+          "link": "https://eleconomista.com.ar/economia/prepagas-cuanto-cobra-cada-empresa-mas-barata-n93321",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2024/12/crop/674ddb9697fc5__950x512.webp\" /><p>El Gobierno difundi\u00f3 los valores de referencia de las prepagas para marzo de 2026 y los usuarios ya pueden comparar precios entre las principales empresas.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "Crisis en electrodom\u00e9sticos: multinacional abre m\u00e1s de 100 retiros voluntarios",
+          "link": "https://eleconomista.com.ar/economia/crisis-electrodomesticos-multinacional-abre-mas-100-retiros-voluntarios-n93320",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b2f181c3c8f__950x512.webp\" /><p>Electrolux abri\u00f3 retiros voluntarios en su planta de Rosario y m\u00e1s de 130 trabajadores se anotaron. La medida refleja la crisis que atraviesa la industria.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "Inflaci\u00f3n de febrero y una \"sorpresa positiva\": el IPC podr\u00eda marcar 2,3% y desatar el festejo oficial",
+          "link": "https://eleconomista.com.ar/economia/inflacion-febrero-una-sorpresa-positiva-ipc-podria-marcar-23-desatar-festejo-oficial-n93315",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2023/12/crop/657cbdeb7a198__950x512.webp\" /><p>El IPC de febrero se publica este jueves y podr\u00eda traer una sorpresa para el Gobierno. El dato de CABA abre expectativas sobre una inflaci\u00f3n menor.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "Plazos fijos en bancos: cu\u00e1nto hay que invertir para ganar $200.000 por mes",
+          "link": "https://eleconomista.com.ar/economia/plazos-fijos-bancos-cuanto-hay-invertir-ganar-200000-mes-n93310",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2024/10/crop/670d456945f98__950x512.webp\" /><p>Conoc\u00e9 cu\u00e1l es el Banco privado con mejor tasa para plazos fijos en el d\u00eda de hoy. \u00bfCu\u00e1l es la TNA actual y c\u00f3mo queda el ranking de los bancos?</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "CAPUTO: \"La gente realmente no tiene idea de lo que se viene\"",
+          "link": "https://eleconomista.com.ar/economia/caputo-la-gente-realmente-tiene-idea-lo-viene-n93305",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/02/crop/69a1cebfe6d8a__950x512.webp\" /><p>Tras reunirse con empresarios y banqueros en Nueva York, Caputo asegur\u00f3 que el inter\u00e9s por Argentina crece y anticip\u00f3 anuncios de inversi\u00f3n en energ\u00eda, miner\u00eda e infraestructura.</p>"
+        },
+        {
+          "source": "El Economista Economia",
+          "category": "Nacional",
+          "title": "D\u00f3lar hoy: a cu\u00e1nto cotiza este jueves 12 de marzo",
+          "link": "https://eleconomista.com.ar/economia/dolar-hoy-cuanto-cotiza-jueves-12-marzo-n93301",
+          "date": 1773374921232,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2024/09/crop/66d887abf012a__950x512.webp\" /><p>Segu\u00ed el minuto a minuto de la cotizaci\u00f3n del d\u00f3lar y del resto de las divisas.</p>"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "Incertidumbre por la guerra, con inflaci\u00f3n local sostenida y una buena licitaci\u00f3n",
+          "link": "https://eleconomista.com.ar/finanzas/incertidumbre-guerra-inflacion-local-sostenida-una-buena-licitacion-n93334",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a6f128618a6__950x512.webp\" /><p>Pas\u00f3 de todo. El r\u00e9gimen iran\u00ed meti\u00f3 m\u00e1s presi\u00f3n, avis\u00f3 que el petr\u00f3leo puede llegar a US$ 200 d\u00f3lares. Hubo un atentado en EE.UU. y drones sobre California. Eso gener\u00f3 un salto para el petr\u00f3leo y el alumini"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "Caputo negocia un pr\u00e9stamo bilateral para pagar la deuda y en Wall Street preguntan por la tolerancia social a la econom\u00eda de Milei",
+          "link": "https://eleconomista.com.ar/finanzas/caputo-negocia-prestamo-bilateral-pagar-deuda-wall-street-preguntan-tolerancia-social-economia-milei-n93328",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2025/11/crop/691f708a396c1__950x512.webp\" /><p>El team econ\u00f3mico insisti\u00f3 en que se van a financiar con los d\u00f3lares locales. \"No venimos a pedirle plata a Wall Street\", reiteraron.</p>"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "El mundo sigue inquieto y la Argentina contin\u00faa recuperando",
+          "link": "https://eleconomista.com.ar/finanzas/el-mundo-sigue-inquieto-argentina-continua-recuperando-n93295",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a5ed2351cb5__950x512.webp\" /><p>Las tensiones en torno a la guerra en Ir\u00e1n siguen alterando todo. Se hacen todo tipo de advertencias y corren rumores que parecen irreales. Con ese contexto, el d\u00f3lar sube en el mundo y las Bolsas en general"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "El impacto que el ataque a Ir\u00e1n tendr\u00e1 sobre la econom\u00eda argentina, seg\u00fan dos expertos",
+          "link": "https://eleconomista.com.ar/finanzas/el-impacto-ataque-iran-tendra-sobre-economia-argentina-dos-expertos-n93271",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69aa176199c0b__950x512.webp?v=1772754814\" /><p>Un mayor ingreso de d\u00f3lares podr\u00eda verse compensando por mayores presiones sobre los precios.</p>"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "Vuelve el inter\u00e9s por colocarse en inversiones riesgosas",
+          "link": "https://eleconomista.com.ar/finanzas/vuelve-interes-colocarse-inversiones-riesgosas-n93263",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b00d942fef6__950x512.webp\" /><p>El d\u00eda arranc\u00f3 con gran optimismo y precios de los t\u00edtulos argentinos muy para arriba. Con el correr de las horas la algarab\u00eda algo se apag\u00f3, pero el d\u00eda termin\u00f3 igual en positivo. Todos los d\u00f3lares bajaron,"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "Volatilidad hist\u00f3rica: los drones sobre el estrecho tuvieron patas cortas",
+          "link": "https://eleconomista.com.ar/finanzas/volatilidad-historica-drones-sobre-estrecho-tuvieron-patas-cortas-n93228",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69aec0d703710__950x512.webp\" /><p>En una de las ruedas m\u00e1s vol\u00e1tiles de la historia, el precio del petr\u00f3leo marc\u00f3 el ritmo de todos los negocios. En la apertura del d\u00eda lleg\u00f3 a rozar los US$ 120. Pero al final del d\u00eda, por varios movimientos"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "La guerra abre una ventana de oportunidad para la Argentina",
+          "link": "https://eleconomista.com.ar/finanzas/la-guerra-abre-una-ventana-oportunidad-argentina-n93179",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69aa176199c0b__950x512.webp?v=1772754814\" /><p>Con mayor resistencia de Ir\u00e1n, ahora todos se preguntan cu\u00e1nto durar\u00e1 esta guerra. Y los efectos secundarios crecen. El petr\u00f3leo peg\u00f3 un salto tremendo, hasta mayor valor desde 2022.</p>"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "Buitres con espuma en la boca: Argentina sigue pagando al contado",
+          "link": "https://eleconomista.com.ar/finanzas/buitres-espuma-boca-argentina-sigue-pagando-contado-n93142",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69aa03623b1e6__950x512.webp\" /><p>Con precios que cambian al comp\u00e1s de cada bombardeo, el mundo financiero bail\u00f3 nuevamente al comp\u00e1s de lo que pasa en Medio Oriente. Lo que tuvo m\u00e1s impacto fue una suba vertical del petr\u00f3leo. Y una movida d"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "Adcap crea un Comit\u00e9 de Asesores y designa a Miguel Kiguel como presidente",
+          "link": "https://eleconomista.com.ar/finanzas/adcap-crea-comite-asesores-designa-miguel-kiguel-como-presidente-n93137",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a9dd5b71ee9__950x512.webp?v=1772739963\" /><p>Kiguel brindar\u00e1 asesoramiento al Directorio, al Comit\u00e9 de Inversiones y a las distintas \u00e1reas del grupo, aportando su experiencia en mercados financieros y an\u00e1lisis macroecon\u00f3mico.</p>"
+        },
+        {
+          "source": "El Economista Finanzas",
+          "category": "Nacional",
+          "title": "Hubo un d\u00eda m\u00e1s tranquilo, pero la Bolsa argentina sigue sin enterarse",
+          "link": "https://eleconomista.com.ar/finanzas/hubo-dia-mas-tranquilo-pero-bolsa-argentina-sigue-enterarse-n93106",
+          "date": 1773374921482,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a88c0ae70a3__950x512.webp\" /><p>Con alg\u00fan acercamiento entre EE.UU. e Ir\u00e1n, los mercados globales tuvieron un d\u00eda con m\u00e1s calma. El d\u00f3lar global baj\u00f3, las tasas largas de EE.UU. subieron. Y los metales preciosos y, sobre todo las criptomon"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "Empresas familiares: el desaf\u00edo de profesionalizar cuando la empresa crece",
+          "link": "https://eleconomista.com.ar/negocios/empresas-familiares-desafio-profesionalizar-cuando-empresa-crece-n93297",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b1a85142f53__950x512.webp\" /><p>La incorporaci\u00f3n de ejecutivos externos suele generar tensiones. Un CEO o un CFO que no pertenece a la familia aporta experiencia, objetividad y, muchas veces, est\u00e1ndares internacionales.</p>"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "Estall\u00f3 la pol\u00e9mica por precios distintos para el mismo producto en Mercado Libre: qu\u00e9 dijo la empresa",
+          "link": "https://eleconomista.com.ar/negocios/estallo-polemica-precios-distintos-mismo-producto-mercado-libre-dijo-empresa-n93256",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b04523a5fb6__950x512.webp\" /><p>Capturas virales mostraron diferencias de hasta 20% en el mismo producto seg\u00fan la cuenta que lo consulte. Mercado Libre respondi\u00f3 y explic\u00f3 c\u00f3mo funcionan sus testeos de precios.</p>"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "\"WAIT & SEE\": el plan de las empresas argentinas ante la reforma laboral",
+          "link": "https://eleconomista.com.ar/negocios/wait-see-plan-empresas-argentinas-reforma-laboral-n93236",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2025/08/crop/6894a4129c739__950x512.webp\" /><p>\u00bfLa Ley de Modernizaci\u00f3n Laboral cambi\u00f3 las reglas del juego? Michael Page revela por qu\u00e9 las empresas argentinas prefieren el \"wait & see\" antes que contratar o despedir. Enterate qu\u00e9 est\u00e1 pasando realmente"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "Yerba mate: qui\u00e9n lidera el ranking y cu\u00e1nto vende cada marca",
+          "link": "https://eleconomista.com.ar/negocios/yerba-mate-quien-lidera-ranking-cuanto-vende-cada-marca-n93161",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69aaee2e310e8__950x512.webp\" /><p>Un ranking con datos oficiales del INYM revela qu\u00e9 empresas dominan el negocio de la yerba mate en Argentina y c\u00f3mo se disputa el liderazgo.</p>"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "\u00bfMomento de comprar? Por qu\u00e9 el real estate premium en Argentina vive su mejor arranque en a\u00f1os",
+          "link": "https://eleconomista.com.ar/negocios/momento-comprar-real-estate-premium-argentina-vive-su-mejor-arranque-anos-n93158",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69aadedb9a988__950x512.webp\" /><p>El mercado inmobiliario cambi\u00f3: con cr\u00e9dito hipotecario y precios estabilizados, Miranda Bosch revela por qu\u00e9 el 2026 es el a\u00f1o de las decisiones estrat\u00e9gicas. \u00bfQu\u00e9 buscan los que saben?</p>"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "\u00bfTen\u00e9s un negocio...o te creaste un empleo exigente?",
+          "link": "https://eleconomista.com.ar/negocios/tenes-negocioo-te-creaste-empleo-exigente-n93155",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69aa24cb05045__950x512.webp?v=1772758241\" /><p>Cuando empez\u00e1s a hacer todo sin procesos transferibles, lo que cre\u00e1s no es un negocio. Es un autoempleo sofisticado.</p>"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "Los Agentes de IA llegaron con la era de la \"Eficiencia Brutal\"",
+          "link": "https://eleconomista.com.ar/negocios/los-agentes-ia-llegaron-era-eficiencia-brutal-n93108",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a85e8a12e0a__950x512.webp?v=1772641954\" /><p>Ante el escenario de devaluaci\u00f3n del d\u00f3lar, los CEOs tienen dos palancas para demostrar los resultados explosivos que exige el mercado.</p>"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "La empresa colmena y el liderazgo de contraste: el precio invisible de la armon\u00eda",
+          "link": "https://eleconomista.com.ar/negocios/la-empresa-colmena-liderazgo-contraste-precio-invisible-armonia-n93096",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a7092d2929d__950x512.webp\" /><p>La mente colmena no se instala con \u00f3rdenes, sino con incentivos, lenguaje correcto y consenso que parece madurez. El problema es que esa paz suele comprarse con silencio. Para ti, en la cumbre, el ant\u00eddoto n"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "Ual\u00e1 recibe US$ 195 millones de un gigante global y dispara su valuaci\u00f3n a US$ 3.200 millones",
+          "link": "https://eleconomista.com.ar/negocios/uala-recibe-us-195-millones-gigante-global-dispara-su-valuacion-us-3200-millones-n93087",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2023/05/crop/6470c47d47e25__950x512.webp\" /><p>La fintech fundada por Pierpaolo Barbieri obtuvo US$195 millones en una ronda liderada por Allianz X y ya alcanza una valuaci\u00f3n de US$3.200 millones.</p>"
+        },
+        {
+          "source": "El Economista Negocios",
+          "category": "Nacional",
+          "title": "Cr\u00e9ditos hipotecarios: Banco Ciudad capta $99.000 millones y sorprende al mercado",
+          "link": "https://eleconomista.com.ar/negocios/creditos-hipotecarios-banco-ciudad-capta-99000-millones-sorprende-mercado-n93086",
+          "date": 1773374922188,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a83897851e1__950x512.webp\" /><p>Banco Ciudad coloc\u00f3 deuda por casi $100.000 millones en UVA y recibi\u00f3 ofertas por $157.000 millones. Los fondos se destinar\u00e1n a impulsar cr\u00e9ditos hipotecarios.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Fatiga del cr\u00e9dito y niveles de morosidad como en 2001: la advertencia del presidente del Banco Provincia",
+          "link": "https://eleconomista.com.ar/agro/fatiga-credito-niveles-morosidad-como-2001-advertencia-presidente-banco-provincia-n93313",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b2d054a266f__950x512.webp\" /><p>El presidente del Banco Provincia analiz\u00f3 en Expoagro el acceso al cr\u00e9dito del agro, advirti\u00f3 sobre la \"fatiga del cr\u00e9dito\" y se\u00f1al\u00f3 mayor demanda de financiamiento en d\u00f3lares.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Nicol\u00e1s Pino: \"Hay un solo objetivo: que los productores est\u00e9n cada d\u00eda mejor y que podamos producir m\u00e1s\"",
+          "link": "https://eleconomista.com.ar/agro/nicolas-pino-hay-objetivo-productores-esten-cada-dia-mejor-podamos-producir-mas-n93302",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2023/08/crop/64d9521a78005__950x512.webp\" /><p>\"Estoy motivado y me entusiasma tener un nuevo per\u00edodo para completar lo que venimos construyendo: lo evaluar\u00e9 en los pr\u00f3ximos d\u00edas y tomar\u00e9 una decisi\u00f3n al respecto\", dijo Pino.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "R\u00e9cord mundial en Expoagro: rematan 38.145 cabezas en un d\u00eda",
+          "link": "https://eleconomista.com.ar/agro/record-mundial-expoagro-rematan-38145-cabezas-dia-n93276",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b177a709177__950x512.webp\" /><p>La consignataria Colombo y Magliano concret\u00f3 en Expoagro un remate r\u00e9cord con 38.145 cabezas en una jornada marat\u00f3nica que reuni\u00f3 compradores de todo el pa\u00eds.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Furiase en Expoagro: \"Este es un a\u00f1o especial para invertir, sin brecha cambiaria y estabilidad macro\"",
+          "link": "https://eleconomista.com.ar/agro/furiase-expoagro-este-ano-especial-invertir-brecha-cambiaria-estabilidad-macro-n93268",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69b155273995f__950x512.webp\" /><p>En Expoagro, Federico Furiase asegur\u00f3 que la estabilidad macro y la baja de retenciones abren una oportunidad in\u00e9dita de inversi\u00f3n para el agro en 2026.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Nicol\u00e1s Pino: \"El campo hoy sabe que no nos cambiar\u00e1n las reglas de un d\u00eda para el otro\"",
+          "link": "https://eleconomista.com.ar/agro/nicolas-pino-el-campo-hoy-sabe-nos-cambiaran-reglas-dia-otro-n93222",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2025/07/crop/687649be4fd80__950x512.webp\" /><p>\"Se arreglaron las finanzas, hoy la Rural es una entidad s\u00f3lida y ser\u00e1 s\u00f3lida a futuro. Hoy nos hace tener la posibilidad de reinvertir en el predio de Palermo\", destac\u00f3 Pino.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Guerra en Medio Oriente dispara un insumo clave del campo",
+          "link": "https://eleconomista.com.ar/agro/guerra-medio-oriente-dispara-insumo-clave-campo-n93119",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/03/crop/69a6f128618a6__950x512.webp\" /><p>La escalada en Medio Oriente impuls\u00f3 el precio internacional de la urea hasta US$ 590 por tonelada y anticipa un fuerte impacto en los costos agr\u00edcolas.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Bioceres quiebra y estalla la guerra entre sus accionistas",
+          "link": "https://eleconomista.com.ar/agro/bioceres-quiebra-estalla-guerra-sus-accionistas-n93075",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2026/02/crop/69833b094c775__950x512.webp\" /><p>La firma que dio origen al grupo Bioceres cay\u00f3 en quiebra tras una profunda crisis financiera y una batalla entre accionistas que ahora se traslada a la Justicia.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "GRIPE AVIAR: tercer brote en una provincia clave y se agrava el golpe exportador",
+          "link": "https://eleconomista.com.ar/agro/gripe-aviar-tercer-brote-una-provincia-clave-agrava-golpe-exportador-n93051",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2020/01/crop/614e1ba5d85b8__950x512.webp\" /><p>El Senasa confirm\u00f3 un nuevo caso de influenza aviar en C\u00f3rdoba. No impacta en el consumo local, pero extiende las restricciones y agrava la situaci\u00f3n exportadora.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Fuerte desplome y golpe al BCRA: \u00bfqu\u00e9 pas\u00f3 con los d\u00f3lares del campo en febrero?",
+          "link": "https://eleconomista.com.ar/agro/fuerte-desplome-golpe-bcra-que-paso-dolares-campo-febrero-n92987",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2022/09/crop/6324af94b9076__950x512.webp\" /><p>La liquidaci\u00f3n del agro se desplom\u00f3 en febrero por menos d\u00edas h\u00e1biles y paros sindicales. El impacto redujo el margen de acumulaci\u00f3n de reservas.</p>"
+        },
+        {
+          "source": "El Economista Agro",
+          "category": "Nacional",
+          "title": "Ma\u00edz en riesgo: la plaga que avanza en todo el pa\u00eds y preocupa al campo",
+          "link": "https://eleconomista.com.ar/agro/maiz-riesgo-plaga-avanza-todo-pais-preocupa-campo-n92986",
+          "date": 1773374922451,
+          "description": "<img src=\"https://statics.eleconomista.com.ar/2021/12/crop/61c1f7cf37458__950x512.webp\" /><p>El insecto vector vuelve a ganar terreno en el pa\u00eds. Expertos alertan por posibles p\u00e9rdidas severas en ma\u00edz y refuerzan el monitoreo en zonas end\u00e9micas.</p>"
+        },
+        {
           "source": "Bloomberg",
-          "category": "Mercados",
+          "category": "Internacional",
+          "title": "Asian Stocks Trim Early Losses, Oil Rally Cools: Markets Wrap",
+          "link": "https://www.bloomberg.com/news/articles/2026-03-12/asian-stocks-bonds-to-echo-us-drop-as-crude-rises-markets-wrap",
+          "date": 1773374923501,
+          "description": "Asian stocks pared early declines while S&amp;P 500 futures rose as the US issued a second temporary waiver allowing purchases of Russian oil to help curb surging energy prices."
+        },
+        {
+          "source": "Bloomberg",
+          "category": "Internacional",
+          "title": "MTR CEO: Cautiously Optimistic About 2026 Revenue",
+          "link": "https://www.bloomberg.com/news/videos/2026-03-13/mtr-ceo-cautiously-optimistic-about-2026-revenue-video",
+          "date": 1773374923501,
+          "description": "Shares of Hong Kong's MTR Corp. fell on Friday after it reported full-year net income for 2025 that missed analyst estimates. Still, CEO Jeny Yeung says the company's fundamentals remain strong, citing high occupancy rates at its shopping malls and record passenger growth. (Source: Bloomberg)"
+        },
+        {
+          "source": "Bloomberg",
+          "category": "Internacional",
+          "title": "Iran War Impact: Philippines Sees 16% Power Price Jump",
+          "link": "https://www.bloomberg.com/news/videos/2026-03-13/iran-war-impact-philippines-sees-16-power-price-jump-video",
+          "date": 1773374923501,
+          "description": "The Philippines expects electricity prices to rise by 16% in April due to higher oil prices, Energy Secretary Sharon Garin tells Bloomberg TV in an exclusive interview. Garin says the country is accelerating its push for more renewable energy, while congress is revisiting the oil deregulation law. ("
+        },
+        {
+          "source": "Bloomberg",
+          "category": "Internacional",
+          "title": "China Consumption Start to Year Seen as Worst Ever Outside Covid",
+          "link": "https://www.bloomberg.com/news/articles/2026-03-13/china-consumption-start-to-year-seen-as-worst-ever-outside-covid",
+          "date": 1773374923501,
+          "description": "China\u2019s consumer spending may have booked the worst start to any year outside the pandemic, highlighting the challenge to a government that has targeted a bigger role for domestic demand."
+        },
+        {
+          "source": "Bloomberg",
+          "category": "Internacional",
+          "title": "Trump and Iran Strike Defiant Tone as Oil Markets See Little Relief",
+          "link": "https://www.bloomberg.com/news/articles/2026-03-12/trump-iran-strike-defiant-tone-as-oil-markets-see-little-relief",
+          "date": 1773374923501,
+          "description": "President Donald Trump and Iran\u2019s new supreme leader both struck defiant tones on the 13th day of the war, offering little relief to energy markets despite fresh US efforts to curb oil prices."
+        },
+        {
+          "source": "Bloomberg",
+          "category": "Internacional",
           "title": "Brent Oil Trades Near $100 as Iran Vows to Keep Hormuz Closed",
           "link": "https://www.bloomberg.com/news/articles/2026-03-12/latest-oil-market-news-and-analysis-for-march-13",
-          "date": 1773372845228,
-          "description": ""
+          "date": 1773374923501,
+          "description": "Brent oil traded near $100 a barrel following one of the most volatile trading weeks ever, with investors bracing for more upheaval as Iran pledged to keep the Strait of Hormuz effectively shut."
         },
         {
           "source": "Bloomberg",
-          "category": "Mercados",
+          "category": "Internacional",
+          "title": "UAE Cuts Partners\u2019 Crude Shipments With Flows Sent to Fujairah",
+          "link": "https://www.bloomberg.com/news/articles/2026-03-13/uae-cuts-partners-crude-shipments-with-flows-sent-to-fujairah",
+          "date": 1773374923501,
+          "description": "Abu Dhabi National Oil Co. cut the volume of crude for its onshore partners by about a fifth for this month, although the flows will still go to a port outside the all-but-shuttered Strait of Hormuz."
+        },
+        {
+          "source": "Bloomberg",
+          "category": "Internacional",
+          "title": "Treasuries Fear Gauge Surges to Nine-Month High on War Risks",
+          "link": "https://www.bloomberg.com/news/articles/2026-03-13/treasuries-fear-gauge-surges-to-nine-month-high-on-war-risks",
+          "date": 1773374923501,
+          "description": "US Treasuries volatility jumped to a nine-month high as the Iran war fanned inflation concerns and upended traders\u2019 expectations on the Federal Reserve\u2019s policy path."
+        },
+        {
+          "source": "Bloomberg",
+          "category": "Internacional",
           "title": "How Australia\u2019s Pension System Became One of the World\u2019s Largest",
           "link": "https://www.bloomberg.com/news/articles/2026-03-13/how-australia-s-superannuation-became-one-of-world-s-largest-pension-systems",
-          "date": 1773372845228,
-          "description": ""
+          "date": 1773374923501,
+          "description": "At A$4.5 trillion ($3.2 trillion), Australia\u2019s pension system is the fourth-largest pool of retirement savings in the world &mdash; and the fastest-growing among major markets. It\u2019s expected to overtake the UK and Canada by the early 2030s to become the second-largest globally."
         },
         {
           "source": "Bloomberg",
-          "category": "Mercados",
+          "category": "Internacional",
           "title": "Asia Markets at Risk Due to Oil Dependency: BCA Research",
           "link": "https://www.bloomberg.com/news/videos/2026-03-13/asia-markets-at-risk-due-to-oil-dependency-rca-research-video",
-          "date": 1773372845228,
-          "description": ""
-        },
-        {
-          "source": "Bloomberg",
-          "category": "Mercados",
-          "title": "Gold Set for Weekly Drop as Mideast War Keeps Oil Prices High",
-          "link": "https://www.bloomberg.com/news/articles/2026-03-12/gold-steadies-after-two-day-drop-as-oil-prices-rally-further",
-          "date": 1773372845228,
-          "description": ""
-        },
-        {
-          "source": "Bloomberg",
-          "category": "Mercados",
-          "title": "Australian Retirement Trust CIO on Investment Strategy",
-          "link": "https://www.bloomberg.com/news/videos/2026-03-13/australian-retirement-trust-cio-on-investment-strategy-video",
-          "date": 1773372845228,
-          "description": ""
-        },
-        {
-          "source": "Bloomberg",
-          "category": "Mercados",
-          "title": "Asian Stocks Trim Earlier Losses, Oil Rally Cools: Markets Wrap",
-          "link": "https://www.bloomberg.com/news/articles/2026-03-12/asian-stocks-bonds-to-echo-us-drop-as-crude-rises-markets-wrap",
-          "date": 1773372845228,
-          "description": ""
-        },
-        {
-          "source": "Bloomberg",
-          "category": "Mercados",
-          "title": "Gas Shortage, Harsh Summer Lure Bulls to India Power Utilities",
-          "link": "https://www.bloomberg.com/news/newsletters/2026-03-13/adani-power-tata-power-jsw-energy-shares-rally-coal-india-hits-16-month-high",
-          "date": 1773372845228,
-          "description": ""
-        },
-        {
-          "source": "Bloomberg",
-          "category": "Mercados",
-          "title": "Philippines Braces for Iran War Hit on Labor After Jobless Surge",
-          "link": "https://www.bloomberg.com/news/articles/2026-03-13/philippines-braces-for-iran-war-hit-on-labor-after-jobless-surge",
-          "date": 1773372845228,
-          "description": ""
-        },
-        {
-          "source": "Bloomberg",
-          "category": "Mercados",
-          "title": "Xiaomi\u2019s Memory, EV Woes Hand Short Sellers $1.8 Billion Payout",
-          "link": "https://www.bloomberg.com/news/articles/2026-03-12/xiaomi-s-memory-ev-woes-hand-short-sellers-1-8-billion-payout",
-          "date": 1773372845228,
-          "description": ""
-        },
-        {
-          "source": "Bloomberg",
-          "category": "Mercados",
-          "title": "Aluminum Near Four-Year High as War Risks Smelter Closures",
-          "link": "https://www.bloomberg.com/news/articles/2026-03-13/aluminum-near-four-year-high-as-war-risks-smelter-closures",
-          "date": 1773372845228,
-          "description": ""
+          "date": 1773374923501,
+          "description": "BCA Research's Garry Evans says the extent of the pressure on Asian markets \"comes down to the dependence on oil.\" He tells Bloomberg Television that investors should look at places \"that have quite a lot of energy companies in their indexes,\" such as Australia, Canada and Mexico. (Source: Bloomberg"
         }
       ]
-    },
-    "briefing": {
-      "market": {
-        "merval": 2695423.75,
-        "merval_change": -2.71,
-        "blue": 1420,
-        "oficial": 1415,
-        "brecha": 0
-      },
-      "alerts": {
-        "commodities": [
-          {
-            "name": "WTI Crude Oil",
-            "change": 9.87
-          },
-          {
-            "name": "Brent Crude",
-            "change": 5.72
-          },
-          {
-            "name": "Corn",
-            "change": 4.16
-          }
-        ],
-        "stocks": [
-          {
-            "name": "Grupo Financiero Galicia",
-            "change": -4.26
-          },
-          {
-            "name": "Telecom Argentina",
-            "change": -4.63
-          },
-          {
-            "name": "BBVA Argentina",
-            "change": -4.89
-          },
-          {
-            "name": "Grupo Supervielle",
-            "change": -4.61
-          },
-          {
-            "name": "Banco Macro",
-            "change": -4.89
-          }
-        ]
-      },
-      "top_news": [
-        "Brent Oil Trades Near $100 as Iran Vows to Keep Hormuz Closed",
-        "How Australia\u2019s Pension System Became One of the World\u2019s Largest",
-        "Asia Markets at Risk Due to Oil Dependency: BCA Research",
-        "Gold Set for Weekly Drop as Mideast War Keeps Oil Prices High",
-        "Australian Retirement Trust CIO on Investment Strategy"
-      ],
-      "timestamp": "2026-03-13T00:34:06.041193"
     }
   }
 }
