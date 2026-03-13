@@ -13,7 +13,28 @@
         });
     }
 
-    function renderTable(data, containerId) {
+    function sortData(data, key, direction) {
+        var keys = Object.keys(data);
+        keys.sort(function(a, b) {
+            var valA = data[a][key];
+            var valB = data[b][key];
+            if (direction === 'asc') {
+                return valA > valB ? 1 : -1;
+            } else {
+                return valA < valB ? 1 : -1;
+            }
+        });
+        return keys;
+    }
+
+    function getSortArrow(field, currentSort, currentDir) {
+        if (field === currentSort) {
+            return currentDir === 'asc' ? ' ▲' : ' ▼';
+        }
+        return '';
+    }
+
+    function renderTable(data, containerId, defaultSort, defaultDir) {
         var container = document.getElementById(containerId);
         if (!container) return;
         if (!data || Object.keys(data).length === 0) {
@@ -21,9 +42,19 @@
             return;
         }
 
-        var html = '<table class="fin-table"><thead><tr><th>Nombre</th><th>Precio</th><th>Cambio</th><th>%</th></tr></thead><tbody>';
+        var sortKey = defaultSort || 'name';
+        var sortDir = defaultDir || 'asc';
+        var sortedKeys = sortData(data, sortKey, sortDir);
+
+        var html = '<table class="fin-table" data-container="' + containerId + '">';
+        html += '<thead><tr>';
+        html += '<th data-sort="name" data-dir="asc">Nombre' + getSortArrow('name', sortKey, sortDir) + '</th>';
+        html += '<th data-sort="price" data-dir="desc">Precio' + getSortArrow('price', sortKey, sortDir) + '</th>';
+        html += '<th data-sort="change" data-dir="desc">Cambio' + getSortArrow('change', sortKey, sortDir) + '</th>';
+        html += '<th data-sort="pct_change" data-dir="desc">%' + getSortArrow('pct_change', sortKey, sortDir) + '</th>';
+        html += '</tr></thead><tbody>';
         
-        Object.keys(data).forEach(function(symbol) {
+        sortedKeys.forEach(function(symbol) {
             var info = data[symbol];
             var changeClass = info.change >= 0 ? 'positive' : 'negative';
             var arrow = info.change >= 0 ? '▲' : '▼';
@@ -37,39 +68,32 @@
         
         html += '</tbody></table>';
         container.innerHTML = html;
-    }
 
-    function renderIndices(data, containerId) {
-        var container = document.getElementById(containerId);
-        if (!container) return;
-        if (!data || Object.keys(data).length === 0) {
-            container.innerHTML = '<p style="color:#666;padding:10px;">Sin datos</p>';
-            return;
-        }
-
-        var html = '<div class="indices-grid">';
-        Object.keys(data).forEach(function(symbol) {
-            var info = data[symbol];
-            var changeClass = info.change >= 0 ? 'positive' : 'negative';
-            html += '<div class="index-item">';
-            html += '<div class="index-name">' + info.name + '</div>';
-            html += '<div class="index-price">' + info.price.toLocaleString() + '</div>';
-            html += '<div class="index-change ' + changeClass + '">' + (info.change >= 0 ? '+' : '') + info.pct_change.toFixed(2) + '%</div>';
-            html += '</div>';
+        // Add click handlers for sorting
+        container.querySelectorAll('th').forEach(function(th) {
+            th.style.cursor = 'pointer';
+            th.style.userSelect = 'none';
+            th.addEventListener('click', function() {
+                var sortField = th.dataset.sort;
+                var currentDir = th.dataset.dir;
+                var newDir = currentDir === 'asc' ? 'desc' : 'asc';
+                var currentData = window.currentData[containerId];
+                renderTable(currentData, containerId, sortField, newDir);
+            });
         });
-        html += '</div>';
-        container.innerHTML = html;
+
+        // Store data for re-sorting
+        if (!window.currentData) window.currentData = {};
+        window.currentData[containerId] = data;
     }
 
     function init() {
         Promise.all([
             loadData('./data/yfinance_stocks.json'),
-            loadData('./data/yfinance_commodities.json'),
-            loadData('./data/yfinance_indices.json')
+            loadData('./data/yfinance_commodities.json')
         ]).then(function(results) {
-            renderTable(results[0], 'stocks-table');
-            renderTable(results[1], 'commodities-table');
-            renderIndices(results[2], 'indices-display');
+            renderTable(results[0], 'stocks-table', 'name', 'asc');
+            renderTable(results[1], 'commodities-table', 'name', 'asc');
         });
     }
 

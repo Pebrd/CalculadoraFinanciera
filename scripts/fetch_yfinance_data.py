@@ -22,7 +22,15 @@ ARGENTINA_STOCKS = {
     "BMA.BA": "Banco Macro",
     "CEPU.BA": "Central Puerto",
     "MIRG.BA": "Mirgor",
-    "LOMA.BA": "Loma Negra"
+    "LOMA.BA": "Loma Negra",
+    "ALUA.BA": "Aluminio",
+    "TXAR.BA": "Ternium Argentina",
+    "EDN.BA": "Edenor",
+    "CRES.BA": "Cresud",
+    "AGRO.BA": "Agro",
+    "TGSU2.BA": "TGS",
+    "MOLI.BA": "Molinos",
+    "CECO2.BA": "Ceco2"
 }
 
 # Commodities symbols
@@ -85,28 +93,6 @@ def fetch_commodities_data():
             print(f"Error fetching {symbol}: {e}")
     return data
 
-def fetch_indices_data():
-    """Fetch latest prices for indices"""
-    data = {}
-    for symbol, name in INDICES.items():
-        try:
-            ticker = yf.Ticker(symbol)
-            hist = ticker.history(period="5d")
-            if not hist.empty:
-                last_price = hist['Close'].iloc[-1]
-                change = last_price - hist['Close'].iloc[-2]
-                pct_change = (change / hist['Close'].iloc[-2]) * 100
-                data[symbol] = {
-                    "name": name,
-                    "price": round(last_price, 2),
-                    "change": round(change, 2),
-                    "pct_change": round(pct_change, 2),
-                    "timestamp": datetime.datetime.now().isoformat()
-                }
-        except Exception as e:
-            print(f"Error fetching {symbol}: {e}")
-    return data
-
 def main():
     """Main function to fetch and save all data"""
     DATA_DIR.mkdir(exist_ok=True)
@@ -120,11 +106,6 @@ def main():
     commodities = fetch_commodities_data()
     with open(DATA_DIR / "yfinance_commodities.json", "w") as f:
         json.dump(commodities, f, indent=2)
-    
-    print("Fetching indices...")
-    indices = fetch_indices_data()
-    with open(DATA_DIR / "yfinance_indices.json", "w") as f:
-        json.dump(indices, f, indent=2)
     
     print("Data saved to data/ directory")
 
