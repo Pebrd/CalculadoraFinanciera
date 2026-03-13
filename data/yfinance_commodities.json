@@ -1,0 +1,44 @@
+{
+  "GC=F": {
+    "name": "Gold",
+    "price": 5120.4,
+    "change": -47.0,
+    "pct_change": -0.91,
+    "timestamp": "2026-03-12T23:33:20.395774"
+  },
+  "CL=F": {
+    "name": "WTI Crude Oil",
+    "price": 95.64,
+    "change": 8.39,
+    "pct_change": 9.62,
+    "timestamp": "2026-03-12T23:33:21.018169"
+  },
+  "BZ=F": {
+    "name": "Brent Crude",
+    "price": 96.88,
+    "change": 4.9,
+    "pct_change": 5.33,
+    "timestamp": "2026-03-12T23:33:21.408025"
+  },
+  "ZS=F": {
+    "name": "Soybeans",
+    "price": 1225.75,
+    "change": 25.25,
+    "pct_change": 2.1,
+    "timestamp": "2026-03-12T23:33:21.781309"
+  },
+  "ZC=F": {
+    "name": "Corn",
+    "price": 462.5,
+    "change": 18.25,
+    "pct_change": 4.11,
+    "timestamp": "2026-03-12T23:33:22.398372"
+  },
+  "ZW=F": {
+    "name": "Wheat",
+    "price": 601.0,
+    "change": 12.5,
+    "pct_change": 2.12,
+    "timestamp": "2026-03-12T23:33:22.786449"
+  }
+}

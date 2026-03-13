@@ -1,0 +1,72 @@
+{
+  "GGAL.BA": {
+    "name": "Grupo Financiero Galicia",
+    "price": 6295.0,
+    "change": -280.0,
+    "pct_change": -4.26,
+    "timestamp": "2026-03-12T23:33:16.226838"
+  },
+  "YPFD.BA": {
+    "name": "YPF",
+    "price": 55950.0,
+    "change": -1000.0,
+    "pct_change": -1.76,
+    "timestamp": "2026-03-12T23:33:16.620274"
+  },
+  "PAMP.BA": {
+    "name": "Pampa Energ\u00eda",
+    "price": 4802.5,
+    "change": -97.5,
+    "pct_change": -1.99,
+    "timestamp": "2026-03-12T23:33:17.024923"
+  },
+  "TECO2.BA": {
+    "name": "Telecom Argentina",
+    "price": 3400.0,
+    "change": -165.0,
+    "pct_change": -4.63,
+    "timestamp": "2026-03-12T23:33:17.451082"
+  },
+  "BBVA.BA": {
+    "name": "BBVA Argentina",
+    "price": 31900.0,
+    "change": -140.0,
+    "pct_change": -0.44,
+    "timestamp": "2026-03-12T23:33:17.880201"
+  },
+  "SUPV.BA": {
+    "name": "Grupo Supervielle",
+    "price": 2587.5,
+    "change": -125.0,
+    "pct_change": -4.61,
+    "timestamp": "2026-03-12T23:33:18.289098"
+  },
+  "BMA.BA": {
+    "name": "Banco Macro",
+    "price": 10310.0,
+    "change": -530.0,
+    "pct_change": -4.89,
+    "timestamp": "2026-03-12T23:33:18.713555"
+  },
+  "CEPU.BA": {
+    "name": "Central Puerto",
+    "price": 2271.0,
+    "change": -38.0,
+    "pct_change": -1.65,
+    "timestamp": "2026-03-12T23:33:19.149058"
+  },
+  "MIRG.BA": {
+    "name": "Mirgor",
+    "price": 19200.0,
+    "change": -25.0,
+    "pct_change": -0.13,
+    "timestamp": "2026-03-12T23:33:19.576706"
+  },
+  "LOMA.BA": {
+    "name": "Loma Negra",
+    "price": 3000.0,
+    "change": -82.5,
+    "pct_change": -2.68,
+    "timestamp": "2026-03-12T23:33:19.996855"
+  }
+}

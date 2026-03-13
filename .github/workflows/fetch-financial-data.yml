@@ -1,0 +1,45 @@
+name: Fetch Financial Data
+
+on:
+  schedule:
+    # Run every hour during market hours (Argentina time)
+    - cron: '0 12-21 * * 1-5'  # 9am-6pm ART, Monday-Friday
+    # Run also at market close
+    - cron: '0 0 * * 1-5'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+      
+      - name: Run data fetcher
+        run: |
+          python scripts/fetch_yfinance_data.py
+      
+      - name: Commit and push data files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/yfinance_*.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update financial data from yfinance"
+            git push
+          fi

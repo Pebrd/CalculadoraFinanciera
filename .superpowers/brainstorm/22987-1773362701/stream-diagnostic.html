@@ -1,0 +1,40 @@
+<h2>Diagnóstico de Streams de YouTube</h2>
+<p class="subtitle">He identificado los siguientes problemas en el código actual:</p>
+
+<div class="section">
+  <div class="pros-cons">
+    <div class="cons">
+      <h4>Problemas Detectados</h4>
+      <ul>
+        <li><strong>IDs de Canal Inválidos:</strong> Muchos IDs en <code>screener-pro.js</code> parecen ser marcadores de posición (ej: <code>UC_8_S8O_mS_S_...</code>).</li>
+        <li><strong>Método de Inserción:</strong> El uso de <code>live_stream?channel=ID</code> es poco confiable y a menudo es bloqueado por YouTube para ciertos canales.</li>
+        <li><strong>Carga Estática:</strong> Actualmente el player se carga con un <code>src</code> vacío o erróneo inicialmente.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h3>¿Cómo preferís proceder con el arreglo?</h3>
+<div class="options" data-choice="approach">
+  <div class="option" data-choice="fix-ids" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Corregir IDs y Mantener Método</h3>
+      <p>Busco los IDs reales de los canales y seguimos usando el método de "live_stream". Es lo más simple si funciona.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="dynamic-video" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Búsqueda Dinámica de Video</h3>
+      <p>Intentar obtener el ID del video en vivo actual (requiere más lógica o una API/Proxy) para asegurar que siempre cargue.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="embedded-playlist" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Playlist de YouTube</h3>
+      <p>Usar una playlist del canal que incluya el stream en vivo. A veces es más estable.</p>
+    </div>
+  </div>
+</div>

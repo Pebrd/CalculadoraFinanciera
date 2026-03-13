@@ -1,0 +1,44 @@
+<h2>Estructura del ScreenerArgy</h2>
+<p class="subtitle">¿Cómo queremos organizar el espacio y la información?</p>
+
+<div class="options">
+  <div class="option" data-choice="sidebar" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Panel Lateral Integrado</h3>
+      <p>Mantiene el Screener central grande, pero añade una columna lateral para datos locales (Dólares, Noticias, Agro) que no dependen de TradingView.</p>
+      <div class="mockup" style="height: 100px; padding: 5px;">
+        <div style="display: flex; height: 100%; gap: 4px;">
+          <div class="placeholder" style="flex: 3;">TV Screener</div>
+          <div class="placeholder" style="flex: 1; font-size: 8px;">Dólar / News</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="bento" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Bento Box Modular</h3>
+      <p>Un diseño moderno de "tarjetas" de distintos tamaños. Ideal para mezclar widgets de TV con módulos propios hechos con JS (ej. brecha cambiaria, tasas BCRA).</p>
+      <div class="mockup" style="height: 100px; padding: 5px; display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px;">
+        <div class="placeholder">TV Chart</div>
+        <div class="placeholder">Dólares</div>
+        <div class="placeholder" style="grid-column: span 2;">TV Screener</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="pro" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Centro de Control "Pro"</h3>
+      <p>Maximiza la densidad de información. Paneles compactos, ideal para usuarios que quieren ver Bonos, Cedears y Acciones al mismo tiempo sin scroll.</p>
+      <div class="mockup" style="height: 100px; padding: 5px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px;">
+        <div class="placeholder">Stocks</div>
+        <div class="placeholder">Bonds</div>
+        <div class="placeholder">Cedears</div>
+      </div>
+    </div>
+  </div>
+</div>
