@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-15T06:34:44.141Z",
+  "last_updated": "2026-03-15T06:44:58.282Z",
   "data": {
     "andina": {
       "ask": 1410,
       "totalAsk": 1410,
       "bid": 1360,
       "totalBid": 1360,
-      "time": 1773554683
+      "time": 1773556485
     },
     "bapro": {
       "ask": 1425,
@@ -20,7 +20,7 @@
       "totalAsk": 1425,
       "bid": 1375,
       "totalBid": 1375,
-      "time": 1773554687
+      "time": 1773556488
     },
     "bna": {
       "ask": 1420,
@@ -62,7 +62,7 @@
       "totalAsk": 1425,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773554789
+      "time": 1773556591
     },
     "galicia": {
       "ask": 1470,
@@ -83,7 +83,7 @@
       "totalAsk": 1445,
       "bid": 1385,
       "totalBid": 1385,
-      "time": 1773554734
+      "time": 1773556535
     },
     "macro": {
       "ask": 1485,
@@ -97,7 +97,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773554713
+      "time": 1773556514
     },
     "patagonia": {
       "ask": 1425,
