@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-13T20:30:44.507Z",
+  "last_updated": "2026-03-16T11:00:10.744Z",
   "data": {
     "result": {
       "resultCode": 600,
@@ -58,7 +58,7 @@
       "isCompressed": 0,
       "resultSize": 701,
       "domain": null,
-      "lastUpdatedDateData": "2026-03-13T17:30:44-03:00"
+      "lastUpdatedDateData": "2026-03-16T08:00:10-03:00"
     }
   }
 }
