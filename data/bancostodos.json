@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-17T15:13:07.772Z",
+  "last_updated": "2026-03-17T15:15:20.053Z",
   "data": {
     "andina": {
       "ask": 1400,
       "totalAsk": 1400,
       "bid": 1350,
       "totalBid": 1350,
-      "time": 1773760261
+      "time": 1773760510
     },
     "bapro": {
       "ask": 1425,
@@ -20,14 +20,14 @@
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773760353
+      "time": 1773760474
     },
     "bna": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773760347
+      "time": 1773760469
     },
     "brubank": {
       "ask": 1472,
@@ -41,7 +41,7 @@
       "totalAsk": 1420,
       "bid": 1380,
       "totalBid": 1380,
-      "time": 1773760343
+      "time": 1773760464
     },
     "ciudad": {
       "ask": 1470,
@@ -76,14 +76,14 @@
       "totalAsk": 1415,
       "bid": 1375,
       "totalBid": 1375,
-      "time": 1773760374
+      "time": 1773760497
     },
     "icbc": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1355,
       "totalBid": 1355,
-      "time": 1773760349
+      "time": 1773760470
     },
     "macro": {
       "ask": 1485,
@@ -118,21 +118,21 @@
       "totalAsk": 1415,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773760377
+      "time": 1773760497
     },
     "pluscambio": {
       "ask": 1420,
       "totalAsk": 1420,
       "bid": 1380,
       "totalBid": 1380,
-      "time": 1773760347
+      "time": 1773760470
     },
     "prex": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773760362
+      "time": 1773760483
     },
     "santander": {
       "ask": 1470,
@@ -146,14 +146,14 @@
       "totalAsk": 1424,
       "bid": 1384,
       "totalBid": 1384,
-      "time": 1773760314
+      "time": 1773760434
     },
     "triacambio": {
       "ask": 1420,
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773760366
+      "time": 1773760486
     }
   }
 }
