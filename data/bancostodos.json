@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-19T21:04:11.625Z",
+  "last_updated": "2026-03-19T21:05:35.834Z",
   "data": {
     "andina": {
       "ask": 1395,
@@ -97,7 +97,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773953715
+      "time": 1773954317
     },
     "patagonia": {
       "ask": 1425,
