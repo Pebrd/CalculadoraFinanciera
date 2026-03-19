@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-19T14:48:43.422Z",
+  "last_updated": "2026-03-19T15:29:31.069Z",
   "data": {
     "andina": {
       "ask": 1405,
       "totalAsk": 1405,
       "bid": 1355,
       "totalBid": 1355,
-      "time": 1773931610
+      "time": 1773934060
     },
     "bapro": {
       "ask": 1425,
@@ -20,14 +20,14 @@
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773931655
+      "time": 1773934128
     },
     "bna": {
-      "ask": 1420,
-      "totalAsk": 1420,
-      "bid": 1370,
-      "totalBid": 1370,
-      "time": 1773931677
+      "ask": 1415,
+      "totalAsk": 1415,
+      "bid": 1365,
+      "totalBid": 1365,
+      "time": 1773934104
     },
     "brubank": {
       "ask": 1472,
@@ -37,11 +37,11 @@
       "time": 1766167200
     },
     "bytelime": {
-      "ask": 1418,
-      "totalAsk": 1418,
-      "bid": 1378,
-      "totalBid": 1378,
-      "time": 1773931715
+      "ask": 1415,
+      "totalAsk": 1415,
+      "bid": 1375,
+      "totalBid": 1375,
+      "time": 1773934095
     },
     "ciudad": {
       "ask": 1470,
@@ -62,7 +62,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773931711
+      "time": 1773934130
     },
     "galicia": {
       "ask": 1470,
@@ -76,14 +76,14 @@
       "totalAsk": 1420,
       "bid": 1380,
       "totalBid": 1380,
-      "time": 1773931672
+      "time": 1773934098
     },
     "icbc": {
       "ask": 1415,
       "totalAsk": 1415,
       "bid": 1355,
       "totalBid": 1355,
-      "time": 1773931669
+      "time": 1773934089
     },
     "macro": {
       "ask": 1485,
@@ -97,7 +97,7 @@
       "totalAsk": 1430,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773931708
+      "time": 1773934131
     },
     "patagonia": {
       "ask": 1425,
@@ -118,14 +118,14 @@
       "totalAsk": 1410,
       "bid": 1365,
       "totalBid": 1365,
-      "time": 1773931711
+      "time": 1773934130
     },
     "pluscambio": {
-      "ask": 1418,
-      "totalAsk": 1418,
-      "bid": 1378,
-      "totalBid": 1378,
-      "time": 1773931700
+      "ask": 1415,
+      "totalAsk": 1415,
+      "bid": 1375,
+      "totalBid": 1375,
+      "time": 1773934108
     },
     "prex": {
       "ask": 1420,
@@ -142,18 +142,18 @@
       "time": 1760724000
     },
     "supervielle": {
-      "ask": 1420,
-      "totalAsk": 1420,
-      "bid": 1380,
-      "totalBid": 1380,
-      "time": 1773931649
+      "ask": 1421,
+      "totalAsk": 1421,
+      "bid": 1381,
+      "totalBid": 1381,
+      "time": 1773934066
     },
     "triacambio": {
       "ask": 1420,
       "totalAsk": 1420,
       "bid": 1370,
       "totalBid": 1370,
-      "time": 1773931721
+      "time": 1773934141
     }
   }
 }
