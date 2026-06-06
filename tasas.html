@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasas y Rendimientos | Pampa Finance</title>
+    <link rel="stylesheet" href="nox-tokens.css">
     <link rel="stylesheet" href="shared-styles.css">
     <style>
         .sub-nav {
@@ -187,7 +188,7 @@ const TasasPage = {
             return `
                 <div class="rate-card fade-in">
                     <div class="rate-header">
-                        ${icon ? `<img src="${icon}" width="24" height="24" style="border-radius:50%;">` : '🏦'}
+                        ${icon ? `<img src="${icon}" width="24" height="24">` : '🏦'}
                         <span class="bank-name">${item.name}</span>
                     </div>
                     <div class="rate-body">

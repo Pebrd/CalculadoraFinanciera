@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pampa Finance - Screener Pro</title>
+    <link rel="stylesheet" href="nox-tokens.css">
     <link rel="stylesheet" href="shared-styles.css">
     <style>
         :root {
-            --bg-dark: #000000;
-            --panel-bg: #0a0a0a;
-            --border-color: #1a1a1a;
-            --text-color: #ffffff;
-            --accent-color: #00d4aa;
-            --header-bg: #0f0f0f;
+            --bg-dark: var(--nox-color-bg-base);
+            --panel-bg: var(--nox-color-bg-surface);
+            --border-color: var(--nox-color-bg-border);
+            --text-color: var(--nox-color-text-primary);
+            --accent-color: var(--nox-color-accent-default);
+            --header-bg: var(--nox-color-bg-surface2);
         }
 
         body, html {
@@ -22,7 +23,7 @@
             padding: 0;
             background-color: var(--bg-dark);
             color: var(--text-color);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: var(--nox-font-family-display), -apple-system, sans-serif;
             overflow: hidden;
         }
 
@@ -115,8 +116,8 @@
             text-align: left;
         }
         
-        .positive { color: #4caf50; }
-        .negative { color: #f44336; }
+        .positive { color: var(--nox-color-accent-default); }
+        .negative { color: var(--nox-color-semantic-danger); }
         
         .indices-grid {
             display: flex;
@@ -222,7 +223,9 @@
         </section>
     </main>
 
-    <script src="screener-pro.js"></script>
-    <script src="scripts/financial-tables.js"></script>
+<script src="shared-scripts.js"></script>
+<script src="api-service.js"></script>
+<script src="screener-pro.js"></script>
+<script src="scripts/financial-tables.js"></script>
 </body>
 </html>

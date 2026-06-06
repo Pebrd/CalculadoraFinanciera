@@ -19,6 +19,8 @@ const ApiService = {
         ARG_DATOS_PF: 'https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo',
         ACABASE_GRANOS: 'https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase',
         HACIENDA: 'https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo',
+        YAHOO_QUOTE: 'https://query2.finance.yahoo.com/v7/finance/quote',
+        DATOS_FINANCIEROS: 'https://space.tasas.ar/api/bancos-digitales',
         // Datos estáticos generados por GitHub Actions
         STATIC_DATA: './data/'
     },
@@ -134,6 +136,91 @@ const ApiService = {
         }
     },
 
+    // Símbolos para Yahoo Finance
+    SYMBOLS: {
+        stocks: [
+            'GGAL.BA', 'YPFD.BA', 'PAMP.BA', 'TECO2.BA', 'BBVA.BA',
+            'SUPV.BA', 'BMA.BA', 'CEPU.BA', 'MIRG.BA', 'LOMA.BA',
+            'ALUA.BA', 'TXAR.BA', 'EDN.BA', 'CRES.BA', 'AGRO.BA',
+            'TGSU2.BA', 'MOLI.BA', 'CECO2.BA'
+        ],
+        commodities: ['GC=F', 'CL=F', 'BZ=F', 'ZS=F', 'ZC=F', 'ZW=F']
+    },
+
+    STOCK_NAMES: {
+        'GGAL.BA': 'Grupo Financiero Galicia',
+        'YPFD.BA': 'YPF',
+        'PAMP.BA': 'Pampa Energía',
+        'TECO2.BA': 'Telecom Argentina',
+        'BBVA.BA': 'BBVA Argentina',
+        'SUPV.BA': 'Grupo Supervielle',
+        'BMA.BA': 'Banco Macro',
+        'CEPU.BA': 'Central Puerto',
+        'MIRG.BA': 'Mirgor',
+        'LOMA.BA': 'Loma Negra',
+        'ALUA.BA': 'Aluminio',
+        'TXAR.BA': 'Ternium Argentina',
+        'EDN.BA': 'Edenor',
+        'CRES.BA': 'Cresud',
+        'AGRO.BA': 'Agro',
+        'TGSU2.BA': 'TGS',
+        'MOLI.BA': 'Molinos',
+        'CECO2.BA': 'Ceco2',
+        'GC=F': 'Oro',
+        'CL=F': 'Petróleo WTI',
+        'BZ=F': 'Petróleo Brent',
+        'ZS=F': 'Soja',
+        'ZC=F': 'Maíz',
+        'ZW=F': 'Trigo'
+    },
+
+    async getYahooQuotes(symbols) {
+        const url = `${this.URLS.YAHOO_QUOTE}?symbols=${symbols.join(',')}`;
+        const data = await this.fetchWithProxy(url, true);
+        if (data?.quoteResponse?.result) {
+            return data.quoteResponse.result;
+        }
+        throw new Error('Respuesta inválida de Yahoo Finance');
+    },
+
+    async getStocks() {
+        const quotes = await this.getYahooQuotes(this.SYMBOLS.stocks);
+        return this._transformYahooQuotes(quotes);
+    },
+
+    async getCommodities() {
+        const quotes = await this.getYahooQuotes(this.SYMBOLS.commodities);
+        return this._transformYahooQuotes(quotes);
+    },
+
+    _transformYahooQuotes(quotes) {
+        const result = {};
+        quotes.forEach(q => {
+            const symbol = q.symbol || q.underlyingSymbol;
+            result[symbol] = {
+                name: this.STOCK_NAMES[symbol] || q.shortName || symbol,
+                price: q.regularMarketPrice,
+                change: q.regularMarketChange,
+                pct_change: q.regularMarketChangePercent,
+                timestamp: new Date(q.regularMarketTime * 1000).toISOString()
+            };
+        });
+        return result;
+    },
+
+    async getHacienda() {
+        // Live first — browser direct, proxies como fallback
+        try {
+            const live = await this.fetchWithProxy(this.URLS.HACIENDA, true);
+            if (live?.data?.length) return live.data;
+        } catch (e) {
+            console.warn('[ApiService] Hacienda live falló, usando bundle');
+        }
+        // Fallback bundle
+        const bundle = await this.getSmartData('hacienda', this.URLS.HACIENDA, true);
+        return bundle?.data || bundle || [];
+    },
+
     // --- Métodos específicos ---
 
     async getDolares() {
@@ -141,7 +228,8 @@ const ApiService = {
     },
 
     async getBancos() {
-        return this.getSmartData('bancostodos', this.URLS.CRIPTOYA_BANCOS);
+        const data = await this.getSmartData('bancostodos', this.URLS.CRIPTOYA_BANCOS);
+        return { criptoya: data, comparadolar: null };
     },
 
     async getUSDT() {
@@ -158,12 +246,6 @@ const ApiService = {
             argDatos: argDatos.status === 'fulfilled' ? argDatos.value : null,
             tasasAr: tasasAr.status === 'fulfilled' ? tasasAr.value : null
         };
-    },
-
-    async getHacienda() {
-        const data = await this.getSmartData('hacienda', this.URLS.HACIENDA, true);
-        // decampoacampo devuelve { status: "success", data: [...] }
-        return data?.data || data;
     },
 
     async getGranos() {

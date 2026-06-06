@@ -1,22 +1,11 @@
 /**
  * Financial Tables Display Module
- * Optimizado para cache y actualización
+ * Carga en vivo desde Yahoo Finance vía ApiService (con fallback a JSON estático)
  */
 
 (function() {
     var cacheBust = 't=' + Date.now();
     var lastUpdateTime = null;
-
-    function loadData(url) {
-        var separator = url.indexOf('?') >= 0 ? '&' : '?';
-        return fetch(url + separator + cacheBust).then(function(response) {
-            if (!response.ok) throw new Error('Failed to load ' + url);
-            return response.json();
-        }).catch(function(error) {
-            console.error('Error:', url, error);
-            return {};
-        });
-    }
 
     function formatTimestamp(isoString) {
         var date = new Date(isoString);
@@ -93,9 +82,9 @@
             var arrow = info.change >= 0 ? '▲' : '▼';
             html += '<tr>';
             html += '<td>' + info.name + '</td>';
-            html += '<td>$' + info.price.toLocaleString() + '</td>';
-            html += '<td class="' + changeClass + '">' + (info.change >= 0 ? '+' : '') + info.change.toLocaleString() + '</td>';
-            html += '<td class="' + changeClass + '">' + arrow + ' ' + Math.abs(info.pct_change).toFixed(2) + '%</td>';
+            html += '<td>$' + (info.price != null ? info.price.toLocaleString() : '-') + '</td>';
+            html += '<td class="' + changeClass + '">' + (info.change >= 0 ? '+' : '') + (info.change != null ? info.change.toLocaleString() : '0') + '</td>';
+            html += '<td class="' + changeClass + '">' + arrow + ' ' + (info.pct_change != null ? Math.abs(info.pct_change).toFixed(2) : '0.00') + '%</td>';
             html += '</tr>';
         });
         
@@ -120,13 +109,34 @@
         window.lastTimestamps[containerId] = timestamp;
     }
 
+    function loadStaticData(url) {
+        var separator = url.indexOf('?') >= 0 ? '&' : '?';
+        return fetch(url + separator + cacheBust).then(function(response) {
+            if (!response.ok) throw new Error('Failed to load ' + url);
+            return response.json();
+        }).catch(function() {
+            return {};
+        });
+    }
+
     function init() {
         cacheBust = 't=' + Date.now();
-        
-        Promise.all([
-            loadData('./data/yfinance_stocks.json'),
-            loadData('./data/yfinance_commodities.json')
-        ]).then(function(results) {
+
+        var stocksPromise, commoditiesPromise;
+
+        if (window.ApiService) {
+            stocksPromise = ApiService.getStocks().catch(function() {
+                return loadStaticData('./data/yfinance_stocks.json');
+            });
+            commoditiesPromise = ApiService.getCommodities().catch(function() {
+                return loadStaticData('./data/yfinance_commodities.json');
+            });
+        } else {
+            stocksPromise = loadStaticData('./data/yfinance_stocks.json');
+            commoditiesPromise = loadStaticData('./data/yfinance_commodities.json');
+        }
+
+        Promise.all([stocksPromise, commoditiesPromise]).then(function(results) {
             var stocksData = results[0];
             var commoditiesData = results[1];
             

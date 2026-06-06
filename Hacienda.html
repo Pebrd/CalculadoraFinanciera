@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacienda | Pampa Finance</title>
+    <link rel="stylesheet" href="nox-tokens.css">
     <link rel="stylesheet" href="shared-styles.css">
     <style>
         .agro-widgets {
@@ -72,7 +73,7 @@
             padding: 4px 10px;
             font-size: 0.75rem;
             font-weight: 700;
-            border-radius: 2px;
+            border-radius: var(--nox-border-radius-none);
             display: inline-flex;
             align-items: center;
             gap: 5px;
@@ -159,6 +160,10 @@ const HaciendaPage = {
         
         try {
             this.rawData = await ApiService.getHacienda();
+            if (!this.rawData || !this.rawData.length) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--text-secondary);">Sin datos disponibles del Mercado de Hacienda.</div>';
+                return;
+            }
             this.render();
         } catch (e) {
             container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--error);">Error al conectar con el Mercado de Hacienda.</div>';

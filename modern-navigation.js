@@ -36,7 +36,6 @@ class ModernNavigation {
       { href: 'index.html', text: '📊 Cotizaciones' },
       { href: 'calculadoras.html', text: '🧮 Calculadoras' },
       { href: 'tasas.html', text: '📈 Tasas' },
-      { href: 'noticias.html', text: '📰 Noticias' },
       { href: 'Graficos historicos.html', text: '📉 Gráficos' },
       { href: 'Hacienda.html', text: '🌾 Agro' },
       { href: 'ScreenerArgy.html', text: '🇦🇷 Argy' }

@@ -1,23 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400&display=swap');
+
 /* ========================================================== */
 /* === ESTILOS COMPARTIDOS - PAMPA FINANCE (NAV INFERIOR) === */
 /* ========================================================== */
 
 :root {
-  --primary: #1a1a1a;
-  --surface: #0f0f0f;
-  --surface-elevated: #151515;
-  --text-primary: #ffffff;
-  --text-secondary: #b3b3b3;
-  --success: #00d4aa;
-  --success-glow: rgba(0, 212, 170, 0.15);
-  --info: #3742fa;
-  --buy: #00d4aa;
-  --buy-glow: rgba(0, 212, 170, 0.1);
-  --sell: #3742fa;
-  --sell-glow: rgba(55, 66, 250, 0.1);
+  --primary: var(--nox-color-bg-surface2);
+  --surface: var(--nox-color-bg-base);
+  --surface-elevated: var(--nox-color-bg-surface);
+  --text-primary: var(--nox-color-text-primary);
+  --text-secondary: var(--nox-color-text-secondary);
+  --success: var(--nox-color-accent-default);
+  --success-glow: rgba(168, 176, 188, 0.15);
+  --info: var(--nox-color-accent-blue);
+  --buy: var(--nox-color-accent-default);
+  --buy-glow: rgba(168, 176, 188, 0.1);
+  --sell: var(--nox-color-accent-blue);
+  --sell-glow: rgba(107, 164, 200, 0.1);
+  --error: var(--nox-color-semantic-danger);
+  --error-glow: rgba(200, 112, 112, 0.15);
   --max-width: 1200px;
-  --padding-mobile: 15px;
-  --padding-desktop: 24px;
+  --padding-mobile: var(--nox-spacing-md);
+  --padding-desktop: var(--nox-spacing-lg);
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -25,7 +29,7 @@
 body {
   background: var(--surface);
   color: var(--text-primary);
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: var(--nox-font-family-display), -apple-system, sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.5;
@@ -91,7 +95,7 @@ nav {
     height: 2px;
     background: #fff;
     transition: 0.3s;
-    border-radius: 2px;
+    border-radius: var(--nox-border-radius-none);
 }
 
 .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -137,10 +141,10 @@ nav {
     display: flex;
     align-items: center;
     gap: 12px;
-    border-radius: 4px;
+    border-radius: var(--nox-border-radius-none);
 }
 
-.nav-link.active { color: var(--success); background: rgba(0, 212, 170, 0.05); }
+.nav-link.active { color: var(--success); background: rgba(168, 176, 188, 0.08); }
 
 @media (min-width: 900px) {
     .nav-container { top: 0; bottom: auto; border-top: none; border-bottom: 1px solid #1a1a1a; }
@@ -182,7 +186,7 @@ nav {
     background: #0a0a0a;
     border: 1px solid #1a1a1a;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: var(--nox-border-radius-none);
 }
 
 /* === TABLAS (SIN ICONOS, SIN SCROLL) === */
