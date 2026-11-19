@@ -1,227 +1,220 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-    <link rel="manifest" href="manifest.json">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasas y Rendimientos | Pampa Finance</title>
-    <link rel="stylesheet" href="nox-tokens.css">
-    <link rel="stylesheet" href="shared-styles.css">
-    <style>
-        .sub-nav {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        .rates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: var(--max-width);
-            margin: 0 auto;
-        }
-        .rate-card {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            transition: border-color 0.2s;
-        }
-        .rate-card:hover {
-            border-color: var(--success);
-        }
-        .rate-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #151515;
-            padding-bottom: 12px;
-        }
-        .bank-name {
-            font-weight: 600;
-            font-size: 1rem;
-            color: #fff;
-        }
-        .rate-body {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .tna-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--success);
-        }
-        .tea-value {
-            font-size: 0.8rem;
-            color: #555;
-        }
-        .rate-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: #444;
-        }
-        .btn-details {
-            background: transparent;
-            border: 1px solid #222;
-            color: #666;
-            padding: 4px 10px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-        .btn-details:hover {
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        /* Modal Overlays */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px);
-            display: none; align-items: center; justify-content: center; z-index: 3000;
-        }
-        .modal-content {
-            background: #0a0a0a; border: 1px solid var(--success); padding: 30px;
-            max-width: 450px; width: 90%; text-align: center;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Tasas de cuentas remuneradas, billeteras y fondos comunes de inversión en Argentina, comparadas en TNA y TEA.">
+<title>Tasas — Pampa Finance</title>
+<link rel="icon" href="icono.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<script src="modern-navigation.js"></script>
+<main class="main">
 
-<main class="main-container">
-    <h1 class="page-title fade-in">Rendimientos ARS</h1>
+    <header class="page-head">
+        <span class="eyebrow">Renta en pesos</span>
+        <h1 class="title">Dónde rinde más <strong>la plata quieta</strong>.</h1>
+        <p class="lede" id="answer">Cargando tasas…</p>
+        <div class="meta-row">
+            <span class="dot" data-sync-dot></span>
+            <span data-sync>cargando datos</span>
+            <span>tasas.ar · ArgentinaDatos</span>
+        </div>
+    </header>
 
-    <div class="sub-nav">
-        <a href="tasas.html" class="agro-pill active">Bancos Digitales</a>
-        <a href="plazo-fijo.html" class="agro-pill">Plazo Fijo</a>
-    </div>
+    <section class="stats reveal" id="stats">
+        <div class="stat"><span class="stat__label">Cargando</span></div>
+    </section>
 
-    <div class="controls">
-        <button id="refresh-btn" class="btn btn-sm">🔄 Sincronizar Tasas</button>
-        <div id="sync-status" class="text-secondary" style="font-size: 0.8rem;">Actualizando...</div>
-    </div>
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Billeteras y bancos digitales</h2>
+            <span class="section__note" id="count-ar">—</span>
+        </div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <div class="chips" id="filters">
+                        <button class="chip is-active" data-type="all" type="button">Todas</button>
+                        <button class="chip" data-type="cuenta_remunerada" type="button">Cuentas remuneradas</button>
+                        <button class="chip" data-type="fondos_comunes" type="button">Fondos</button>
+                    </div>
+                    <span class="panel__hint">TNA publicada · TEA calculada a 30 días</span>
+                </div>
+                <div id="tabla-ar" data-error><span class="skeleton" style="width:100%"></span></div>
+            </div>
+        </div>
+    </section>
 
-    <div id="rates-container" class="rates-grid">
-        <!-- Skeletons -->
-        <div class="loading" style="grid-column: 1/-1; height: 200px;"></div>
-    </div>
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Fondos con tasa publicada</h2>
+            <span class="section__note">ordenados por TNA</span>
+        </div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div id="tabla-fci" data-error><span class="skeleton" style="width:100%"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Money market por patrimonio</h2>
+            <span class="section__note">los fondos más grandes del mercado</span>
+        </div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div id="tabla-dinero" data-error><span class="skeleton" style="width:100%"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="foot">
+        <span>Pampa Finance · TEA = capitalización compuesta a 30 días</span>
+        <span><a href="plazo-fijo.html">Ver plazo fijo</a> · <a href="calculadoras.html">Calcular rendimiento</a></span>
+    </footer>
 </main>
 
-<div id="details-modal" class="modal-overlay">
-    <div class="modal-content">
-        <h3 id="modal-title" style="color: var(--success); margin-bottom: 15px;"></h3>
-        <div id="modal-body" style="color: #888; line-height: 1.6; margin-bottom: 20px;"></div>
-        <button onclick="closeModal()" class="btn btn-sm">Cerrar</button>
-    </div>
-</div>
-
-<script src="shared-scripts.js"></script>
 <script src="api-service.js"></script>
+<script src="app.js"></script>
 <script>
-const TasasPage = {
-    async init() {
-        this.bindEvents();
-        await this.load();
-    },
+(function () {
+    var Fmt = PF.Fmt;
+    var TYPE_LABEL = {
+        cuenta_remunerada: 'Cuenta remunerada',
+        fondos_comunes: 'Fondo',
+        billetera: 'Billetera',
+        banco: 'Banco'
+    };
 
-    bindEvents() {
-        document.getElementById('refresh-btn').addEventListener('click', () => this.load());
-        window.onclick = (e) => { if (e.target.id === 'details-modal') closeModal(); };
-    },
+    PF.withData(function (api) {
+        var tasas = api.getTasasAR();
+        var fci = api.getFCI();
+        var dinero = api.getFCIDinero();
+        var pf = api.getPlazoFijo();
 
-    async load() {
-        const container = document.getElementById('rates-container');
-        const status = document.getElementById('sync-status');
-        container.innerHTML = '<div class="loading" style="grid-column: 1/-1; height: 200px;"></div>';
+        var wallets = tasas.filter(function (t) { return t.tipo === 'cuenta_remunerada'; });
+        var bestWallet = wallets[0] || tasas[0];
+        var bestFci = fci[0];
+        var bestPf = pf[0];
 
-        try {
-            const { argDatos, tasasAr } = await ApiService.getTasas();
-            let merged = [];
-
-            if (argDatos) {
-                argDatos.forEach(item => {
-                    merged.push({
-                        name: item.fondo,
-                        tna: parseFloat(item.tna) * 100,
-                        tea: item.tea ? parseFloat(item.tea) * 100 : null,
-                        date: item.fecha,
-                        conditions: item.condiciones || "",
-                        limit: item.tope
-                    });
-                });
+        // --- Héroe ---
+        document.getElementById('stats').innerHTML = [
+            {
+                label: 'Mejor billetera',
+                value: bestWallet ? Fmt.pct(bestWallet.tna, 2) : '—',
+                name: bestWallet ? bestWallet.nombre : '—',
+                tea: bestWallet ? api.teaFromTna(bestWallet.tna) : null,
+                tag: 'TNA'
+            },
+            {
+                label: 'Mejor fondo',
+                value: bestFci ? Fmt.pct(bestFci.tna, 2) : '—',
+                name: bestFci ? bestFci.fondo : '—',
+                tea: bestFci ? (bestFci.tea || api.teaFromTna(bestFci.tna)) : null,
+                tag: 'TNA'
+            },
+            {
+                label: 'Plazo fijo',
+                value: bestPf ? Fmt.pct(bestPf.tnaClientes || bestPf.tnaNoClientes, 2) : '—',
+                name: bestPf ? bestPf.entidad : '—',
+                tea: bestPf ? api.teaFromTna(bestPf.tnaClientes || bestPf.tnaNoClientes) : null,
+                tag: 'TNA'
             }
-
-            if (tasasAr) {
-                tasasAr.data.forEach(item => {
-                    if (!merged.some(d => d.name.toLowerCase().includes(item.name.toLowerCase()))) {
-                        merged.push({
-                            name: item.name,
-                            tna: parseFloat(item.tna),
-                            tea: item.tea ? parseFloat(item.tea) : null,
-                            date: 'Hoy',
-                            conditions: item.tna_conditions?.[0]?.description || "",
-                            limit: item.maxAmount
-                        });
-                    }
-                });
-            }
-
-            merged.sort((a, b) => b.tna - a.tna);
-            this.render(merged);
-            status.textContent = `Sincronizado: ${CalculadoraFinanciera.Formatters.time()}`;
-        } catch (e) {
-            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--error);">Error al cargar tasas.</div>';
-        }
-    },
-
-    render(data) {
-        const container = document.getElementById('rates-container');
-        container.innerHTML = data.map(item => {
-            const icon = ApiService.getIcon ? ApiService.getIcon(item.name) : null;
-            return `
-                <div class="rate-card fade-in">
-                    <div class="rate-header">
-                        ${icon ? `<img src="${icon}" width="24" height="24">` : '🏦'}
-                        <span class="bank-name">${item.name}</span>
-                    </div>
-                    <div class="rate-body">
-                        <div>
-                            <div class="tna-value">${item.tna.toFixed(2)}%</div>
-                            <div class="text-secondary" style="font-size: 0.7rem; font-weight: 700;">TNA</div>
-                        </div>
-                        ${item.tea ? `
-                        <div style="text-align: right;">
-                            <div class="tea-value">TEA: ${item.tea.toFixed(2)}%</div>
-                        </div>` : ''}
-                    </div>
-                    <div class="rate-footer">
-                        <span>Actualizado: ${item.date}</span>
-                        ${item.conditions ? `<button class="btn-details" onclick="openModal('${item.name}', '${item.conditions.replace(/'/g, "\\'")}')">Detalles</button>` : ''}
-                    </div>
-                </div>
-            `;
+        ].map(function (s) {
+            var tea = s.tea ? Fmt.pct(s.tea, 2) : '—';
+            return '<div class="stat">' +
+                '<span class="stat__label">' + s.label + '<span class="tag">' + s.tag + '</span></span>' +
+                '<span class="stat__value">' + s.value + '</span>' +
+                '<span class="stat__foot"><span>' + Fmt.esc(s.name) + '</span><span>' + tea + ' TEA</span></span>' +
+            '</div>';
         }).join('');
-    }
-};
 
-function openModal(title, body) {
-    document.getElementById('modal-title').textContent = title;
-    document.getElementById('modal-body').textContent = body;
-    document.getElementById('details-modal').style.display = 'flex';
-}
+        // --- Línea de respuesta ---
+        if (bestWallet && bestFci) {
+            document.getElementById('answer').innerHTML =
+                'La mejor cuenta remunerada paga <b>' + Fmt.pct(bestWallet.tna, 2) + '</b> de TNA (' +
+                Fmt.esc(bestWallet.nombre) + '), equivalente a <b>' + Fmt.pct(api.teaFromTna(bestWallet.tna), 1) + '</b> de TEA. ' +
+                'El mejor fondo con tasa publicada llega a <b>' + Fmt.pct(bestFci.tna, 2) + '</b>.';
+        }
 
-function closeModal() {
-    document.getElementById('details-modal').style.display = 'none';
-}
+        // --- Tabla billeteras con filtros ---
+        var currentType = 'all';
+        var tableEl = document.getElementById('tabla-ar');
 
-document.addEventListener('DOMContentLoaded', () => TasasPage.init());
+        function columnSet() {
+            return [
+                { key: 'nombre', label: 'Entidad', render: function (r) {
+                    var logo = r.logo ? '<img src="' + Fmt.esc(r.logo) + '" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px;border-radius:2px;opacity:.9" loading="lazy">' : '';
+                    var txt = r.condicion || '';
+                    var short = txt.length > 88 ? txt.slice(0, 88) + '…' : txt;
+                    var sub = txt ? '<span class="muted" style="display:block;font-size:11px;line-height:1.4;margin-top:3px;white-space:normal;max-width:34ch" title="' + Fmt.esc(txt) + '">' + Fmt.esc(short) + '</span>' : '';
+                    return logo + '<span class="name">' + Fmt.esc(r.nombre) + '</span>' + sub;
+                } },
+                { key: 'tipo', label: 'Tipo', render: function (r) {
+                    return '<span class="tag">' + Fmt.esc(TYPE_LABEL[r.tipo] || r.tipo) + '</span>';
+                } },
+                { key: 'tna', label: 'TNA', align: 'right', render: function (r) {
+                    return '<strong>' + Fmt.pct(r.tna, 2) + '</strong>';
+                } },
+                { key: 'tea', label: 'TEA', align: 'right', sort: function (r) { return api.teaFromTna(r.tna); }, render: function (r) {
+                    return Fmt.pct(api.teaFromTna(r.tna), 2);
+                } },
+                { key: 'tope', label: 'Tope', align: 'right', mobileHide: true, render: function (r) {
+                    return r.tope ? Fmt.compact(r.tope) : '<span class="muted">sin tope</span>';
+                } }
+            ];
+        }
+
+        function drawAr() {
+            var rows = currentType === 'all' ? tasas : tasas.filter(function (t) { return t.tipo === currentType; });
+            document.getElementById('count-ar').textContent = rows.length + ' opciones';
+            PF.renderTable(tableEl, columnSet(), rows, {
+                sortKey: 'tna',
+                sortDir: 'desc',
+                bestRow: function (r) { return r === rows[0]; },
+                empty: 'Sin datos para este filtro'
+            });
+        }
+
+        document.getElementById('filters').addEventListener('click', function (e) {
+            var btn = e.target.closest('.chip');
+            if (!btn) return;
+            currentType = btn.getAttribute('data-type');
+            Array.prototype.forEach.call(document.querySelectorAll('#filters .chip'), function (c) {
+                c.classList.toggle('is-active', c === btn);
+            });
+            drawAr();
+        });
+
+        drawAr();
+
+        // --- FCI con tasa ---
+        PF.renderTable(document.getElementById('tabla-fci'), [
+            { key: 'fondo', label: 'Fondo', render: function (r) { return '<span class="name">' + Fmt.esc(r.fondo) + '</span>'; } },
+            { key: 'tna', label: 'TNA', align: 'right', render: function (r) { return '<strong>' + Fmt.pct(r.tna, 2) + '</strong>'; } },
+            { key: 'tea', label: 'TEA', align: 'right', render: function (r) { return Fmt.pct(r.tea || api.teaFromTna(r.tna), 2); } },
+            { key: 'tope', label: 'Tope', align: 'right', render: function (r) { return r.tope ? Fmt.compact(r.tope) : '<span class="muted">sin tope</span>'; } },
+            { key: 'fecha', label: 'Fecha', align: 'right', render: function (r) { return '<span class="muted">' + Fmt.date(r.fecha) + '</span>'; } }
+        ], fci, { sortKey: 'tna', sortDir: 'desc', bestRow: function (r) { return r === fci[0]; }, empty: 'Sin fondos' });
+
+        // --- FCI money market ---
+        PF.renderTable(document.getElementById('tabla-dinero'), [
+            { key: 'fondo', label: 'Fondo', render: function (r) { return '<span class="name">' + Fmt.esc(r.fondo) + '</span>'; } },
+            { key: 'horizonte', label: 'Horizonte', render: function (r) { return '<span class="tag">' + Fmt.esc(Fmt.title(r.horizonte || '—')) + '</span>'; } },
+            { key: 'patrimonio', label: 'Patrimonio', align: 'right', render: function (r) { return Fmt.compact(r.patrimonio); } },
+            { key: 'cuota', label: 'Valor cuota', align: 'right', render: function (r) { return Fmt.money(r.cuota, 2); } },
+            { key: 'fecha', label: 'Fecha', align: 'right', render: function (r) { return '<span class="muted">' + Fmt.date(r.fecha) + '</span>'; } }
+        ], dinero, { sortKey: 'patrimonio', sortDir: 'desc', empty: 'Sin datos de fondos' });
+
+        PF.reveal();
+    });
+})();
 </script>
 </body>
 </html>

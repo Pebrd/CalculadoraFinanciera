@@ -1,197 +1,86 @@
-# 🏦 Pampa Finance - Terminal de Inteligencia Financiera
+# Pampa Finance
 
-![Version](https://img.shields.io/badge/version-2.1.0-success)
-![Build](https://img.shields.io/github/actions/workflow/status/SantiSanti/CalculadoraFinanciera-main/fetch-data.yml)
-![PWA](https://img.shields.io/badge/PWA-Ready-orange)
+Terminal de datos del mercado argentino. PWA estática, sin backend ni framework: HTML, CSS y JavaScript vanilla, con un bundle de datos que GitHub Actions regenera solo.
 
-**Pampa Finance** es una plataforma de análisis y cálculo financiero diseñada para el mercado argentino. Combina una interfaz de usuario minimalista de alta velocidad con un backend automatizado basado en GitHub Actions, garantizando precisión bancaria y disponibilidad constante.
+**Sitio:** https://pebrd.github.io/CalculadoraFinanciera/
 
----
+## Páginas
 
-## 🛠️ Funcionamiento Técnico (Arquitectura "Backendless")
+| Archivo | Qué resuelve |
+| :--- | :--- |
+| `index.html` | Dólar oficial, blue, MEP y CCL; dólar bancario; USDT; indicadores |
+| `tasas.html` | Cuentas remuneradas, billeteras y FCI comparados en TNA y TEA |
+| `plazo-fijo.html` | Tasas de plazo fijo banco por banco y simulador |
+| `calculadoras.html` | Plazo fijo, arbitraje bancario, dólar cripto y liquidación de granos |
+| `Graficos historicos.html` | Series de dólar, riesgo país, inflación, UVA y reservas |
+| `Hacienda.html` | Pizarra Rosario y mercado de hacienda |
+| `ScreenerArgy.html` | Acciones, bonos, notas y CEDEARs del panel BYMA |
+| `noticias.html` | Titulares de economía, mercados y política |
 
-La plataforma opera bajo un modelo de **Sincronización Asincrónica**:
+## Arquitectura
 
-1.  **Ingesta de Datos (The Worker):** Un flujo de trabajo de GitHub Actions (`scripts/fetch_data.js`) se ejecuta cada hora. Consulta APIs oficiales y privadas (DolarAPI, CriptoYa, AcaBase, BCRA), procesa los JSON y los guarda en la carpeta `/data/`.
-2.  **API Service Layer (`api-service.js`):** El frontend no consulta directamente a las APIs externas (evitando errores de CORS y latencia). En su lugar:
-    - Intenta cargar el archivo estático desde el repositorio (Velocidad de CDN).
-    - Si falla, realiza un fetch en vivo a la API original.
-    - Como última instancia, utiliza una rotación de Proxies (CORS-Proxy, AllOrigins).
-3.  **PWA & Cache (`sw.js`):** Utiliza Service Workers para cachear activos estáticos y datos financieros. La plataforma es **totalmente funcional offline** con los últimos datos sincronizados.
+1. **Ingesta:** `.github/workflows/fetch-data.yml` ejecuta `scripts/fetch_data.js` según cron. Cada fuente falla de forma aislada y, si una API no responde, el bundle conserva el último valor bueno.
+2. **Bundle:** `data/finanzas.json` concentra todo (`{ last_updated, sources, data, counts }`). Cada fuente mantiene además su archivo individual en `data/`.
+3. **Capa de datos:** `api-service.js` lee el bundle; si no está, cae a las APIs en vivo; si tampoco, el Service Worker responde con la última copia cacheada.
+4. **PWA:** `sw.js` usa network-first para HTML, JS, CSS y datos, con fallback offline.
 
----
+## Comandos
 
-## 📐 Fórmulas y Metodología de Cálculo
-
-Pampa Finance utiliza estándares normativos para sus herramientas de cálculo:
-
-### 1. Inversiones (Plazo Fijo / TNA)
-Para la **TEA (Tasa Efectiva Anual)**, implementamos la fórmula de transparencia del BCRA, que contempla la capitalización compuesta sobre subperiodos de 30 días:
-
-$$TEA = \left[ \left( 1 + \frac{TNA \times 30}{365} \right)^{\frac{365}{30}} - 1 \right] \times 100$$
-
-*   **Ganancia Simple:** $Capital \times \left( \frac{TNA}{100} \right) \times \left( \frac{Días}{365} \right)$
-
-### 2. Arbitraje (Bancos vs MEP/Blue)
-Calcula el rendimiento neto de un ciclo de compra y venta de divisas:
-
-$$Utilidad = \left( \frac{Capital}{PrecioCompra} \times PrecioVenta \right) - Capital$$
-
-### 3. Dólar Cripto (USDT)
-Determina la eficiencia de compra en exchanges y el arbitraje implícito:
-
-*   **Cantidad USDT:** $Capital / PrecioCompra_{ARS}$
-*   **Final ARS:** $Cantidad USDT \times PrecioVenta_{ARS}$
-
-### 4. Liquidación de Granos (Agro)
-Utiliza los valores de la **Pizarra de Rosario (AcaBase)** en pesos y aplica las Derechos de Exportación (DEX) actuales:
-
-*   **Liquidación Neta:** $(Toneladas \times PrecioPizarra) \times (1 - \frac{DEX}{100})$
-*   **Conversión teórica (USD Blend):** $LiquidaciónNeta_{ARS} / DólarBlend$
-    *   *Dólar Blend:* Calculado automáticamente como un ponderado (80% Oficial + 20% CCL).
-
----
-
-## 📊 Fuentes de Información
-
-| Categoría | Proveedor | Frecuencia |
-| :--- | :--- | :--- |
-| Dólares | DolarAPI.com | 5 min |
-| Bancos / USDT | CriptoYa.com | Real-time |
-| Granos (Pizarra) | AcaBase | Diario |
-| Hacienda | DeCampoACampo (Cañuelas) | Diario |
-| Indicadores (IPC/UVA) | ArgentinaDatos / BCRA | Mensual/Diario |
-
----
-
-## 📱 Instalación
-
-Pampa Finance es una **Progressive Web App**. 
-1. Accede desde tu móvil.
-2. Selecciona "Compartir" o el menú de tres puntos.
-3. Elige **"Agregar a la pantalla de inicio"**.
-4. Disfruta de la experiencia de una app nativa sin consumo de almacenamiento excesivo.
-
----
-
-## 🚀 Características Principales
-
-- **Calculadora de Plazo Fijo**: Simula inversiones con tasas nominales y efectivas (TEA/TNA), incluyendo capitalización compuesta.
-- **Dólar MEP vs Blue**: Compara rendimientos entre operaciones bursátiles y cambio paralelo.
-- **Dólar Cripto**: Analiza arbitraje entre exchanges y calcula eficiencia de compra en USDT.
-- **Liquidación de Granos**: Calcula liquidación neta de trigo, soja, maíz y otros cereales aplicando DEX actuales.
-- **Plazo Fijo UVA**: Simula inversiones ajustables por UVA con proyección de interés.
-- **Screener Argy**: Dashboard de indicadores financieros argentinos (IPC, UVA, CER, tasas).
-- **Noticias Financieras**: feed de noticias del mercado argentino.
-- **Gráficos Históricos**: Visualización de evolución de precios del dólar y otras métricas.
-
----
-
-## 🏗️ Estructura del Proyecto
-
-```
-CalculadoraFinanciera-main/
-├── index.html              # Página principal
-├── plazo-fijo.html        # Calculadora de plazo fijo
-├── Hacienda.html          # Liquidación de granos
-├── calculadoras.html      # Calculadoras varias
-├── tasas.html             # Tasas e indicadores
-├── noticias.html          # Noticias financieras
-├── ScreenerArgy.html      # Dashboard de indicadores
-├── Graficos historicos.html # Gráficos históricos
-├── api-service.js         # Capa de servicio de datos
-├── sw.js                  # Service Worker para PWA
-├── shared-scripts.js      # Utilidades compartidas
-├── modern-navigation.js   # Navegación moderna
-├── manifest.json          # Manifiesto PWA
-├── scripts/
-│   └── fetch_data.js      # Script de sincronización de datos
-├── data/                  # Datos estáticos (JSON)
-│   ├── finanzas.json
-│   ├── dolares.json
-│   ├── bancostodos.json
-│   ├── usdt.json
-│   ├── plazofijo.json
-│   ├── hacienda.json
-│   └── ...
-└── README.md
-```
-
----
-
-## 💻 Desarrollo Local
-
-### Requisitos Previos
-
-- Navegador moderno (Chrome, Firefox, Edge, Safari)
-- Servidor local (recomendado para evitar problemas de CORS)
-
-### Ejecución Local
-
-1. **Clona el repositorio:**
-   ```bash
-   git clone https://github.com/SantiSanti/CalculadoraFinanciera-main.git
-   cd CalculadoraFinanciera-main
-   ```
-
-2. **Inicia un servidor local:**
-   
-   Con Python:
-   ```bash
-   python -m http.server 8000
-   ```
-   
-   O con Node.js:
-   ```bash
-   npx serve .
-   ```
-
-3. **Abre en el navegador:**
-   ```
-   http://localhost:8000
-   ```
-
-### Actualizar Datos Manualmente
-
-Para sincronizar datos desde la terminal:
 ```bash
-node scripts/fetch_data.js
+# servidor local
+python3 -m http.server 8000
+
+# datos (Node 20+)
+node scripts/fetch_data.js --all      # todo
+node scripts/fetch_data.js --quotes   # dólar, dólar bancario, USDT
+node scripts/fetch_data.js --rates    # FCI, plazo fijo, billeteras
+node scripts/fetch_data.js --agro     # pizarra y hacienda
+node scripts/fetch_data.js --market   # panel BYMA (data912)
+node scripts/fetch_data.js --series   # series históricas + noticias
+node scripts/fetch_data.js --news     # solo noticias
 ```
 
----
+## Fuentes
 
-## 🤝 Contribuir
+| Dato | Endpoint | Frecuencia |
+| :--- | :--- | :--- |
+| Dólares | `https://dolarapi.com/v1/dolares` | 5 min |
+| Dólar bancario | `https://api.comparadolar.ar/usd` | 5 min |
+| USDT | `https://criptoya.com/api/usdt/ars/0.1` | 5 min |
+| Plazo fijo | `https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo` | 3 h |
+| FCI | `https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/ultimo` · `/fci/otros/ultimo/` | 3 h |
+| Billeteras | `https://space.tasas.ar/api/bancos-digitales` | 3 h |
+| Granos | `https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase` | 30 min |
+| Hacienda | `https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo` | 30 min |
+| Panel BYMA | `https://data912.com/live/arg_stocks` · `arg_bonds` · `arg_notes` · `arg_cedears` · `mep` · `ccl` | 30 min |
+| Riesgo país, inflación, UVA, dólar histórico | `https://api.argentinadatos.com/v1/finanzas/indices/*` · `/v1/cotizaciones/dolares` | 6 h |
+| Reservas | `https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1` | 6 h |
+| Noticias | RSS de Ámbito, La Nación, Clarín, iProfesional, El Economista, Investing | 6 h |
 
-¡Las contribuciones son bienvenidas! Para colaborar:
+## Fórmulas
 
-1. **Fork** el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. **Commit** tus cambios (`git commit -m 'Agrega nueva funcionalidad'`)
-4. **Push** a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un **Pull Request**
+- **TEA:** `(1 + TNA × 30 / 365)^(365/30) − 1`
+- **Plazo fijo:** `capital × TNA × días / 365`
+- **Arbitraje:** `capital / compra × venta − capital`
+- **Granos:** `toneladas × precio × (1 − retenciones / 100)`
+- **Dólar blend:** `oficial × 0,8 + CCL × 0,2`
 
-### Buenas Prácticas
+## Diseño
 
-- Mantén el código limpio y modular
-- Agrega comentarios solo cuando sea necesario para explicar lógica compleja
-- Verifica que no haya errores de consola antes de提交
-- Prueba la app en dispositivos móviles (PWA)
+Canvas AMOLED `#000`, estructura de hairlines `rgba(255,255,255,.13)`, radios de 2 px, IBM Plex Sans para texto e IBM Plex Mono con numerales tabulares para cifras. Sin gradientes en superficies ni iconografía decorativa. Tokens en `styles.css` (`:root`).
 
----
+## Verificación
 
-## 📄 Licencia
+No hay test runner. Para revisar cambios:
 
-Este proyecto está bajo la licencia **MIT**. Esto significa que puedes usar, copiar, modificar y distribuir el software libremente, siempre que incluyas el aviso de licencia.
+```bash
+python3 -m http.server 8765
+# en otra terminal, con Chromium headless:
+chromium --headless --dump-dom --virtual-time-budget=6000 http://127.0.0.1:8765/index.html
+```
 
----
+Revisar consola del navegador, que `data/finanzas.json` tenga `last_updated` reciente y que `sources` no acumule fuentes en `ok: false`.
 
-## 🙏 Agradecimientos
+## Licencia
 
-- [DolarAPI](https://dolarapi.com) por los tipos de cambio oficiales
-- [CriptoYa](https://criptoya.com) por datos de criptomonedas y exchanges
-- [AcaBase](https://acabase.com) por la pizarra de granos
-- [BCRA](https://bcra.gob.ar) por los indicadores macroeconómicos
-
----
-
-Desarrollado con precisión para el ecosistema financiero argentino. 🇦🇷
+MIT.

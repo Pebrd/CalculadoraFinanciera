@@ -1,0 +1,781 @@
+{
+  "last_updated": "2026-11-19T02:30:34.111Z",
+  "data": [
+    {
+      "simbolo": "COME",
+      "precio": 28.8,
+      "compra": 28.7,
+      "venta": 28.8,
+      "variacion": -1.43,
+      "volumen": 9564579
+    },
+    {
+      "simbolo": "BYMA",
+      "precio": 200,
+      "compra": 199,
+      "venta": 200,
+      "variacion": 4.71,
+      "volumen": 5318322
+    },
+    {
+      "simbolo": "GGAL",
+      "precio": 4770,
+      "compra": 4775,
+      "venta": 4782.5,
+      "variacion": -1.8,
+      "volumen": 2766027
+    },
+    {
+      "simbolo": "TXAR",
+      "precio": 716,
+      "compra": 716,
+      "venta": 716.5,
+      "variacion": 4.44,
+      "volumen": 2239921
+    },
+    {
+      "simbolo": "YPFD",
+      "precio": 6040,
+      "compra": 6030,
+      "venta": 6040,
+      "variacion": -2.02,
+      "volumen": 2017496
+    },
+    {
+      "simbolo": "MORI",
+      "precio": 18,
+      "compra": 17.7,
+      "venta": 18.1,
+      "variacion": 1.4,
+      "volumen": 1845098
+    },
+    {
+      "simbolo": "VALO",
+      "precio": 525,
+      "compra": 524,
+      "venta": 525,
+      "variacion": 0.09,
+      "volumen": 1772490
+    },
+    {
+      "simbolo": "AGRO",
+      "precio": 19.5,
+      "compra": 19.5,
+      "venta": 19.75,
+      "variacion": -1.01,
+      "volumen": 1417945
+    },
+    {
+      "simbolo": "SEMI",
+      "precio": 10.8,
+      "compra": 10.8,
+      "venta": 10.85,
+      "variacion": 2.36,
+      "volumen": 1212812
+    },
+    {
+      "simbolo": "BMA",
+      "precio": 9280,
+      "compra": 9280,
+      "venta": 9340,
+      "variacion": 0.32,
+      "volumen": 1140238
+    },
+    {
+      "simbolo": "PAMP",
+      "precio": 4290,
+      "compra": 4290,
+      "venta": 4300,
+      "variacion": 1.29,
+      "volumen": 1117266
+    },
+    {
+      "simbolo": "CEPU",
+      "precio": 1782,
+      "compra": 1782,
+      "venta": 1799,
+      "variacion": 1.07,
+      "volumen": 957356
+    },
+    {
+      "simbolo": "TRAN",
+      "precio": 1947,
+      "compra": 1946,
+      "venta": 1955,
+      "variacion": 4.79,
+      "volumen": 883451
+    },
+    {
+      "simbolo": "ALUA",
+      "precio": 838,
+      "compra": 836.5,
+      "venta": 837.5,
+      "variacion": 4.94,
+      "volumen": 735003
+    },
+    {
+      "simbolo": "SUPV",
+      "precio": 1815,
+      "compra": 1815,
+      "venta": 1827,
+      "variacion": -2.31,
+      "volumen": 724087
+    },
+    {
+      "simbolo": "BHIP",
+      "precio": 175,
+      "compra": 173,
+      "venta": 175,
+      "variacion": -1.96,
+      "volumen": 656841
+    },
+    {
+      "simbolo": "EDN",
+      "precio": 1120,
+      "compra": 1120,
+      "venta": 1128,
+      "variacion": 0.35,
+      "volumen": 637062
+    },
+    {
+      "simbolo": "CRES",
+      "precio": 1456,
+      "compra": 1445,
+      "venta": 1452,
+      "variacion": -4.71,
+      "volumen": 349805
+    },
+    {
+      "simbolo": "BBAR",
+      "precio": 5585,
+      "compra": 5570,
+      "venta": 5615,
+      "variacion": -0.88,
+      "volumen": 282812
+    },
+    {
+      "simbolo": "TGSU2",
+      "precio": 6980,
+      "compra": 6980,
+      "venta": 7000,
+      "variacion": -0.14,
+      "volumen": 249761
+    },
+    {
+      "simbolo": "BYMAD",
+      "precio": 0.13,
+      "compra": 0.12,
+      "venta": 0.13,
+      "variacion": 4.16,
+      "volumen": 247936
+    },
+    {
+      "simbolo": "ECOG",
+      "precio": 1921,
+      "compra": 1913,
+      "venta": 1920,
+      "variacion": 1.9,
+      "volumen": 246712
+    },
+    {
+      "simbolo": "METR",
+      "precio": 2098,
+      "compra": 2069,
+      "venta": 2093,
+      "variacion": 2.29,
+      "volumen": 244074
+    },
+    {
+      "simbolo": "YPFDD",
+      "precio": 3.73,
+      "compra": 3.71,
+      "venta": 3.73,
+      "variacion": -3.73,
+      "volumen": 234398
+    },
+    {
+      "simbolo": "GCDI",
+      "precio": 9.54,
+      "compra": 9.2,
+      "venta": 9.54,
+      "variacion": -0.62,
+      "volumen": 217100
+    },
+    {
+      "simbolo": "TGNO4",
+      "precio": 2341,
+      "compra": 2342,
+      "venta": 2352,
+      "variacion": -0.55,
+      "volumen": 215128
+    },
+    {
+      "simbolo": "LOMA",
+      "precio": 2777.5,
+      "compra": 2770,
+      "venta": 2800,
+      "variacion": 0.63,
+      "volumen": 184055
+    },
+    {
+      "simbolo": "BOLT",
+      "precio": 62.2,
+      "compra": 62.2,
+      "venta": 62.8,
+      "variacion": -0.95,
+      "volumen": 133400
+    },
+    {
+      "simbolo": "CELU",
+      "precio": 140,
+      "compra": 137,
+      "venta": 140,
+      "variacion": 0.35,
+      "volumen": 128091
+    },
+    {
+      "simbolo": "FERR",
+      "precio": 14.65,
+      "compra": 14.4,
+      "venta": 14.65,
+      "variacion": 0,
+      "volumen": 113169
+    },
+    {
+      "simbolo": "GGALD",
+      "precio": 2.96,
+      "compra": 2.92,
+      "venta": 2.97,
+      "variacion": -3.27,
+      "volumen": 101315
+    },
+    {
+      "simbolo": "SAMI",
+      "precio": 320,
+      "compra": 319.5,
+      "venta": 320,
+      "variacion": -5.74,
+      "volumen": 92233
+    },
+    {
+      "simbolo": "ALUAD",
+      "precio": 0.52,
+      "compra": 0.51,
+      "venta": 0.52,
+      "variacion": 2.97,
+      "volumen": 84116
+    },
+    {
+      "simbolo": "A3",
+      "precio": 2795,
+      "compra": 2670,
+      "venta": 2795,
+      "variacion": 6.27,
+      "volumen": 79684
+    },
+    {
+      "simbolo": "PAMPD",
+      "precio": 2.66,
+      "compra": 2.64,
+      "venta": 2.67,
+      "variacion": -0.37,
+      "volumen": 72417
+    },
+    {
+      "simbolo": "TXARD",
+      "precio": 0.43,
+      "compra": 0.44,
+      "venta": 0.44,
+      "variacion": -0.45,
+      "volumen": 66895
+    },
+    {
+      "simbolo": "INAG",
+      "precio": 4805,
+      "compra": 4805,
+      "venta": 6510,
+      "variacion": -29.85,
+      "volumen": 51133
+    },
+    {
+      "simbolo": "REITD",
+      "precio": 0.67,
+      "compra": 0.64,
+      "venta": 0.67,
+      "variacion": 2.9,
+      "volumen": 47521
+    },
+    {
+      "simbolo": "CEPUD",
+      "precio": 1.09,
+      "compra": 1.09,
+      "venta": 1.11,
+      "variacion": 0.45,
+      "volumen": 46803
+    },
+    {
+      "simbolo": "LEDE",
+      "precio": 585,
+      "compra": 552,
+      "venta": 585,
+      "variacion": 0.86,
+      "volumen": 40512
+    },
+    {
+      "simbolo": "CRESD",
+      "precio": 0.9,
+      "compra": 0.89,
+      "venta": 0.91,
+      "variacion": -7.69,
+      "volumen": 38441
+    },
+    {
+      "simbolo": "TRAND",
+      "precio": 1.2,
+      "compra": 1.19,
+      "venta": 1.21,
+      "variacion": 3,
+      "volumen": 38024
+    },
+    {
+      "simbolo": "TECO2",
+      "precio": 3540,
+      "compra": 3515,
+      "venta": 3540,
+      "variacion": -0.42,
+      "volumen": 37630
+    },
+    {
+      "simbolo": "IRSA",
+      "precio": 1960,
+      "compra": 1955,
+      "venta": 1975,
+      "variacion": -1.25,
+      "volumen": 36598
+    },
+    {
+      "simbolo": "AUSO",
+      "precio": 1910,
+      "compra": 1900,
+      "venta": 1910,
+      "variacion": -2.79,
+      "volumen": 36238
+    },
+    {
+      "simbolo": "EDND",
+      "precio": 0.7,
+      "compra": 0.68,
+      "venta": 0.73,
+      "variacion": -0.14,
+      "volumen": 36200
+    },
+    {
+      "simbolo": "REIT",
+      "precio": 1055,
+      "compra": 1040,
+      "venta": 1050,
+      "variacion": 1.05,
+      "volumen": 29684
+    },
+    {
+      "simbolo": "IEB",
+      "precio": 1890,
+      "compra": 1840,
+      "venta": 1885,
+      "variacion": 0.8,
+      "volumen": 24592
+    },
+    {
+      "simbolo": "CECO2",
+      "precio": 391,
+      "compra": 388.5,
+      "venta": 391,
+      "variacion": -0.88,
+      "volumen": 22022
+    },
+    {
+      "simbolo": "CARC",
+      "precio": 16.8,
+      "compra": 16.4,
+      "venta": 16.75,
+      "variacion": -0.88,
+      "volumen": 21228
+    },
+    {
+      "simbolo": "GCLA",
+      "precio": 1710,
+      "compra": 1700,
+      "venta": 1710,
+      "variacion": -4.46,
+      "volumen": 21101
+    },
+    {
+      "simbolo": "COMED",
+      "precio": 0.02,
+      "compra": 0.02,
+      "venta": 0.02,
+      "variacion": 0,
+      "volumen": 18452
+    },
+    {
+      "simbolo": "GAMI",
+      "precio": 360,
+      "compra": 346,
+      "venta": 360,
+      "variacion": -1.09,
+      "volumen": 18361
+    },
+    {
+      "simbolo": "METRD",
+      "precio": 1.28,
+      "compra": 1.28,
+      "venta": 1.3,
+      "variacion": -0.38,
+      "volumen": 18044
+    },
+    {
+      "simbolo": "TGSUD",
+      "precio": 4.33,
+      "compra": 4.28,
+      "venta": 4.36,
+      "variacion": -1.02,
+      "volumen": 17268
+    },
+    {
+      "simbolo": "LONG",
+      "precio": 14.85,
+      "compra": 14.45,
+      "venta": 14.85,
+      "variacion": 3.48,
+      "volumen": 16040
+    },
+    {
+      "simbolo": "DGCU2",
+      "precio": 1190,
+      "compra": 1190,
+      "venta": 1200,
+      "variacion": 0.84,
+      "volumen": 15979
+    },
+    {
+      "simbolo": "CTIO",
+      "precio": 1645,
+      "compra": 1620,
+      "venta": 1650,
+      "variacion": 1.54,
+      "volumen": 15735
+    },
+    {
+      "simbolo": "INVJ",
+      "precio": 321,
+      "compra": 320,
+      "venta": 321,
+      "variacion": -3.89,
+      "volumen": 14149
+    },
+    {
+      "simbolo": "BPAT",
+      "precio": 1405,
+      "compra": 1400,
+      "venta": 1415,
+      "variacion": -2.09,
+      "volumen": 14053
+    },
+    {
+      "simbolo": "MIRG",
+      "precio": 1695,
+      "compra": 1690,
+      "venta": 1695,
+      "variacion": 1.49,
+      "volumen": 13655
+    },
+    {
+      "simbolo": "HARG",
+      "precio": 1030,
+      "compra": 1030,
+      "venta": 1040,
+      "variacion": 0.48,
+      "volumen": 13459
+    },
+    {
+      "simbolo": "CVH",
+      "precio": 8550,
+      "compra": 8540,
+      "venta": 8550,
+      "variacion": -0.69,
+      "volumen": 13061
+    },
+    {
+      "simbolo": "SUPVD",
+      "precio": 1.13,
+      "compra": 1.11,
+      "venta": 1.13,
+      "variacion": -3,
+      "volumen": 12112
+    },
+    {
+      "simbolo": "PATA",
+      "precio": 940,
+      "compra": 920,
+      "venta": 960,
+      "variacion": -0.26,
+      "volumen": 11465
+    },
+    {
+      "simbolo": "ECOGD",
+      "precio": 1.17,
+      "compra": 1.18,
+      "venta": 1.24,
+      "variacion": -2.51,
+      "volumen": 9192
+    },
+    {
+      "simbolo": "BBARD",
+      "precio": 3.44,
+      "compra": 3.43,
+      "venta": 3.5,
+      "variacion": -2.82,
+      "volumen": 9151
+    },
+    {
+      "simbolo": "CGPA2",
+      "precio": 1170,
+      "compra": 1130,
+      "venta": 1170,
+      "variacion": -0.42,
+      "volumen": 8783
+    },
+    {
+      "simbolo": "LOMAD",
+      "precio": 1.73,
+      "compra": 1.69,
+      "venta": 1.75,
+      "variacion": -1.98,
+      "volumen": 6426
+    },
+    {
+      "simbolo": "GBAN",
+      "precio": 1415,
+      "compra": 1385,
+      "venta": 1415,
+      "variacion": -3.41,
+      "volumen": 6313
+    },
+    {
+      "simbolo": "BMA.D",
+      "precio": 5.72,
+      "compra": 5.66,
+      "venta": 5.72,
+      "variacion": -2.05,
+      "volumen": 5653
+    },
+    {
+      "simbolo": "CAPX",
+      "precio": 2600,
+      "compra": 2580,
+      "venta": 2600,
+      "variacion": 0.58,
+      "volumen": 5430
+    },
+    {
+      "simbolo": "FIPL",
+      "precio": 117,
+      "compra": 117,
+      "venta": 118.5,
+      "variacion": 0.42,
+      "volumen": 4808
+    },
+    {
+      "simbolo": "HSAT",
+      "precio": 123,
+      "compra": 122,
+      "venta": 123,
+      "variacion": -1.2,
+      "volumen": 4379
+    },
+    {
+      "simbolo": "TGN4D",
+      "precio": 1.45,
+      "compra": 1.42,
+      "venta": 1.48,
+      "variacion": -3.33,
+      "volumen": 3917
+    },
+    {
+      "simbolo": "OEST",
+      "precio": 610,
+      "compra": 591,
+      "venta": 610,
+      "variacion": -0.81,
+      "volumen": 3552
+    },
+    {
+      "simbolo": "VALOD",
+      "precio": 0.32,
+      "compra": 0.32,
+      "venta": 0.33,
+      "variacion": -0.92,
+      "volumen": 2937
+    },
+    {
+      "simbolo": "HAVA",
+      "precio": 3355,
+      "compra": 3265,
+      "venta": 3355,
+      "variacion": 0.75,
+      "volumen": 2495
+    },
+    {
+      "simbolo": "MOLI",
+      "precio": 2020,
+      "compra": 2020,
+      "venta": 2030,
+      "variacion": -1.94,
+      "volumen": 2387
+    },
+    {
+      "simbolo": "GARO",
+      "precio": 479,
+      "compra": 407,
+      "venta": 479,
+      "variacion": 0.2,
+      "volumen": 1491
+    },
+    {
+      "simbolo": "RICH",
+      "precio": 1570,
+      "compra": 1570,
+      "venta": 1595,
+      "variacion": -1.56,
+      "volumen": 1375
+    },
+    {
+      "simbolo": "IRSAD",
+      "precio": 1.19,
+      "compra": 1.2,
+      "venta": 1.23,
+      "variacion": -4.43,
+      "volumen": 935
+    },
+    {
+      "simbolo": "MOLA",
+      "precio": 19025,
+      "compra": 19025,
+      "venta": 19200,
+      "variacion": 0.52,
+      "volumen": 915
+    },
+    {
+      "simbolo": "TECOD",
+      "precio": 2.15,
+      "compra": 2.15,
+      "venta": 2.28,
+      "variacion": -2.49,
+      "volumen": 903
+    },
+    {
+      "simbolo": "DOME",
+      "precio": 71,
+      "compra": 63,
+      "venta": 70,
+      "variacion": 2.9,
+      "volumen": 300
+    },
+    {
+      "simbolo": "GRIM",
+      "precio": 1850,
+      "compra": 1850,
+      "venta": 1990,
+      "variacion": -2.63,
+      "volumen": 124
+    },
+    {
+      "simbolo": "CVHD",
+      "precio": 5.3,
+      "compra": 5.15,
+      "venta": 5.36,
+      "variacion": -4.5,
+      "volumen": 73
+    },
+    {
+      "simbolo": "EDSH",
+      "precio": 9000,
+      "compra": 9450,
+      "venta": 9600,
+      "variacion": 3.45,
+      "volumen": 20
+    },
+    {
+      "simbolo": "RIGO",
+      "precio": 435,
+      "compra": 410,
+      "venta": 435,
+      "variacion": -0.91,
+      "volumen": 20
+    },
+    {
+      "simbolo": "CADO",
+      "precio": 517,
+      "compra": 501,
+      "venta": 515,
+      "variacion": 5.51,
+      "volumen": 0
+    },
+    {
+      "simbolo": "EDLH",
+      "precio": 22.5,
+      "compra": 200,
+      "venta": 1500,
+      "variacion": 0,
+      "volumen": 0
+    },
+    {
+      "simbolo": "INTR",
+      "precio": 261,
+      "compra": 261,
+      "venta": 268,
+      "variacion": -3.33,
+      "volumen": 0
+    },
+    {
+      "simbolo": "POLL",
+      "precio": 313.5,
+      "compra": 0,
+      "venta": 330,
+      "variacion": 0,
+      "volumen": 0
+    },
+    {
+      "simbolo": "RAGH",
+      "precio": 1800,
+      "compra": 1800,
+      "venta": 2240,
+      "variacion": 0,
+      "volumen": 0
+    },
+    {
+      "simbolo": "REGE",
+      "precio": 6880,
+      "compra": 0,
+      "venta": 7200,
+      "variacion": 1.03,
+      "volumen": 0
+    },
+    {
+      "simbolo": "REITC",
+      "precio": 0.63,
+      "compra": 0,
+      "venta": 0.63,
+      "variacion": -1.73,
+      "volumen": 0
+    },
+    {
+      "simbolo": "ROSE",
+      "precio": 139,
+      "compra": 130,
+      "venta": 138.5,
+      "variacion": -1.42,
+      "volumen": 0
+    }
+  ]
+}

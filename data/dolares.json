@@ -1,62 +1,54 @@
 {
-  "last_updated": "2026-03-20T17:10:50.677Z",
+  "last_updated": "2026-11-19T02:30:33.902Z",
   "data": [
     {
-      "moneda": "USD",
       "casa": "oficial",
       "nombre": "Oficial",
-      "compra": 1365,
-      "venta": 1415,
-      "fechaActualizacion": "2026-03-20T09:55:00.000Z"
+      "compra": 1530,
+      "venta": 1580,
+      "fecha": "2026-11-18T18:00:00.000Z"
     },
     {
-      "moneda": "USD",
       "casa": "blue",
       "nombre": "Blue",
-      "compra": 1400,
-      "venta": 1420,
-      "fechaActualizacion": "2026-03-20T17:00:00.000Z"
+      "compra": 1610,
+      "venta": 1630,
+      "fecha": "2026-11-18T20:56:00.000Z"
     },
     {
-      "moneda": "USD",
       "casa": "bolsa",
       "nombre": "Bolsa",
-      "compra": 1421,
-      "venta": 1423.6,
-      "fechaActualizacion": "2026-03-20T17:00:00.000Z"
+      "compra": 1620.9,
+      "venta": 1628.8,
+      "fecha": "2026-11-18T20:56:00.000Z"
     },
     {
-      "moneda": "USD",
       "casa": "contadoconliqui",
       "nombre": "Contado con liquidación",
-      "compra": 1468.3,
-      "venta": 1469,
-      "fechaActualizacion": "2026-03-20T17:00:00.000Z"
+      "compra": 1721.1,
+      "venta": 1724.1,
+      "fecha": "2026-11-18T20:56:00.000Z"
     },
     {
-      "moneda": "USD",
       "casa": "mayorista",
       "nombre": "Mayorista",
-      "compra": 1384,
-      "venta": 1393,
-      "fechaActualizacion": "2026-03-20T13:45:00.000Z",
-      "variacion": -0.11
+      "compra": 1550.5,
+      "venta": 1559.5,
+      "fecha": "2026-11-18T15:08:00.000Z"
     },
     {
-      "moneda": "USD",
       "casa": "cripto",
       "nombre": "Cripto",
-      "compra": 1471.5,
-      "venta": 1471.6,
-      "fechaActualizacion": "2026-03-20T17:00:00.000Z"
+      "compra": 1714.23,
+      "venta": 1718.47,
+      "fecha": "2026-11-18T20:56:00.000Z"
     },
     {
-      "moneda": "USD",
       "casa": "tarjeta",
       "nombre": "Tarjeta",
-      "compra": 1774.5,
-      "venta": 1839.5,
-      "fechaActualizacion": "2026-03-20T09:55:00.000Z"
+      "compra": 1989,
+      "venta": 2054,
+      "fecha": "2026-11-18T18:00:00.000Z"
     }
   ]
 }

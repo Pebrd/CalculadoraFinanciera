@@ -2,25 +2,29 @@ name: Fetch Data
 
 on:
   schedule:
-    # 1. COTIZACIONES: Cada 5 min (Lunes-Viernes 10-17 ART / 13-20 UTC)
+    # Cotizaciones del dólar: cada 5 minutos en horario de mercado (10-17 ART)
     - cron: '*/5 13-20 * * 1-5'
-    
-    # 2. PIZARRA: Cada 30 min (Lunes-Viernes 10-17 ART / 13-20 UTC)
-    # (Ya está cubierto por el de 5 min, el script puede manejarlo o usamos un cron separado)
-    - cron: '*/30 * * * *'
-    
-    # 3. TASAS/CAÑUELAS/NOTICIAS: 4 veces al día (Cada 6 horas)
+    # Panel BYMA + agro: cada 30 minutos
+    - cron: '*/30 13-20 * * 1-5'
+    # Tasas y FCI: cada 3 horas
+    - cron: '0 */3 * * *'
+    # Actualización completa (series + noticias): 4 veces al día
     - cron: '0 0,6,12,18 * * *'
 
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-data
+  cancel-in-progress: false
 
 jobs:
   fetch-and-commit:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout repository
@@ -31,36 +35,59 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch Financial Data
+      - name: Resolve mode
+        id: mode
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          EVENT: ${{ github.event_name }}
         run: |
-          # Determinar qué modo usar basado en la hora/minuto
-          # (Lógica simple: si el minuto es divisible por 30, hacemos pizarra. 
-          # Si la hora es divisible por 6, hacemos rates/news/all)
-          
-          MINUTE=$(date +%-M)
-          HOUR=$(date +%-H)
-          DAY=$(date +%u)
-
-          if [ $((HOUR % 6)) -eq 0 ] && [ "$MINUTE" -eq 0 ]; then
-            echo "Running FULL UPDATE"
-            node scripts/fetch_data.js --all
-          elif [ $((MINUTE % 30)) -eq 0 ]; then
-            echo "Running AGRO + QUOTES update"
-            node scripts/fetch_data.js --agro
-            node scripts/fetch_data.js --quotes
-          else
-            echo "Running QUOTES update only"
-            node scripts/fetch_data.js --quotes
+          MODE="--all"
+          if [ "$EVENT" = "push" ]; then
+            MODE="--all"
+          elif [ "$SCHEDULE" = "*/5 13-20 * * 1-5" ]; then
+            MODE="--quotes"
+          elif [ "$SCHEDULE" = "*/30 13-20 * * 1-5" ]; then
+            MODE="--market --agro"
+          elif [ "$SCHEDULE" = "0 */3 * * *" ]; then
+            MODE="--rates"
           fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "Modo elegido: $MODE"
 
-      - name: Commit and push changes
+      - name: Fetch data
+        run: |
+          for mode in ${{ steps.mode.outputs.mode }}; do
+            echo "== node scripts/fetch_data.js $mode"
+            node scripts/fetch_data.js "$mode"
+          done
+
+      - name: Validate bundle
+        run: |
+          node -e "
+            const fs = require('fs');
+            const b = JSON.parse(fs.readFileSync('data/finanzas.json', 'utf8'));
+            if (!b.last_updated || !b.data || !Object.keys(b.data).length) {
+              console.error('Bundle inválido');
+              process.exit(1);
+            }
+            const failed = Object.entries(b.sources || {}).filter(([, s]) => s.ok === false);
+            console.log('Fuentes OK:', Object.keys(b.data).length);
+            if (failed.length) console.warn('Con error:', failed.map(([k]) => k).join(', '));
+            if (failed.length > 8) process.exit(1);
+          "
+
+      - name: Commit and push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/*.json
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "chore: update financial data [skip ci]"
-            git push
-          else
-            echo "No changes to commit"
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Sin cambios para commitear"
+            exit 0
           fi
+          git commit -m "chore: update financial data [skip ci]"
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main && git push && break
+            echo "Reintento $i por conflicto de push"
+            sleep 5
+          done

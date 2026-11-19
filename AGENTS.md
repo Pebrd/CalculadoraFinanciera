@@ -1,68 +1,63 @@
-# 🤖 Pampa Finance - Agent Instructions
+# Instrucciones para agentes — Pampa Finance
 
-This guide provides context, standards, and commands for AI agents operating in this repository.
+PWA estática del mercado argentino. Sin framework, sin backend: HTML + CSS + JS vanilla y un bundle JSON que GitHub Actions mantiene al día.
 
-## 🏗️ Project Architecture
-Pampa Finance is a "Backendless" PWA (Progressive Web App) designed for the Argentine financial market.
-- **Frontend:** Vanilla HTML, CSS, and JavaScript. No framework (React/Vue/etc.) is used.
-- **Data Sync:** GitHub Actions runs `scripts/fetch_data.js` to populate the `data/` directory with JSON files.
-- **Service Layer:** `api-service.js` handles data fetching with local-first logic, live API fallbacks, and CORS proxy rotation.
+## Arquitectura
 
-## 🛠️ Build & Development Commands
+- `scripts/fetch_data.js` descarga y normaliza todas las fuentes. Escribe `data/finanzas.json` (bundle `{ last_updated, sources, data, counts }`) y un archivo por fuente.
+- `api-service.js` es la única puerta a los datos: bundle primero, APIs en vivo después, cache del Service Worker al final. Expone `window.ApiService` con accesores (`getDolares()`, `getPlazofijo()`, `getStocks()`, etc.) y helpers (`teaFromTna`, `dollarVariation`, `gap`, `health`).
+- `app.js` aporta `window.PF`: formateo es-AR (`Fmt`), navegación, `renderTable`, `chart` (SVG propio), `reveal`, `withData`.
+- `sw.js` cachea shell y datos con network-first. Al tocar assets, subir `CACHE`.
 
-### Local Development
-The project is static. Use any local server to avoid CORS issues:
-- **Python:** `python3 -m http.server 8000`
-- **Node.js:** `npx serve .`
+## Comandos
 
-### Data Sincronization (Node.js required)
-To update the local data cache in the `data/` directory:
-- **Update all:** `node scripts/fetch_data.js --all`
-- **Update quotes only:** `node scripts/fetch_data.js --quotes`
-- **Update agro data:** `node scripts/fetch_data.js --agro`
-- **Update rates:** `node scripts/fetch_data.js --rates`
+```bash
+python3 -m http.server 8000            # desarrollo
+node scripts/fetch_data.js --all       # todas las fuentes
+node scripts/fetch_data.js --quotes    # dólar, dólar bancario, USDT
+node scripts/fetch_data.js --rates     # FCI, plazo fijo, billeteras
+node scripts/fetch_data.js --agro      # pizarra y hacienda
+node scripts/fetch_data.js --market    # acciones, bonos, notas, CEDEARs
+node scripts/fetch_data.js --series    # series históricas
+node scripts/fetch_data.js --news      # titulares
+```
 
-### Testing & Linting
-There is no automated test suite (Jest/Mocha) or linter (ESLint) configured.
-- **Validation:** Manually check the browser console for errors.
-- **JSON Validation:** Ensure any manual changes to `data/*.json` or `manifest.json` are valid JSON.
-- **PWA Audit:** Use Lighthouse in Chrome to verify PWA compliance after changes to `sw.js` or `manifest.json`.
+Después de tocar el fetcher, correr `--all` y confirmar que `sources` no quede con fuentes en `ok: false`.
 
-## 🎨 Code Style & Guidelines
+## Diseño (reglas fijas)
 
-### 1. JavaScript (Vanilla ES6+)
-- **Naming:** 
-  - Variables and functions: `camelCase` (e.g., `calculateTea`, `getSmartData`).
-  - Constants and Enums: `SCREAMING_SNAKE_CASE` (e.g., `PROXIES`, `URLS`).
-  - Objects/Namespaces: `PascalCase` (e.g., `ApiService`, `CalculadoraFinanciera`).
-- **Formatting:** 4 spaces for indentation. Use semicolons.
-- **Async/Await:** Prefer `async/await` over raw Promises. Always use `try...catch` for network operations.
-- **Imports:** The project does not use ES Modules (`import/export`). It relies on script order in HTML and global objects (e.g., `window.ApiService`).
-- **DOM Access:** Use `document.getElementById` or `document.querySelector`. Cache frequent DOM references.
+- Fondo AMOLED `#000` puro. Nada de grises de fondo grandes.
+- Radios de 2 px. Prohibido `border-radius` grande, pills redondeadas o sombras.
+- Separación por hairlines (`--line`, `--line-soft`) y aire, no por cajas elevadas.
+- Cifras siempre en IBM Plex Mono con `font-variant-numeric: tabular-nums`.
+- Tipografía: IBM Plex Sans; etiquetas en mayúscula con `letter-spacing` 0.12–0.2em.
+- Colores semánticos únicos: `--up` verde, `--down` rojo, `--info` azul, `--warn` ámbar. Sin neones ni degradados de texto.
+- Prohibido reintroducir `nox-tokens.css` o cualquier sistema de tokens anterior: el sistema vive en `styles.css`.
+- Cada página responde primero: un héroe, una línea de lectura y después el detalle. No esconder datos para "limpiar" la interfaz.
 
-### 2. Error Handling
-- Use the established pattern in `api-service.js`:
-  1. Try local/static data first.
-  2. Fallback to live API if data is missing or stale (>10 min).
-  3. Use `AbortSignal.timeout` for all fetch calls.
-  4. Use `ApiService.fetchWithProxy` to bypass CORS when calling external APIs directly.
+## JavaScript
 
-### 3. HTML & CSS
-- **Styling:** Shared styles are in `shared-styles.css`. Use CSS variables for colors (defined in `:root`).
-- **Responsive Design:** Mobile-first approach is mandatory. Test with standard mobile viewports.
-- **Accessibility:** Ensure buttons have labels and inputs have associated labels for PWA usability.
+- 4 espacios, punto y coma, `const`/`let`, sin `import/export` (orden de scripts en el HTML).
+- Nombres `camelCase`; constantes `SCREAMING_SNAKE_CASE`; módulos globales en `PascalCase` (`ApiService`, `PF`).
+- Redes: siempre `try/catch` y `AbortSignal.timeout` (ver `api-service.js`).
+- No consultar APIs externas desde una página: agregar la fuente al fetcher y al bundle.
+- El HTML se arma con `PF.renderTable` o `innerHTML` escapando con `Fmt.esc`. Nunca interpolar texto de terceros sin escapar (los RSS traen HTML).
+- Todo texto visible en español rioplatense, sin anglicismos innecesarios.
 
-### 4. Data Management
-- Do **not** commit large or sensitive data to the `data/` directory.
-- The `finanzas.json` file is a bundle. If you add a new data source, ensure it's added to the `GROUPS` object in `scripts/fetch_data.js`.
+## Datos
 
-## 📱 Service Worker (sw.js)
-- When modifying `sw.js`, increment the `CACHE_NAME` version to force updates on user devices.
-- Ensure all critical assets (`index.html`, `shared-styles.css`, `api-service.js`) are in the `PRECACHE_ASSETS` array.
+- No commitear datos voluminosos: el fetcher recorta series y topes (400 puntos de series, 60 noticias, 40 CEDEARs).
+- Si una API cambia, verificar el contrato antes de tocar transformaciones; `data/<fuente>.json` sirve para inspeccionar el último resultado normalizado.
+- Frecuencias y endpoints documentados en `README.md`.
 
-## 📝 Commit Messages
-Follow conventional commits:
-- `feat:` for new features.
-- `fix:` for bug fixes.
-- `chore:` for updating data or non-code tasks (e.g., `chore: update financial data`).
-- `docs:` for documentation changes.
+## Verificación antes de dar algo por terminado
+
+1. `python3 -m http.server` y abrir cada página tocada.
+2. Consola sin errores; sin requests 404.
+3. Las tablas tienen filas reales (no vacías) y `[data-sync]` muestra una hora reciente.
+4. Sin scroll horizontal en 390 px de ancho.
+5. Contrastes: texto secundario ≥ 4.5:1 sobre negro.
+
+## Commits
+
+Conventional commits: `feat:`, `fix:`, `chore:` (datos), `docs:`. Los commits de datos automáticos usan `[skip ci]`.

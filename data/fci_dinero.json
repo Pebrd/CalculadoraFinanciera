@@ -1,0 +1,215 @@
+{
+  "last_updated": "2026-11-19T02:30:34.139Z",
+  "data": [
+    {
+      "fondo": "Mercado Fondo - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 8841259830421,
+      "variacionDiaria": 1261706468.789
+    },
+    {
+      "fondo": "Fima Premium - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 4772187190999,
+      "variacionDiaria": 42680368.87
+    },
+    {
+      "fondo": "Fima Premium - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 3653958137428,
+      "variacionDiaria": 47886576.868
+    },
+    {
+      "fondo": "FBA Money Market Pesos - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 3620998110847,
+      "variacionDiaria": 8855932.736
+    },
+    {
+      "fondo": "Pionero Pesos Plus - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 2607947830200,
+      "variacionDiaria": 61225757.408
+    },
+    {
+      "fondo": "Super Ahorro $ - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 2340592450796,
+      "variacionDiaria": 552313087.54
+    },
+    {
+      "fondo": "Pellegrini Renta Pesos - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 2198505563549,
+      "variacionDiaria": 280889875.42
+    },
+    {
+      "fondo": "Super Ahorro $ - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 2076432511995,
+      "variacionDiaria": 331215099.005
+    },
+    {
+      "fondo": "Alpha Pesos - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 1845371584861,
+      "variacionDiaria": 16081603.375
+    },
+    {
+      "fondo": "1822 Raices Ahorro Pesos - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 1643630401637,
+      "variacionDiaria": 106058579.001
+    },
+    {
+      "fondo": "Lombard Renta en Pesos - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 1570607935887,
+      "variacionDiaria": 2363432.578
+    },
+    {
+      "fondo": "1810 Ahorro",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 1570168260612,
+      "variacionDiaria": 2588238.656
+    },
+    {
+      "fondo": "Super Ahorro Plus - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 1453657627281,
+      "variacionDiaria": 317716.765
+    },
+    {
+      "fondo": "Fima Premium - Clase C",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 1027568270187,
+      "variacionDiaria": 8892685.387
+    },
+    {
+      "fondo": "Super Ahorro $ - Clase H",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 1005124431790,
+      "variacionDiaria": 410490640.228
+    },
+    {
+      "fondo": "IAM Ahorro Pesos - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 772291634815,
+      "variacionDiaria": 25393613.973
+    },
+    {
+      "fondo": "Delta Pesos - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 650773411096,
+      "variacionDiaria": 5917762.343
+    },
+    {
+      "fondo": "Allaria Ahorro - Clase C",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 610774403021,
+      "variacionDiaria": 51155460.339
+    },
+    {
+      "fondo": "Premier Renta CP en Pesos - Clase C",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 572500504055,
+      "variacionDiaria": 80065786
+    },
+    {
+      "fondo": "MEGAQM Pesos - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 565574198786,
+      "variacionDiaria": 16333322.138
+    },
+    {
+      "fondo": "Pionero Pesos Plus - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 522839233636,
+      "variacionDiaria": 14144197.096
+    },
+    {
+      "fondo": "FBA Money Market Pesos - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 488587465260,
+      "variacionDiaria": 1449565.651
+    },
+    {
+      "fondo": "Allaria Ahorro - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 424254507019,
+      "variacionDiaria": 3315852.042
+    },
+    {
+      "fondo": "Max Money Market - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 400493692575,
+      "variacionDiaria": 1200748209.753
+    },
+    {
+      "fondo": "Adcap Ahorro Pesos Fondo de Dinero - Clase C",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 390651517170,
+      "variacionDiaria": 85887612.841
+    },
+    {
+      "fondo": "Delta Pesos - Clase X",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 383471582393,
+      "variacionDiaria": 1022911013.152
+    },
+    {
+      "fondo": "Premier Renta CP en Pesos - Clase A",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 383144204264,
+      "variacionDiaria": 1016646.932
+    },
+    {
+      "fondo": "Adcap Ahorro Pesos Fondo de Dinero - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 364559141034,
+      "variacionDiaria": 82547068.818
+    },
+    {
+      "fondo": "Toronto Trust Ahorro - Clase B",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 360973596325,
+      "variacionDiaria": 9472700.919
+    },
+    {
+      "fondo": "Fima Premium - Clase N",
+      "horizonte": "corto",
+      "fecha": "2026-11-17",
+      "patrimonio": 330312555138,
+      "variacionDiaria": 3649360.727
+    }
+  ]
+}

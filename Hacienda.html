@@ -1,221 +1,239 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-    <link rel="manifest" href="manifest.json">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacienda | Pampa Finance</title>
-    <link rel="stylesheet" href="nox-tokens.css">
-    <link rel="stylesheet" href="shared-styles.css">
-    <style>
-        .agro-widgets {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .widget-card {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            padding: 15px;
-            min-height: 120px;
-        }
-        .hacienda-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-        .hacienda-card {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hacienda-card:hover {
-            border-color: var(--success);
-            transform: translateY(-4px);
-        }
-        .hacienda-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #151515;
-            padding-bottom: 12px;
-        }
-        .category-name {
-            font-weight: 700;
-            color: #fff;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .hacienda-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        .price-main {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .price-label {
-            font-size: 0.65rem;
-            color: #555;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .trend-indicator {
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            border-radius: var(--nox-border-radius-none);
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .trend-up { background: var(--success-glow); color: var(--success); }
-        .trend-down { background: var(--error-glow); color: var(--error); }
-        .hacienda-footer {
-            font-size: 0.7rem;
-            color: #444;
-            display: flex;
-            justify-content: space-between;
-            margin-top: 5px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Pizarra de granos de Rosario, precios de hacienda en pesos y dólares, y dólar blend para liquidar la cosecha.">
+<title>Agro — Pampa Finance</title>
+<link rel="icon" href="icono.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<script src="modern-navigation.js"></script>
+<main class="main">
 
-<main class="main-container">
-    <h1 class="page-title fade-in">Mercado de Hacienda</h1>
+    <header class="page-head">
+        <span class="eyebrow">Agro · Rosario</span>
+        <h1 class="title">El campo, <strong>en números</strong>.</h1>
+        <p class="lede" id="answer">Cargando pizarra…</p>
+        <div class="meta-row">
+            <span class="dot" data-sync-dot></span>
+            <span data-sync>cargando datos</span>
+            <span>AcaBase · DeCampoACampo</span>
+        </div>
+    </header>
 
-    <div class="agro-widgets">
-        <div class="widget-card">
-            <div class="tradingview-widget-container">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                { "symbol": "MATBAROFEX:SOJCONT", "colorTheme": "dark", "isTransparent": true, "width": "100%" }
-                </script>
+    <section class="stats reveal" id="stats">
+        <div class="stat"><span class="stat__label">Cargando</span></div>
+    </section>
+
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Pizarra Rosario</h2>
+            <span class="section__note" id="granos-note">precio por tonelada</span>
+        </div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div id="granos" data-error><span class="skeleton" style="width:100%"></span></div>
             </div>
         </div>
-        <div class="widget-card">
-            <div class="tradingview-widget-container">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                { "symbol": "MATBAROFEX:MAICONT", "colorTheme": "dark", "isTransparent": true, "width": "100%" }
-                </script>
+    </section>
+
+    <section class="section split">
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">Mercado de hacienda</span>
+                    <span class="panel__hint" id="hacienda-fecha">—</span>
+                </div>
+                <div id="hacienda" data-error><span class="skeleton" style="width:100%"></span></div>
             </div>
         </div>
-        <div class="widget-card">
-            <div class="tradingview-widget-container">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-                { "symbol": "MATBAROFEX:TRICONT", "colorTheme": "dark", "isTransparent": true, "width": "100%" }
-                </script>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">Dólares de referencia</span>
+                    <span class="panel__hint">para convertir</span>
+                </div>
+                <div class="kpi-list" id="dolares">
+                    <div class="kpi"><span class="kpi__label">Cargando…</span></div>
+                </div>
+                <p class="result__note" id="blend-note"></p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="controls">
-        <div class="agro-pill-selector" style="margin-bottom: 0;">
-            <button id="btn-ars" class="agro-pill active">ARS</button>
-            <button id="btn-usd" class="agro-pill">USD (Oficial)</button>
-        </div>
-        <button id="refresh-hacienda" class="btn btn-sm">🔄 Actualizar Cañuelas</button>
-    </div>
-
-    <div id="hacienda-container" class="hacienda-grid">
-        <!-- Skeletons -->
-        <div class="loading" style="grid-column: 1/-1; height: 200px;"></div>
-    </div>
-</main>
-
-<script src="shared-scripts.js"></script>
-<script src="api-service.js"></script>
-<script>
-const HaciendaPage = {
-    isUSD: false,
-    rawData: [],
-
-    async init() {
-        this.bindEvents();
-        await this.load();
-    },
-
-    bindEvents() {
-        document.getElementById('refresh-hacienda').addEventListener('click', () => this.load());
-        document.getElementById('btn-ars').addEventListener('click', () => { this.isUSD = false; this.updateUI(); });
-        document.getElementById('btn-usd').addEventListener('click', () => { this.isUSD = true; this.updateUI(); });
-    },
-
-    async load() {
-        const container = document.getElementById('hacienda-container');
-        container.innerHTML = '<div class="loading" style="grid-column: 1/-1; height: 200px;"></div>';
-        
-        try {
-            this.rawData = await ApiService.getHacienda();
-            if (!this.rawData || !this.rawData.length) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--text-secondary);">Sin datos disponibles del Mercado de Hacienda.</div>';
-                return;
-            }
-            this.render();
-        } catch (e) {
-            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--error);">Error al conectar con el Mercado de Hacienda.</div>';
-        }
-    },
-
-    updateUI() {
-        document.getElementById('btn-ars').classList.toggle('active', !this.isUSD);
-        document.getElementById('btn-usd').classList.toggle('active', this.isUSD);
-        this.render();
-    },
-
-    render() {
-        const container = document.getElementById('hacienda-container');
-        if (!this.rawData || !this.rawData.length) return;
-
-        container.innerHTML = this.rawData.map(item => {
-            const p1 = this.isUSD ? parseFloat(item.precio_semana_1_usd) : parseFloat(item.precio_semana_1);
-            const p2 = this.isUSD ? parseFloat(item.precio_semana_2_usd) : parseFloat(item.precio_semana_2);
-            const diff = p1 - p2;
-            const currency = this.isUSD ? 'USD' : 'ARS';
-
-            const trendClass = diff > 0 ? 'trend-up' : (diff < 0 ? 'trend-down' : '');
-            const icon = diff > 0 ? '▲' : (diff < 0 ? '▼' : '▬');
-
-            return `
-                <div class="hacienda-card fade-in">
-                    <div class="hacienda-header">
-                        <span class="category-name">${item.categoria}</span>
-                        <span class="trend-indicator ${trendClass}">${icon} ${Math.abs(diff).toFixed(2)}</span>
+    <section class="section">
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">Cómo leer la pizarra</span>
+                </div>
+                <div class="kpi-list">
+                    <div class="kpi">
+                        <span class="kpi__label">Precio</span>
+                        <span class="kpi__value" style="text-align:left;font-size:13px">pesos por tonelada, puesto en el puerto indicado</span>
                     </div>
-                    <div class="hacienda-body">
-                        <div>
-                            <div class="price-label">Precio Hoy</div>
-                            <div class="price-main">${CalculadoraFinanciera.Formatters.currency(p1, currency)}</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="price-label">Sem. Anterior</div>
-                            <div style="font-size: 1.1rem; color: #666;">${CalculadoraFinanciera.Formatters.currency(p2, currency)}</div>
-                        </div>
+                    <div class="kpi">
+                        <span class="kpi__label">Diferencia</span>
+                        <span class="kpi__value" style="text-align:left;font-size:13px">contra el cierre de la rueda anterior</span>
                     </div>
-                    <div class="hacienda-footer">
-                        <span>Cabezas: ${item.cantidad_semana_1 || '-'}</span>
-                        <span>Variación: ${((diff/p2)*100).toFixed(2)}%</span>
+                    <div class="kpi">
+                        <span class="kpi__label">Hacienda</span>
+                        <span class="kpi__value" style="text-align:left;font-size:13px">pesos y dólares por kilo vivo, según la semana en curso</span>
                     </div>
                 </div>
-            `;
-        }).join('');
-    }
-};
+                <p class="result__note">
+                    Para liquidar con retenciones usá la
+                    <a href="calculadoras.html" style="color:var(--fg)">calculadora de granos</a>:
+                    toma el precio de esta pizarra y el dólar blend del día.
+                </p>
+            </div>
+        </div>
+    </section>
 
-document.addEventListener('DOMContentLoaded', () => HaciendaPage.init());
+    <footer class="foot">
+        <span>Pampa Finance · pizarra informativa, no constituye oferta de compra</span>
+        <span><a href="calculadoras.html">Liquidar granos</a> · <a href="index.html">Cotizaciones</a></span>
+    </footer>
+</main>
+
+<script src="api-service.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+    var Fmt = PF.Fmt;
+
+    PF.withData(function (api) {
+        var granos = api.getGranos();
+        var hacienda = api.getHacienda();
+        var dolares = api.getDolares();
+        var byCasa = {};
+        dolares.forEach(function (d) { byCasa[d.casa] = d; });
+
+        var soja = granos.filter(function (g) { return g.producto === 'SO'; })[0];
+        var maiz = granos.filter(function (g) { return g.producto === 'MZ'; })[0];
+        var trigo = granos.filter(function (g) { return g.producto === 'TR'; })[0];
+        var girasol = granos.filter(function (g) { return g.producto === 'GI'; })[0];
+        var novillito = (hacienda.categorias || [])[0];
+
+        // --- Héroe ---
+        var cards = [];
+        [soja, maiz, trigo, girasol].forEach(function (g) {
+            if (!g) return;
+            var d = Fmt.delta(g.variacion ? (g.variacion / (g.precio - g.variacion)) * 100 : null, 2);
+            cards.push({
+                label: Fmt.title(g.nombre),
+                value: Fmt.money(g.precio, 0),
+                left: g.hora ? 'actualizado ' + g.hora : 'pizarra',
+                right: '<span class="' + d.cls + '">' + (g.variacion >= 0 ? '+' : '−') + '$' + Fmt.num(Math.abs(g.variacion), 0) + '</span>'
+            });
+        });
+        document.getElementById('stats').innerHTML = cards.map(function (s) {
+            return '<div class="stat">' +
+                '<span class="stat__label">' + s.label + '<span class="tag">tn</span></span>' +
+                '<span class="stat__value">' + s.value + '</span>' +
+                '<span class="stat__foot"><span>' + s.left + '</span><span>' + s.right + '</span></span>' +
+            '</div>';
+        }).join('');
+
+        // --- Respuesta ---
+        if (soja) {
+            var usdSoja = byCasa.contadoconliqui ? soja.precio / byCasa.contadoconliqui.venta : null;
+            document.getElementById('answer').innerHTML =
+                'Soja <b>' + Fmt.money(soja.precio, 0) + '</b> por tonelada en Rosario' +
+                (usdSoja ? ' (US$ ' + Fmt.num(usdSoja, 0) + ' al CCL)' : '') +
+                (novillito ? '. Novillito chico a <b>' + Fmt.money(novillito.precioArs, 0) + ' el kilo</b>.' : '.');
+        }
+        if (granos.length) {
+            var last = granos[0];
+            document.getElementById('granos-note').textContent =
+                'precio por tonelada · ' + (last.fecha || '') + (last.hora ? ' ' + last.hora : '');
+        }
+
+        // --- Tabla pizarra ---
+        PF.renderTable(document.getElementById('granos'), [
+            { key: 'nombre', label: 'Producto', render: function (r) {
+                return '<span class="name">' + Fmt.esc(Fmt.title(r.nombre)) + '</span>';
+            } },
+            { key: 'puerto', label: 'Puerto', render: function (r) {
+                return '<span class="tag">' + Fmt.esc(r.puerto || '—') + '</span>';
+            } },
+            { key: 'precio', label: '$/tonelada', align: 'right', render: function (r) {
+                return '<strong>' + Fmt.money(r.precio, 0) + '</strong>';
+            } },
+            { key: 'variacion', label: 'Dif.', align: 'right', render: function (r) {
+                var cls = r.variacion > 0 ? 'up' : (r.variacion < 0 ? 'down' : 'flat');
+                return '<span class="' + cls + '">' + Fmt.signed(r.variacion, 0) + '</span>';
+            } },
+            { key: 'hora', label: 'Hora', align: 'right', render: function (r) {
+                return '<span class="muted">' + Fmt.esc(r.hora || '—') + '</span>';
+            } }
+        ], granos, {
+            sortKey: 'precio',
+            sortDir: 'desc',
+            empty: 'Sin pizarra disponible'
+        });
+
+        // --- Hacienda ---
+        document.getElementById('hacienda-fecha').textContent = hacienda.fecha || '—';
+        PF.renderTable(document.getElementById('hacienda'), [
+            { key: 'categoria', label: 'Categoría', render: function (r) {
+                return '<span class="name">' + Fmt.esc(r.categoria) + '</span>';
+            } },
+            { key: 'precioArs', label: '$/kg', align: 'right', render: function (r) {
+                return '<strong>' + Fmt.money(r.precioArs, 0) + '</strong>';
+            } },
+            { key: 'precioUsd', label: 'US$/kg', align: 'right', render: function (r) {
+                return r.precioUsd != null ? 'US$ ' + Fmt.num(r.precioUsd, 2) : '—';
+            } },
+            { key: 'precioBlue', label: 'US$/kg blue', align: 'right', render: function (r) {
+                return r.precioBlue != null ? 'US$ ' + Fmt.num(r.precioBlue, 2) : '—';
+            } },
+            { key: 'var', label: 'Var.', align: 'right', sort: function (r) { return r.precioArs - r.precioAnteriorArs; }, render: function (r) {
+                var diff = r.precioArs - r.precioAnteriorArs;
+                var cls = diff > 0 ? 'up' : (diff < 0 ? 'down' : 'flat');
+                return '<span class="' + cls + '">' + Fmt.signed(diff, 0) + '</span>';
+            } },
+            { key: 'cabezas', label: 'Cabezas', align: 'right', mobileHide: true, render: function (r) {
+                return '<span class="muted">' + Fmt.qty(r.cabezas) + '</span>';
+            } }
+        ], hacienda.categorias || [], {
+            sortKey: 'precioArs',
+            sortDir: 'desc',
+            empty: 'Sin datos de hacienda'
+        });
+
+        // --- Dólares de referencia ---
+        var oficial = byCasa.oficial ? byCasa.oficial.venta : hacienda.dolarOficial;
+        var blue = byCasa.blue ? byCasa.blue.venta : hacienda.dolarBlue;
+        var ccl = byCasa.contadoconliqui ? byCasa.contadoconliqui.venta : null;
+        var blend = (oficial && ccl) ? oficial * 0.8 + ccl * 0.2 : null;
+
+        var rows = [];
+        if (oficial) rows.push(['Oficial', Fmt.money(oficial, 2), 'para convertir hacienda']);
+        if (blue) rows.push(['Blue', Fmt.money(blue, 2), 'referencia informal']);
+        if (ccl) rows.push(['CCL', Fmt.money(ccl, 2), 'dólar implícito en bonos']);
+        if (blend) rows.push(['Blend 80/20', Fmt.money(blend, 2), 'oficial 80% + CCL 20%']);
+
+        document.getElementById('dolares').innerHTML = rows.length ? rows.map(function (r) {
+            return '<div class="kpi"><span class="kpi__label">' + r[0] + '</span>' +
+                '<span class="kpi__value">' + r[1] + '<div class="kpi__sub">' + r[2] + '</div></span></div>';
+        }).join('') : '<div class="empty">Sin cotizaciones</div>';
+
+        if (blend) {
+            document.getElementById('blend-note').innerHTML =
+                'Con el blend de <b>' + Fmt.money(blend, 2) + '</b>, una tonelada de soja a ' +
+                Fmt.money(soja ? soja.precio : 0, 0) + ' equivale a <b>US$ ' +
+                Fmt.num(soja ? soja.precio / blend : 0, 0) + '</b> antes de retenciones.';
+        }
+
+        PF.reveal();
+    });
+})();
 </script>
 </body>
 </html>

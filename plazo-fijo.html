@@ -1,242 +1,202 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-    <link rel="manifest" href="manifest.json">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plazo Fijo | Pampa Finance</title>
-    <link rel="stylesheet" href="nox-tokens.css">
-    <link rel="stylesheet" href="shared-styles.css">
-    <style>
-        .sub-nav {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        .pf-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            max-width: var(--max-width);
-            margin: 0 auto;
-        }
-        .pf-card {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .pf-card:hover {
-            border-color: var(--success);
-            transform: translateY(-4px);
-        }
-        .pf-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-bottom: 1px solid #151515;
-            padding-bottom: 15px;
-        }
-        .bank-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #fff;
-        }
-        .pf-body {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        .tna-box {
-            display: flex;
-            flex-direction: column;
-        }
-        .tna-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--success);
-            line-height: 1;
-        }
-        .tna-label {
-            font-size: 0.7rem;
-            color: #555;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-        .non-client-badge {
-            background: #111;
-            border: 1px solid #222;
-            color: #666;
-            padding: 4px 10px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: var(--nox-border-radius-none);
-        }
-        .pf-footer {
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .section-divider {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px 0 20px 0;
-            font-size: 0.8rem;
-            color: #444;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .section-divider::before, .section-divider::after {
-            content: '';
-            flex-grow: 1;
-            height: 1px;
-            background: #151515;
-        }
-
-        /* Modal Details */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
-            display: none; align-items: center; justify-content: center; z-index: 3000;
-        }
-        .modal-content {
-            background: #050505; border: 1px solid var(--success); padding: 40px;
-            max-width: 400px; width: 90%; text-align: center;
-            box-shadow: 0 0 50px rgba(0, 212, 170, 0.1);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Tasas de plazo fijo banco por banco, clientes y no clientes, con simulador de rendimiento y TEA.">
+<title>Plazo fijo — Pampa Finance</title>
+<link rel="icon" href="icono.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<script src="modern-navigation.js"></script>
+<main class="main">
 
-<main class="main-container">
-    <h1 class="page-title fade-in">Tasas Plazo Fijo</h1>
+    <header class="page-head">
+        <span class="eyebrow">Depósitos a plazo</span>
+        <h1 class="title">Plazo fijo: <strong>quién paga más</strong>.</h1>
+        <p class="lede" id="answer">Cargando tasas de plazo fijo…</p>
+        <div class="meta-row">
+            <span class="dot" data-sync-dot></span>
+            <span data-sync>cargando datos</span>
+            <span>BCRA vía ArgentinaDatos</span>
+        </div>
+    </header>
 
-    <div class="sub-nav">
-        <a href="tasas.html" class="agro-pill">Bancos Digitales</a>
-        <a href="plazo-fijo.html" class="agro-pill active">Plazo Fijo</a>
-    </div>
+    <section class="stats reveal" id="stats">
+        <div class="stat"><span class="stat__label">Cargando</span></div>
+    </section>
 
-    <div class="controls">
-        <button id="refresh-btn" class="btn btn-sm">🔄 Sincronizar Bancos</button>
-        <div id="sync-status" class="text-secondary" style="font-size: 0.8rem;">Actualizando...</div>
-    </div>
-
-    <div id="pf-container" class="pf-grid">
-        <!-- Skeletons -->
-        <div class="loading" style="grid-column: 1/-1; height: 200px;"></div>
-    </div>
-</main>
-
-<div id="conditions-modal" class="modal-overlay">
-    <div class="modal-content">
-        <h2 id="modal-bank" style="color: var(--success); margin-bottom: 10px;"></h2>
-        <p style="color: #555; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 20px;">Tasa No Clientes</p>
-        <div id="modal-tna" style="font-size: 3.5rem; font-weight: 800; color: #fff; margin-bottom: 30px;"></div>
-        <button onclick="closeModal()" class="btn btn-sm" style="width: 100%;">Entendido</button>
-    </div>
-</div>
-
-<script src="shared-scripts.js"></script>
-<script src="api-service.js"></script>
-<script>
-const PFPage = {
-    async init() {
-        this.bindEvents();
-        await this.load();
-    },
-
-    bindEvents() {
-        document.getElementById('refresh-btn').addEventListener('click', () => this.load());
-        window.onclick = (e) => { if (e.target.id === 'conditions-modal') closeModal(); };
-    },
-
-    async load() {
-        const container = document.getElementById('pf-container');
-        const status = document.getElementById('sync-status');
-        container.innerHTML = '<div class="loading" style="grid-column: 1/-1; height: 200px;"></div>';
-
-        try {
-            const data = await ApiService.getSmartData('plazofijo', ApiService.URLS.ARG_DATOS_PF);
-            if (!data) throw new Error("No data");
-
-            const conClientes = data.filter(item => item.tnaClientes > 0).sort((a, b) => b.tnaClientes - a.tnaClientes);
-            const soloNoClientes = data.filter(item => (!item.tnaClientes || item.tnaClientes == 0) && item.tnaNoClientes > 0).sort((a, b) => b.tnaNoClientes - a.tnaNoClientes);
-
-            this.render(conClientes, soloNoClientes);
-            status.textContent = `Sincronizado: ${CalculadoraFinanciera.Formatters.time()}`;
-        } catch (e) {
-            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--error);">Error al obtener tasas de bancos.</div>';
-        }
-    },
-
-    render(conClientes, soloNoClientes) {
-        const container = document.getElementById('pf-container');
-        let html = conClientes.map(item => this.createCard(item, true)).join('');
-
-        if (soloNoClientes.length > 0) {
-            html += `<div class="section-divider">Tasas No Clientes</div>`;
-            html += soloNoClientes.map(item => this.createCard(item, false)).join('');
-        }
-
-        container.innerHTML = html;
-    },
-
-    createCard(item, isClient) {
-        const tna = isClient ? item.tnaClientes : item.tnaNoClientes;
-        const hasAlternative = !isClient || (item.tnaNoClientes > 0 && item.tnaNoClientes !== item.tnaClientes);
-        const icon = ApiService.getIcon ? ApiService.getIcon(item.entidad) : null;
-
-        return `
-            <div class="pf-card fade-in">
-                <div class="pf-header">
-                    ${item.logo ? `<img src="${item.logo}" width="28" height="28" style="background:#fff; padding:2px;">` : '🏦'}
-                    <span class="bank-name">${item.entidad}</span>
-                </div>
-                <div class="pf-body">
-                    <div class="tna-box">
-                        <span class="tna-value">${(tna * 100).toFixed(2)}%</span>
-                        <span class="tna-label">TNA Actual</span>
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Simulador</h2>
+            <span class="section__note">interés simple, base 365 días</span>
+        </div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="calc-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+                    <div class="field">
+                        <label class="field__label" for="pf-monto">Capital</label>
+                        <input id="pf-monto" type="number" inputmode="decimal" value="1000000" min="0" step="10000">
                     </div>
-                    ${(isClient && item.tnaNoClientes > 0 && item.tnaNoClientes !== item.tnaClientes) ? `
-                        <button class="non-client-badge" onclick="openModal('${item.entidad}', '${(item.tnaNoClientes * 100).toFixed(2)}%')">
-                            Ver No Clientes
-                        </button>
-                    ` : ''}
+                    <div class="field">
+                        <label class="field__label" for="pf-tna">TNA (%)</label>
+                        <input id="pf-tna" type="number" inputmode="decimal" value="24" min="0" step="0.1">
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="pf-dias">Días</label>
+                        <select id="pf-dias">
+                            <option value="30" selected>30 días</option>
+                            <option value="60">60 días</option>
+                            <option value="90">90 días</option>
+                            <option value="180">180 días</option>
+                            <option value="365">365 días</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="pf-footer">
-                    <span style="color:#333; font-size:0.65rem;">Mínimo 30 días</span>
-                    <span style="color:var(--success); font-size:0.65rem; font-weight:700;">ARS</span>
+                <div class="result" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+                    <div>
+                        <div class="result__label">Interés ganado</div>
+                        <div class="result__value" id="pf-interes">—</div>
+                    </div>
+                    <div>
+                        <div class="result__label">Total al vencimiento</div>
+                        <div class="result__value" id="pf-total">—</div>
+                        <div class="result__note" id="pf-nota"></div>
+                    </div>
                 </div>
             </div>
-        `;
-    }
-};
+        </div>
+    </section>
 
-function openModal(bank, tna) {
-    document.getElementById('modal-bank').textContent = bank;
-    document.getElementById('modal-tna').textContent = tna;
-    document.getElementById('conditions-modal').style.display = 'flex';
-}
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Tasas por banco</h2>
+            <span class="section__note" id="count">—</span>
+        </div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div id="tabla" data-error><span class="skeleton" style="width:100%"></span></div>
+            </div>
+        </div>
+    </section>
 
-function closeModal() {
-    document.getElementById('conditions-modal').style.display = 'none';
-}
+    <footer class="foot">
+        <span>Pampa Finance · tasas informadas por las entidades al BCRA</span>
+        <span><a href="tasas.html">Ver billeteras</a> · <a href="calculadoras.html">Más calculadoras</a></span>
+    </footer>
+</main>
 
-document.addEventListener('DOMContentLoaded', () => PFPage.init());
+<script src="api-service.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+    var Fmt = PF.Fmt;
+
+    PF.withData(function (api) {
+        var pf = api.getPlazoFijo();
+        var best = pf[0];
+        var bestTna = best ? (best.tnaClientes || best.tnaNoClientes) : null;
+
+        var conClientes = pf.filter(function (b) { return b.tnaClientes > 0; });
+        var sinClientes = pf.filter(function (b) { return b.tnaNoClientes > 0; });
+        var prom = pf.length ? pf.reduce(function (acc, b) {
+            return acc + (b.tnaClientes || b.tnaNoClientes || 0);
+        }, 0) / pf.length : null;
+
+        document.getElementById('stats').innerHTML = [
+            {
+                label: 'Mejor tasa clientes',
+                value: best ? Fmt.pct(best.tnaClientes || best.tnaNoClientes, 2) : '—',
+                name: best ? best.entidad : '—',
+                foot: bestTna ? Fmt.pct(api.teaFromTna(bestTna), 2) + ' TEA' : '—'
+            },
+            {
+                label: 'Bancos con clientes',
+                value: conClientes.length ? Fmt.pct(conClientes[0].tnaClientes, 2) : '—',
+                name: conClientes.length ? conClientes[0].entidad : '—',
+                foot: sinClientes.length ? sinClientes.length + ' con tasa para no clientes' : '—'
+            },
+            {
+                label: 'Promedio del mercado',
+                value: prom ? Fmt.pct(prom, 2) : '—',
+                name: pf.length + ' entidades',
+                foot: 'TNA promedio simple'
+            }
+        ].map(function (s) {
+            return '<div class="stat">' +
+                '<span class="stat__label">' + s.label + '<span class="tag">TNA</span></span>' +
+                '<span class="stat__value">' + s.value + '</span>' +
+                '<span class="stat__foot"><span>' + Fmt.esc(s.name) + '</span><span>' + s.foot + '</span></span>' +
+            '</div>';
+        }).join('');
+
+        if (best) {
+            var tna = best.tnaClientes || best.tnaNoClientes;
+            document.getElementById('answer').innerHTML =
+                'La mejor TNA del mercado es <b>' + Fmt.pct(tna, 2) + '</b> en ' + Fmt.esc(best.entidad) +
+                ', que equivale a <b>' + Fmt.pct(api.teaFromTna(tna), 2) + '</b> de TEA si renovás todos los meses. ' +
+                'Un millón de pesos a 30 días rinde <b>' + Fmt.money(1000000 * (tna / 100) * 30 / 365, 0) + '</b>.';
+        }
+
+        // --- Tabla ---
+        document.getElementById('count').textContent = pf.length + ' entidades';
+        PF.renderTable(document.getElementById('tabla'), [
+            { key: 'entidad', label: 'Entidad', render: function (r) {
+                var logo = r.logo ? '<img src="' + Fmt.esc(r.logo) + '" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px;border-radius:2px;opacity:.9" loading="lazy">' : '';
+                return logo + '<span class="name">' + Fmt.esc(r.entidad) + '</span>';
+            } },
+            { key: 'tnaClientes', label: 'Clientes', align: 'right', render: function (r) {
+                return r.tnaClientes ? '<strong>' + Fmt.pct(r.tnaClientes, 2) + '</strong>' : '<span class="muted">—</span>';
+            } },
+            { key: 'tnaNoClientes', label: 'No cli.', align: 'right', render: function (r) {
+                return r.tnaNoClientes ? Fmt.pct(r.tnaNoClientes, 2) : '<span class="muted">—</span>';
+            } },
+            { key: 'tea', label: 'TEA', align: 'right', sort: function (r) { return r.tnaClientes || r.tnaNoClientes || 0; }, render: function (r) {
+                var t = api.teaFromTna(r.tnaClientes || r.tnaNoClientes);
+                return t ? Fmt.pct(t, 2) : '<span class="muted">—</span>';
+            } },
+            { key: 'enlace', label: 'Sitio', align: 'right', mobileHide: true, render: function (r) {
+                return r.enlace ? '<a href="' + Fmt.esc(r.enlace) + '" target="_blank" rel="noopener" class="tag">abrir ↗</a>' : '<span class="muted">—</span>';
+            } }
+        ], pf, {
+            sortKey: 'tnaClientes',
+            sortDir: 'desc',
+            bestRow: function (r) { return r === pf[0]; },
+            empty: 'Sin tasas publicadas'
+        });
+
+        // --- Simulador ---
+        var montoEl = document.getElementById('pf-monto');
+        var tnaEl = document.getElementById('pf-tna');
+        var diasEl = document.getElementById('pf-dias');
+
+        if (best) tnaEl.value = (best.tnaClientes || best.tnaNoClientes).toFixed(2);
+
+        function calc() {
+            var monto = parseFloat(montoEl.value) || 0;
+            var tna = parseFloat(tnaEl.value) || 0;
+            var dias = parseInt(diasEl.value, 10) || 30;
+            var interes = monto * (tna / 100) * dias / 365;
+            document.getElementById('pf-interes').textContent = Fmt.money(interes, 0);
+            document.getElementById('pf-total').textContent = Fmt.money(monto + interes, 0);
+            document.getElementById('pf-nota').textContent =
+                'TEA equivalente: ' + Fmt.pct(api.teaFromTna(tna), 2) + ' · TNA ' + Fmt.pct(tna, 2) +
+                ' a ' + dias + ' días';
+        }
+
+        [montoEl, tnaEl, diasEl].forEach(function (el) {
+            el.addEventListener('input', calc);
+            el.addEventListener('change', calc);
+        });
+        calc();
+
+        PF.reveal();
+    });
+})();
 </script>
 </body>
 </html>

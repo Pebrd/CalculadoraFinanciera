@@ -1,283 +1,318 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-    <link rel="manifest" href="manifest.json">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indicadores y Gráficos | Pampa Finance</title>
-    <link rel="stylesheet" href="nox-tokens.css">
-    <link rel="stylesheet" href="shared-styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-    <style>
-        .indicators-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .indicator-card {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .indicator-label {
-            font-size: 0.7rem;
-            color: #555;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .indicator-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .indicator-diff {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .chart-section {
-            background: #050505;
-            border: 1px solid #111;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .chart-container {
-            height: 350px;
-            position: relative;
-        }
-        .variacion.up { color: var(--error); }
-        .variacion.down { color: var(--success); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Series históricas del dólar, riesgo país, inflación mensual, UVA y reservas del BCRA con lectura en texto.">
+<title>Gráficos — Pampa Finance</title>
+<link rel="icon" href="icono.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<script src="modern-navigation.js"></script>
+<main class="main">
 
-<main class="main-container">
-    <h1 class="page-title fade-in">Tablero de Indicadores</h1>
+    <header class="page-head">
+        <span class="eyebrow">Series históricas</span>
+        <h1 class="title">Lo que <strong>explica</strong> los precios de hoy.</h1>
+        <p class="lede" id="answer">Cargando series…</p>
+        <div class="meta-row">
+            <span class="dot" data-sync-dot></span>
+            <span data-sync>cargando datos</span>
+            <span>ArgentinaDatos · BCRA · DolarAPI</span>
+        </div>
+    </header>
 
-    <div class="indicators-grid">
-        <div class="indicator-card fade-in">
-            <div class="indicator-label">📈 Inflación Mensual</div>
-            <div id="inflacion-mensual" class="indicator-value">--</div>
-            <div id="inflacion-variacion" class="indicator-diff"></div>
-        </div>
-        <div class="indicator-card fade-in" style="animation-delay: 0.1s;">
-            <div class="indicator-label">📊 Riesgo País</div>
-            <div id="riesgo-valor" class="indicator-value">--</div>
-            <div id="riesgo-variacion" class="indicator-diff"></div>
-        </div>
-        <div class="indicator-card fade-in" style="animation-delay: 0.2s;">
-            <div class="indicator-label">🏠 Valor UVA</div>
-            <div id="uva-valor" class="indicator-value">--</div>
-            <div id="uva-variacion" class="indicator-diff"></div>
-        </div>
-        <div class="indicator-card fade-in" style="animation-delay: 0.3s;">
-            <div class="indicator-label">💰 Reservas BCRA</div>
-            <div id="bcra-valor" class="indicator-value">--</div>
-            <div id="bcra-variacion" class="indicator-diff"></div>
-        </div>
-    </div>
+    <section class="stats reveal" id="stats">
+        <div class="stat"><span class="stat__label">Cargando</span></div>
+    </section>
 
-    <!-- GRÁFICOS -->
-    <section class="chart-section slide-up">
-        <div class="chart-header">
-            <h2 class="section-title" style="margin-bottom: 0;">Inflación Mensual (%)</h2>
-            <div class="filter-buttons" data-chart-id="chartInflacionMensual" data-raw-data-key="inflacionMensual">
-                <button class="agro-pill active" data-period="1">1A</button>
-                <button class="agro-pill" data-period="5">5A</button>
-                <button class="agro-pill" data-period="0">MAX</button>
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Dólar · venta</h2>
+            <div class="chips" data-range-group="dolar">
+                <button class="chip" data-range="30" type="button">30 d</button>
+                <button class="chip is-active" data-range="90" type="button">90 d</button>
+                <button class="chip" data-range="120" type="button">120 d</button>
             </div>
         </div>
-        <div class="chart-container">
-            <canvas id="chartInflacionMensual"></canvas>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="chart-box"><svg class="chart" id="chart-dolar" role="img" aria-label="Evolución del dólar oficial, blue, MEP y CCL"></svg></div>
+                <div class="chart-legend">
+                    <span style="color:#f7f7f7"><i></i>Oficial</span>
+                    <span style="color:#8fc0e0"><i></i>Blue</span>
+                    <span style="color:#e0bd72"><i></i>MEP</span>
+                    <span style="color:#57e6a8"><i></i>CCL</span>
+                </div>
+                <p class="result__note" id="note-dolar"></p>
+            </div>
         </div>
     </section>
 
-    <section class="chart-section slide-up">
-        <div class="chart-header">
-            <h2 class="section-title" style="margin-bottom: 0;">Riesgo País (PB)</h2>
-            <div class="filter-buttons" data-chart-id="chartRiesgoPais" data-raw-data-key="riesgoPais">
-                <button class="agro-pill active" data-period="1">1A</button>
-                <button class="agro-pill" data-period="5">5A</button>
-                <button class="agro-pill" data-period="0">MAX</button>
+    <section class="split section">
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">Riesgo país</span>
+                    <div class="chips" data-range-group="riesgo">
+                        <button class="chip" data-range="90" type="button">90 d</button>
+                        <button class="chip is-active" data-range="365" type="button">1 a</button>
+                        <button class="chip" data-range="0" type="button">máx</button>
+                    </div>
+                </div>
+                <div class="chart-box"><svg class="chart" id="chart-riesgo" role="img" aria-label="Riesgo país en puntos básicos"></svg></div>
+                <p class="result__note" id="note-riesgo"></p>
             </div>
         </div>
-        <div class="chart-container">
-            <canvas id="chartRiesgoPais"></canvas>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">Inflación mensual</span>
+                    <div class="chips" data-range-group="inflacion">
+                        <button class="chip" data-range="12" type="button">12 m</button>
+                        <button class="chip is-active" data-range="36" type="button">36 m</button>
+                        <button class="chip" data-range="0" type="button">máx</button>
+                    </div>
+                </div>
+                <div class="chart-box"><svg class="chart" id="chart-inflacion" role="img" aria-label="Inflación mensual en porcentaje"></svg></div>
+                <p class="result__note" id="note-inflacion"></p>
+            </div>
         </div>
     </section>
 
-    <section class="chart-section slide-up">
-        <div class="chart-header">
-            <h2 class="section-title" style="margin-bottom: 0;">Unidad de Vivienda (UVA)</h2>
-            <div class="filter-buttons" data-chart-id="chartUVA" data-raw-data-key="uva">
-                <button class="agro-pill active" data-period="1">1A</button>
-                <button class="agro-pill" data-period="5">5A</button>
-                <button class="agro-pill" data-period="0">MAX</button>
+    <section class="split section">
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">UVA</span>
+                    <div class="chips" data-range-group="uva">
+                        <button class="chip" data-range="90" type="button">90 d</button>
+                        <button class="chip is-active" data-range="365" type="button">1 a</button>
+                        <button class="chip" data-range="0" type="button">máx</button>
+                    </div>
+                </div>
+                <div class="chart-box"><svg class="chart" id="chart-uva" role="img" aria-label="Valor de la UVA"></svg></div>
+                <p class="result__note" id="note-uva"></p>
             </div>
         </div>
-        <div class="chart-container">
-            <canvas id="chartUVA"></canvas>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">Reservas BCRA</span>
+                    <div class="chips" data-range-group="reservas">
+                        <button class="chip" data-range="90" type="button">90 d</button>
+                        <button class="chip is-active" data-range="365" type="button">1 a</button>
+                        <button class="chip" data-range="0" type="button">máx</button>
+                    </div>
+                </div>
+                <div class="chart-box"><svg class="chart" id="chart-reservas" role="img" aria-label="Reservas internacionales del BCRA"></svg></div>
+                <p class="result__note" id="note-reservas"></p>
+            </div>
         </div>
     </section>
+
+    <footer class="foot">
+        <span>Pampa Finance · series oficiales, sin proyecciones</span>
+        <span><a href="index.html">Volver a cotizaciones</a></span>
+    </footer>
 </main>
 
-<script src="shared-scripts.js"></script>
 <script src="api-service.js"></script>
+<script src="app.js"></script>
 <script>
-/**
- * Indicators & Charts Page Logic
- */
-const IndicatorsPage = {
-    charts: {},
-    rawData: {},
+(function () {
+    var Fmt = PF.Fmt;
 
-    async init() {
-        this.bindEvents();
-        await Promise.all([
-            this.loadIndicators(),
-            this.loadCharts()
-        ]);
-    },
+    PF.withData(function (api) {
+        var hist = api.getDolarHist();
+        var rp = api.getRiesgoPais();
+        var inf = api.getInflacion();
+        var uva = api.getUVA();
+        var res = api.get('reservas', { serie: [] });
+        var implied = api.getImplied();
 
-    bindEvents() {
-        document.querySelectorAll('.filter-buttons').forEach(container => {
-            container.addEventListener('click', (e) => {
-                if (e.target.classList.contains('agro-pill')) {
-                    container.querySelectorAll('.agro-pill').forEach(b => b.classList.remove('active'));
-                    e.target.classList.add('active');
-                    this.updateChart(container.dataset.chartId, container.dataset.rawDataKey, parseInt(e.target.dataset.period));
-                }
+        /* ---------- Héroe ---------- */
+        var rpVar = (rp.valor != null && rp.anterior != null) ? ((rp.valor / rp.anterior) - 1) * 100 : null;
+        var infLast = inf.length ? inf[inf.length - 1] : null;
+        var infPrev = inf.length > 1 ? inf[inf.length - 2] : null;
+        var uvaVar = (uva.valor != null && uva.anterior != null) ? ((uva.valor / uva.anterior) - 1) * 100 : null;
+        var resVar = (res.valor != null && res.anterior != null) ? ((res.valor / res.anterior) - 1) * 100 : null;
+
+        var stats = [];
+        if (rp.valor != null) {
+            var d1 = Fmt.delta(rpVar, 2);
+            stats.push({
+                label: 'Riesgo país', value: Fmt.num(rp.valor, 0) + '<small>pb</small>',
+                left: Fmt.date(rp.fecha), right: '<span class="' + d1.cls + '">' + d1.text + '</span>'
+            });
+        }
+        if (infLast) {
+            stats.push({
+                label: 'Inflación mensual', value: Fmt.pct(infLast.valor, 1),
+                left: Fmt.date(infLast.fecha, { month: 'long', year: 'numeric' }),
+                right: infPrev ? 'antes ' + Fmt.pct(infPrev.valor, 1) : '—'
+            });
+        }
+        if (uva.valor != null) {
+            var d2 = Fmt.delta(uvaVar, 2);
+            stats.push({
+                label: 'UVA', value: Fmt.money(uva.valor, 2),
+                left: 'ajuste diario', right: '<span class="' + d2.cls + '">' + d2.text + '</span>'
+            });
+        }
+        if (res.valor != null) {
+            var d3 = Fmt.delta(resVar, 2);
+            stats.push({
+                label: 'Reservas BCRA', value: 'US$ ' + Fmt.num(res.valor / 1000, 1) + '<small>B</small>',
+                left: Fmt.date(res.fecha), right: '<span class="' + d3.cls + '">' + d3.text + '</span>'
+            });
+        }
+        document.getElementById('stats').innerHTML = stats.map(function (s) {
+            return '<div class="stat">' +
+                '<span class="stat__label">' + s.label + '</span>' +
+                '<span class="stat__value">' + s.value + '</span>' +
+                '<span class="stat__foot"><span>' + s.left + '</span><span>' + s.right + '</span></span>' +
+            '</div>';
+        }).join('');
+
+        function acumulado(serie, dias) {
+            if (!serie || serie.length < 2) return null;
+            var last = serie[serie.length - 1];
+            var ref = serie[Math.max(0, serie.length - 1 - dias)];
+            if (!ref.venta) return null;
+            return ((last.venta / ref.venta) - 1) * 100;
+        }
+
+        if (rp.valor != null && infLast) {
+            document.getElementById('answer').innerHTML =
+                'Riesgo país en <b>' + Fmt.num(rp.valor, 0) + ' pb</b>, inflación de ' +
+                Fmt.date(infLast.fecha, { month: 'long' }) + ' en <b>' + Fmt.pct(infLast.valor, 1) + '</b>' +
+                (hist.blue ? ' y blue <b>' + Fmt.pct(acumulado(hist.blue, 30), 1) + '</b> en 30 días.' : '.');
+        }
+
+        function sliceDays(rows, days) {
+            if (!days || days <= 0) return rows;
+            return rows.slice(Math.max(0, rows.length - days));
+        }
+
+        /* ---------- Gráficos ---------- */
+        var state = { dolar: 90, riesgo: 365, inflacion: 36, uva: 365, reservas: 365 };
+
+        function drawDolar() {
+            var days = state.dolar;
+            var colors = { oficial: '#f7f7f7', blue: '#8fc0e0', bolsa: '#e0bd72', contadoconliqui: '#57e6a8' };
+            var series = ['oficial', 'blue', 'bolsa', 'contadoconliqui'].map(function (casa) {
+                var rows = sliceDays(hist[casa] || [], days);
+                return { label: casa, color: colors[casa], data: rows.map(function (r) { return [r.fecha, r.venta]; }) };
+            }).filter(function (s) { return s.data.length; });
+
+            PF.chart(document.getElementById('chart-dolar'), {
+                series: series, unit: '$', decimals: 0, area: false, height: 280
+            });
+
+            var blue = hist.blue || [];
+            var oficial = hist.oficial || [];
+            if (blue.length && oficial.length) {
+                var b = blue[blue.length - 1].venta;
+                var o = oficial[oficial.length - 1].venta;
+                var extra = implied.brecha ? ' Spread CCL/MEP implícito: <b>' + Fmt.pct(implied.brecha.spread, 2) + '</b>.' : '';
+                document.getElementById('note-dolar').innerHTML =
+                    'Blue <b>' + Fmt.money(b, 0) + '</b> contra oficial <b>' + Fmt.money(o, 0) + '</b>: brecha de <b>' +
+                    Fmt.pct(((b / o) - 1) * 100, 1) + '</b>. Variación del blue en el período: ' +
+                    Fmt.pct(acumulado(sliceDays(blue, days), days), 1) + '.' + extra;
+            }
+        }
+
+        function drawRiesgo() {
+            var rows = sliceDays(rp.serie || [], state.riesgo);
+            PF.chart(document.getElementById('chart-riesgo'), {
+                series: [{ label: 'Riesgo país', color: '#ff8f8f', data: rows.map(function (r) { return [r.fecha, r.valor]; }) }],
+                unit: '', decimals: 0, height: 230
+            });
+            if (rows.length > 1) {
+                var first = rows[0];
+                var last = rows[rows.length - 1];
+                document.getElementById('note-riesgo').innerHTML =
+                    'De <b>' + Fmt.num(first.valor, 0) + '</b> a <b>' + Fmt.num(last.valor, 0) + '</b> pb en el período (' +
+                    Fmt.pct(((last.valor / first.valor) - 1) * 100, 1) + '). Puntos básicos sobre la tasa de EE.UU.';
+            }
+        }
+
+        function drawInflacion() {
+            var rows = sliceDays(inf, state.inflacion);
+            PF.chart(document.getElementById('chart-inflacion'), {
+                series: [{ label: 'Inflación mensual', color: '#8fc0e0', data: rows.map(function (r) { return [r.fecha, r.valor]; }) }],
+                type: 'bar', unit: '', decimals: 1, height: 230
+            });
+            if (rows.length) {
+                var vals = rows.map(function (r) { return r.valor; });
+                var acum = vals.reduce(function (acc, v) { return acc * (1 + v / 100); }, 1) - 1;
+                document.getElementById('note-inflacion').innerHTML =
+                    'Promedio <b>' + Fmt.pct(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length, 1) + '</b> · ' +
+                    'máximo ' + Fmt.pct(Math.max.apply(null, vals), 1) + ' · acumulado del período ' +
+                    Fmt.pct(acum * 100, 1) + '.';
+            }
+        }
+
+        function drawUva() {
+            var rows = sliceDays(uva.serie || [], state.uva);
+            PF.chart(document.getElementById('chart-uva'), {
+                series: [{ label: 'UVA', color: '#57e6a8', data: rows.map(function (r) { return [r.fecha, r.valor]; }) }],
+                unit: '$', decimals: 0, height: 230
+            });
+            if (rows.length > 1) {
+                document.getElementById('note-uva').innerHTML =
+                    'De <b>' + Fmt.money(rows[0].valor, 2) + '</b> a <b>' + Fmt.money(rows[rows.length - 1].valor, 2) +
+                    '</b> (' + Fmt.pct(((rows[rows.length - 1].valor / rows[0].valor) - 1) * 100, 1) + '). ' +
+                    'Es la unidad que sigue la inflación y ajusta créditos hipotecarios.';
+            }
+        }
+
+        function drawReservas() {
+            var rows = sliceDays(res.serie || [], state.reservas);
+            PF.chart(document.getElementById('chart-reservas'), {
+                series: [{ label: 'Reservas', color: '#e0bd72', data: rows.map(function (r) { return [r.fecha, r.valor]; }) }],
+                unit: '', decimals: 0, height: 230
+            });
+            if (rows.length > 1) {
+                var delta = rows[rows.length - 1].valor - rows[0].valor;
+                document.getElementById('note-reservas').innerHTML =
+                    'De <b>US$ ' + Fmt.num(rows[0].valor / 1000, 1) + ' B</b> a <b>US$ ' +
+                    Fmt.num(rows[rows.length - 1].valor / 1000, 1) + ' B</b> en el período (' +
+                    (delta >= 0 ? '+' : '−') + 'US$ ' + Fmt.num(Math.abs(delta) / 1000, 1) + ' B). ' +
+                    'Fuente: BCRA, variable Monetarias 1.';
+            }
+        }
+
+        function drawFor(group) {
+            if (group === 'dolar') drawDolar();
+            else if (group === 'riesgo') drawRiesgo();
+            else if (group === 'inflacion') drawInflacion();
+            else if (group === 'uva') drawUva();
+            else drawReservas();
+        }
+
+        document.querySelectorAll('[data-range-group]').forEach(function (group) {
+            group.addEventListener('click', function (e) {
+                var btn = e.target.closest('.chip');
+                if (!btn) return;
+                var key = group.getAttribute('data-range-group');
+                state[key] = parseInt(btn.getAttribute('data-range'), 10) || 0;
+                Array.prototype.forEach.call(group.querySelectorAll('.chip'), function (c) {
+                    c.classList.toggle('is-active', c === btn);
+                });
+                drawFor(key);
             });
         });
-    },
 
-    async loadIndicators() {
-        // Inflación
-        try {
-            const data = await ApiService.fetchWithProxy("https://api.argentinadatos.com/v1/finanzas/indices/inflacion");
-            const ult = data[data.length - 1];
-            const ant = data[data.length - 2];
-            document.getElementById('inflacion-mensual').textContent = ult.valor.toFixed(2) + '%';
-            this.renderDiff('inflacion-variacion', ult.valor, ant.valor, 'up');
-        } catch (e) {}
-
-        // Riesgo País
-        try {
-            const data = await ApiService.fetchWithProxy("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais");
-            const ult = data[data.length - 1];
-            const ant = data[data.length - 2];
-            document.getElementById('riesgo-valor').textContent = ult.valor + ' pts';
-            this.renderDiff('riesgo-variacion', ult.valor, ant.valor, 'up');
-        } catch (e) {}
-
-        // UVA
-        try {
-            const data = await ApiService.fetchWithProxy("https://api.argentinadatos.com/v1/finanzas/indices/uva");
-            const ult = data[data.length - 1];
-            const ant = data[data.length - 2];
-            document.getElementById('uva-valor').textContent = ult.valor.toFixed(2);
-            this.renderDiff('uva-variacion', ult.valor, ant.valor, 'up');
-        } catch (e) {}
-
-        // Reservas BCRA (Usando Proxy para la API del BCRA)
-        try {
-            const res = await ApiService.fetchWithProxy('https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1');
-            const detail = res.results[0].detalle;
-            const ult = detail[0];
-            const ant = detail[1];
-            // Los valores del BCRA vienen en millones de USD. Dividimos por 1000 para Billones (escala corta).
-            document.getElementById('bcra-valor').textContent = 'U$S ' + (ult.valor / 1000).toFixed(1) + 'B';
-            this.renderDiff('bcra-variacion', ult.valor, ant.valor, 'down'); // Subir Reservas es bueno
-        } catch (e) {
-            console.error("Error cargando reservas BCRA:", e);
-            document.getElementById('bcra-valor').textContent = 'N/A';
-        }
-    },
-
-    renderDiff(id, actual, anterior, type) {
-        const el = document.getElementById(id);
-        const diff = ((actual - anterior) / anterior) * 100;
-        const isUp = diff > 0;
-        const colorClass = (type === 'up') ? (isUp ? 'up' : 'down') : (isUp ? 'down' : 'up');
-        el.className = `indicator-diff variacion ${colorClass}`;
-        el.textContent = `${isUp ? '▲' : '▼'} ${Math.abs(diff).toFixed(2)}%`;
-    },
-
-    async loadCharts() {
-        const endpoints = {
-            inflacionMensual: "https://api.argentinadatos.com/v1/finanzas/indices/inflacion",
-            riesgoPais: "https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais",
-            uva: "https://api.argentinadatos.com/v1/finanzas/indices/uva"
-        };
-
-        for (const [key, url] of Object.entries(endpoints)) {
-            try {
-                const data = await ApiService.fetchWithProxy(url);
-                this.rawData[key] = data.map(d => ({ x: d.fecha, y: d.valor }));
-                this.updateChart(`chart${key.charAt(0).toUpperCase() + key.slice(1)}`, key, 1);
-            } catch (e) {}
-        }
-    },
-
-    updateChart(chartId, dataKey, years) {
-        let data = this.rawData[dataKey];
-        if (years > 0) {
-            const cutoff = new Date();
-            cutoff.setFullYear(cutoff.getFullYear() - years);
-            data = data.filter(d => new Date(d.x) >= cutoff);
-        }
-
-        const ctx = document.getElementById(chartId).getContext('2d');
-        const color = chartId.includes('Inflacion') ? '#ff4757' : (chartId.includes('Riesgo') ? '#3742fa' : '#ffa502');
-
-        if (this.charts[chartId]) {
-            this.charts[chartId].data.datasets[0].data = data;
-            this.charts[chartId].update();
-        } else {
-            this.charts[chartId] = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    datasets: [{
-                        data: data,
-                        borderColor: color,
-                        borderWidth: 2,
-                        pointRadius: 0,
-                        tension: 0.1,
-                        fill: true,
-                        backgroundColor: color + '10'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { type: 'time', time: { unit: 'month' }, grid: { display: false } },
-                        y: { grid: { color: '#111' } }
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
-    }
-};
-
-document.addEventListener('DOMContentLoaded', () => IndicatorsPage.init());
+        drawDolar(); drawRiesgo(); drawInflacion(); drawUva(); drawReservas();
+        PF.reveal();
+    });
+})();
 </script>
 </body>
 </html>

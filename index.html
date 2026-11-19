@@ -1,331 +1,276 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-    <link rel="manifest" href="manifest.json">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Cotizaciones | Pampa Finance</title>
-    <link rel="icon" type="image/png" href="img/logo.png">
-    <link rel="stylesheet" href="nox-tokens.css">
-    <link rel="stylesheet" href="shared-styles.css">
-    <style>
-        .quote-values {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        .quote-main-val {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1;
-        }
-        .quote-sub-val {
-            font-size: 0.9rem;
-            color: #444;
-            font-weight: 600;
-        }
-        .bank-table-container {
-            background: #050505;
-            border: 1px solid #111;
-            padding: 15px;
-            margin-bottom: 30px;
-        }
-        @media (min-width: 768px) {
-            .bank-table-container { padding: 25px; }
-        }
-
-        .best-banner {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        @media (min-width: 600px) {
-            .best-banner { grid-template-columns: 1fr 1fr; }
-        }
-
-        .best-card {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #151515;
-        }
-        .best-card.buy { border-left: 4px solid var(--buy); background: var(--buy-glow); }
-        .best-card.sell { border-left: 4px solid var(--sell); background: var(--sell-glow); }
-        
-        .compact-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 400px;
-        }
-        .table-container {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        .compact-table th {
-            text-align: left;
-            font-size: 0.65rem;
-            color: #444;
-            padding: 10px;
-            text-transform: uppercase;
-            border-bottom: 1px solid #111;
-            cursor: pointer;
-            user-select: none;
-        }
-        .compact-table th:hover { color: var(--success); }
-        .compact-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #0a0a0a;
-            font-size: 0.9rem;
-        }
-        .entity-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .entity-logo {
-            width: 24px;
-            height: 24px;
-            border-radius: var(--nox-border-radius-none);
-            background: #111;
-        }
-        .sort-icon { font-size: 0.6rem; margin-left: 5px; opacity: 0.5; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Cotizaciones del dólar, tasas, plazo fijo, granos y mercado argentino en una sola pantalla. Datos actualizados automáticamente.">
+<title>Pampa Finance — El dólar y el mercado argentino</title>
+<link rel="icon" href="icono.png">
+<link rel="apple-touch-icon" href="icono.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<script src="modern-navigation.js"></script>
+<main class="main">
 
-<main class="main-container">
-    <h1 class="page-title fade-in">Cotizaciones</h1>
+    <header class="page-head">
+        <span class="eyebrow">Mercado argentino</span>
+        <h1 class="title">El dólar, <strong>hoy</strong>.</h1>
+        <p class="lede" id="answer">Cargando cotizaciones…</p>
+        <div class="meta-row">
+            <span class="dot" data-sync-dot></span>
+            <span data-sync>cargando datos</span>
+            <span>DolarAPI · ComparaDolar · CriptoYa</span>
+        </div>
+    </header>
 
-    <!-- DASHBOARD DOLARES -->
-    <div id="dolar-cards" class="quote-grid">
-        <div class="quote-card skeleton" style="height: 100px;"></div>
-        <div class="quote-card skeleton" style="height: 100px;"></div>
-        <div class="quote-card skeleton" style="height: 100px;"></div>
-        <div class="quote-card skeleton" style="height: 100px;"></div>
-    </div>
-    <div class="section-footer" style="margin-bottom: 40px; text-align: right;">
-        <span id="last-update-dolar" class="text-secondary" style="font-size: 0.7rem;">Sincronizando...</span>
-        <p class="fuente">Fuente: DolarAPI.com</p>
-    </div>
+    <section class="stats reveal" id="stats" aria-label="Cotizaciones del dólar"></section>
 
-    <!-- SECCION BANCOS -->
-    <div class="bank-table-container slide-up">
-        <h2 class="section-title">Dólar Bancario</h2>
-        
-        <div class="best-banner">
-            <div class="best-card buy">
-                <div class="price-label">Mejor Compra</div>
-                <div id="best-buy-usd" class="quote-main-val" style="font-size: 1.4rem;">--</div>
-                <div id="best-buy-name-usd" class="quote-sub-val">...</div>
-            </div>
-            <div class="best-card sell">
-                <div class="price-label">Mejor Venta</div>
-                <div id="best-sell-usd" class="quote-main-val" style="font-size: 1.4rem;">--</div>
-                <div id="best-sell-name-usd" class="quote-sub-val">...</div>
+    <section class="section split">
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">Dólar bancario</span>
+                    <span class="panel__hint" id="providers-hint">compra y venta por entidad</span>
+                </div>
+                <div id="providers" data-error>
+                    <span class="skeleton" style="width:100%"></span>
+                </div>
             </div>
         </div>
 
-        <div class="table-container">
-            <table class="compact-table" id="table-usd">
-                <thead>
-                    <tr>
-                        <th data-sort="entity">Entidad <span class="sort-icon">↕</span></th>
-                        <th data-sort="ask" class="text-right">Compra <span class="sort-icon">↕</span></th>
-                        <th data-sort="bid" class="text-right">Venta <span class="sort-icon">↕</span></th>
-                    </tr>
-                </thead>
-                <tbody id="bank-body-usd">
-                    <tr><td colspan="3" class="text-center">Sincronizando bancos...</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="section-footer">
-            <span id="last-update-usd" class="text-secondary" style="font-size: 0.7rem;">Sincronizando...</span>
-            <p class="fuente">Datos de CriptoYa y ComparaDolar. Los valores son informativos.</p>
-        </div>
-    </div>
-
-    <!-- SECCION CRYPTO -->
-    <div class="bank-table-container slide-up">
-        <h2 class="section-title">Dólar Cripto (USDT)</h2>
-        
-        <div class="best-banner">
-            <div class="best-card buy">
-                <div class="price-label">Compra más barata</div>
-                <div id="best-buy-usdt" class="quote-main-val" style="font-size: 1.4rem;">--</div>
-                <div id="best-buy-name-usdt" class="quote-sub-val">...</div>
-            </div>
-            <div class="best-card sell">
-                <div class="price-label">Venta más cara</div>
-                <div id="best-sell-usdt" class="quote-main-val" style="font-size: 1.4rem;">--</div>
-                <div id="best-sell-name-usdt" class="quote-sub-val">...</div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="panel__head">
+                    <span class="panel__title">USDT · ARS</span>
+                    <span class="panel__hint">mejor punta de venta</span>
+                </div>
+                <div id="usdt" data-error>
+                    <span class="skeleton" style="width:100%"></span>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="table-container">
-            <table class="compact-table" id="table-usdt">
-                <thead>
-                    <tr>
-                        <th data-sort="entity">Exchange <span class="sort-icon">↕</span></th>
-                        <th data-sort="ask" class="text-right">Compra <span class="sort-icon">↕</span></th>
-                        <th data-sort="bid" class="text-right">Venta <span class="sort-icon">↕</span></th>
-                    </tr>
-                </thead>
-                <tbody id="crypto-body-usdt">
-                    <tr><td colspan="3" class="text-center">Sincronizando exchanges...</td></tr>
-                </tbody>
-            </table>
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Dólar implícito en CEDEARs</h2>
+            <span class="section__note">mediana de las 15 puntas más operadas</span>
         </div>
-        <div class="section-footer">
-            <span id="last-update-usdt" class="text-secondary" style="font-size: 0.7rem;">Sincronizando...</span>
-            <p class="fuente">Valores P2P y Directos de CriptoYa. Actualizado cada 5 min.</p>
+        <div class="split">
+            <div class="panel reveal">
+                <div class="panel__in">
+                    <div class="kpi-list" id="implied">
+                        <div class="kpi"><span class="kpi__label">Cargando…</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel reveal">
+                <div class="panel__in">
+                    <div class="panel__head">
+                        <span class="panel__title">Indicadores</span>
+                        <span class="panel__hint">último dato publicado</span>
+                    </div>
+                    <div class="kpi-list" id="indicators">
+                        <div class="kpi"><span class="kpi__label">Cargando…</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Herramientas</h2>
+            <span class="section__note">cálculo con datos de hoy</span>
+        </div>
+        <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+            <a class="stat reveal" href="plazo-fijo.html">
+                <span class="stat__label">Plazo fijo <span>→</span></span>
+                <span class="stat__value" id="best-pf">—</span>
+                <span class="stat__foot"><span>TNA máxima del mercado</span></span>
+            </a>
+            <a class="stat reveal" href="tasas.html">
+                <span class="stat__label">Billeteras <span>→</span></span>
+                <span class="stat__value" id="best-wallet">—</span>
+                <span class="stat__foot"><span>TNA de cuentas remuneradas</span></span>
+            </a>
+            <a class="stat reveal" href="Hacienda.html">
+                <span class="stat__label">Soja <span>→</span></span>
+                <span class="stat__value" id="soja">—</span>
+                <span class="stat__foot"><span>pizarra Rosario por tonelada</span></span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="foot">
+        <span>Pampa Finance · datos públicos, sin registro</span>
+        <span>Actualización automática cada 5 minutos <a href="Graficos historicos.html">· ver series</a></span>
+    </footer>
 </main>
 
-<script src="shared-scripts.js"></script>
 <script src="api-service.js"></script>
+<script src="app.js"></script>
 <script>
-const IndexPage = {
-    data: { usd: [], usdt: [] },
-    sort: {
-        usd: { col: 'ask', dir: 1 },
-        usdt: { col: 'ask', dir: 1 }
-    },
+(function () {
+    var Fmt = PF.Fmt;
 
-    async init() {
-        this.bindEvents();
-        await this.loadAll();
-        setInterval(() => this.loadAll(), 300000);
-    },
+    PF.withData(function (api) {
+        var dolares = api.getDolares();
+        var by = {};
+        dolares.forEach(function (d) { by[d.casa] = d; });
 
-    bindEvents() {
-        document.querySelectorAll('#table-usd th[data-sort]').forEach(th => {
-            th.addEventListener('click', () => this.handleSort('usd', th.dataset.sort));
+        var primary = [
+            { label: 'Oficial', casa: 'oficial' },
+            { label: 'Blue', casa: 'blue' },
+            { label: 'MEP', casa: 'bolsa' },
+            { label: 'CCL', casa: 'contadoconliqui' }
+        ];
+
+        // --- Héroe: venta + variación real contra la rueda anterior ---
+        document.getElementById('stats').innerHTML = primary.map(function (item) {
+            var row = by[item.casa] || {};
+            var vari = api.dollarVariation(item.casa);
+            var delta = vari ? Fmt.delta(vari.pct, 2) : Fmt.delta(null);
+            return '<div class="stat">' +
+                '<span class="stat__label">' + item.label + '<span class="tag">venta</span></span>' +
+                '<span class="stat__value">' + (row.venta ? Fmt.money(row.venta, 0) : '—') + '</span>' +
+                '<span class="stat__foot">' +
+                    '<span>compra ' + (row.compra ? Fmt.money(row.compra, 0) : '—') + '</span>' +
+                    '<span class="' + delta.cls + '">' + delta.text + '</span>' +
+                '</span>' +
+            '</div>';
+        }).join('');
+
+        // --- Línea de respuesta ---
+        var blue = by.blue ? by.blue.venta : null;
+        var oficial = by.oficial ? by.oficial.venta : null;
+        var mep = by.bolsa ? by.bolsa.venta : null;
+        var brecha = blue && oficial ? ((blue / oficial) - 1) * 100 : null;
+        var answer = document.getElementById('answer');
+        if (blue && oficial && mep) {
+            answer.innerHTML = 'Blue <b>' + Fmt.money(blue, 0) + '</b>, oficial <b>' + Fmt.money(oficial, 0) +
+                '</b> y MEP <b>' + Fmt.money(mep, 0) + '</b>. La brecha del blue contra el oficial es de <b>' +
+                Fmt.pct(brecha, 1) + '</b>.';
+        } else {
+            answer.textContent = 'No pudimos leer las cotizaciones principales.';
+        }
+
+        // --- Dólar bancario ---
+        var providers = api.getUSDProviders();
+        PF.renderTable(document.getElementById('providers'), [
+            { key: 'nombre', label: 'Entidad', render: function (r) {
+                return '<span class="name">' + Fmt.esc(r.nombre) + '</span>';
+            } },
+            { key: 'tipo', label: 'Tipo', mobileHide: true, render: function (r) {
+                return '<span class="tag">' + Fmt.esc(r.tipo || '—') + '</span>';
+            } },
+            { key: 'compra', label: 'Compra', align: 'right', render: function (r) {
+                return Fmt.money(r.compra, 0);
+            } },
+            { key: 'venta', label: 'Venta', align: 'right', render: function (r) {
+                return '<strong>' + Fmt.money(r.venta, 0) + '</strong>';
+            } },
+            { key: 'variacion', label: 'Var.', align: 'right', render: function (r) {
+                var d = Fmt.delta(r.variacion, 2);
+                return '<span class="' + d.cls + '">' + d.text + '</span>';
+            } }
+        ], providers, {
+            sortKey: 'venta',
+            sortDir: 'asc',
+            bestRow: function (r) {
+                var min = Math.min.apply(null, providers.map(function (p) { return p.venta; }));
+                return r.venta === min;
+            },
+            empty: 'Sin datos de entidades'
         });
-        document.querySelectorAll('#table-usdt th[data-sort]').forEach(th => {
-            th.addEventListener('click', () => this.handleSort('usdt', th.dataset.sort));
+        var hint = document.getElementById('providers-hint');
+        if (hint && providers.length) {
+            hint.textContent = providers.length + ' entidades · más barata ' + Fmt.money(providers[0].venta, 0);
+        }
+
+        // --- USDT ---
+        var usdt = api.getUSDT();
+        var usdtRows = Object.keys(usdt).map(function (k) {
+            return { casa: k, ask: usdt[k].ask, bid: usdt[k].bid };
+        }).filter(function (r) { return r.ask > 0; }).sort(function (a, b) { return a.ask - b.ask; });
+
+        PF.renderTable(document.getElementById('usdt'), [
+            { key: 'casa', label: 'Exchange', render: function (r) {
+                return '<span class="name">' + Fmt.esc(Fmt.title(r.casa)) + '</span>';
+            } },
+            { key: 'bid', label: 'Compra', align: 'right', render: function (r) { return Fmt.money(r.bid, 2); } },
+            { key: 'ask', label: 'Venta', align: 'right', render: function (r) { return '<strong>' + Fmt.money(r.ask, 2) + '</strong>'; } }
+        ], usdtRows.slice(0, 8), {
+            sortKey: 'ask',
+            sortDir: 'asc',
+            bestRow: function (r) { return r === usdtRows[0]; },
+            empty: 'Sin datos de exchanges'
         });
-    },
 
-    handleSort(type, col) {
-        if (this.sort[type].col === col) this.sort[type].dir *= -1;
-        else { this.sort[type].col = col; this.sort[type].dir = 1; }
-        this.renderTable(type === 'usd' ? 'bank-body-usd' : 'crypto-body-usdt', this.data[type], type);
-    },
+        // --- Dólar implícito ---
+        var implied = api.getImplied();
+        var rows = [];
+        if (implied.mep) {
+            rows.push(['MEP implícito (CEDEARs)', Fmt.money(implied.mep.bid, 2) + ' / ' + Fmt.money(implied.mep.ask, 2), implied.mep.operaciones + ' puntas']);
+        }
+        if (implied.ccl) {
+            rows.push(['CCL implícito (ADRs)', Fmt.money(implied.ccl.bid, 2) + ' / ' + Fmt.money(implied.ccl.ask, 2), implied.ccl.operaciones + ' puntas']);
+        }
+        if (implied.brecha) {
+            var sp = Fmt.delta(implied.brecha.spread, 2);
+            rows.push(['Spread CCL / MEP', '<span class="' + sp.cls + '">' + sp.text + '</span>', 'mismo momento de mercado']);
+        }
+        document.getElementById('implied').innerHTML = rows.length ? rows.map(function (r) {
+            return '<div class="kpi"><span class="kpi__label">' + r[0] + '</span>' +
+                '<span class="kpi__value">' + r[1] + '<div class="kpi__sub">' + r[2] + '</div></span></div>';
+        }).join('') : '<div class="empty">Sin datos de CEDEARs</div>';
 
-    async loadAll() {
-        await Promise.allSettled([
-            this.loadDolares(),
-            this.loadBancos(),
-            this.loadUSDT()
-        ]);
-    },
+        // --- Indicadores ---
+        var rp = api.getRiesgoPais();
+        var uv = api.getUVA();
+        var inf = api.getInflacion();
+        var lastInf = inf.length ? inf[inf.length - 1] : null;
+        var rpVar = rp.valor != null && rp.anterior != null ? ((rp.valor / rp.anterior) - 1) * 100 : null;
+        var uvaVar = uv.valor != null && uv.anterior != null ? ((uv.valor / uv.anterior) - 1) * 100 : null;
 
-    async loadDolares() {
-        try {
-            const data = await ApiService.getDolares();
-            const container = document.getElementById('dolar-cards');
-            
-            const mapping = [
-                { key: 'oficial', name: 'Oficial' },
-                { key: 'blue', name: 'Blue' },
-                { key: 'bolsa', name: 'MEP' },
-                { key: 'liqui', name: 'CCL' }
-            ];
+        var ind = [];
+        if (rp.valor != null) {
+            var d1 = Fmt.delta(rpVar, 2);
+            ind.push(['Riesgo país', Fmt.num(rp.valor, 0) + ' pb', '<span class="' + d1.cls + '">' + d1.text + '</span> · ' + Fmt.date(rp.fecha)]);
+        }
+        if (lastInf) {
+            ind.push(['Inflación mensual', Fmt.pct(lastInf.valor, 1), Fmt.date(lastInf.fecha, { month: 'long', year: 'numeric' })]);
+        }
+        if (uv.valor != null) {
+            var d2 = Fmt.delta(uvaVar, 2);
+            ind.push(['UVA', Fmt.money(uv.valor, 2), '<span class="' + d2.cls + '">' + d2.text + '</span> · diario']);
+        }
+        document.getElementById('indicators').innerHTML = ind.map(function (r) {
+            return '<div class="kpi"><span class="kpi__label">' + r[0] + '</span>' +
+                '<span class="kpi__value">' + r[1] + '<div class="kpi__sub">' + r[2] + '</div></span></div>';
+        }).join('');
 
-            container.innerHTML = mapping.map(item => {
-                const val = data.find(d => d.nombre.toLowerCase().includes(item.key)) || { compra: 0, venta: 0 };
-                return `
-                    <div class="quote-card fade-in">
-                        <div class="quote-title">${item.name} <span>ARS</span></div>
-                        <div class="quote-values">
-                            <div class="quote-main-val">${val.venta.toFixed(0)}</div>
-                            <div class="quote-sub-val">C: ${val.compra.toFixed(0)}</div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            document.getElementById('last-update-dolar').textContent = 'Última actualización: ' + CalculadoraFinanciera.Formatters.time();
-        } catch (e) {}
-    },
+        // --- Mejores tasas y soja ---
+        var pf = api.getPlazoFijo();
+        if (pf.length) {
+            document.getElementById('best-pf').textContent = Fmt.pct(pf[0].tnaClientes || pf[0].tnaNoClientes, 2);
+        }
+        var wallets = api.getTasasAR().filter(function (t) { return t.tipo === 'cuenta_remunerada'; });
+        if (wallets.length) {
+            document.getElementById('best-wallet').textContent = Fmt.pct(wallets[0].tna, 2);
+        }
+        var soja = api.getGranos().filter(function (g) { return g.producto === 'SO'; })[0];
+        if (soja) {
+            document.getElementById('soja').textContent = Fmt.money(soja.precio, 0);
+        }
 
-    async loadBancos() {
-        try {
-            const { criptoya, comparadolar } = await ApiService.getBancos();
-            let allData = [];
-
-            if (criptoya) {
-                for (const [name, prices] of Object.entries(criptoya)) {
-                    if (prices.ask && prices.bid) {
-                        allData.push({ entity: name, ask: prices.ask, bid: prices.bid, logo: null });
-                    }
-                }
-            }
-
-            if (comparadolar) {
-                comparadolar.forEach(item => {
-                    const existing = allData.find(d => d.entity.toLowerCase().includes(item.prettyName.toLowerCase()));
-                    if (existing) existing.logo = item.logoUrl;
-                    else allData.push({ entity: item.prettyName, ask: item.ask, bid: item.bid, logo: item.logoUrl });
-                });
-            }
-
-            this.data.usd = allData;
-            this.renderTable('bank-body-usd', allData, 'usd');
-            document.getElementById('last-update-usd').textContent = 'Última actualización: ' + CalculadoraFinanciera.Formatters.time();
-        } catch (e) {}
-    },
-
-    async loadUSDT() {
-        try {
-            const data = await ApiService.getUSDT();
-            const processed = Object.entries(data).map(([name, v]) => ({
-                entity: name.charAt(0).toUpperCase() + name.slice(1),
-                ask: parseFloat(v.ask),
-                bid: parseFloat(v.bid)
-            })).filter(v => v.ask > 0);
-
-            this.data.usdt = processed;
-            this.renderTable('crypto-body-usdt', processed, 'usdt');
-            document.getElementById('last-update-usdt').textContent = 'Última actualización: ' + CalculadoraFinanciera.Formatters.time();
-        } catch (e) {}
-    },
-
-    renderTable(containerId, data, type) {
-        const tbody = document.getElementById(containerId);
-        const s = this.sort[type];
-        
-        const sorted = [...data].sort((a, b) => {
-            const valA = a[s.col];
-            const valB = b[s.col];
-            if (typeof valA === 'string') return valA.localeCompare(valB) * s.dir;
-            return (valA - valB) * s.dir;
-        });
-        
-        const bestAsk = [...data].sort((a,b) => a.ask - b.ask)[0];
-        const bestBid = [...data].sort((a,b) => b.bid - a.bid)[0];
-
-        // Update Banners
-        document.getElementById(`best-buy-${type}`).textContent = CalculadoraFinanciera.Formatters.currency(bestAsk.ask);
-        document.getElementById(`best-buy-name-${type}`).textContent = bestAsk.entity;
-        document.getElementById(`best-sell-${type}`).textContent = CalculadoraFinanciera.Formatters.currency(bestBid.bid);
-        document.getElementById(`best-sell-name-${type}`).textContent = bestBid.entity;
-
-        tbody.innerHTML = sorted.map(item => `
-            <tr>
-                <td>${item.entity}</td>
-                <td class="text-right ${item.ask === bestAsk.ask ? 'highlight-buy' : ''}">${CalculadoraFinanciera.Formatters.currency(item.ask)}</td>
-                <td class="text-right ${item.bid === bestBid.bid ? 'highlight-sell' : ''}">${CalculadoraFinanciera.Formatters.currency(item.bid)}</td>
-            </tr>
-        `).join('');
-    }
-};
-
-document.addEventListener('DOMContentLoaded', () => IndexPage.init());
+        PF.reveal();
+    });
+})();
 </script>
 </body>
 </html>
