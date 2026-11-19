@@ -1,61 +1,269 @@
 {
-  "last_updated": "2026-11-19T02:44:59.216Z",
+  "last_updated": "2026-11-19T10:49:09.496Z",
   "articles": [
     {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "PNC de Anses: cuál es el monto de las Pensiones No Contributivas en diciembre de 2026 con el bono, el aguinaldo y el aumento",
+      "link": "https://www.lanacion.com.ar/economia/pnc-de-anses-cual-es-el-monto-de-las-pensiones-no-contributivas-en-diciembre-de-2026-con-el-bono-el-nid18112026/",
+      "date": 1795084962000,
+      "description": "Las pensiones aumentan un 2,17%; cuáles son las cifras con el bono y la segunda cuota del aguinaldo"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Monto de la Asignación Universal por Hijo: de cuánto es la AUH en diciembre 2026, con el aumento oficial",
+      "link": "https://www.lanacion.com.ar/economia/monto-de-la-asignacion-universal-por-hijo-de-cuanto-es-la-auh-en-diciembre-2026-con-el-aumento-nid17112026/",
+      "date": 1795084959000,
+      "description": "Este mes, el incremento en la prestación es del 2,17%, cuáles son los nuevos valores, según el caso"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Jubilaciones de Anses: cuánto cobro en diciembre 2026 con el aumento, el bono y el aguinaldo",
+      "link": "https://www.lanacion.com.ar/economia/jubilaciones-de-anses-cuanto-cobro-en-noviembre-2026-con-el-aumento-el-bono-y-el-aguinaldo-nid16112026/",
+      "date": 1795084955000,
+      "description": "Para la actualización de haberes se toma el 2,17%, del último índice de inflación que publicó el Indec; cuáles son las cifras para el último mes del año"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Calendario de pago del IPS: cuándo cobro la jubilación del Instituto de Previsión Social en noviembre 2026",
+      "link": "https://www.lanacion.com.ar/economia/calendario-de-pago-del-ips-cuando-cobro-la-jubilacion-en-noviembre-2026-nid17112026/",
+      "date": 1795084953000,
+      "description": "La prestación de los pensionados de la provincia de Buenos Aires se cobra según la terminación del DNI del beneficiario en dos jornadas a fines del anteúltimo mes del año"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Fecha límite: hasta qué día me pueden pagar el aguinaldo en diciembre 2026",
+      "link": "https://www.lanacion.com.ar/economia/fecha-limite-hasta-que-dia-me-pueden-pagar-el-aguinaldo-en-diciembre-2026-nid18112026/",
+      "date": 1795084941000,
+      "description": "Qué dice la Ley de Contrato de Trabajo acerca de la fecha en el calendario que se puede percibir este salario"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Cómo se calcula el aguinaldo de diciembre 2026 en la Argentina",
+      "link": "https://www.lanacion.com.ar/economia/como-se-calcula-el-aguinaldo-de-diciembre-2026-en-la-argentina-nid16112026/",
+      "date": 1795084939000,
+      "description": "En el último mes del año se entrega un monto adicional; así se puede calcular con exactitud, según el tiempo trabajado"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Aguinaldo de diciembre 2026: cuándo se paga y el cálculo para saber cuánto se cobra",
+      "link": "https://www.lanacion.com.ar/economia/aguinaldo-2026-cuando-se-paga-en-la-argentina-y-cual-es-el-calculo-nid10112026/",
+      "date": 1795084936000,
+      "description": "La fecha exacta de cobro del SAC está prevista en la legislación; la segunda cuota de este concepto se entrega en diciembre y corresponde al 50% del sueldo de mayor remuneración mensual"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Cuándo se cobra el aguinaldo de diciembre 2026 en la Argentina: fecha de pago y a quiénes les corresponde",
+      "link": "https://www.lanacion.com.ar/economia/cuando-se-cobra-el-aguinaldo-de-diciembre-2026-en-la-argentina-fecha-de-pago-y-a-quienes-les-nid02112026/",
+      "date": 1795084934000,
+      "description": "La legislación establece una fecha límite para abonar el SAC de la segunda mitad del año; a quiénes les corresponde y cómo se calcula este concepto"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Paritaria con aumento: cuánto gana el personal de la Policía Federal Argentina en noviembre 2026",
+      "link": "https://www.lanacion.com.ar/economia/paritaria-con-aumento-cuanto-gana-el-personal-de-la-policia-federal-argentina-en-noviembre-2026-nid18112026/",
+      "date": 1795084927000,
+      "description": "Los distintos cargos jerárquicos cuentan con nuevos valores para el penúltimo mes del año; a continuación, el detalle"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Paritaria con aumento: cuánto gana el personal de la Gendarmería Nacional Argentina en noviembre de 2026",
+      "link": "https://www.lanacion.com.ar/economia/paritaria-con-aumento-cuanto-gana-el-personal-de-la-gendarmeria-nacional-argentina-en-noviembre-de-nid17112026/",
+      "date": 1795084855000,
+      "description": "La grilla salarial actualiza los valores con un incremento para este mes; cuáles son las cifras para cada cargo jerárquico"
+    },
+    {
+      "source": "Ámbito",
+      "category": "Mercados",
+      "title": "Dólar hoy y dólar blue hoy minuto a minuto: a cuánto opera este jueves 19 de noviembre",
+      "link": "https://www.ambito.com/finanzas/dolar-hoy-y-dolar-blue-hoy-minuto-minuto-cuanto-opera-este-jueves-19-noviembre-n6346965",
+      "date": 1795084320000,
+      "description": "Conocé las cotizaciones dólar blue, el oficial, el MEP y el CCL."
+    },
+    {
+      "source": "iProfesional",
+      "category": "Economía",
+      "title": "Camioneros acordó premio por presentismo en Quilmes y quiere extenderlo a Coca-Cola",
+      "link": "https://www.iprofesional.com/economia/469509-camioneros-acordo-premio-por-presentismo-en-quilmes-y-quiere-extenderlo-a-coca-cola",
+      "date": 1795084200000,
+      "description": "]]>"
+    },
+    {
       "source": "Investing.com",
       "category": "Mercados",
-      "title": "Acciones de Sunrise Energy Metals caen 10% a mínimo de siete meses",
-      "link": "https://es.investing.com/news/stock-market-news/acciones-de-sunrise-energy-metals-caen-10-a-minimo-de-siete-meses-3935290",
-      "date": 1795065218000,
+      "title": "¿Por qué cae hoy la acción de Universal Technical Institute Inc?",
+      "link": "https://es.investing.com/news/stock-market-news/por-que-cae-hoy-la-accion-de-universal-technical-institute-inc-93CH-3935758",
+      "date": 1795083349000,
       "description": ""
     },
     {
       "source": "Investing.com",
       "category": "Mercados",
-      "title": "¿Por qué cae el Dólar australiano Dólar hoy?",
-      "link": "https://es.investing.com/news/stock-market-news/por-que-cae-el-dolar-australiano-dolar-hoy-93CH-3935286",
-      "date": 1795064908000,
+      "title": "¿Por qué se dispara hoy la acción de Palo Alto Networks?",
+      "link": "https://es.investing.com/news/stock-market-news/por-que-se-dispara-hoy-la-accion-de-palo-alto-networks-93CH-3935757",
+      "date": 1795083336000,
+      "description": ""
+    },
+    {
+      "source": "Ámbito",
+      "category": "Economía",
+      "title": "El Gobierno sumó $15,6 billones al Presupuesto 2026 y recorta el superávit de fin de año",
+      "link": "https://www.ambito.com/economia/el-gobierno-sumo-156-billones-al-presupuesto-2026-y-recorta-el-superavit-fin-ano-n6346959",
+      "date": 1795083300000,
+      "description": "La ampliación equivale al 10,2% del crédito vigente. PAMI y los intereses de deuda se llevan la mayor parte, mientras que Servicios Económicos pierde unos $2,3 billones."
+    },
+    {
+      "source": "Investing.com",
+      "category": "Mercados",
+      "title": "Director ejecutivo de Deutsche Bank AG NA O.N. dice que los clientes mantienen la calma tras la filtración de datos",
+      "link": "https://es.investing.com/news/stock-market-news/director-ejecutivo-de-deutsche-bank-ag-na-on-dice-que-los-clientes-mantienen-la-calma-tras-la-filtracion-de-datos-93CH-3935748",
+      "date": 1795082607000,
+      "description": ""
+    },
+    {
+      "source": "Ámbito",
+      "category": "Economía",
+      "title": "Argentina pierde interés entre los fondos de inversión latinoamericanos",
+      "link": "https://www.ambito.com/economia/argentina-pierde-interes-los-fondos-inversion-latinoamericanos-n6346930",
+      "date": 1795082400000,
+      "description": "Los principales gestores de fondos de inversiones para la región han adoptado una postura defensiva de cara al 2027. Pero además han modificado sus preferencias. Así hoy les gusta más México que Brasil. Mientras los activos argentinos tambi…"
+    },
+    {
+      "source": "iProfesional",
+      "category": "Economía",
+      "title": "La Ciy prevé repunte bursátil y un dólar más calmo si Milei logra sepultar las PASO",
+      "link": "https://www.iprofesional.com/finanzas/469510-la-ciy-preve-repunte-bursatil-y-un-dolar-mas-calmo-si-milei-logra-sepultar-las-paso",
+      "date": 1795082400000,
+      "description": "]]>"
+    },
+    {
+      "source": "Investing.com",
+      "category": "Mercados",
+      "title": "Tereos recorta previsiones de beneficio tras mala cosecha de remolacha en Francia",
+      "link": "https://es.investing.com/news/stock-market-news/tereos-recorta-previsiones-de-beneficio-tras-mala-cosecha-de-remolacha-en-francia-93CH-3935736",
+      "date": 1795081399000,
       "description": ""
     },
     {
       "source": "Investing.com",
       "category": "Mercados",
-      "title": "Datasection de Japón se desploma tras recortar drásticamente sus previsiones",
-      "link": "https://es.investing.com/news/stock-market-news/datasection-de-japon-se-desploma-tras-recortar-drasticamente-sus-previsiones-3935282",
-      "date": 1795064000000,
+      "title": "Las acciones de Close Brothers caen un 10% por presión en márgenes",
+      "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-close-brothers-caen-un-10-por-presion-en-margenes-3935730",
+      "date": 1795080680000,
       "description": ""
     },
     {
       "source": "Investing.com",
       "category": "Mercados",
-      "title": "Los futuros de Wall Street suben antes de la mega OPV de Anthropic",
-      "link": "https://es.investing.com/news/stock-market-news/los-futuros-de-wall-street-suben-antes-de-la-mega-opv-de-anthropic-3935273",
-      "date": 1795063049000,
+      "title": "¿Por qué se desploman hoy las acciones de PayPoint plc?",
+      "link": "https://es.investing.com/news/stock-market-news/por-que-se-desploman-hoy-las-acciones-de-paypoint-plc-93CH-3935717",
+      "date": 1795080506000,
       "description": ""
     },
     {
       "source": "Investing.com",
       "category": "Mercados",
-      "title": "Corte en la NSA afecta a instalación en Georgia vinculada a Oriente Próximo",
-      "link": "https://es.investing.com/news/stock-market-news/corte-en-la-nsa-afecta-a-instalacion-en-georgia-vinculada-a-oriente-proximo-93CH-3935242",
-      "date": 1795059657000,
+      "title": "¿Por qué cae hoy la acción de Medios AG?",
+      "link": "https://es.investing.com/news/stock-market-news/por-que-cae-hoy-la-accion-de-medios-ag-93CH-3935716",
+      "date": 1795080453000,
       "description": ""
     },
     {
       "source": "Investing.com",
       "category": "Mercados",
-      "title": "¿Por qué cae hoy la acción de Sunrise Energy Metals?",
-      "link": "https://es.investing.com/news/stock-market-news/por-que-cae-hoy-la-accion-de-sunrise-energy-metals-93CH-3935240",
-      "date": 1795059445000,
+      "title": "Las acciones de Medios AG suben un 8% tras anunciar nuevo programa de recompra",
+      "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-medios-ag-suben-un-8-tras-anunciar-nuevo-programa-de-recompra-93CH-3935715",
+      "date": 1795080091000,
       "description": ""
     },
     {
       "source": "Investing.com",
       "category": "Mercados",
-      "title": "Director ejecutivo de Cintas se reunió con Trump para impulsar acuerdo de 5.000 millones de dólares con UniFirst",
-      "link": "https://es.investing.com/news/stock-market-news/director-ejecutivo-de-cintas-se-reunio-con-trump-para-impulsar-acuerdo-de-5000-millones-de-dolares-con-unifirst-93CH-3935230",
-      "date": 1795058486000,
+      "title": "Tensión bursátil: pendientes de la OPV de Anthropic tras la resaca de Nvidia",
+      "link": "https://es.investing.com/news/stock-market-news/tension-bursatil-pendientes-de-la-opv-de-anthropic-tras-la-resaca-de-nvidia-3935711",
+      "date": 1795079795000,
       "description": ""
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Fecha de cobro de Anses: el cronograma de pagos para este jueves 19 de noviembre",
+      "link": "https://www.lanacion.com.ar/economia/fecha-de-cobro-de-anses-el-cronograma-de-pagos-para-este-jueves-19-de-noviembre-nid19112026/",
+      "date": 1795079580000,
+      "description": "El organismo previsional continúa con el calendario de pagos de jubilaciones mínimas, entre otras asignaciones sociales"
+    },
+    {
+      "source": "Investing.com",
+      "category": "Mercados",
+      "title": "Las acciones de PayPoint plc caen un 15% tras el descenso de beneficios",
+      "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-paypoint-plc-caen-un-15-tras-el-descenso-de-beneficios-93CH-3935698",
+      "date": 1795079008000,
+      "description": ""
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "El fundador de un unicornio argentino vendido por US$1100 millones invirtió en una empresa vinculada con el agro",
+      "link": "https://www.lanacion.com.ar/economia/campo/el-fundador-de-un-unicornio-argentino-vendido-por-us1100-millones-invirtio-en-una-empresa-vinculada-nid19112026/",
+      "date": 1795078801000,
+      "description": "Germán Pugliese Bassi, uno de los creadores de Technisys, se incorporó a SiloReal a través de su fondo Persea Ventures; la compañía argentina desarrolló una tecnología para verificar granos y hacienda que pueden utilizarse como garantía en …"
+    },
+    {
+      "source": "La Nación",
+      "category": "Economía",
+      "title": "Antes que la NASA: los príncipes de Gales compartieron la historia del argentino que creó un sistema para detectar incendios forestales",
+      "link": "https://www.lanacion.com.ar/economia/campo/antes-que-la-nasa-los-principes-de-gales-compartieron-la-historia-del-argentino-que-creo-un-sistema-nid19112026/",
+      "date": 1795078800000,
+      "description": "Guillermo y Kate difundieron en su cuenta oficial de Instagram un video de Franco Rodríguez Viau en el marco de la final del Earthshot Prize 2026; el emprendedor contó cómo Satellites on Fire nació como un proyecto de secundaria y llegó a m…"
+    },
+    {
+      "source": "Ámbito",
+      "category": "Mercados",
+      "title": "Dólar blue hoy: a cuánto opera este jueves 19 de noviembre",
+      "link": "https://www.ambito.com/finanzas/dolar-blue-hoy-cuanto-opera-este-jueves-19-noviembre-n6346956",
+      "date": 1795057260000,
+      "description": "Conocé las cotizaciones dólar blue, el oficial, el MEP y el CCL."
+    },
+    {
+      "source": "Ámbito",
+      "category": "Mercados",
+      "title": "Dólar hoy: a cuánto cotiza este jueves 19 de noviembre",
+      "link": "https://www.ambito.com/finanzas/dolar-hoy-cuanto-cotiza-este-jueves-19-noviembre-n6346955",
+      "date": 1795057260000,
+      "description": "Conocé las cotizaciones dólar blue, el oficial, el MEP y el CCL."
+    },
+    {
+      "source": "Ámbito",
+      "category": "Economía",
+      "title": "La devaluación del real abarata fuerte las vacaciones en Brasil y pone en riesgo al 35% de las exportaciones regionales",
+      "link": "https://www.ambito.com/economia/la-devaluacion-del-real-abarata-fuerte-las-vacaciones-brasil-y-pone-riesgo-al-35-las-exportaciones-regionales-n6346786",
+      "date": 1795057200000,
+      "description": "La depreciación de la moneda brasileña agrega aún más presión al turismo interno, ya golpeado por los bajos niveles de consumo. Asimismo, el bajo tipo de cambio real y el menor crecimiento esperado para Brasil también puede impactar en el c…"
+    },
+    {
+      "source": "Ámbito",
+      "category": "Negocios",
+      "title": "Sebastián Aveille, de Microsoft, sobre la adopción de IA en las empresas: \"Todos los directores están preguntando cómo aceleramos\"",
+      "link": "https://www.ambito.com/negocios/sebastian-aveille-microsoft-la-adopcion-ia-las-empresas-todos-los-directores-estan-preguntando-como-aceleramos-n6346121",
+      "date": 1795057200000,
+      "description": "El country manager de Microsoft Argentina analiza el avance de la inteligencia artificial en el sector privado, los obstáculos para llevarla a gran escala y el potencial del talento local. Además, explica qué factores definen las inversione…"
+    },
+    {
+      "source": "Derecha Diario",
+      "category": "Política",
+      "title": "Kicillof prevé gastar casi $120 millones en luces, sonido y pantallas para un evento de Lotería",
+      "link": "https://derechadiario.com.ar/politica/kicillof-preve-gastar-casi-120-millones-en-luces-sonido-pantallas-evento-loteria",
+      "date": 1795056978000,
+      "description": "Luis Gasulla reveló la millonaria licitación mientras Kicillof y La Cámpora se enfrentan por la regulación de apuestas."
     },
     {
       "source": "Derecha Diario",
@@ -66,28 +274,12 @@
       "description": "El fiscal Stornelli busca determinar si el dirigente recibió instrucciones de la organización iraní y si cometió delitos penales."
     },
     {
-      "source": "Investing.com",
-      "category": "Mercados",
-      "title": "Las acciones de First US Bancshares suben por la ampliación de su recompra",
-      "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-first-us-bancshares-suben-por-la-ampliacion-de-su-recompra-3935192",
-      "date": 1795053202000,
-      "description": ""
-    },
-    {
-      "source": "Investing.com",
-      "category": "Mercados",
-      "title": "Las acciones de Markel Group suben tras ampliar recompra en 2.500 millones",
-      "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-markel-group-suben-tras-ampliar-recompra-en-2500-millones-3935190",
-      "date": 1795053105000,
-      "description": ""
-    },
-    {
-      "source": "Investing.com",
-      "category": "Mercados",
-      "title": "Moody’s rebaja la perspectiva crediticia de Nvidia a estable tras la salida del director ejecutivo Jensen Huang",
-      "link": "https://es.investing.com/news/stock-market-news/moodys-rebaja-la-perspectiva-crediticia-de-nvidia-a-estable-tras-la-salida-del-director-ejecutivo-jensen-huang-3935180",
-      "date": 1795052645000,
-      "description": ""
+      "source": "Clarín",
+      "category": "Economía",
+      "title": "Anthropic recauda cerca de US$ 80.000 millones horas antes de su salida a la bolsa y superará el récord de SpaceX",
+      "link": "https://www.clarin.com/economia/anthropic-recauda-cerca-us-80000-millones-horas-salida-bolsa-superara-record-spacex_0_H33hyi3a8G.html",
+      "date": 1795053726000,
+      "description": "La empresa estadounidense de inteligencia artificial creadora de Claude confirmó en un comunicado lo que vendió en una oferta pública inicial ampliada. Este jueves cotizará formalmente en el mercado."
     },
     {
       "source": "Ámbito",
@@ -288,198 +480,6 @@
       "link": "https://www.ambito.com/politica/el-colegio-abogados-cuestiono-la-abstencion-argentina-la-onu-la-violencia-genero-n6346895",
       "date": 1795040760000,
       "description": "La presidenta de la entidad, Alejandra García, cuestionó la decisión del Gobierno nacional de no acompañar una resolución que recibió el respaldo de 175 países. Argentina fue el único Estado latinoamericano que se abstuvo."
-    },
-    {
-      "source": "Ámbito",
-      "category": "Mercados",
-      "title": "Los bonos en dólares rebotaron y el riesgo país perforó los 850 puntos, pero los ADRs se hundieron hasta 7%",
-      "link": "https://www.ambito.com/finanzas/los-bonos-dolares-suben-pero-el-riesgo-pais-se-mantiene-encima-los-850-puntos-n6346590",
-      "date": 1795040580000,
-      "description": "El Merval avanzó levemente en pesos, pero cayó más de 1% en dólares y acumula una pérdida del 34% desde julio. La mirada del mercado está puesta en el Congreso, la Fed y el escenario internacional. Qué acciones recomiendan los expertos y lo…"
-    },
-    {
-      "source": "Ámbito",
-      "category": "Economía",
-      "title": "\"Oportunidad estratégica\": empresarios pidieron a Diputados que apruebe la nueva Ley de Biocombustibles",
-      "link": "https://www.ambito.com/economia/oportunidad-estrategica-empresarios-pidieron-diputados-que-apruebe-la-nueva-ley-biocombustibles-n6346873",
-      "date": 1795040040000,
-      "description": "La entidad sostuvo que el proyecto, que cuenta con media sanción del Senado, dará previsibilidad a las pymes y fortalecerá las economías regionales."
-    },
-    {
-      "source": "Ámbito",
-      "category": "Economía",
-      "title": "Domingo Cavallo cruzó a Javier Milei y le recordó sus elogios de 2020: \"¿Cuándo interpretaba bien, entonces o ahora?\"",
-      "link": "https://www.ambito.com/economia/domingo-cavallo-cruzo-javier-milei-y-le-recordo-sus-elogios-2020-cuando-interpretaba-bien-entonces-o-ahora-n6346880",
-      "date": 1795039680000,
-      "description": "El exministro cuestionó el cambio de postura del Presidente sobre su gestión en el Banco Central, la Convertibilidad y la crisis de 2001. Le recordó sus elogios de 2020 y le pidió que vuelva a ver aquella entrevista."
-    },
-    {
-      "source": "Ámbito",
-      "category": "Mercados",
-      "title": "Real blue: a cuánto operó este miércoles 18 de noviembre",
-      "link": "https://www.ambito.com/finanzas/real-blue-cuanto-opero-este-miercoles-18-noviembre-n6346887",
-      "date": 1795039560000,
-      "description": "La cotización minuto a minuto para la compra y venta de la divisa brasileña en nuestro país."
-    },
-    {
-      "source": "Ámbito",
-      "category": "Mercados",
-      "title": "Euro hoy y Euro blue hoy: a cuánto cotizó este miércoles 18 de noviembre",
-      "link": "https://www.ambito.com/finanzas/euro-hoy-y-euro-blue-hoy-cuanto-cotizo-este-miercoles-18-noviembre-n6346885",
-      "date": 1795039080000,
-      "description": "Mirá a cuánto cotizan el euro oficial y el euro blue."
-    },
-    {
-      "source": "La Nación",
-      "category": "Economía",
-      "title": "Debe más de $15.000 millones: se presentó en concurso de acreedores Agro de Souza, una importante firma del sudoeste bonaerense",
-      "link": "https://www.lanacion.com.ar/economia/campo/debe-mas-de-15000-millones-se-presento-en-concurso-de-acreedores-agro-de-souza-una-importante-firma-nid18112026/",
-      "date": 1795038904000,
-      "description": "La empresa, de Coronel Suárez, registra deudas con bancos y sociedades de garantía recíproca; ante la CNV dijo que mantendrá informados a los inversores sobre la evolución del proceso"
-    },
-    {
-      "source": "La Nación",
-      "category": "Economía",
-      "title": "Patricia Bullrich, antes del dictamen: “Es un hecho que se suspenden las PASO, ¡aplaudan!”",
-      "link": "https://www.lanacion.com.ar/economia/bullrich-antes-del-dictamen-es-un-hecho-que-se-suspenden-las-paso-aplaudan-nid18112026/",
-      "date": 1795038576000,
-      "description": "Festejó la cancelación de las primarias, la Ficha Limpia y el final de la obligatoriedad en los debates; dejó otra advertencia para el plan económico: “Sin plan platita, que se reactive la actividad”"
-    },
-    {
-      "source": "iProfesional",
-      "category": "Economía",
-      "title": "Nvidia presentó resultados récord tras el escándalo y la City avisa si conviene invertir",
-      "link": "https://www.iprofesional.com/finanzas/469484-la-city-anticipa-si-conviene-invertir-en-nvidia-tas-balance-record",
-      "date": 1795038480000,
-      "description": "]]>"
-    },
-    {
-      "source": "Clarín",
-      "category": "Economía",
-      "title": "Sacar un crédito personal en la Argentina es más caro que en otros 29 países",
-      "link": "https://www.clarin.com/economia/sacar-credito-personal-argentina-caro-29-paises_0_vcOzCrZ2aQ.html",
-      "date": 1795037799000,
-      "description": "Los impuestos nacionales, provinciales y municipales agregan una sobrecarga de 39%. Por cada $ 1.400 que el deudor paga de interés y demás costos a la hora de sacar un préstamo, casi $ 400 son impuestos. La Argentina el único país que aplic…"
-    },
-    {
-      "source": "Ámbito",
-      "category": "Política",
-      "title": "Eduardo Riggi es el nuevo Fiscal General Adjunto en lo Penal, Contravencional y de Faltas",
-      "link": "https://www.ambito.com/politica/eduardo-riggi-es-el-nuevo-fiscal-general-adjunto-lo-penal-contravencional-y-faltas-n6346870",
-      "date": 1795037760000,
-      "description": "Fue designado mediante la Resolución FG 113-26. Tiene una extensa trayectoria en el ámbito judicial y académico, con experiencia en fiscalías temáticas y docencia universitaria."
-    },
-    {
-      "source": "Clarín",
-      "category": "Economía",
-      "title": "Expectativa por la salida a bolsa de los creadores de Claude: ¿se podrá invertir desde Argentina?",
-      "link": "https://www.clarin.com/economia/expectativa-salida-bolsa-creadores-claude-podra-invertir-argentina_0_Yy2r5c6CJr.html",
-      "date": 1795037668000,
-      "description": "El debut bursátil de Anthropic promete ser el más grande de la historia."
-    },
-    {
-      "source": "Ámbito",
-      "category": "Mercados",
-      "title": "Dólar: el BCRA moderó fuerte el ritmo de compras y las reservas bajaron casi u$s200 millones",
-      "link": "https://www.ambito.com/finanzas/dolar-el-bcra-modero-fuerte-el-ritmo-compras-y-las-reservas-bajaron-casi-us200-millones-n6346854",
-      "date": 1795037640000,
-      "description": "La autoridad monetaria adquirió apenas u$s11 millones, frente a los u$s74 millones del martes, mientras las reservas retrocedieron u$s190 millones por el impacto de la caída del oro. En paralelo, el dólar mayorista acumuló tres subas consec…"
-    },
-    {
-      "source": "La Nación",
-      "category": "Economía",
-      "title": "“Mercado paralelo”: diputados y senadores apoyaron a los productores frente a una exigencia antideforestación de la Unión Europea",
-      "link": "https://www.lanacion.com.ar/economia/campo/mercado-paralelo-diputados-y-senadores-apoyaron-a-los-productores-frente-a-una-exigencia-nid18112026/",
-      "date": 1795037336000,
-      "description": "En una reunión organizada por la Fundación Barbechando, advirtieron que los productores pueden recibir un precio menor si su mercadería queda fuera del circuito exportador europeo"
-    },
-    {
-      "source": "La Nación",
-      "category": "Economía",
-      "title": "Cuatro economistas candidatos a presidente, ¡socorro!",
-      "link": "https://www.lanacion.com.ar/economia/cuatro-economistas-candidatos-a-presidente-socorro-nid18112026/",
-      "date": 1795036602000,
-      "description": "Milei, Kicillof, Lacunza y Melconian se presentarían en las elecciones de 2027, tras el objetivo de gobernar la Argentina; la pregunta es qué ventajas e inconvenientes tiene que un profesional de este rubro ejerza como primer mandatario"
-    },
-    {
-      "source": "Derecha Diario",
-      "category": "Política",
-      "title": "El Gobierno de Milei logró dictamen en el Senado para suspender las PASO",
-      "link": "https://derechadiario.com.ar/politica/gobierno-milei-logro-dictamen-en-senado-suspender-paso",
-      "date": 1795036112000,
-      "description": "La iniciativa reunió las firmas necesarias en la Comisión de Asuntos Constitucionales y quedó habilitada para su debate en el recinto."
-    },
-    {
-      "source": "La Nación",
-      "category": "Economía",
-      "title": "“Nefasta cláusula”: el presidente de Acopiadores fustigó prácticas de los molinos y también cuestionó a los exportadores",
-      "link": "https://www.lanacion.com.ar/economia/campo/nefasta-clausula-el-presidente-de-acopiadores-fustigo-practicas-de-los-molinos-y-tambien-cuestiono-a-nid18112026/",
-      "date": 1795035615000,
-      "description": "Fernando Rivara defendió la plataforma de trazabilidad Visec, acusó a la industria molinera de aplicar medidas comerciales que perjudican a productores y acopiadores y advirtió que los exportadores retienen dinero de las operaciones sin pag…"
-    },
-    {
-      "source": "Ámbito",
-      "category": "Negocios",
-      "title": "La familia Brito expande su negocio de la carne: inversión millonaria y un salto en las exportaciones",
-      "link": "https://www.ambito.com/negocios/la-familia-brito-expande-su-negocio-la-carne-inversion-millonaria-y-un-salto-las-exportaciones-n6346838",
-      "date": 1795035600000,
-      "description": "Frigorífico Bermejo reinauguró su planta de Pichanal tras destinar u$s20 millones a su modernización. La compañía duplicó sus ventas, alcanzó una facturación de u$s72 millones en el primer semestre y multiplicó casi por seis sus envíos al e…"
-    },
-    {
-      "source": "El Economista",
-      "category": "Economía",
-      "title": "3.411 ARGENTINOS COBRAN MÁS DE $10 MILLONES DE JUBILACIÓN: quiénes son y por qué reciben tanto",
-      "link": "https://eleconomista.com.ar/economia/3411-argentinos-cobran-mas-10-millones-jubilacion-quienes-son-reciben-tanto-n99763",
-      "date": 1795035420000,
-      "description": "Un informe de ANSES expuso las fuertes diferencias del sistema previsional: mientras el régimen general paga un promedio de $644.005, miles de beneficiarios de regímenes especiales superan los $10 millones mensuales. El Poder Judicial y el …"
-    },
-    {
-      "source": "Derecha Diario",
-      "category": "Política",
-      "title": "REPUDIABLE: Cristina Kirchner cobrará $3 millones más por su jubilación de privilegio",
-      "link": "https://derechadiario.com.ar/politica/cristina-kirchner-cobrara-3-millones-por-jubilacion-privilegio",
-      "date": 1795034752000,
-      "description": "El incremento elevará a más de $30 millones mensuales el monto que percibe la corrupta ex presidente por sus beneficios previsionales."
-    },
-    {
-      "source": "Clarín",
-      "category": "Economía",
-      "title": "Los Grobo presentó su oferta de pago a sus acreedores, con quitas que llegan al 85%",
-      "link": "https://www.clarin.com/rural/grobo-presento-oferta-pago-acreedores-quitas-llegan-85-pago_0_HEX95XH8Pk.html",
-      "date": 1795034104000,
-      "description": "La empresa agroindustrial argentina atraviesa un concurso de acreedores desde febrero de 2025. Según fuentes cercanas a la empresa, la deuda asciende a US$ 127 millones a 747 acreedores quirografarios. El plan se dio a conocer días después …"
-    },
-    {
-      "source": "Ámbito",
-      "category": "Política",
-      "title": "Argentina se abstuvo en una votación contra la violencia de género en la ONU",
-      "link": "https://www.ambito.com/politica/argentina-se-abstuvo-una-votacion-contra-la-violencia-genero-la-onu-n6346845",
-      "date": 1795033680000,
-      "description": "La delegación del gobierno libertario evitó apoyar una propuesta que plantea fortalecer las políticas públicas destinadas a combatir la violencia contra las mujeres y niñas. Recientemente, también se abstuvo en una resolución sobre la preve…"
-    },
-    {
-      "source": "Derecha Diario",
-      "category": "Política",
-      "title": "La Cámara de Casación redujo la condena de José Alperovich por abuso sexual",
-      "link": "https://derechadiario.com.ar/politica/camara-casacion-redujo-condena-jose-alperovich-por-abuso-sexual",
-      "date": 1795033651000,
-      "description": "El tribunal mantuvo la condena y la inhabilitación perpetua para ejercer cargos públicos, pero descontó dos años de prisión al considerar atenuantes como su edad, su salud y el vínculo con sus hijos."
-    },
-    {
-      "source": "La Nación",
-      "category": "Economía",
-      "title": "La incertidumbre empieza a contagiar al mercado cambiario y hay señales de menos oferta de dólares",
-      "link": "https://www.lanacion.com.ar/economia/la-incertidumbre-ya-contagio-al-mercado-cambiario-y-hay-senales-de-menos-oferta-de-dolares-nid18112026/",
-      "date": 1795033599000,
-      "description": "El volumen de contado se mantiene en mínimos esta semana; los operadores están muy atentos al derrumbe del real en Brasil"
-    },
-    {
-      "source": "Ámbito",
-      "category": "Mercados",
-      "title": "El dólar blue pegó otro salto y ya trepó más de $60 en apenas cuatro días",
-      "link": "https://www.ambito.com/finanzas/el-dolar-blue-pego-otro-salto-y-ya-trepo-mas-60-apenas-cuatro-dias-n6346832",
-      "date": 1795033500000,
-      "description": "El paralelo escaló hasta $1.630 para la venta y profundizó la presión compradora que domina las últimas ruedas. Al mismo tiempo, el mayorista volvió a marcar un récord nominal, pero avanzó menos y dejó la brecha en torno a 4,5%."
     }
   ]
 }

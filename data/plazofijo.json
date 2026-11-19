@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-19T02:30:34.137Z",
+  "last_updated": "2026-11-19T10:49:08.380Z",
   "data": [
     {
       "entidad": "BANCO BICA S.A.",
@@ -79,13 +79,6 @@
       "enlace": "https://www.uala.com.ar/inversiones/plazo-fijo"
     },
     {
-      "entidad": "BANCO MACRO S.A.",
-      "logo": "http://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00285.png",
-      "tnaClientes": 21.5,
-      "tnaNoClientes": 0,
-      "enlace": "https://www.macro.com.ar/personas/inversiones/plazo-fijo"
-    },
-    {
       "entidad": "BIBANK S.A.",
       "logo": "http://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00147.png",
       "tnaClientes": 21.5,
@@ -126,6 +119,13 @@
       "tnaClientes": 20,
       "tnaNoClientes": 22,
       "enlace": "https://bancodino.com/personas/plazo-fijo/"
+    },
+    {
+      "entidad": "BANCO MACRO S.A.",
+      "logo": "http://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00285.png",
+      "tnaClientes": 19.5,
+      "tnaNoClientes": 0,
+      "enlace": "https://www.macro.com.ar/personas/inversiones/plazo-fijo"
     },
     {
       "entidad": "BANCO DE FORMOSA S.A.",

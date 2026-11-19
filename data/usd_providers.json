@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-19T02:30:34.566Z",
+  "last_updated": "2026-11-19T10:49:08.615Z",
   "data": [
     {
       "slug": "balanz",
@@ -10,8 +10,8 @@
       "variacion": 0.13,
       "tipo": "Oficial",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "banco-hipotecario",
@@ -22,8 +22,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "banco-supervielle",
@@ -34,7 +34,7 @@
       "variacion": 0.06,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": true,
+      "stale": true,
       "actualizado": "2026-11-05T02:02:38.234Z"
     },
     {
@@ -46,8 +46,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "banco-nacion",
@@ -58,8 +58,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "banco-provincia",
@@ -70,8 +70,8 @@
       "variacion": 0.16,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "cocos-bank",
@@ -82,8 +82,8 @@
       "variacion": 0.03,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "icbc",
@@ -94,8 +94,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "reba",
@@ -106,8 +106,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "bancor",
@@ -118,8 +118,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "brubank-ultra",
@@ -130,8 +130,8 @@
       "variacion": 0.16,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "uala",
@@ -142,8 +142,8 @@
       "variacion": 0.03,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "banco-bica",
@@ -154,8 +154,8 @@
       "variacion": 0.26,
       "tipo": "Oficial",
       "esBanco": true,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "plus",
@@ -166,8 +166,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "tiendadolar",
@@ -178,8 +178,8 @@
       "variacion": 0.32,
       "tipo": "Oficial",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "fiwind-mep",
@@ -190,8 +190,8 @@
       "variacion": -0.46,
       "tipo": "MEP",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "fiwind-cripto",
@@ -202,20 +202,20 @@
       "variacion": 0.15,
       "tipo": "Cripto",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "nexo",
       "nombre": "Nexo",
       "logo": "https://api.argentinadatos.com/static/logos/nexo.png",
-      "compra": 1605.91,
-      "venta": 1631.81,
-      "variacion": -0.03,
+      "compra": 1604.7,
+      "venta": 1632.21,
+      "variacion": -0.06,
       "tipo": "Cripto",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "cocos",
@@ -226,8 +226,8 @@
       "variacion": -0.12,
       "tipo": "MEP",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "plus-inversiones",
@@ -238,8 +238,8 @@
       "variacion": -0.26,
       "tipo": "MEP",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "plus-crypto",
@@ -250,68 +250,68 @@
       "variacion": 0.16,
       "tipo": "CCL",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "ripio",
       "nombre": "Ripio",
       "logo": "https://api.argentinadatos.com/static/logos/ripio.png",
-      "compra": 1584.49,
-      "venta": 1722.04,
-      "variacion": 0.03,
+      "compra": 1585.32,
+      "venta": 1723.47,
+      "variacion": 0.04,
       "tipo": "Cripto",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "wallbit",
       "nombre": "Wallbit",
       "logo": "https://api.argentinadatos.com/static/logos/wallbit.png",
-      "compra": 1693.29,
-      "venta": 1732.82,
+      "compra": 1693.36,
+      "venta": 1734.54,
       "variacion": 0,
       "tipo": "CCL",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "wallbit-pro",
       "nombre": "Wallbit Pro",
       "logo": "https://api.argentinadatos.com/static/logos/wallbit.png",
-      "compra": 1697.52,
-      "venta": 1732.82,
+      "compra": 1697.59,
+      "venta": 1734.54,
       "variacion": 0,
       "tipo": "CCL",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "grabrfi",
       "nombre": "GrabrFi",
       "logo": "https://api.argentinadatos.com/static/logos/grabr.svg",
       "compra": 1677.74,
-      "venta": 1735.85,
-      "variacion": 0,
+      "venta": 1737.46,
+      "variacion": 0.01,
       "tipo": "Cripto",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "eluter",
       "nombre": "Eluter",
       "logo": "https://www.eluter.com/brand/elutericon.svg",
-      "compra": 1700.55,
-      "venta": 1738.36,
-      "variacion": -0.12,
+      "compra": 1700.75,
+      "venta": 1738.56,
+      "variacion": 0.01,
       "tipo": "Cripto",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "global66",
@@ -322,8 +322,8 @@
       "variacion": 0.06,
       "tipo": "CCL",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "astropay",
@@ -334,8 +334,8 @@
       "variacion": 0.01,
       "tipo": "CCL",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     },
     {
       "slug": "takenos",
@@ -346,8 +346,8 @@
       "variacion": 0.02,
       "tipo": "Cripto",
       "esBanco": false,
-      "estale": false,
-      "actualizado": "2026-11-19T02:26:50.505Z"
+      "stale": false,
+      "actualizado": "2026-11-19T10:46:50.344Z"
     }
   ]
 }

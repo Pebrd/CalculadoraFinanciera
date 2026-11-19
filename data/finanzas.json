@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-19T02:44:59.216Z",
+  "last_updated": "2026-11-19T10:49:09.497Z",
   "data": {
     "dolares": [
       {
@@ -54,164 +54,164 @@
     ],
     "usdt": {
       "ripio": {
-        "ask": 1734.8,
-        "bid": 1691.12,
-        "time": 1795055413
+        "ask": 1734.76,
+        "bid": 1693.5,
+        "time": 1795085322
       },
       "ripioexchange": {
-        "ask": 1715.9,
-        "bid": 1708.2,
-        "time": 1795055408
+        "ask": 1715.8,
+        "bid": 1710.7,
+        "time": 1795085295
       },
       "satoshitango": {
-        "ask": 1719.24,
-        "bid": 1688.52,
-        "time": 1795055410
+        "ask": 1720.57,
+        "bid": 1689.83,
+        "time": 1795085345
       },
       "universalcoins": {
         "ask": 1710,
         "bid": 1620,
-        "time": 1795055413
+        "time": 1795085345
       },
       "decrypto": {
         "ask": 1728.55,
         "bid": 1672.35,
-        "time": 1795055400
+        "time": 1795085340
       },
       "letsbit": {
-        "ask": 1718.98,
-        "bid": 1667.31,
-        "time": 1795055405
+        "ask": 1719.83,
+        "bid": 1668.13,
+        "time": 1795085322
       },
       "binancep2p": {
-        "ask": 1714.09,
-        "bid": 1706.56,
-        "time": 1795055407
+        "ask": 1716.67,
+        "bid": 1706.4,
+        "time": 1795085309
       },
       "fiwind": {
         "ask": 1722,
         "bid": 1705,
-        "time": 1795055399
+        "time": 1795085339
       },
       "lemoncash": {
-        "ask": 1738.71,
-        "bid": 1663.76,
-        "time": 1795055401
+        "ask": 1738.68,
+        "bid": 1663.73,
+        "time": 1795085339
       },
       "okexp2p": {
-        "ask": 1712.5,
-        "bid": 1706,
-        "time": 1795055413
+        "ask": 1713.99,
+        "bid": 1705.55,
+        "time": 1795085319
       },
       "vitawallet": {
-        "ask": 1733.75,
-        "bid": 1690.72,
-        "time": 1795055411
+        "ask": 1735.52,
+        "bid": 1692.45,
+        "time": 1795085344
       },
       "belo": {
         "ask": 1720,
         "bid": 1700,
-        "time": 1795055395
+        "time": 1795085335
       },
       "tiendacrypto": {
         "ask": 1740.02,
         "bid": 1698.67,
-        "time": 1795055411
+        "time": 1795085344
       },
       "bybitp2p": {
-        "ask": 1712.09,
-        "bid": 1715,
-        "time": 1795055400
+        "ask": 1713,
+        "bid": 1708,
+        "time": 1795085345
       },
       "kucoinp2p": {
-        "ask": 1719.49,
-        "bid": 1704.01,
-        "time": 1795055399
+        "ask": 1719.99,
+        "bid": 1697,
+        "time": 1795085291
       },
       "saldo": {
-        "ask": 1715.93,
-        "bid": 1676.79,
-        "time": 1795055411
+        "ask": 1710.34,
+        "bid": 1679.61,
+        "time": 1795085345
       },
       "astropay": {
         "ask": 1763.04,
         "bid": 1689.79,
-        "time": 1795055395
+        "time": 1795085335
       },
       "bitgetp2p": {
-        "ask": 1716.8,
-        "bid": 1708.2,
-        "time": 1795055425
+        "ask": 1726.69,
+        "bid": 1706.3,
+        "time": 1795085326
       },
       "bybit": {
         "ask": 1761.2,
         "bid": 1683.57,
-        "time": 1795055336
+        "time": 1795085258
       },
       "binance": {
-        "ask": 1722,
-        "bid": 1717.3,
-        "time": 1795055319
+        "ask": 1722.3,
+        "bid": 1716.5,
+        "time": 1795085271
       },
       "eldoradop2p": {
-        "ask": 1720,
+        "ask": 1749.99,
         "bid": 1725,
-        "time": 1795055413
+        "time": 1795085321
       },
       "bingxp2p": {
-        "ask": 1710.2,
-        "bid": 1705,
-        "time": 1795055388
+        "ask": 1716,
+        "bid": 1704.59,
+        "time": 1795085277
       },
       "bitsoalpha": {
-        "ask": 1713.92,
-        "bid": 1712.41,
-        "time": 1795055401
+        "ask": 1714.95,
+        "bid": 1714.94,
+        "time": 1795085341
       },
       "lemoncashp2p": {
-        "ask": 1715,
-        "bid": 1700.06,
-        "time": 1795055342
+        "ask": 1700,
+        "bid": 1695,
+        "time": 1795085281
       },
       "cocoscrypto": {
         "ask": 1726,
         "bid": 1700,
-        "time": 1795055398
+        "time": 1795085338
       },
       "cryptomktpro": {
-        "ask": 1723.6,
-        "bid": 1707.77,
-        "time": 1795055399
+        "ask": 1721.99,
+        "bid": 1709.01,
+        "time": 1795085339
       },
       "takenos": {
         "ask": 1750.46,
         "bid": 1698.67,
-        "time": 1795055410
+        "time": 1795085343
       },
       "wallbit": {
-        "ask": 1732.73,
-        "bid": 1688.39,
-        "time": 1795055412
+        "ask": 1734.54,
+        "bid": 1693.36,
+        "time": 1795085345
       },
       "mexcp2p": {
         "ask": 1720,
-        "bid": 1699,
-        "time": 1795055423
+        "bid": 1701,
+        "time": 1795085321
       },
       "mexc": {
-        "ask": 1661.41,
-        "bid": 1654.26,
-        "time": 1795055404
+        "ask": 1667.22,
+        "bid": 1661.41,
+        "time": 1795085341
       },
       "peanut": {
         "ask": 1750.46,
         "bid": 1688.48,
-        "time": 1795055405
+        "time": 1795085342
       },
       "nexo": {
-        "ask": 1719.87,
-        "bid": 1704.79,
-        "time": 1795055403
+        "ask": 1718.54,
+        "bid": 1705.17,
+        "time": 1795085341
       }
     },
     "plazofijo": [
@@ -293,13 +293,6 @@
         "enlace": "https://www.uala.com.ar/inversiones/plazo-fijo"
       },
       {
-        "entidad": "BANCO MACRO S.A.",
-        "logo": "http://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00285.png",
-        "tnaClientes": 21.5,
-        "tnaNoClientes": 0,
-        "enlace": "https://www.macro.com.ar/personas/inversiones/plazo-fijo"
-      },
-      {
         "entidad": "BIBANK S.A.",
         "logo": "http://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00147.png",
         "tnaClientes": 21.5,
@@ -340,6 +333,13 @@
         "tnaClientes": 20,
         "tnaNoClientes": 22,
         "enlace": "https://bancodino.com/personas/plazo-fijo/"
+      },
+      {
+        "entidad": "BANCO MACRO S.A.",
+        "logo": "http://www.bcra.gob.ar/archivos/Imagenes/logosbancos/00285.png",
+        "tnaClientes": 19.5,
+        "tnaNoClientes": 0,
+        "enlace": "https://www.macro.com.ar/personas/inversiones/plazo-fijo"
       },
       {
         "entidad": "BANCO DE FORMOSA S.A.",
@@ -713,7 +713,7 @@
         "tna": 25,
         "tea": 28.39,
         "tope": 750000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Tené en cuenta que esta bonificación es una iniciativa propia de fiwind y no tiene fecha de vigencia garantizada: puede ser modificada o descontinuada en cualquier momento.",
         "plazoMinDias": 0
       },
@@ -722,7 +722,7 @@
         "tna": 24,
         "tea": 27.11,
         "tope": 1000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Si sumás $500.000 sube hasta 24% TNA. ¡La más alta del mercado!",
         "plazoMinDias": 0
       },
@@ -731,7 +731,7 @@
         "tna": 22,
         "tea": 24.6,
         "tope": 750000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Cuenta Positiva de Banco Bica: de $1 hasta $750.000",
         "plazoMinDias": 0
       },
@@ -740,7 +740,7 @@
         "tna": 22,
         "tea": 24.6,
         "tope": 2000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Tasa de Cuenta Max de Brubank para la cartera seleccionada por el banco. Remunera hasta $2.000.000.",
         "plazoMinDias": 0
       },
@@ -749,7 +749,7 @@
         "tna": 21,
         "tea": 23.36,
         "tope": 1000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "",
         "plazoMinDias": 0
       },
@@ -758,7 +758,7 @@
         "tna": 20,
         "tea": 22.13,
         "tope": null,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Permite ingresar $ 4.694.400 / mes",
         "plazoMinDias": 0
       },
@@ -767,7 +767,7 @@
         "tna": 20,
         "tea": 22.13,
         "tope": 1000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "",
         "plazoMinDias": 0
       },
@@ -776,8 +776,8 @@
         "tna": 20,
         "tea": 22.13,
         "tope": 30000000,
-        "fecha": "2026-11-18",
-        "condiciones": "Podés guardar hasta $30.000.000 y generar rendimientos. Puedes mantener tu dinero creciendo durante 7, 14 o 28 días, con distintos porcentajes de TNA.",
+        "fecha": "2026-11-19",
+        "condiciones": "Podés guardar hasta $30.000.000 y generar rendimientos. Elegí el plazo que quieras entre 7 y 28 días.",
         "plazoMinDias": 14
       },
       {
@@ -785,8 +785,8 @@
         "tna": 20,
         "tea": 22.13,
         "tope": 30000000,
-        "fecha": "2026-11-18",
-        "condiciones": "Podés guardar hasta $30.000.000 y generar rendimientos. Puedes mantener tu dinero creciendo durante 7, 14 o 28 días, con distintos porcentajes de TNA.",
+        "fecha": "2026-11-19",
+        "condiciones": "Podés guardar hasta $30.000.000 y generar rendimientos. Elegí el plazo que quieras entre 7 y 28 días.",
         "plazoMinDias": 28
       },
       {
@@ -794,8 +794,8 @@
         "tna": 20,
         "tea": 22.13,
         "tope": 30000000,
-        "fecha": "2026-11-18",
-        "condiciones": "Podés guardar hasta $30.000.000 y generar rendimientos. Puedes mantener tu dinero creciendo durante 7, 14 o 28 días, con distintos porcentajes de TNA.",
+        "fecha": "2026-11-19",
+        "condiciones": "Podés guardar hasta $30.000.000 y generar rendimientos. Elegí el plazo que quieras entre 7 y 28 días.",
         "plazoMinDias": 7
       },
       {
@@ -803,7 +803,7 @@
         "tna": 20,
         "tea": 22.13,
         "tope": 1000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Si acumulás $50.000 en ciertas operaciones este mes, tu tasa sube hasta 20% TNA.",
         "plazoMinDias": 0
       },
@@ -812,7 +812,7 @@
         "tna": 19.94,
         "tea": 22.06,
         "tope": null,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "",
         "plazoMinDias": 0
       },
@@ -821,7 +821,7 @@
         "tna": 19,
         "tea": 20.92,
         "tope": null,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "",
         "plazoMinDias": 0
       },
@@ -830,7 +830,7 @@
         "tna": 19,
         "tea": 20.92,
         "tope": 2250000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Cuenta Positiva de Banco Bica: de $750.001 hasta $2.250.000",
         "plazoMinDias": 0
       },
@@ -839,7 +839,7 @@
         "tna": 19,
         "tea": 20.92,
         "tope": 1000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Tasa de Cuenta Max de Brubank para la cartera general. Remunera hasta $1.000.000.",
         "plazoMinDias": 0
       },
@@ -848,7 +848,7 @@
         "tna": 19,
         "tea": 20.92,
         "tope": null,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "",
         "plazoMinDias": 0
       },
@@ -857,7 +857,7 @@
         "tna": 19,
         "tea": 20.92,
         "tope": 1000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Si tenés entre $10.000 y $1.000.000 en tu cuenta rinden 19% TNA sin hacer nada.",
         "plazoMinDias": 0
       },
@@ -866,7 +866,7 @@
         "tna": 16,
         "tea": 17.35,
         "tope": 20000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Cuenta Positiva de Banco Bica: de $2.250.001 hasta $20.000.000",
         "plazoMinDias": 0
       },
@@ -875,7 +875,7 @@
         "tna": 14,
         "tea": 15.02,
         "tope": 2000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "**CUENTA REMUNERADA EN PESOS**\nBENEFICIO CONSISTENTE EN LA REMUNERACIÓN DIARIA Y AUTOMÁTICA DEL SALDO DISPONIBLE EN LA CUENTA SUELDO DEL TITULAR. SE REMUNERA HASTA LA SUMA MÁXIMA DE $2.000.000,00.- (PESOS DOS MILLONES) A UNA TASA NOMINAL ANUAL DE 14,00% (TNA), TASA EFECTIVA ANUAL 15,0243%(TEA). EN CASO DE QUE EL SALDO DEPOSITADO SUPERE ESE MONTO, LOS INTERESES SERÁN CALCULADOS ÚNICAMENTE POR LOS PRIMEROS $2.000.000,00.- VÁLIDO EN LA REPÚBLICA ARGENTINA EXCLUSIVO PARA CLIENTES DE CARTERA CONSUMO TITULARES O COTITULARES DE UNA CUENTA SUELDO. NO SE REMUNERAN CUENTAS EN ESTADO BLOQUEADO Y/O CON EMBARGOS VIGENTES. LA TASA NOMINAL ANUAL (TNA) Y EL SALDO MÁXIMO A REMUNERAR PODRÁN SER MODIFICADOS, RESERVÁNDOSE EL BANCO EL DERECHO DE MODIFICAR, SUSPENDER O CANCELAR EL BENEFICIO EN CUALQUIER MOMENTO. DICHAS MODIFICACIONES SERÁN COMUNICADAS POR LOS MEDIOS HABILITADOS POR EL BANCO A TAL EFECTO. VIGENCIA DEL BENEFICIO DESDE EL 10/04/2026 AL 31/12/2026. BANCO DE LA NACIÓN ARGENTINA – BARTOLOMÉ MITRE 326, CABA – CUIT 30-50001091-2.",
         "plazoMinDias": 0
       },
@@ -884,7 +884,7 @@
         "tna": 14,
         "tea": 15.02,
         "tope": 1000000,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "",
         "plazoMinDias": 0
       },
@@ -893,7 +893,7 @@
         "tna": 14,
         "tea": 15.02,
         "tope": null,
-        "fecha": "2026-11-18",
+        "fecha": "2026-11-19",
         "condiciones": "Cuenta remunerada en pesos para clientes con Cuenta Hit IOL.",
         "plazoMinDias": 0
       }
@@ -1790,212 +1790,242 @@
       {
         "fondo": "Mercado Fondo - Clase A",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 8841259830421,
-        "variacionDiaria": 1261706468.789
+        "fecha": "2026-11-18",
+        "patrimonio": 8745490656240,
+        "cuota": 26484.999,
+        "cuotasPartes": 330205436528
       },
       {
         "fondo": "Fima Premium - Clase B",
         "horizonte": "corto",
         "fecha": "2026-11-17",
         "patrimonio": 4772187190999,
-        "variacionDiaria": 42680368.87
+        "cuota": 105741.178,
+        "cuotasPartes": 45130830559
       },
       {
         "fondo": "Fima Premium - Clase A",
         "horizonte": "corto",
         "fecha": "2026-11-17",
         "patrimonio": 3653958137428,
-        "variacionDiaria": 47886576.868
+        "cuota": 87352.318,
+        "cuotasPartes": 41830122258
       },
       {
         "fondo": "FBA Money Market Pesos - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 3620998110847,
-        "variacionDiaria": 8855932.736
+        "fecha": "2026-11-18",
+        "patrimonio": 3576778048488,
+        "cuota": 202308.557,
+        "cuotasPartes": 17679815921
       },
       {
         "fondo": "Pionero Pesos Plus - Clase B",
         "horizonte": "corto",
         "fecha": "2026-11-17",
         "patrimonio": 2607947830200,
-        "variacionDiaria": 61225757.408
+        "cuota": 65265.251,
+        "cuotasPartes": 39959209514
       },
       {
         "fondo": "Super Ahorro $ - Clase A",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 2340592450796,
-        "variacionDiaria": 552313087.54
+        "fecha": "2026-11-18",
+        "patrimonio": 2380090697773,
+        "cuota": 20595.796,
+        "cuotasPartes": 115561967583
       },
       {
         "fondo": "Pellegrini Renta Pesos - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 2198505563549,
-        "variacionDiaria": 280889875.42
+        "fecha": "2026-11-18",
+        "patrimonio": 2272849515481,
+        "cuota": 27992.305,
+        "cuotasPartes": 81195511534
       },
       {
         "fondo": "Super Ahorro $ - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 2076432511995,
-        "variacionDiaria": 331215099.005
+        "fecha": "2026-11-18",
+        "patrimonio": 2072624303478,
+        "cuota": 25051.15,
+        "cuotasPartes": 82735693495
       },
       {
         "fondo": "Alpha Pesos - Clase A",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 1845371584861,
-        "variacionDiaria": 16081603.375
+        "fecha": "2026-11-18",
+        "patrimonio": 1846297301645,
+        "cuota": 107175.05,
+        "cuotasPartes": 17226931969
       },
       {
         "fondo": "1822 Raices Ahorro Pesos - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 1643630401637,
-        "variacionDiaria": 106058579.001
-      },
-      {
-        "fondo": "Lombard Renta en Pesos - Clase B",
-        "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 1570607935887,
-        "variacionDiaria": 2363432.578
+        "fecha": "2026-11-18",
+        "patrimonio": 1686461116796,
+        "cuota": 39387.881,
+        "cuotasPartes": 42816751571
       },
       {
         "fondo": "1810 Ahorro",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 1570168260612,
-        "variacionDiaria": 2588238.656
+        "fecha": "2026-11-18",
+        "patrimonio": 1619166992909,
+        "cuota": 246425.354,
+        "cuotasPartes": 6570618509
+      },
+      {
+        "fondo": "Lombard Renta en Pesos - Clase B",
+        "horizonte": "corto",
+        "fecha": "2026-11-18",
+        "patrimonio": 1597775128986,
+        "cuota": 257924.743,
+        "cuotasPartes": 6194733826
       },
       {
         "fondo": "Super Ahorro Plus - Clase A",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 1453657627281,
-        "variacionDiaria": 317716.765
+        "fecha": "2026-11-18",
+        "patrimonio": 1468135560650,
+        "cuota": 676621.555,
+        "cuotasPartes": 2169803120
       },
       {
         "fondo": "Fima Premium - Clase C",
         "horizonte": "corto",
         "fecha": "2026-11-17",
         "patrimonio": 1027568270187,
-        "variacionDiaria": 8892685.387
+        "cuota": 107494.548,
+        "cuotasPartes": 9559259457
       },
       {
         "fondo": "Super Ahorro $ - Clase H",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 1005124431790,
-        "variacionDiaria": 410490640.228
-      },
-      {
-        "fondo": "IAM Ahorro Pesos - Clase B",
-        "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 772291634815,
-        "variacionDiaria": 25393613.973
+        "fecha": "2026-11-18",
+        "patrimonio": 999527822026,
+        "cuota": 15656.047,
+        "cuotasPartes": 63842923183
       },
       {
         "fondo": "Delta Pesos - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 650773411096,
-        "variacionDiaria": 5917762.343
+        "fecha": "2026-11-18",
+        "patrimonio": 715849338094,
+        "cuota": 104918.874,
+        "cuotasPartes": 6822884310
       },
       {
         "fondo": "Allaria Ahorro - Clase C",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 610774403021,
-        "variacionDiaria": 51155460.339
+        "fecha": "2026-11-18",
+        "patrimonio": 682690051658,
+        "cuota": 34572.017,
+        "cuotasPartes": 19746896612
       },
       {
-        "fondo": "Premier Renta CP en Pesos - Clase C",
+        "fondo": "IAM Ahorro Pesos - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 572500504055,
-        "variacionDiaria": 80065786
+        "fecha": "2026-11-18",
+        "patrimonio": 663750979890,
+        "cuota": 55177.807,
+        "cuotasPartes": 12029310721
       },
       {
         "fondo": "MEGAQM Pesos - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 565574198786,
-        "variacionDiaria": 16333322.138
+        "fecha": "2026-11-18",
+        "patrimonio": 580524117517,
+        "cuota": 58876.478,
+        "cuotasPartes": 9860034711
+      },
+      {
+        "fondo": "Premier Renta CP en Pesos - Clase C",
+        "horizonte": "corto",
+        "fecha": "2026-11-18",
+        "patrimonio": 572821593266,
+        "cuota": 26755.168,
+        "cuotasPartes": 21409754829
       },
       {
         "fondo": "Pionero Pesos Plus - Clase A",
         "horizonte": "corto",
         "fecha": "2026-11-17",
         "patrimonio": 522839233636,
-        "variacionDiaria": 14144197.096
+        "cuota": 60798.575,
+        "cuotasPartes": 8599531078
       },
       {
         "fondo": "FBA Money Market Pesos - Clase A",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 488587465260,
-        "variacionDiaria": 1449565.651
-      },
-      {
-        "fondo": "Allaria Ahorro - Clase B",
-        "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 424254507019,
-        "variacionDiaria": 3315852.042
+        "fecha": "2026-11-18",
+        "patrimonio": 490916350486,
+        "cuota": 183678.421,
+        "cuotasPartes": 2672694743
       },
       {
         "fondo": "Max Money Market - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 400493692575,
-        "variacionDiaria": 1200748209.753
+        "fecha": "2026-11-18",
+        "patrimonio": 445879120113,
+        "cuota": 5778.281,
+        "cuotasPartes": 77164660236
       },
       {
         "fondo": "Adcap Ahorro Pesos Fondo de Dinero - Clase C",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 390651517170,
-        "variacionDiaria": 85887612.841
-      },
-      {
-        "fondo": "Delta Pesos - Clase X",
-        "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 383471582393,
-        "variacionDiaria": 1022911013.152
-      },
-      {
-        "fondo": "Premier Renta CP en Pesos - Clase A",
-        "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 383144204264,
-        "variacionDiaria": 1016646.932
-      },
-      {
-        "fondo": "Adcap Ahorro Pesos Fondo de Dinero - Clase B",
-        "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 364559141034,
-        "variacionDiaria": 82547068.818
+        "fecha": "2026-11-18",
+        "patrimonio": 438214626841,
+        "cuota": 21339.189,
+        "cuotasPartes": 20535674226
       },
       {
         "fondo": "Toronto Trust Ahorro - Clase B",
         "horizonte": "corto",
-        "fecha": "2026-11-17",
-        "patrimonio": 360973596325,
-        "variacionDiaria": 9472700.919
+        "fecha": "2026-11-18",
+        "patrimonio": 416520701589,
+        "cuota": 61767.04,
+        "cuotasPartes": 6743413685
+      },
+      {
+        "fondo": "Adcap Ahorro Pesos Fondo de Dinero - Clase B",
+        "horizonte": "corto",
+        "fecha": "2026-11-18",
+        "patrimonio": 403700633900,
+        "cuota": 21027.027,
+        "cuotasPartes": 19199130231
+      },
+      {
+        "fondo": "Allaria Ahorro - Clase B",
+        "horizonte": "corto",
+        "fecha": "2026-11-18",
+        "patrimonio": 394385087117,
+        "cuota": 113169.896,
+        "cuotasPartes": 3484893961
+      },
+      {
+        "fondo": "Premier Renta CP en Pesos - Clase A",
+        "horizonte": "corto",
+        "fecha": "2026-11-18",
+        "patrimonio": 383351194385,
+        "cuota": 194226.845,
+        "cuotasPartes": 1973729194
+      },
+      {
+        "fondo": "Delta Pesos - Clase X",
+        "horizonte": "corto",
+        "fecha": "2026-11-18",
+        "patrimonio": 381004695477,
+        "cuota": 6125.975,
+        "cuotasPartes": 62194945353
       },
       {
         "fondo": "Fima Premium - Clase N",
         "horizonte": "corto",
         "fecha": "2026-11-17",
         "patrimonio": 330312555138,
-        "variacionDiaria": 3649360.727
+        "cuota": 95136.724,
+        "cuotasPartes": 3471977379
       }
     ],
     "inflacion": [
@@ -3931,14 +3961,10 @@
       }
     ],
     "riesgo_pais": {
-      "valor": 854,
-      "fecha": "2026-11-17",
-      "anterior": 855,
+      "valor": 848,
+      "fecha": "2026-11-18",
+      "anterior": 854,
       "serie": [
-        {
-          "fecha": "2025-04-29",
-          "valor": 701
-        },
         {
           "fecha": "2025-04-30",
           "valor": 726
@@ -5534,18 +5560,18 @@
         {
           "fecha": "2026-11-17",
           "valor": 854
+        },
+        {
+          "fecha": "2026-11-18",
+          "valor": 848
         }
       ]
     },
     "uva": {
-      "valor": 2203.58,
-      "fecha": "2026-11-19",
-      "anterior": 2201.98,
+      "valor": 2205.17,
+      "fecha": "2026-11-20",
+      "anterior": 2203.58,
       "serie": [
-        {
-          "fecha": "2025-10-16",
-          "valor": 1615.64
-        },
         {
           "fecha": "2025-10-17",
           "valor": 1616.73
@@ -7141,6 +7167,10 @@
         {
           "fecha": "2026-11-19",
           "valor": 2203.58
+        },
+        {
+          "fecha": "2026-11-20",
+          "valor": 2205.17
         }
       ]
     },
@@ -7745,6 +7775,11 @@
           "fecha": "2026-11-18",
           "compra": 1585,
           "venta": 1605
+        },
+        {
+          "fecha": "2026-11-19",
+          "compra": 1610,
+          "venta": 1630
         }
       ],
       "bolsa": [
@@ -8347,6 +8382,11 @@
           "fecha": "2026-11-18",
           "compra": 1591.5,
           "venta": 1603.3
+        },
+        {
+          "fecha": "2026-11-19",
+          "compra": 1620.9,
+          "venta": 1628.8
         }
       ],
       "contadoconliqui": [
@@ -8949,6 +8989,11 @@
           "fecha": "2026-11-18",
           "compra": 1694.2,
           "venta": 1697.2
+        },
+        {
+          "fecha": "2026-11-19",
+          "compra": 1721.1,
+          "venta": 1724.1
         }
       ],
       "oficial": [
@@ -9551,6 +9596,11 @@
           "fecha": "2026-11-18",
           "compra": 1525,
           "venta": 1575
+        },
+        {
+          "fecha": "2026-11-19",
+          "compra": 1530,
+          "venta": 1580
         }
       ]
     },
@@ -9853,8 +9903,8 @@
         "variacion": 0.13,
         "tipo": "Oficial",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "banco-hipotecario",
@@ -9865,8 +9915,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "banco-supervielle",
@@ -9877,7 +9927,7 @@
         "variacion": 0.06,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": true,
+        "stale": true,
         "actualizado": "2026-11-05T02:02:38.234Z"
       },
       {
@@ -9889,8 +9939,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "banco-nacion",
@@ -9901,8 +9951,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "banco-provincia",
@@ -9913,8 +9963,8 @@
         "variacion": 0.16,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "cocos-bank",
@@ -9925,8 +9975,8 @@
         "variacion": 0.03,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "icbc",
@@ -9937,8 +9987,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "reba",
@@ -9949,8 +9999,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "bancor",
@@ -9961,8 +10011,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "brubank-ultra",
@@ -9973,8 +10023,8 @@
         "variacion": 0.16,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "uala",
@@ -9985,8 +10035,8 @@
         "variacion": 0.03,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "banco-bica",
@@ -9997,8 +10047,8 @@
         "variacion": 0.26,
         "tipo": "Oficial",
         "esBanco": true,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "plus",
@@ -10009,8 +10059,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "tiendadolar",
@@ -10021,8 +10071,8 @@
         "variacion": 0.32,
         "tipo": "Oficial",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "fiwind-mep",
@@ -10033,8 +10083,8 @@
         "variacion": -0.46,
         "tipo": "MEP",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "fiwind-cripto",
@@ -10045,20 +10095,20 @@
         "variacion": 0.15,
         "tipo": "Cripto",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "nexo",
         "nombre": "Nexo",
         "logo": "https://api.argentinadatos.com/static/logos/nexo.png",
-        "compra": 1605.91,
-        "venta": 1631.81,
-        "variacion": -0.03,
+        "compra": 1604.7,
+        "venta": 1632.21,
+        "variacion": -0.06,
         "tipo": "Cripto",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "cocos",
@@ -10069,8 +10119,8 @@
         "variacion": -0.12,
         "tipo": "MEP",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "plus-inversiones",
@@ -10081,8 +10131,8 @@
         "variacion": -0.26,
         "tipo": "MEP",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "plus-crypto",
@@ -10093,68 +10143,68 @@
         "variacion": 0.16,
         "tipo": "CCL",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "ripio",
         "nombre": "Ripio",
         "logo": "https://api.argentinadatos.com/static/logos/ripio.png",
-        "compra": 1584.49,
-        "venta": 1722.04,
-        "variacion": 0.03,
+        "compra": 1585.32,
+        "venta": 1723.47,
+        "variacion": 0.04,
         "tipo": "Cripto",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "wallbit",
         "nombre": "Wallbit",
         "logo": "https://api.argentinadatos.com/static/logos/wallbit.png",
-        "compra": 1693.29,
-        "venta": 1732.82,
+        "compra": 1693.36,
+        "venta": 1734.54,
         "variacion": 0,
         "tipo": "CCL",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "wallbit-pro",
         "nombre": "Wallbit Pro",
         "logo": "https://api.argentinadatos.com/static/logos/wallbit.png",
-        "compra": 1697.52,
-        "venta": 1732.82,
+        "compra": 1697.59,
+        "venta": 1734.54,
         "variacion": 0,
         "tipo": "CCL",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "grabrfi",
         "nombre": "GrabrFi",
         "logo": "https://api.argentinadatos.com/static/logos/grabr.svg",
         "compra": 1677.74,
-        "venta": 1735.85,
-        "variacion": 0,
+        "venta": 1737.46,
+        "variacion": 0.01,
         "tipo": "Cripto",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "eluter",
         "nombre": "Eluter",
         "logo": "https://www.eluter.com/brand/elutericon.svg",
-        "compra": 1700.55,
-        "venta": 1738.36,
-        "variacion": -0.12,
+        "compra": 1700.75,
+        "venta": 1738.56,
+        "variacion": 0.01,
         "tipo": "Cripto",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "global66",
@@ -10165,8 +10215,8 @@
         "variacion": 0.06,
         "tipo": "CCL",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "astropay",
@@ -10177,8 +10227,8 @@
         "variacion": 0.01,
         "tipo": "CCL",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       },
       {
         "slug": "takenos",
@@ -10189,8 +10239,8 @@
         "variacion": 0.02,
         "tipo": "Cripto",
         "esBanco": false,
-        "estale": false,
-        "actualizado": "2026-11-19T02:26:50.505Z"
+        "stale": false,
+        "actualizado": "2026-11-19T10:46:50.344Z"
       }
     ],
     "ccl": {
@@ -10206,60 +10256,268 @@
     "news": {
       "articles": [
         {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "PNC de Anses: cuál es el monto de las Pensiones No Contributivas en diciembre de 2026 con el bono, el aguinaldo y el aumento",
+          "link": "https://www.lanacion.com.ar/economia/pnc-de-anses-cual-es-el-monto-de-las-pensiones-no-contributivas-en-diciembre-de-2026-con-el-bono-el-nid18112026/",
+          "date": 1795084962000,
+          "description": "Las pensiones aumentan un 2,17%; cuáles son las cifras con el bono y la segunda cuota del aguinaldo"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Monto de la Asignación Universal por Hijo: de cuánto es la AUH en diciembre 2026, con el aumento oficial",
+          "link": "https://www.lanacion.com.ar/economia/monto-de-la-asignacion-universal-por-hijo-de-cuanto-es-la-auh-en-diciembre-2026-con-el-aumento-nid17112026/",
+          "date": 1795084959000,
+          "description": "Este mes, el incremento en la prestación es del 2,17%, cuáles son los nuevos valores, según el caso"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Jubilaciones de Anses: cuánto cobro en diciembre 2026 con el aumento, el bono y el aguinaldo",
+          "link": "https://www.lanacion.com.ar/economia/jubilaciones-de-anses-cuanto-cobro-en-noviembre-2026-con-el-aumento-el-bono-y-el-aguinaldo-nid16112026/",
+          "date": 1795084955000,
+          "description": "Para la actualización de haberes se toma el 2,17%, del último índice de inflación que publicó el Indec; cuáles son las cifras para el último mes del año"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Calendario de pago del IPS: cuándo cobro la jubilación del Instituto de Previsión Social en noviembre 2026",
+          "link": "https://www.lanacion.com.ar/economia/calendario-de-pago-del-ips-cuando-cobro-la-jubilacion-en-noviembre-2026-nid17112026/",
+          "date": 1795084953000,
+          "description": "La prestación de los pensionados de la provincia de Buenos Aires se cobra según la terminación del DNI del beneficiario en dos jornadas a fines del anteúltimo mes del año"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Fecha límite: hasta qué día me pueden pagar el aguinaldo en diciembre 2026",
+          "link": "https://www.lanacion.com.ar/economia/fecha-limite-hasta-que-dia-me-pueden-pagar-el-aguinaldo-en-diciembre-2026-nid18112026/",
+          "date": 1795084941000,
+          "description": "Qué dice la Ley de Contrato de Trabajo acerca de la fecha en el calendario que se puede percibir este salario"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Cómo se calcula el aguinaldo de diciembre 2026 en la Argentina",
+          "link": "https://www.lanacion.com.ar/economia/como-se-calcula-el-aguinaldo-de-diciembre-2026-en-la-argentina-nid16112026/",
+          "date": 1795084939000,
+          "description": "En el último mes del año se entrega un monto adicional; así se puede calcular con exactitud, según el tiempo trabajado"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Aguinaldo de diciembre 2026: cuándo se paga y el cálculo para saber cuánto se cobra",
+          "link": "https://www.lanacion.com.ar/economia/aguinaldo-2026-cuando-se-paga-en-la-argentina-y-cual-es-el-calculo-nid10112026/",
+          "date": 1795084936000,
+          "description": "La fecha exacta de cobro del SAC está prevista en la legislación; la segunda cuota de este concepto se entrega en diciembre y corresponde al 50% del sueldo de mayor remuneración mensual"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Cuándo se cobra el aguinaldo de diciembre 2026 en la Argentina: fecha de pago y a quiénes les corresponde",
+          "link": "https://www.lanacion.com.ar/economia/cuando-se-cobra-el-aguinaldo-de-diciembre-2026-en-la-argentina-fecha-de-pago-y-a-quienes-les-nid02112026/",
+          "date": 1795084934000,
+          "description": "La legislación establece una fecha límite para abonar el SAC de la segunda mitad del año; a quiénes les corresponde y cómo se calcula este concepto"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Paritaria con aumento: cuánto gana el personal de la Policía Federal Argentina en noviembre 2026",
+          "link": "https://www.lanacion.com.ar/economia/paritaria-con-aumento-cuanto-gana-el-personal-de-la-policia-federal-argentina-en-noviembre-2026-nid18112026/",
+          "date": 1795084927000,
+          "description": "Los distintos cargos jerárquicos cuentan con nuevos valores para el penúltimo mes del año; a continuación, el detalle"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Paritaria con aumento: cuánto gana el personal de la Gendarmería Nacional Argentina en noviembre de 2026",
+          "link": "https://www.lanacion.com.ar/economia/paritaria-con-aumento-cuanto-gana-el-personal-de-la-gendarmeria-nacional-argentina-en-noviembre-de-nid17112026/",
+          "date": 1795084855000,
+          "description": "La grilla salarial actualiza los valores con un incremento para este mes; cuáles son las cifras para cada cargo jerárquico"
+        },
+        {
+          "source": "Ámbito",
+          "category": "Mercados",
+          "title": "Dólar hoy y dólar blue hoy minuto a minuto: a cuánto opera este jueves 19 de noviembre",
+          "link": "https://www.ambito.com/finanzas/dolar-hoy-y-dolar-blue-hoy-minuto-minuto-cuanto-opera-este-jueves-19-noviembre-n6346965",
+          "date": 1795084320000,
+          "description": "Conocé las cotizaciones dólar blue, el oficial, el MEP y el CCL."
+        },
+        {
+          "source": "iProfesional",
+          "category": "Economía",
+          "title": "Camioneros acordó premio por presentismo en Quilmes y quiere extenderlo a Coca-Cola",
+          "link": "https://www.iprofesional.com/economia/469509-camioneros-acordo-premio-por-presentismo-en-quilmes-y-quiere-extenderlo-a-coca-cola",
+          "date": 1795084200000,
+          "description": "]]>"
+        },
+        {
           "source": "Investing.com",
           "category": "Mercados",
-          "title": "Acciones de Sunrise Energy Metals caen 10% a mínimo de siete meses",
-          "link": "https://es.investing.com/news/stock-market-news/acciones-de-sunrise-energy-metals-caen-10-a-minimo-de-siete-meses-3935290",
-          "date": 1795065218000,
+          "title": "¿Por qué cae hoy la acción de Universal Technical Institute Inc?",
+          "link": "https://es.investing.com/news/stock-market-news/por-que-cae-hoy-la-accion-de-universal-technical-institute-inc-93CH-3935758",
+          "date": 1795083349000,
           "description": ""
         },
         {
           "source": "Investing.com",
           "category": "Mercados",
-          "title": "¿Por qué cae el Dólar australiano Dólar hoy?",
-          "link": "https://es.investing.com/news/stock-market-news/por-que-cae-el-dolar-australiano-dolar-hoy-93CH-3935286",
-          "date": 1795064908000,
+          "title": "¿Por qué se dispara hoy la acción de Palo Alto Networks?",
+          "link": "https://es.investing.com/news/stock-market-news/por-que-se-dispara-hoy-la-accion-de-palo-alto-networks-93CH-3935757",
+          "date": 1795083336000,
+          "description": ""
+        },
+        {
+          "source": "Ámbito",
+          "category": "Economía",
+          "title": "El Gobierno sumó $15,6 billones al Presupuesto 2026 y recorta el superávit de fin de año",
+          "link": "https://www.ambito.com/economia/el-gobierno-sumo-156-billones-al-presupuesto-2026-y-recorta-el-superavit-fin-ano-n6346959",
+          "date": 1795083300000,
+          "description": "La ampliación equivale al 10,2% del crédito vigente. PAMI y los intereses de deuda se llevan la mayor parte, mientras que Servicios Económicos pierde unos $2,3 billones."
+        },
+        {
+          "source": "Investing.com",
+          "category": "Mercados",
+          "title": "Director ejecutivo de Deutsche Bank AG NA O.N. dice que los clientes mantienen la calma tras la filtración de datos",
+          "link": "https://es.investing.com/news/stock-market-news/director-ejecutivo-de-deutsche-bank-ag-na-on-dice-que-los-clientes-mantienen-la-calma-tras-la-filtracion-de-datos-93CH-3935748",
+          "date": 1795082607000,
+          "description": ""
+        },
+        {
+          "source": "Ámbito",
+          "category": "Economía",
+          "title": "Argentina pierde interés entre los fondos de inversión latinoamericanos",
+          "link": "https://www.ambito.com/economia/argentina-pierde-interes-los-fondos-inversion-latinoamericanos-n6346930",
+          "date": 1795082400000,
+          "description": "Los principales gestores de fondos de inversiones para la región han adoptado una postura defensiva de cara al 2027. Pero además han modificado sus preferencias. Así hoy les gusta más México que Brasil. Mientras los activos argentinos tambi…"
+        },
+        {
+          "source": "iProfesional",
+          "category": "Economía",
+          "title": "La Ciy prevé repunte bursátil y un dólar más calmo si Milei logra sepultar las PASO",
+          "link": "https://www.iprofesional.com/finanzas/469510-la-ciy-preve-repunte-bursatil-y-un-dolar-mas-calmo-si-milei-logra-sepultar-las-paso",
+          "date": 1795082400000,
+          "description": "]]>"
+        },
+        {
+          "source": "Investing.com",
+          "category": "Mercados",
+          "title": "Tereos recorta previsiones de beneficio tras mala cosecha de remolacha en Francia",
+          "link": "https://es.investing.com/news/stock-market-news/tereos-recorta-previsiones-de-beneficio-tras-mala-cosecha-de-remolacha-en-francia-93CH-3935736",
+          "date": 1795081399000,
           "description": ""
         },
         {
           "source": "Investing.com",
           "category": "Mercados",
-          "title": "Datasection de Japón se desploma tras recortar drásticamente sus previsiones",
-          "link": "https://es.investing.com/news/stock-market-news/datasection-de-japon-se-desploma-tras-recortar-drasticamente-sus-previsiones-3935282",
-          "date": 1795064000000,
+          "title": "Las acciones de Close Brothers caen un 10% por presión en márgenes",
+          "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-close-brothers-caen-un-10-por-presion-en-margenes-3935730",
+          "date": 1795080680000,
           "description": ""
         },
         {
           "source": "Investing.com",
           "category": "Mercados",
-          "title": "Los futuros de Wall Street suben antes de la mega OPV de Anthropic",
-          "link": "https://es.investing.com/news/stock-market-news/los-futuros-de-wall-street-suben-antes-de-la-mega-opv-de-anthropic-3935273",
-          "date": 1795063049000,
+          "title": "¿Por qué se desploman hoy las acciones de PayPoint plc?",
+          "link": "https://es.investing.com/news/stock-market-news/por-que-se-desploman-hoy-las-acciones-de-paypoint-plc-93CH-3935717",
+          "date": 1795080506000,
           "description": ""
         },
         {
           "source": "Investing.com",
           "category": "Mercados",
-          "title": "Corte en la NSA afecta a instalación en Georgia vinculada a Oriente Próximo",
-          "link": "https://es.investing.com/news/stock-market-news/corte-en-la-nsa-afecta-a-instalacion-en-georgia-vinculada-a-oriente-proximo-93CH-3935242",
-          "date": 1795059657000,
+          "title": "¿Por qué cae hoy la acción de Medios AG?",
+          "link": "https://es.investing.com/news/stock-market-news/por-que-cae-hoy-la-accion-de-medios-ag-93CH-3935716",
+          "date": 1795080453000,
           "description": ""
         },
         {
           "source": "Investing.com",
           "category": "Mercados",
-          "title": "¿Por qué cae hoy la acción de Sunrise Energy Metals?",
-          "link": "https://es.investing.com/news/stock-market-news/por-que-cae-hoy-la-accion-de-sunrise-energy-metals-93CH-3935240",
-          "date": 1795059445000,
+          "title": "Las acciones de Medios AG suben un 8% tras anunciar nuevo programa de recompra",
+          "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-medios-ag-suben-un-8-tras-anunciar-nuevo-programa-de-recompra-93CH-3935715",
+          "date": 1795080091000,
           "description": ""
         },
         {
           "source": "Investing.com",
           "category": "Mercados",
-          "title": "Director ejecutivo de Cintas se reunió con Trump para impulsar acuerdo de 5.000 millones de dólares con UniFirst",
-          "link": "https://es.investing.com/news/stock-market-news/director-ejecutivo-de-cintas-se-reunio-con-trump-para-impulsar-acuerdo-de-5000-millones-de-dolares-con-unifirst-93CH-3935230",
-          "date": 1795058486000,
+          "title": "Tensión bursátil: pendientes de la OPV de Anthropic tras la resaca de Nvidia",
+          "link": "https://es.investing.com/news/stock-market-news/tension-bursatil-pendientes-de-la-opv-de-anthropic-tras-la-resaca-de-nvidia-3935711",
+          "date": 1795079795000,
           "description": ""
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Fecha de cobro de Anses: el cronograma de pagos para este jueves 19 de noviembre",
+          "link": "https://www.lanacion.com.ar/economia/fecha-de-cobro-de-anses-el-cronograma-de-pagos-para-este-jueves-19-de-noviembre-nid19112026/",
+          "date": 1795079580000,
+          "description": "El organismo previsional continúa con el calendario de pagos de jubilaciones mínimas, entre otras asignaciones sociales"
+        },
+        {
+          "source": "Investing.com",
+          "category": "Mercados",
+          "title": "Las acciones de PayPoint plc caen un 15% tras el descenso de beneficios",
+          "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-paypoint-plc-caen-un-15-tras-el-descenso-de-beneficios-93CH-3935698",
+          "date": 1795079008000,
+          "description": ""
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "El fundador de un unicornio argentino vendido por US$1100 millones invirtió en una empresa vinculada con el agro",
+          "link": "https://www.lanacion.com.ar/economia/campo/el-fundador-de-un-unicornio-argentino-vendido-por-us1100-millones-invirtio-en-una-empresa-vinculada-nid19112026/",
+          "date": 1795078801000,
+          "description": "Germán Pugliese Bassi, uno de los creadores de Technisys, se incorporó a SiloReal a través de su fondo Persea Ventures; la compañía argentina desarrolló una tecnología para verificar granos y hacienda que pueden utilizarse como garantía en …"
+        },
+        {
+          "source": "La Nación",
+          "category": "Economía",
+          "title": "Antes que la NASA: los príncipes de Gales compartieron la historia del argentino que creó un sistema para detectar incendios forestales",
+          "link": "https://www.lanacion.com.ar/economia/campo/antes-que-la-nasa-los-principes-de-gales-compartieron-la-historia-del-argentino-que-creo-un-sistema-nid19112026/",
+          "date": 1795078800000,
+          "description": "Guillermo y Kate difundieron en su cuenta oficial de Instagram un video de Franco Rodríguez Viau en el marco de la final del Earthshot Prize 2026; el emprendedor contó cómo Satellites on Fire nació como un proyecto de secundaria y llegó a m…"
+        },
+        {
+          "source": "Ámbito",
+          "category": "Mercados",
+          "title": "Dólar blue hoy: a cuánto opera este jueves 19 de noviembre",
+          "link": "https://www.ambito.com/finanzas/dolar-blue-hoy-cuanto-opera-este-jueves-19-noviembre-n6346956",
+          "date": 1795057260000,
+          "description": "Conocé las cotizaciones dólar blue, el oficial, el MEP y el CCL."
+        },
+        {
+          "source": "Ámbito",
+          "category": "Mercados",
+          "title": "Dólar hoy: a cuánto cotiza este jueves 19 de noviembre",
+          "link": "https://www.ambito.com/finanzas/dolar-hoy-cuanto-cotiza-este-jueves-19-noviembre-n6346955",
+          "date": 1795057260000,
+          "description": "Conocé las cotizaciones dólar blue, el oficial, el MEP y el CCL."
+        },
+        {
+          "source": "Ámbito",
+          "category": "Economía",
+          "title": "La devaluación del real abarata fuerte las vacaciones en Brasil y pone en riesgo al 35% de las exportaciones regionales",
+          "link": "https://www.ambito.com/economia/la-devaluacion-del-real-abarata-fuerte-las-vacaciones-brasil-y-pone-riesgo-al-35-las-exportaciones-regionales-n6346786",
+          "date": 1795057200000,
+          "description": "La depreciación de la moneda brasileña agrega aún más presión al turismo interno, ya golpeado por los bajos niveles de consumo. Asimismo, el bajo tipo de cambio real y el menor crecimiento esperado para Brasil también puede impactar en el c…"
+        },
+        {
+          "source": "Ámbito",
+          "category": "Negocios",
+          "title": "Sebastián Aveille, de Microsoft, sobre la adopción de IA en las empresas: \"Todos los directores están preguntando cómo aceleramos\"",
+          "link": "https://www.ambito.com/negocios/sebastian-aveille-microsoft-la-adopcion-ia-las-empresas-todos-los-directores-estan-preguntando-como-aceleramos-n6346121",
+          "date": 1795057200000,
+          "description": "El country manager de Microsoft Argentina analiza el avance de la inteligencia artificial en el sector privado, los obstáculos para llevarla a gran escala y el potencial del talento local. Además, explica qué factores definen las inversione…"
+        },
+        {
+          "source": "Derecha Diario",
+          "category": "Política",
+          "title": "Kicillof prevé gastar casi $120 millones en luces, sonido y pantallas para un evento de Lotería",
+          "link": "https://derechadiario.com.ar/politica/kicillof-preve-gastar-casi-120-millones-en-luces-sonido-pantallas-evento-loteria",
+          "date": 1795056978000,
+          "description": "Luis Gasulla reveló la millonaria licitación mientras Kicillof y La Cámpora se enfrentan por la regulación de apuestas."
         },
         {
           "source": "Derecha Diario",
@@ -10270,28 +10528,12 @@
           "description": "El fiscal Stornelli busca determinar si el dirigente recibió instrucciones de la organización iraní y si cometió delitos penales."
         },
         {
-          "source": "Investing.com",
-          "category": "Mercados",
-          "title": "Las acciones de First US Bancshares suben por la ampliación de su recompra",
-          "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-first-us-bancshares-suben-por-la-ampliacion-de-su-recompra-3935192",
-          "date": 1795053202000,
-          "description": ""
-        },
-        {
-          "source": "Investing.com",
-          "category": "Mercados",
-          "title": "Las acciones de Markel Group suben tras ampliar recompra en 2.500 millones",
-          "link": "https://es.investing.com/news/stock-market-news/las-acciones-de-markel-group-suben-tras-ampliar-recompra-en-2500-millones-3935190",
-          "date": 1795053105000,
-          "description": ""
-        },
-        {
-          "source": "Investing.com",
-          "category": "Mercados",
-          "title": "Moody’s rebaja la perspectiva crediticia de Nvidia a estable tras la salida del director ejecutivo Jensen Huang",
-          "link": "https://es.investing.com/news/stock-market-news/moodys-rebaja-la-perspectiva-crediticia-de-nvidia-a-estable-tras-la-salida-del-director-ejecutivo-jensen-huang-3935180",
-          "date": 1795052645000,
-          "description": ""
+          "source": "Clarín",
+          "category": "Economía",
+          "title": "Anthropic recauda cerca de US$ 80.000 millones horas antes de su salida a la bolsa y superará el récord de SpaceX",
+          "link": "https://www.clarin.com/economia/anthropic-recauda-cerca-us-80000-millones-horas-salida-bolsa-superara-record-spacex_0_H33hyi3a8G.html",
+          "date": 1795053726000,
+          "description": "La empresa estadounidense de inteligencia artificial creadora de Claude confirmó en un comunicado lo que vendió en una oferta pública inicial ampliada. Este jueves cotizará formalmente en el mercado."
         },
         {
           "source": "Ámbito",
@@ -10492,201 +10734,9 @@
           "link": "https://www.ambito.com/politica/el-colegio-abogados-cuestiono-la-abstencion-argentina-la-onu-la-violencia-genero-n6346895",
           "date": 1795040760000,
           "description": "La presidenta de la entidad, Alejandra García, cuestionó la decisión del Gobierno nacional de no acompañar una resolución que recibió el respaldo de 175 países. Argentina fue el único Estado latinoamericano que se abstuvo."
-        },
-        {
-          "source": "Ámbito",
-          "category": "Mercados",
-          "title": "Los bonos en dólares rebotaron y el riesgo país perforó los 850 puntos, pero los ADRs se hundieron hasta 7%",
-          "link": "https://www.ambito.com/finanzas/los-bonos-dolares-suben-pero-el-riesgo-pais-se-mantiene-encima-los-850-puntos-n6346590",
-          "date": 1795040580000,
-          "description": "El Merval avanzó levemente en pesos, pero cayó más de 1% en dólares y acumula una pérdida del 34% desde julio. La mirada del mercado está puesta en el Congreso, la Fed y el escenario internacional. Qué acciones recomiendan los expertos y lo…"
-        },
-        {
-          "source": "Ámbito",
-          "category": "Economía",
-          "title": "\"Oportunidad estratégica\": empresarios pidieron a Diputados que apruebe la nueva Ley de Biocombustibles",
-          "link": "https://www.ambito.com/economia/oportunidad-estrategica-empresarios-pidieron-diputados-que-apruebe-la-nueva-ley-biocombustibles-n6346873",
-          "date": 1795040040000,
-          "description": "La entidad sostuvo que el proyecto, que cuenta con media sanción del Senado, dará previsibilidad a las pymes y fortalecerá las economías regionales."
-        },
-        {
-          "source": "Ámbito",
-          "category": "Economía",
-          "title": "Domingo Cavallo cruzó a Javier Milei y le recordó sus elogios de 2020: \"¿Cuándo interpretaba bien, entonces o ahora?\"",
-          "link": "https://www.ambito.com/economia/domingo-cavallo-cruzo-javier-milei-y-le-recordo-sus-elogios-2020-cuando-interpretaba-bien-entonces-o-ahora-n6346880",
-          "date": 1795039680000,
-          "description": "El exministro cuestionó el cambio de postura del Presidente sobre su gestión en el Banco Central, la Convertibilidad y la crisis de 2001. Le recordó sus elogios de 2020 y le pidió que vuelva a ver aquella entrevista."
-        },
-        {
-          "source": "Ámbito",
-          "category": "Mercados",
-          "title": "Real blue: a cuánto operó este miércoles 18 de noviembre",
-          "link": "https://www.ambito.com/finanzas/real-blue-cuanto-opero-este-miercoles-18-noviembre-n6346887",
-          "date": 1795039560000,
-          "description": "La cotización minuto a minuto para la compra y venta de la divisa brasileña en nuestro país."
-        },
-        {
-          "source": "Ámbito",
-          "category": "Mercados",
-          "title": "Euro hoy y Euro blue hoy: a cuánto cotizó este miércoles 18 de noviembre",
-          "link": "https://www.ambito.com/finanzas/euro-hoy-y-euro-blue-hoy-cuanto-cotizo-este-miercoles-18-noviembre-n6346885",
-          "date": 1795039080000,
-          "description": "Mirá a cuánto cotizan el euro oficial y el euro blue."
-        },
-        {
-          "source": "La Nación",
-          "category": "Economía",
-          "title": "Debe más de $15.000 millones: se presentó en concurso de acreedores Agro de Souza, una importante firma del sudoeste bonaerense",
-          "link": "https://www.lanacion.com.ar/economia/campo/debe-mas-de-15000-millones-se-presento-en-concurso-de-acreedores-agro-de-souza-una-importante-firma-nid18112026/",
-          "date": 1795038904000,
-          "description": "La empresa, de Coronel Suárez, registra deudas con bancos y sociedades de garantía recíproca; ante la CNV dijo que mantendrá informados a los inversores sobre la evolución del proceso"
-        },
-        {
-          "source": "La Nación",
-          "category": "Economía",
-          "title": "Patricia Bullrich, antes del dictamen: “Es un hecho que se suspenden las PASO, ¡aplaudan!”",
-          "link": "https://www.lanacion.com.ar/economia/bullrich-antes-del-dictamen-es-un-hecho-que-se-suspenden-las-paso-aplaudan-nid18112026/",
-          "date": 1795038576000,
-          "description": "Festejó la cancelación de las primarias, la Ficha Limpia y el final de la obligatoriedad en los debates; dejó otra advertencia para el plan económico: “Sin plan platita, que se reactive la actividad”"
-        },
-        {
-          "source": "iProfesional",
-          "category": "Economía",
-          "title": "Nvidia presentó resultados récord tras el escándalo y la City avisa si conviene invertir",
-          "link": "https://www.iprofesional.com/finanzas/469484-la-city-anticipa-si-conviene-invertir-en-nvidia-tas-balance-record",
-          "date": 1795038480000,
-          "description": "]]>"
-        },
-        {
-          "source": "Clarín",
-          "category": "Economía",
-          "title": "Sacar un crédito personal en la Argentina es más caro que en otros 29 países",
-          "link": "https://www.clarin.com/economia/sacar-credito-personal-argentina-caro-29-paises_0_vcOzCrZ2aQ.html",
-          "date": 1795037799000,
-          "description": "Los impuestos nacionales, provinciales y municipales agregan una sobrecarga de 39%. Por cada $ 1.400 que el deudor paga de interés y demás costos a la hora de sacar un préstamo, casi $ 400 son impuestos. La Argentina el único país que aplic…"
-        },
-        {
-          "source": "Ámbito",
-          "category": "Política",
-          "title": "Eduardo Riggi es el nuevo Fiscal General Adjunto en lo Penal, Contravencional y de Faltas",
-          "link": "https://www.ambito.com/politica/eduardo-riggi-es-el-nuevo-fiscal-general-adjunto-lo-penal-contravencional-y-faltas-n6346870",
-          "date": 1795037760000,
-          "description": "Fue designado mediante la Resolución FG 113-26. Tiene una extensa trayectoria en el ámbito judicial y académico, con experiencia en fiscalías temáticas y docencia universitaria."
-        },
-        {
-          "source": "Clarín",
-          "category": "Economía",
-          "title": "Expectativa por la salida a bolsa de los creadores de Claude: ¿se podrá invertir desde Argentina?",
-          "link": "https://www.clarin.com/economia/expectativa-salida-bolsa-creadores-claude-podra-invertir-argentina_0_Yy2r5c6CJr.html",
-          "date": 1795037668000,
-          "description": "El debut bursátil de Anthropic promete ser el más grande de la historia."
-        },
-        {
-          "source": "Ámbito",
-          "category": "Mercados",
-          "title": "Dólar: el BCRA moderó fuerte el ritmo de compras y las reservas bajaron casi u$s200 millones",
-          "link": "https://www.ambito.com/finanzas/dolar-el-bcra-modero-fuerte-el-ritmo-compras-y-las-reservas-bajaron-casi-us200-millones-n6346854",
-          "date": 1795037640000,
-          "description": "La autoridad monetaria adquirió apenas u$s11 millones, frente a los u$s74 millones del martes, mientras las reservas retrocedieron u$s190 millones por el impacto de la caída del oro. En paralelo, el dólar mayorista acumuló tres subas consec…"
-        },
-        {
-          "source": "La Nación",
-          "category": "Economía",
-          "title": "“Mercado paralelo”: diputados y senadores apoyaron a los productores frente a una exigencia antideforestación de la Unión Europea",
-          "link": "https://www.lanacion.com.ar/economia/campo/mercado-paralelo-diputados-y-senadores-apoyaron-a-los-productores-frente-a-una-exigencia-nid18112026/",
-          "date": 1795037336000,
-          "description": "En una reunión organizada por la Fundación Barbechando, advirtieron que los productores pueden recibir un precio menor si su mercadería queda fuera del circuito exportador europeo"
-        },
-        {
-          "source": "La Nación",
-          "category": "Economía",
-          "title": "Cuatro economistas candidatos a presidente, ¡socorro!",
-          "link": "https://www.lanacion.com.ar/economia/cuatro-economistas-candidatos-a-presidente-socorro-nid18112026/",
-          "date": 1795036602000,
-          "description": "Milei, Kicillof, Lacunza y Melconian se presentarían en las elecciones de 2027, tras el objetivo de gobernar la Argentina; la pregunta es qué ventajas e inconvenientes tiene que un profesional de este rubro ejerza como primer mandatario"
-        },
-        {
-          "source": "Derecha Diario",
-          "category": "Política",
-          "title": "El Gobierno de Milei logró dictamen en el Senado para suspender las PASO",
-          "link": "https://derechadiario.com.ar/politica/gobierno-milei-logro-dictamen-en-senado-suspender-paso",
-          "date": 1795036112000,
-          "description": "La iniciativa reunió las firmas necesarias en la Comisión de Asuntos Constitucionales y quedó habilitada para su debate en el recinto."
-        },
-        {
-          "source": "La Nación",
-          "category": "Economía",
-          "title": "“Nefasta cláusula”: el presidente de Acopiadores fustigó prácticas de los molinos y también cuestionó a los exportadores",
-          "link": "https://www.lanacion.com.ar/economia/campo/nefasta-clausula-el-presidente-de-acopiadores-fustigo-practicas-de-los-molinos-y-tambien-cuestiono-a-nid18112026/",
-          "date": 1795035615000,
-          "description": "Fernando Rivara defendió la plataforma de trazabilidad Visec, acusó a la industria molinera de aplicar medidas comerciales que perjudican a productores y acopiadores y advirtió que los exportadores retienen dinero de las operaciones sin pag…"
-        },
-        {
-          "source": "Ámbito",
-          "category": "Negocios",
-          "title": "La familia Brito expande su negocio de la carne: inversión millonaria y un salto en las exportaciones",
-          "link": "https://www.ambito.com/negocios/la-familia-brito-expande-su-negocio-la-carne-inversion-millonaria-y-un-salto-las-exportaciones-n6346838",
-          "date": 1795035600000,
-          "description": "Frigorífico Bermejo reinauguró su planta de Pichanal tras destinar u$s20 millones a su modernización. La compañía duplicó sus ventas, alcanzó una facturación de u$s72 millones en el primer semestre y multiplicó casi por seis sus envíos al e…"
-        },
-        {
-          "source": "El Economista",
-          "category": "Economía",
-          "title": "3.411 ARGENTINOS COBRAN MÁS DE $10 MILLONES DE JUBILACIÓN: quiénes son y por qué reciben tanto",
-          "link": "https://eleconomista.com.ar/economia/3411-argentinos-cobran-mas-10-millones-jubilacion-quienes-son-reciben-tanto-n99763",
-          "date": 1795035420000,
-          "description": "Un informe de ANSES expuso las fuertes diferencias del sistema previsional: mientras el régimen general paga un promedio de $644.005, miles de beneficiarios de regímenes especiales superan los $10 millones mensuales. El Poder Judicial y el …"
-        },
-        {
-          "source": "Derecha Diario",
-          "category": "Política",
-          "title": "REPUDIABLE: Cristina Kirchner cobrará $3 millones más por su jubilación de privilegio",
-          "link": "https://derechadiario.com.ar/politica/cristina-kirchner-cobrara-3-millones-por-jubilacion-privilegio",
-          "date": 1795034752000,
-          "description": "El incremento elevará a más de $30 millones mensuales el monto que percibe la corrupta ex presidente por sus beneficios previsionales."
-        },
-        {
-          "source": "Clarín",
-          "category": "Economía",
-          "title": "Los Grobo presentó su oferta de pago a sus acreedores, con quitas que llegan al 85%",
-          "link": "https://www.clarin.com/rural/grobo-presento-oferta-pago-acreedores-quitas-llegan-85-pago_0_HEX95XH8Pk.html",
-          "date": 1795034104000,
-          "description": "La empresa agroindustrial argentina atraviesa un concurso de acreedores desde febrero de 2025. Según fuentes cercanas a la empresa, la deuda asciende a US$ 127 millones a 747 acreedores quirografarios. El plan se dio a conocer días después …"
-        },
-        {
-          "source": "Ámbito",
-          "category": "Política",
-          "title": "Argentina se abstuvo en una votación contra la violencia de género en la ONU",
-          "link": "https://www.ambito.com/politica/argentina-se-abstuvo-una-votacion-contra-la-violencia-genero-la-onu-n6346845",
-          "date": 1795033680000,
-          "description": "La delegación del gobierno libertario evitó apoyar una propuesta que plantea fortalecer las políticas públicas destinadas a combatir la violencia contra las mujeres y niñas. Recientemente, también se abstuvo en una resolución sobre la preve…"
-        },
-        {
-          "source": "Derecha Diario",
-          "category": "Política",
-          "title": "La Cámara de Casación redujo la condena de José Alperovich por abuso sexual",
-          "link": "https://derechadiario.com.ar/politica/camara-casacion-redujo-condena-jose-alperovich-por-abuso-sexual",
-          "date": 1795033651000,
-          "description": "El tribunal mantuvo la condena y la inhabilitación perpetua para ejercer cargos públicos, pero descontó dos años de prisión al considerar atenuantes como su edad, su salud y el vínculo con sus hijos."
-        },
-        {
-          "source": "La Nación",
-          "category": "Economía",
-          "title": "La incertidumbre empieza a contagiar al mercado cambiario y hay señales de menos oferta de dólares",
-          "link": "https://www.lanacion.com.ar/economia/la-incertidumbre-ya-contagio-al-mercado-cambiario-y-hay-senales-de-menos-oferta-de-dolares-nid18112026/",
-          "date": 1795033599000,
-          "description": "El volumen de contado se mantiene en mínimos esta semana; los operadores están muy atentos al derrumbe del real en Brasil"
-        },
-        {
-          "source": "Ámbito",
-          "category": "Mercados",
-          "title": "El dólar blue pegó otro salto y ya trepó más de $60 en apenas cuatro días",
-          "link": "https://www.ambito.com/finanzas/el-dolar-blue-pego-otro-salto-y-ya-trepo-mas-60-apenas-cuatro-dias-n6346832",
-          "date": 1795033500000,
-          "description": "El paralelo escaló hasta $1.630 para la venta y profundizó la presión compradora que domina las últimas ruedas. Al mismo tiempo, el mayorista volvió a marcar un récord nominal, pero avanzó menos y dejó la brecha en torno a 4,5%."
         }
       ],
-      "fetchedAt": "2026-11-19T02:44:59.216Z"
+      "fetchedAt": "2026-11-19T10:49:09.496Z"
     },
     "brecha_impl": {
       "mep": 1635.9,
@@ -12304,106 +12354,106 @@
   "sources": {
     "dolares": {
       "url": "https://dolarapi.com/v1/dolares",
-      "fetchedAt": "2026-11-19T02:30:33.890Z",
+      "fetchedAt": "2026-11-19T10:49:08.207Z",
       "ok": true
     },
     "hacienda": {
       "url": "https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo",
-      "fetchedAt": "2026-11-19T02:30:34.041Z",
+      "fetchedAt": "2026-11-19T10:49:08.992Z",
       "ok": true
     },
     "tasas_ar": {
       "url": "https://space.tasas.ar/api/bancos-digitales",
-      "fetchedAt": "2026-11-19T02:30:34.041Z",
+      "fetchedAt": "2026-11-19T10:49:08.768Z",
       "ok": true
     },
     "fci_otros": {
       "url": "https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/",
-      "fetchedAt": "2026-11-19T02:30:34.110Z",
+      "fetchedAt": "2026-11-19T10:49:08.573Z",
       "ok": true
     },
     "stocks": {
       "url": "https://data912.com/live/arg_stocks",
-      "fetchedAt": "2026-11-19T02:30:34.111Z",
+      "fetchedAt": "2026-11-19T10:49:08.452Z",
       "ok": true
     },
     "notes": {
       "url": "https://data912.com/live/arg_notes",
-      "fetchedAt": "2026-11-19T02:30:34.134Z",
+      "fetchedAt": "2026-11-19T10:49:08.447Z",
       "ok": true
     },
     "plazofijo": {
       "url": "https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo",
-      "fetchedAt": "2026-11-19T02:30:34.137Z",
+      "fetchedAt": "2026-11-19T10:49:08.380Z",
       "ok": true
     },
     "fci_dinero": {
       "url": "https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/ultimo",
-      "fetchedAt": "2026-11-19T02:30:34.139Z",
+      "fetchedAt": "2026-11-19T10:49:08.568Z",
       "ok": true
     },
     "inflacion": {
       "url": "https://api.argentinadatos.com/v1/finanzas/indices/inflacion",
-      "fetchedAt": "2026-11-19T02:44:56.606Z",
+      "fetchedAt": "2026-11-19T10:49:08.571Z",
       "ok": true
     },
     "bonds": {
       "url": "https://data912.com/live/arg_bonds",
-      "fetchedAt": "2026-11-19T02:30:34.153Z",
+      "fetchedAt": "2026-11-19T10:49:08.459Z",
       "ok": true
     },
     "riesgo_pais": {
       "url": "https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais",
-      "fetchedAt": "2026-11-19T02:44:58.874Z",
+      "fetchedAt": "2026-11-19T10:49:08.588Z",
       "ok": true
     },
     "uva": {
       "url": "https://api.argentinadatos.com/v1/finanzas/indices/uva",
-      "fetchedAt": "2026-11-19T02:44:56.625Z",
+      "fetchedAt": "2026-11-19T10:49:08.755Z",
       "ok": true
     },
     "dolar_hist": {
       "url": "https://api.argentinadatos.com/v1/cotizaciones/dolares",
-      "fetchedAt": "2026-11-19T02:44:58.136Z",
+      "fetchedAt": "2026-11-19T10:49:09.070Z",
       "ok": true
     },
     "cedears": {
       "url": "https://data912.com/live/arg_cedears",
-      "fetchedAt": "2026-11-19T02:30:34.413Z",
+      "fetchedAt": "2026-11-19T10:49:08.463Z",
       "ok": true
     },
     "usdt": {
       "url": "https://criptoya.com/api/usdt/ars/0.1",
-      "fetchedAt": "2026-11-19T02:30:34.501Z",
+      "fetchedAt": "2026-11-19T10:49:08.340Z",
       "ok": true
     },
     "granos": {
       "url": "https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase",
-      "fetchedAt": "2026-11-19T02:30:34.564Z",
+      "fetchedAt": "2026-11-19T10:49:08.378Z",
       "ok": true
     },
     "usd_providers": {
       "url": "https://api.comparadolar.ar/usd",
-      "fetchedAt": "2026-11-19T02:30:34.566Z",
+      "fetchedAt": "2026-11-19T10:49:08.615Z",
       "ok": true
     },
     "ccl": {
       "url": "https://data912.com/live/ccl",
-      "fetchedAt": "2026-11-19T02:30:34.889Z",
+      "fetchedAt": "2026-11-19T10:49:08.912Z",
       "ok": true
     },
     "mep": {
       "url": "https://data912.com/live/mep",
-      "fetchedAt": "2026-11-19T02:30:35.086Z",
+      "fetchedAt": "2026-11-19T10:49:08.999Z",
       "ok": true
     },
     "reservas": {
       "url": "https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1?limit=400",
-      "fetchedAt": "2026-11-19T02:44:56.001Z",
+      "fetchedAt": "2026-11-19T10:49:08.791Z",
       "ok": true
     }
   },
-  "build_ms": 3459,
+  "build_ms": 1414,
   "counts": {
     "dolares": 7,
     "usdt": 32,
