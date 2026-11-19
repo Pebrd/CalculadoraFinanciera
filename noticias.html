@@ -60,6 +60,13 @@
 (function () {
     var Fmt = PF.Fmt;
     var PAGE = 12;
+    var medios = 0;
+
+    // La franja cuenta medios, no los dos grupos de feeds que se piden.
+    PF.syncLabel = function (h) {
+        return 'Datos ' + Fmt.ago(h.updatedAt) + ' · ' + (medios || '—') + ' medios' +
+            (h.failed.length ? ' · ' + h.failed.length + ' sin respuesta' : '');
+    };
 
     PF.withData(['news', 'news_extra'], function (api) {
         var seenTitles = {};
@@ -86,9 +93,12 @@
         if (articles.length) {
             var latest = articles[0];
             var fuentes = Object.keys(articles.reduce(function (m, a) { m[a.source] = 1; return m; }, {})).length;
+            medios = fuentes;
+            var metaLabel = document.querySelector('.meta-row span:last-child');
+            if (metaLabel) metaLabel.textContent = fuentes + ' medios';
             document.getElementById('answer').innerHTML =
                 'Último titular: <b>' + Fmt.esc(latest.title) + '</b> · ' + Fmt.esc(latest.source) + ' (' + Fmt.ago(latest.date) + '). ' +
-                'Hay ' + articles.length + ' notas de ' + fuentes + (fuentes === 1 ? ' fuente' : ' fuentes') + '.';
+                'Hay ' + articles.length + ' notas de ' + fuentes + (fuentes === 1 ? ' medio' : ' medios') + '.';
         }
 
         function filtered() {

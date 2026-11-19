@@ -499,6 +499,13 @@
         } else {
             label = 'Cargando datos…';
         }
+        // Cada página puede redefinir cómo se cuenta (noticias cuenta medios, no endpoints).
+        if (window.PF && typeof window.PF.syncLabel === 'function') {
+            try {
+                var custom = window.PF.syncLabel(h);
+                if (custom) label = custom;
+            } catch (e) { /* se usa el label por defecto */ }
+        }
         document.querySelectorAll('[data-sync]').forEach(function (el) {
             el.textContent = label;
             el.setAttribute('aria-live', 'polite');
