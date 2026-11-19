@@ -420,14 +420,11 @@ h1, h2, h3 { margin: 0; font-weight: 400; letter-spacing: -0.02em; }
 
 /* ---------------- Grilla de stats (héroe) ---------------- */
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: var(--bg-1);
-  overflow: hidden;
-}
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: var(--r); background: var(--bg-1); overflow: hidden; }
+
+.stats--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.calc-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .stat {
   position: relative;
@@ -980,6 +977,13 @@ table.tbl {
   .tbl th.num,
   .tbl td.num { font-size: 11.5px; }
   .stat__value { font-size: 1.4rem; }
+}
+
+@media (max-width: 860px) {
+  .stats--3 { grid-template-columns: 1fr; }
+  .stats--3 .stat { border-right: 0; border-bottom: 1px solid var(--line-soft); }
+  .stats--3 .stat:last-child { border-bottom: 0; }
+  .calc-grid--3 { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
