@@ -546,6 +546,34 @@ table.tbl {
   box-shadow: inset 2px 0 0 var(--fg);
 }
 
+.entidad-logo {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: -5px;
+  border-radius: var(--r);
+  object-fit: contain;
+  background: #111;
+}
+
+.sync-refresh {
+  padding: 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-3);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.sync-refresh:hover { color: var(--fg); border-color: var(--line-strong); }
+.sync-refresh:disabled { color: var(--fg-4); cursor: default; }
+
 .up { color: var(--up); }
 .down { color: var(--down); }
 .flat { color: var(--fg-3); }

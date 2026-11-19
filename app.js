@@ -99,7 +99,7 @@
             if (!iso) return '—';
             var d = iso instanceof Date ? iso : new Date(iso);
             if (isNaN(d)) return '—';
-            return d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+            return d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
         },
         ago: function (iso) {
             if (!iso) return '—';
@@ -427,9 +427,10 @@
         if (!h) return;
         var label;
         if (h.status === 'ready') {
-            label = 'Datos ' + Fmt.ago(h.updatedAt) + (h.source === 'live' ? ' · en vivo' : '');
+            label = 'Datos ' + Fmt.ago(h.updatedAt) + ' · ' + h.total + (h.total === 1 ? ' fuente' : ' fuentes');
+            if (h.failed.length) label += ' · ' + h.failed.length + ' sin respuesta';
         } else if (h.status === 'error') {
-            label = 'Sin conexión con los datos';
+            label = 'No pudimos leer los datos';
         } else {
             label = 'Cargando datos…';
         }
@@ -437,26 +438,62 @@
             el.textContent = label;
         });
         document.querySelectorAll('[data-sync-dot]').forEach(function (el) {
-            el.className = 'dot' + (h.status === 'ready' ? '' : ' is-down');
+            el.className = 'dot' + (h.status === 'ready' && !h.failed.length ? '' : ' is-down');
         });
+        ensureRefreshButton();
     }
 
-    /** Carga datos y ejecuta el callback con manejo de error visible. */
-    function withData(fn) {
+    function ensureRefreshButton() {
+        var host = document.querySelector('.meta-row');
+        if (!host || host.querySelector('[data-refresh]')) return;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'sync-refresh';
+        btn.setAttribute('data-refresh', '');
+        btn.textContent = 'actualizar';
+        btn.addEventListener('click', function () {
+            if (!window.ApiService) return;
+            btn.disabled = true;
+            btn.textContent = 'actualizando…';
+            window.ApiService.refresh().then(function () {
+                PF.toast('Datos actualizados');
+            }).catch(function () {
+                PF.toast('No pudimos actualizar');
+            }).finally(function () {
+                btn.disabled = false;
+                btn.textContent = 'actualizar';
+                syncBadges();
+            });
+        });
+        host.appendChild(btn);
+    }
+
+    /**
+     * Carga las fuentes pedidas y ejecuta el render. El render se repite
+     * cada vez que alguna fuente termina de actualizarse.
+     *   PF.withData(['dolares','usdt'], function (api) { ... })
+     */
+    function withData(names, fn) {
         var api = window.ApiService;
         if (!api) return;
-        api.ready().then(function () {
-            var h = api.health();
-            if (h.status === 'error') {
-                document.querySelectorAll('[data-error]').forEach(function (el) {
-                    el.innerHTML = '<div class="empty">No pudimos cargar los datos. Revisá la conexión y recargá.</div>';
-                });
-            } else {
-                fn(api);
-            }
-            syncBadges();
-            reveal();
-        });
+        if (typeof names === 'function') { fn = names; names = null; }
+
+        var pending = false;
+        function render() {
+            if (pending) return;
+            pending = true;
+            requestAnimationFrame(function () {
+                pending = false;
+                try { fn(api); } catch (err) {
+                    if (window.console) console.error(err);
+                }
+                syncBadges();
+                reveal();
+            });
+        }
+
+        api.subscribe(render);
+        api.load(names).then(render).catch(render);
     }
 
     /* ---------------- Arranque ---------------- */
@@ -467,6 +504,15 @@
         if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
             window.addEventListener('load', function () {
                 navigator.serviceWorker.register('sw.js').catch(function () {});
+            });
+        }
+        // Refresco automático: cada 3 minutos y al volver a la pestaña.
+        if (window.ApiService) {
+            setInterval(function () {
+                if (document.visibilityState === 'visible') window.ApiService.load(null);
+            }, 3 * 60 * 1000);
+            document.addEventListener('visibilitychange', function () {
+                if (document.visibilityState === 'visible') window.ApiService.load(null);
             });
         }
     }

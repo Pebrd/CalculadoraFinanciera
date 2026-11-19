@@ -101,13 +101,14 @@
     </footer>
 </main>
 
+<script src="data-sources.js"></script>
 <script src="api-service.js"></script>
 <script src="app.js"></script>
 <script>
 (function () {
     var Fmt = PF.Fmt;
 
-    PF.withData(function (api) {
+    PF.withData(['granos', 'hacienda', 'dolares'], function (api) {
         var granos = api.getGranos();
         var hacienda = api.getHacienda();
         var dolares = api.getDolares();
@@ -178,8 +179,12 @@
             empty: 'Sin pizarra disponible'
         });
 
-        // --- Hacienda ---
-        document.getElementById('hacienda-fecha').textContent = hacienda.fecha || '—';
+        // --- Hacienda (fuente sin CORS: puede faltar) ---
+        var metaH = api.meta().hacienda;
+        var haciendaOk = hacienda && (hacienda.categorias || []).length;
+        document.getElementById('hacienda-fecha').textContent = haciendaOk
+            ? (hacienda.fecha || '—')
+            : (metaH && metaH.error ? 'fuente no disponible ahora' : '—');
         PF.renderTable(document.getElementById('hacienda'), [
             { key: 'categoria', label: 'Categoría', render: function (r) {
                 return '<span class="name">' + Fmt.esc(r.categoria) + '</span>';

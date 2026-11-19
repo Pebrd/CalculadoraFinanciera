@@ -112,13 +112,20 @@
     </footer>
 </main>
 
+<script src="data-sources.js"></script>
 <script src="api-service.js"></script>
 <script src="app.js"></script>
 <script>
 (function () {
     var Fmt = PF.Fmt;
 
-    PF.withData(function (api) {
+    function entidadLogo(row) {
+        if (!row.logo) return '';
+        return '<img class="entidad-logo" src="' + Fmt.esc(row.logo) + '" alt="" width="20" height="20" loading="lazy" ' +
+            'onerror="this.style.display=\'none\'">';
+    }
+
+    PF.withData(['dolares', 'usd_providers', 'usdt', 'mep', 'ccl', 'riesgo_pais_ultimo', 'inflacion', 'uva', 'plazofijo', 'tasas_ar', 'granos'], function (api) {
         var dolares = api.getDolares();
         var by = {};
         dolares.forEach(function (d) { by[d.casa] = d; });
@@ -130,17 +137,15 @@
             { label: 'CCL', casa: 'contadoconliqui' }
         ];
 
-        // --- Héroe: venta + variación real contra la rueda anterior ---
+        // --- Héroe: venta, compra y hora de la fuente ---
         document.getElementById('stats').innerHTML = primary.map(function (item) {
             var row = by[item.casa] || {};
-            var vari = api.dollarVariation(item.casa);
-            var delta = vari ? Fmt.delta(vari.pct, 2) : Fmt.delta(null);
             return '<div class="stat">' +
                 '<span class="stat__label">' + item.label + '<span class="tag">venta</span></span>' +
                 '<span class="stat__value">' + (row.venta ? Fmt.money(row.venta, 0) : '—') + '</span>' +
                 '<span class="stat__foot">' +
                     '<span>compra ' + (row.compra ? Fmt.money(row.compra, 0) : '—') + '</span>' +
-                    '<span class="' + delta.cls + '">' + delta.text + '</span>' +
+                    '<span>' + (row.fecha ? Fmt.time(row.fecha) : '—') + '</span>' +
                 '</span>' +
             '</div>';
         }).join('');
@@ -163,7 +168,7 @@
         var providers = api.getUSDProviders();
         PF.renderTable(document.getElementById('providers'), [
             { key: 'nombre', label: 'Entidad', render: function (r) {
-                return '<span class="name">' + Fmt.esc(r.nombre) + '</span>';
+                return entidadLogo(r) + '<span class="name">' + Fmt.esc(r.nombre) + '</span>';
             } },
             { key: 'tipo', label: 'Tipo', mobileHide: true, render: function (r) {
                 return '<span class="tag">' + Fmt.esc(r.tipo || '—') + '</span>';
@@ -230,17 +235,15 @@
         }).join('') : '<div class="empty">Sin datos de CEDEARs</div>';
 
         // --- Indicadores ---
-        var rp = api.getRiesgoPais();
+        var rp = api.getRiesgoUltimo();
         var uv = api.getUVA();
         var inf = api.getInflacion();
         var lastInf = inf.length ? inf[inf.length - 1] : null;
-        var rpVar = rp.valor != null && rp.anterior != null ? ((rp.valor / rp.anterior) - 1) * 100 : null;
         var uvaVar = uv.valor != null && uv.anterior != null ? ((uv.valor / uv.anterior) - 1) * 100 : null;
 
         var ind = [];
         if (rp.valor != null) {
-            var d1 = Fmt.delta(rpVar, 2);
-            ind.push(['Riesgo país', Fmt.num(rp.valor, 0) + ' pb', '<span class="' + d1.cls + '">' + d1.text + '</span> · ' + Fmt.date(rp.fecha)]);
+            ind.push(['Riesgo país', Fmt.num(rp.valor, 0) + ' pb', 'último dato · ' + Fmt.date(rp.fecha)]);
         }
         if (lastInf) {
             ind.push(['Inflación mensual', Fmt.pct(lastInf.valor, 1), Fmt.date(lastInf.fecha, { month: 'long', year: 'numeric' })]);

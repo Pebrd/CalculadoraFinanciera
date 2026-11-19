@@ -2,10 +2,11 @@
  * Pampa Finance — Service Worker
  * Estrategia:
  *   - Navegación, HTML, CSS y JS propios: network-first (siempre la última versión).
- *   - data/finanzas.json: network-first con fallback a cache (funciona offline).
- *   - Fuentes externas: cache-first.
+ *   - Fuentes externas y logos: cache-first (los datos los maneja api-service.js).
+ *   - No hay archivos de datos: cada API se pide desde el navegador y se
+ *     guarda en el cache del dispositivo (Cache API, ver api-service.js).
  */
-const CACHE = 'pampa-v3';
+const CACHE = 'pampa-v4';
 const SHELL = [
     './',
     'index.html',
@@ -19,6 +20,7 @@ const SHELL = [
     'styles.css',
     'app.js',
     'api-service.js',
+    'data-sources.js',
     'manifest.json',
     'icono.png'
 ];
@@ -75,7 +77,7 @@ self.addEventListener('fetch', (event) => {
     }
 
     if (url.origin === self.location.origin) {
-        if (/\/data\/.*\.json$/.test(url.pathname) || /\.(?:css|js|html)$/.test(url.pathname)) {
+        if (/\.(?:css|js|html)$/.test(url.pathname)) {
             event.respondWith(networkFirst(request));
             return;
         }

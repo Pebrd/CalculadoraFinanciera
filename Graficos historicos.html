@@ -121,13 +121,14 @@
     </footer>
 </main>
 
+<script src="data-sources.js"></script>
 <script src="api-service.js"></script>
 <script src="app.js"></script>
 <script>
 (function () {
     var Fmt = PF.Fmt;
 
-    PF.withData(function (api) {
+    PF.withData(['dolar_hist', 'riesgo_pais', 'inflacion', 'uva', 'reservas', 'mep', 'ccl'], function (api) {
         var hist = api.getDolarHist();
         var rp = api.getRiesgoPais();
         var inf = api.getInflacion();

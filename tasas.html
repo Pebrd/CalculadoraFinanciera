@@ -22,7 +22,7 @@
         <div class="meta-row">
             <span class="dot" data-sync-dot></span>
             <span data-sync>cargando datos</span>
-            <span>tasas.ar · ArgentinaDatos</span>
+            <span id="fuente-fecha">tasas.ar</span>
         </div>
     </header>
 
@@ -43,9 +43,24 @@
                         <button class="chip" data-type="cuenta_remunerada" type="button">Cuentas remuneradas</button>
                         <button class="chip" data-type="fondos_comunes" type="button">Fondos</button>
                     </div>
-                    <span class="panel__hint">TNA publicada · TEA calculada a 30 días</span>
+                    <span class="panel__hint">TNA base · TEA a 30 días · promociones aparte</span>
                 </div>
                 <div id="tabla-ar" data-error><span class="skeleton" style="width:100%"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section__head">
+            <h2 class="section__title">Referencia BCRA</h2>
+            <span class="section__note">tasas de mercado que publica el BCRA</span>
+        </div>
+        <div class="panel reveal">
+            <div class="panel__in">
+                <div class="kpi-list" id="bcra">
+                    <div class="kpi"><span class="kpi__label">Cargando referencia…</span></div>
+                </div>
+                <p class="result__note" id="bcra-nota"></p>
             </div>
         </div>
     </section>
@@ -80,6 +95,7 @@
     </footer>
 </main>
 
+<script src="data-sources.js"></script>
 <script src="api-service.js"></script>
 <script src="app.js"></script>
 <script>
@@ -92,55 +108,72 @@
         banco: 'Banco'
     };
 
-    PF.withData(function (api) {
+    PF.withData(['tasas_ar', 'fci_otros', 'fci_dinero', 'plazofijo', 'bcra_tasas'], function (api) {
         var tasas = api.getTasasAR();
         var fci = api.getFCI();
         var dinero = api.getFCIDinero();
         var pf = api.getPlazoFijo();
+        var bcra = api.getBCRATasas();
 
         var wallets = tasas.filter(function (t) { return t.tipo === 'cuenta_remunerada'; });
         var bestWallet = wallets[0] || tasas[0];
+        var conBeneficio = tasas.filter(function (t) { return t.tnaBonif; })
+            .sort(function (a, b) { return b.tnaBonif - a.tnaBonif; })[0];
         var bestFci = fci[0];
         var bestPf = pf[0];
 
-        // --- Héroe ---
+        // --- Ranking honesto: se comparan productos distintos por TNA ---
+        var ranking = [];
+        wallets.forEach(function (t) { ranking.push({ name: t.nombre, tna: t.tna, kind: 'Cuenta remunerada' }); });
+        fci.forEach(function (f) { ranking.push({ name: f.fondo, tna: f.tna, kind: 'Fondo' }); });
+        pf.forEach(function (b) {
+            var r = b.tnaClientes || b.tnaNoClientes;
+            if (r > 0) ranking.push({ name: b.entidad, tna: r, kind: 'Plazo fijo' });
+        });
+        ranking.sort(function (a, b) { return b.tna - a.tna; });
+        var best = ranking[0];
+
+        // --- Fecha real de la fuente de tasas ---
+        var meta = api.meta().tasas_ar;
+        var fuenteFecha = meta && (meta.sourceDate || meta.at);
+        document.getElementById('fuente-fecha').textContent = fuenteFecha
+            ? 'tasas.ar · ' + Fmt.date(fuenteFecha) + ' ' + Fmt.time(fuenteFecha)
+            : 'tasas.ar';
+
         document.getElementById('stats').innerHTML = [
             {
-                label: 'Mejor billetera',
+                label: 'Mejor TNA del mercado',
+                value: best ? Fmt.pct(best.tna, 2) : '—',
+                name: best ? best.name : '—',
+                foot: best ? best.kind : '—'
+            },
+            {
+                label: 'Mejor cuenta remunerada',
                 value: bestWallet ? Fmt.pct(bestWallet.tna, 2) : '—',
                 name: bestWallet ? bestWallet.nombre : '—',
-                tea: bestWallet ? api.teaFromTna(bestWallet.tna) : null,
-                tag: 'TNA'
+                foot: bestWallet ? 'TEA ' + Fmt.pct(api.teaFromTna(bestWallet.tna), 2) : '—'
             },
             {
-                label: 'Mejor fondo',
-                value: bestFci ? Fmt.pct(bestFci.tna, 2) : '—',
-                name: bestFci ? bestFci.fondo : '—',
-                tea: bestFci ? (bestFci.tea || api.teaFromTna(bestFci.tna)) : null,
-                tag: 'TNA'
-            },
-            {
-                label: 'Plazo fijo',
+                label: 'Mejor plazo fijo',
                 value: bestPf ? Fmt.pct(bestPf.tnaClientes || bestPf.tnaNoClientes, 2) : '—',
                 name: bestPf ? bestPf.entidad : '—',
-                tea: bestPf ? api.teaFromTna(bestPf.tnaClientes || bestPf.tnaNoClientes) : null,
-                tag: 'TNA'
+                foot: bestPf ? 'TEA ' + Fmt.pct(api.teaFromTna(bestPf.tnaClientes || bestPf.tnaNoClientes), 2) : '—'
             }
         ].map(function (s) {
-            var tea = s.tea ? Fmt.pct(s.tea, 2) : '—';
             return '<div class="stat">' +
-                '<span class="stat__label">' + s.label + '<span class="tag">' + s.tag + '</span></span>' +
+                '<span class="stat__label">' + s.label + '<span class="tag">TNA</span></span>' +
                 '<span class="stat__value">' + s.value + '</span>' +
-                '<span class="stat__foot"><span>' + Fmt.esc(s.name) + '</span><span>' + tea + ' TEA</span></span>' +
+                '<span class="stat__foot"><span>' + Fmt.esc(s.name) + '</span><span>' + Fmt.esc(s.foot) + '</span></span>' +
             '</div>';
         }).join('');
 
         // --- Línea de respuesta ---
-        if (bestWallet && bestFci) {
+        if (best && bestWallet) {
             document.getElementById('answer').innerHTML =
-                'La mejor cuenta remunerada paga <b>' + Fmt.pct(bestWallet.tna, 2) + '</b> de TNA (' +
-                Fmt.esc(bestWallet.nombre) + '), equivalente a <b>' + Fmt.pct(api.teaFromTna(bestWallet.tna), 1) + '</b> de TEA. ' +
-                'El mejor fondo con tasa publicada llega a <b>' + Fmt.pct(bestFci.tna, 2) + '</b>.';
+                'La TNA más alta del mercado es <b>' + Fmt.pct(best.tna, 2) + '</b> (' + Fmt.esc(best.name) +
+                ', ' + Fmt.esc(best.kind.toLowerCase()) + '), equivalente a <b>' + Fmt.pct(api.teaFromTna(best.tna), 1) + '</b> de TEA. ' +
+                'Entre cuentas remuneradas, la mejor base es <b>' + Fmt.pct(bestWallet.tna, 2) + '</b> (' + Fmt.esc(bestWallet.nombre) + ')' +
+                (conBeneficio ? ', y con promoción ' + Fmt.esc(conBeneficio.nombre) + ' llega a ' + Fmt.pct(conBeneficio.tnaBonif, 2) + ' bajo condición' : '') + '.';
         }
 
         // --- Tabla billeteras con filtros ---
@@ -159,8 +192,13 @@
                 { key: 'tipo', label: 'Tipo', render: function (r) {
                     return '<span class="tag">' + Fmt.esc(TYPE_LABEL[r.tipo] || r.tipo) + '</span>';
                 } },
-                { key: 'tna', label: 'TNA', align: 'right', render: function (r) {
+                { key: 'tna', label: 'TNA base', align: 'right', render: function (r) {
                     return '<strong>' + Fmt.pct(r.tna, 2) + '</strong>';
+                } },
+                { key: 'tnaBonif', label: 'c/benef.', align: 'right', mobileHide: true, render: function (r) {
+                    if (!r.tnaBonif) return '<span class="muted">—</span>';
+                    return '<span title="' + Fmt.esc(r.condicion || '') + '" style="border-bottom:1px dotted var(--line-strong)">' +
+                        Fmt.pct(r.tnaBonif, 2) + '</span>';
                 } },
                 { key: 'tea', label: 'TEA', align: 'right', sort: function (r) { return api.teaFromTna(r.tna); }, render: function (r) {
                     return Fmt.pct(api.teaFromTna(r.tna), 2);
@@ -193,6 +231,43 @@
         });
 
         drawAr();
+
+        // --- Referencia BCRA ---
+        var bcraRows = [];
+        if (bcra.depositos30) {
+            bcraRows.push({
+                label: 'Depósitos a 30 días',
+                value: Fmt.pct(bcra.depositos30.valor, 2),
+                sub: 'promedio del sistema · ' + Fmt.date(bcra.depositos30.fecha)
+            });
+        }
+        if (bcra.badlar) {
+            bcraRows.push({
+                label: 'BADLAR',
+                value: Fmt.pct(bcra.badlar.valor, 2),
+                sub: 'tasa mayorista · ' + Fmt.date(bcra.badlar.fecha)
+            });
+        }
+        if (bcraRows.length && best) {
+            var ref = bcra.badlar ? bcra.badlar.valor : bcra.depositos30.valor;
+            var diff = best.tna - ref;
+            bcraRows.push({
+                label: 'Mejor tasa vs. mercado',
+                value: (diff >= 0 ? '+' : '−') + Fmt.pct(Math.abs(diff), 2),
+                sub: best.name + ' contra ' + (bcra.badlar ? 'BADLAR' : 'depósitos a 30 días')
+            });
+        }
+        document.getElementById('bcra').innerHTML = bcraRows.length ? bcraRows.map(function (r) {
+            return '<div class="kpi"><span class="kpi__label">' + Fmt.esc(r.label) + '</span>' +
+                '<span class="kpi__value">' + r.value + '<div class="kpi__sub">' + Fmt.esc(r.sub) + '</div></span></div>';
+        }).join('') : '<div class="empty">Sin referencia del BCRA</div>';
+
+        if (bcraRows.length && best) {
+            document.getElementById('bcra-nota').innerHTML =
+                'Una TNA de ' + Fmt.pct(best.tna, 2) + ' rinde ' + Fmt.pct(api.teaFromTna(best.tna), 2) +
+                ' efectiva anual; el promedio del sistema, ' +
+                Fmt.pct(api.teaFromTna(bcra.depositos30 ? bcra.depositos30.valor : 0), 2) + '.';
+        }
 
         // --- FCI con tasa ---
         PF.renderTable(document.getElementById('tabla-fci'), [

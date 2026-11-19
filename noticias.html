@@ -22,7 +22,7 @@
         <div class="meta-row">
             <span class="dot" data-sync-dot></span>
             <span data-sync>cargando datos</span>
-            <span>Ámbito · La Nación · Clarín · iProfesional</span>
+            <span>12 fuentes RSS</span>
         </div>
     </header>
 
@@ -53,6 +53,7 @@
     </footer>
 </main>
 
+<script src="data-sources.js"></script>
 <script src="api-service.js"></script>
 <script src="app.js"></script>
 <script>
@@ -60,7 +61,7 @@
     var Fmt = PF.Fmt;
     var PAGE = 12;
 
-    PF.withData(function (api) {
+    PF.withData(['news'], function (api) {
         var articles = api.getNews().slice().sort(function (a, b) { return b.date - a.date; });
         var cat = 'all';
         var query = '';

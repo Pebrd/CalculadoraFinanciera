@@ -90,14 +90,16 @@
     </footer>
 </main>
 
+<script src="data-sources.js"></script>
 <script src="api-service.js"></script>
 <script src="app.js"></script>
 <script>
 (function () {
     var Fmt = PF.Fmt;
 
-    PF.withData(function (api) {
+    PF.withData(['plazofijo', 'bcra_tasas'], function (api) {
         var pf = api.getPlazoFijo();
+        var bcra = api.getBCRATasas();
         var best = pf[0];
         var bestTna = best ? (best.tnaClientes || best.tnaNoClientes) : null;
 
@@ -121,10 +123,10 @@
                 foot: sinClientes.length ? sinClientes.length + ' con tasa para no clientes' : '—'
             },
             {
-                label: 'Promedio del mercado',
-                value: prom ? Fmt.pct(prom, 2) : '—',
-                name: pf.length + ' entidades',
-                foot: 'TNA promedio simple'
+                label: 'Promedio BCRA',
+                value: bcra.depositos30 ? Fmt.pct(bcra.depositos30.valor, 2) : '—',
+                name: bcra.depositos30 ? 'depósitos a 30 días' : 'sin dato',
+                foot: bcra.depositos30 ? Fmt.date(bcra.depositos30.fecha) : '—'
             }
         ].map(function (s) {
             return '<div class="stat">' +
@@ -136,10 +138,12 @@
 
         if (best) {
             var tna = best.tnaClientes || best.tnaNoClientes;
+            var ref = bcra.depositos30 ? bcra.depositos30.valor : null;
             document.getElementById('answer').innerHTML =
                 'La mejor TNA del mercado es <b>' + Fmt.pct(tna, 2) + '</b> en ' + Fmt.esc(best.entidad) +
-                ', que equivale a <b>' + Fmt.pct(api.teaFromTna(tna), 2) + '</b> de TEA si renovás todos los meses. ' +
-                'Un millón de pesos a 30 días rinde <b>' + Fmt.money(1000000 * (tna / 100) * 30 / 365, 0) + '</b>.';
+                ', que equivale a <b>' + Fmt.pct(api.teaFromTna(tna), 2) + '</b> de TEA si renovás todos los meses.' +
+                (ref ? ' El promedio del sistema que publica el BCRA es <b>' + Fmt.pct(ref, 2) + '</b>.' : '') +
+                ' Un millón de pesos a 30 días rinde <b>' + Fmt.money(1000000 * (tna / 100) * 30 / 365, 0) + '</b>.';
         }
 
         // --- Tabla ---

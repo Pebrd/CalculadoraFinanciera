@@ -1,151 +1,289 @@
 /**
- * Pampa Finance — capa de datos
+ * Pampa Finance — capa de datos en el navegador
  * ---------------------------------------------------------------
- * El frontend nunca depende de una API externa en el camino crítico:
- *   1. Lee el bundle estático data/finanzas.json (generado por GitHub Actions).
- *   2. Si el bundle no está, cae a las APIs en vivo (con timeout).
- *   3. Si tampoco, usa el último bundle cacheado por el Service Worker.
+ * No hay datos en el repositorio: cada fuente se pide al abrir la
+ * página, se normaliza en data-sources.js y se guarda en el cache del
+ * dispositivo (Cache API, con fallback a localStorage).
+ *
+ * Flujo por fuente:
+ *   1. Si hay copia local fresca (TTL de la fuente) se usa al instante.
+ *   2. Si está vencida, se pinta la copia y se refresca en segundo plano.
+ *   3. Si no hay copia, se pide a la API con timeout de 15 s.
  *
  * Expone window.ApiService.
  */
 (function () {
     'use strict';
 
-    var BUNDLE_URL = 'data/finanzas.json';
-    var CACHE_BUCKET_MS = 5 * 60 * 1000;
-
-    var LIVE = {
-        dolares: 'https://dolarapi.com/v1/dolares',
-        usd_providers: 'https://api.comparadolar.ar/usd',
-        usdt: 'https://criptoya.com/api/usdt/ars/0.1'
-    };
+    var CACHE_NAME = 'pf-data-v2';
+    var LS_PREFIX = 'pf:v2:';
+    var TIMEOUT_MS = 15000;
 
     var state = {
-        status: 'idle',      // idle | loading | ready | error
-        updatedAt: null,     // ISO del bundle
-        source: null,        // 'bundle' | 'live' | 'cache'
-        error: null,
-        fetchedAt: null,
+        status: 'idle',        // idle | loading | ready | error
         data: {},
-        sources: {}
+        meta: {},              // name -> { at, sourceDate, from, ms, ok, error }
+        requested: {},
+        error: null
     };
 
-    var inflight = null;
+    var listeners = [];
+    var inflight = {};
+    var memory = {};
+    var cachePromise = null;
 
-    function withTimeout(url, ms) {
-        return fetch(url, {
-            cache: 'no-store',
-            signal: AbortSignal.timeout(ms || 12000),
-            headers: { Accept: 'application/json' }
-        });
+    function sources() {
+        return window.DATA_SOURCES || {};
     }
 
-    function liveTransformDolares(raw) {
-        return (raw || []).map(function (d) {
-            return {
-                casa: d.casa,
-                nombre: d.nombre,
-                compra: d.compra,
-                venta: d.venta,
-                fecha: d.fechaActualizacion
-            };
-        });
+    function ttlOf(name) {
+        var s = sources()[name];
+        return (s && s.ttl) || 5 * 60 * 1000;
     }
 
-    function liveTransformProviders(raw) {
-        return (raw || [])
-            .filter(function (p) { return Number(p.ask) > 0; })
-            .map(function (p) {
-                return {
-                    slug: p.slug,
-                    nombre: p.prettyName || p.name,
-                    logo: p.logoUrl || null,
-                    compra: Number(p.bid) || null,
-                    venta: Number(p.ask),
-                    variacion: p.pct_variation,
-                    tipo: p.usdType || null,
-                    esBanco: !!p.isBank,
-                    stale: !!p.stale
-                };
-            })
-            .sort(function (a, b) { return a.venta - b.venta; });
+    /* ---------------- Cache ---------------- */
+
+    function openCache() {
+        if (!cachePromise) {
+            cachePromise = (typeof caches !== 'undefined' && caches.open)
+                ? caches.open(CACHE_NAME).catch(function () { return null; })
+                : Promise.resolve(null);
+        }
+        return cachePromise;
     }
 
-    async function tryLive() {
-        var out = {};
-        var results = await Promise.allSettled(Object.keys(LIVE).map(function (key) {
-            return withTimeout(LIVE[key], 9000).then(function (res) {
-                if (!res.ok) throw new Error('HTTP ' + res.status + ' en ' + key);
-                return res.json();
-            }).then(function (raw) {
-                if (key === 'dolares') out.dolares = liveTransformDolares(raw);
-                else if (key === 'usd_providers') out.usd_providers = liveTransformProviders(raw);
-                else if (key === 'usdt') out.usdt = raw;
-            });
-        }));
-        var ok = results.filter(function (r) { return r.status === 'fulfilled'; }).length;
-        return ok ? out : null;
-    }
-
-    async function loadBundle(force) {
-        var bucket = Math.floor(Date.now() / CACHE_BUCKET_MS);
-        var url = BUNDLE_URL + (force ? '?t=' + Date.now() : '?b=' + bucket);
-        var res = await withTimeout(url, 12000);
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        var json = await res.json();
-        if (!json || !json.data) throw new Error('bundle inválido');
-        return json;
-    }
-
-    async function load(force) {
-        if (inflight && !force) return inflight;
-        state.status = 'loading';
-        state.error = null;
-
-        inflight = (async function () {
-            try {
-                var bundle = await loadBundle(force);
-                state.data = bundle.data || {};
-                state.sources = bundle.sources || {};
-                state.updatedAt = bundle.last_updated || null;
-                state.source = 'bundle';
-                state.status = 'ready';
-            } catch (err) {
-                state.error = err;
-                var live = await tryLive().catch(function () { return null; });
-                if (live) {
-                    state.data = live;
-                    state.updatedAt = new Date().toISOString();
-                    state.source = 'live';
-                    state.status = 'ready';
-                } else {
-                    state.status = 'error';
+    async function cacheGet(name) {
+        if (memory[name]) return memory[name];
+        try {
+            var cache = await openCache();
+            if (cache) {
+                var res = await cache.match(name);
+                if (res) {
+                    var entry = await res.json();
+                    memory[name] = entry;
+                    return entry;
                 }
             }
-            state.fetchedAt = new Date().toISOString();
-            inflight = null;
-            return state;
+        } catch (e) { /* cache no disponible */ }
+        try {
+            var raw = localStorage.getItem(LS_PREFIX + name);
+            if (raw) {
+                var parsed = JSON.parse(raw);
+                memory[name] = parsed;
+                return parsed;
+            }
+        } catch (e) { /* cuota o modo privado */ }
+        return null;
+    }
+
+    async function cachePut(name, entry) {
+        memory[name] = entry;
+        try {
+            var cache = await openCache();
+            if (cache) {
+                await cache.put(name, new Response(JSON.stringify(entry), {
+                    headers: { 'Content-Type': 'application/json' }
+                }));
+                return;
+            }
+        } catch (e) { /* sigue con localStorage */ }
+        try {
+            localStorage.setItem(LS_PREFIX + name, JSON.stringify(entry));
+        } catch (e) { /* sin persistencia */ }
+    }
+
+    async function cacheDelete(name) {
+        delete memory[name];
+        try {
+            var cache = await openCache();
+            if (cache) await cache.delete(name);
+        } catch (e) {}
+        try { localStorage.removeItem(LS_PREFIX + name); } catch (e) {}
+    }
+
+    /* ---------------- Red ---------------- */
+
+    async function fetchText(url) {
+        var res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS), cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+    }
+
+    async function fetchJson(url) {
+        var res = await fetch(url, {
+            signal: AbortSignal.timeout(TIMEOUT_MS),
+            cache: 'no-store',
+            headers: { Accept: 'application/json' }
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+    }
+
+    /** Orígenes sin CORS: se leen vía r.jina.ai y se extrae el JSON. */
+    async function fetchViaProxy(url) {
+        var text = await fetchText('https://r.jina.ai/' + url);
+        var start = text.indexOf('{');
+        var end = text.lastIndexOf('}');
+        if (start === -1 || end === -1) throw new Error('respuesta no JSON');
+        return JSON.parse(text.slice(start, end + 1));
+    }
+
+    function parseDate(value) {
+        if (!value) return null;
+        var ts = Date.parse(value);
+        return Number.isFinite(ts) ? new Date(ts).toISOString() : null;
+    }
+
+    async function fetchSource(name) {
+        var source = sources()[name];
+        if (!source) throw new Error('fuente desconocida: ' + name);
+
+        var started = Date.now();
+        var raw;
+        if (typeof source.fetch === 'function') {
+            raw = await source.fetch(fetchJson);
+        } else if (source.proxy === 'jina') {
+            raw = await fetchViaProxy(source.url);
+        } else {
+            raw = await fetchJson(source.url);
+        }
+
+        var data = source.transform ? source.transform(raw) : raw;
+        var empty = data == null ||
+            (Array.isArray(data) && !data.length) ||
+            (typeof data === 'object' && !Array.isArray(data) && !Object.keys(data).length);
+        if (empty) throw new Error('respuesta vacía');
+
+        var sourceDate = null;
+        if (typeof source.dateOf === 'function') {
+            try { sourceDate = parseDate(source.dateOf(raw, data)); } catch (e) { sourceDate = null; }
+        }
+
+        return { at: Date.now(), sourceDate: sourceDate, data: data, ms: Date.now() - started };
+    }
+
+    /* ---------------- Orquestación ---------------- */
+
+    function notify() {
+        listeners.slice().forEach(function (fn) {
+            try { fn(state); } catch (e) { /* un render no debe romper el resto */ }
+        });
+    }
+
+    function isFresh(entry, name) {
+        return entry && (Date.now() - entry.at) < ttlOf(name);
+    }
+
+    async function loadOne(name, force) {
+        if (inflight[name]) return inflight[name];
+
+        inflight[name] = (async function () {
+            var cached = force ? null : await cacheGet(name);
+            if (force) await cacheDelete(name);
+
+            if (cached) {
+                state.data[name] = cached.data;
+                state.meta[name] = { at: cached.at, sourceDate: cached.sourceDate, from: 'cache', ok: true };
+                if (isFresh(cached, name)) {
+                    delete inflight[name];
+                    return cached;
+                }
+            }
+
+            try {
+                var entry = await fetchSource(name);
+                await cachePut(name, entry);
+                state.data[name] = entry.data;
+                state.meta[name] = {
+                    at: entry.at,
+                    sourceDate: entry.sourceDate,
+                    from: 'network',
+                    ms: entry.ms,
+                    ok: true
+                };
+            } catch (err) {
+                state.meta[name] = {
+                    at: cached ? cached.at : null,
+                    sourceDate: cached ? cached.sourceDate : null,
+                    from: cached ? 'cache' : 'none',
+                    ok: !!cached,
+                    error: String(err && err.message ? err.message : err)
+                };
+            }
+            delete inflight[name];
+            notify();
+            return state.data[name];
         })();
 
-        return inflight;
-    }
-
-    /** Espera a que haya datos (idempotente). */
-    async function ready() {
-        if (state.status === 'ready') return state;
-        if (inflight) return inflight;
-        return load(false);
-    }
-
-    function get(key, fallback) {
-        var value = state.data ? state.data[key] : undefined;
-        return value === undefined || value === null ? fallback : value;
+        return inflight[name];
     }
 
     /**
-     * Variación real contra la rueda anterior usando la serie histórica.
-     * Devuelve { venta, previa, pct } para la casa pedida.
+     * Carga las fuentes pedidas. Resuelve cuando todas terminaron
+     * (de red o de cache) y notifica en cada actualización.
      */
+    async function load(names, opts) {
+        names = (names && names.length) ? names : Object.keys(state.requested);
+        if (!names.length) names = Object.keys(sources());
+        opts = opts || {};
+        state.status = 'loading';
+        names.forEach(function (n) { state.requested[n] = true; });
+
+        await Promise.all(names.map(function (name) { return loadOne(name, !!opts.force); }));
+
+        var missing = names.filter(function (n) {
+            var m = state.meta[n];
+            return !m || m.ok === false;
+        });
+        state.status = missing.length === names.length ? 'error' : 'ready';
+        state.error = missing.length ? new Error('fuentes sin datos: ' + missing.join(', ')) : null;
+        notify();
+        return state;
+    }
+
+    function subscribe(fn) {
+        listeners.push(fn);
+        return function () {
+            listeners = listeners.filter(function (l) { return l !== fn; });
+        };
+    }
+
+    /** Edad del dato más viejo entre las fuentes de alta frecuencia. */
+    function health() {
+        var names = Object.keys(state.meta);
+        var fast = names.filter(function (n) { return ttlOf(n) <= 30 * 60 * 1000; });
+        var pool = fast.length ? fast : names;
+        var stamps = [];
+        var failed = [];
+        names.forEach(function (n) {
+            if (state.meta[n] && state.meta[n].ok === false) failed.push(n);
+        });
+        pool.forEach(function (n) {
+            var m = state.meta[n];
+            if (!m) return;
+            var stamp = m.sourceDate || m.at;
+            if (typeof stamp === 'number') stamps.push(stamp);
+            else if (stamp) stamps.push(Date.parse(stamp));
+        });
+        stamps = stamps.filter(function (t) { return Number.isFinite(t); });
+        var oldest = stamps.length ? new Date(Math.min.apply(null, stamps)).toISOString() : null;
+        return {
+            status: state.status,
+            updatedAt: oldest,
+            total: names.length,
+            failed: failed,
+            error: state.error ? String(state.error.message || state.error) : null,
+            ok: state.status === 'ready'
+        };
+    }
+
+    /* ---------------- Accesos ---------------- */
+
+    function get(key, fallback) {
+        var value = state.data[key];
+        return value === undefined || value === null ? fallback : value;
+    }
+
     function dollarVariation(casa) {
         var hist = get('dolar_hist', {})[casa] || [];
         var serie = hist.filter(function (p) { return Number.isFinite(p.venta); });
@@ -153,62 +291,25 @@
         var last = serie[serie.length - 1];
         var prev = serie[serie.length - 2];
         if (!prev.venta) return null;
-        return {
-            venta: last.venta,
-            previa: prev.venta,
-            pct: ((last.venta / prev.venta) - 1) * 100,
-            fecha: last.fecha
-        };
+        return { venta: last.venta, previa: prev.venta, pct: ((last.venta / prev.venta) - 1) * 100, fecha: last.fecha };
     }
 
-    /** Brecha porcentual entre dos casas del dólar. */
-    function gap(casaA, casaB) {
-        var byCasa = {};
-        get('dolares', []).forEach(function (d) { byCasa[d.casa] = d; });
-        var a = byCasa[casaA];
-        var b = byCasa[casaB];
-        if (!a || !b || !b.venta) return null;
-        return {
-            a: a.venta,
-            b: b.venta,
-            pct: ((a.venta / b.venta) - 1) * 100
-        };
-    }
-
-    /** Tasa efectiva anual a partir de una TNA nominal (capitalización 30 días). */
     function teaFromTna(tna) {
         if (!Number.isFinite(tna) || tna <= 0) return null;
-        var daily = (tna / 100) * 30 / 365;
-        return (Math.pow(1 + daily, 365 / 30) - 1) * 100;
-    }
-
-    /** Estado de cada fuente, para la franja de sincronización. */
-    function health() {
-        var sources = state.sources || {};
-        var keys = Object.keys(sources);
-        var failed = keys.filter(function (k) { return sources[k] && sources[k].ok === false; });
-        return {
-            status: state.status,
-            updatedAt: state.updatedAt,
-            source: state.source,
-            error: state.error ? String(state.error.message || state.error) : null,
-            total: keys.length,
-            failed: failed,
-            ok: state.status === 'ready'
-        };
+        return (Math.pow(1 + (tna / 100) * 30 / 365, 365 / 30) - 1) * 100;
     }
 
     window.ApiService = {
-        init: ready,
-        ready: ready,
-        refresh: function () { return load(true); },
+        load: load,
+        refresh: function (names) { return load(names || Object.keys(state.requested), { force: true }); },
+        subscribe: subscribe,
         get: get,
-        all: function () { return state.data || {}; },
+        all: function () { return state.data; },
+        meta: function () { return state.meta; },
         health: health,
-        dollarVariation: dollarVariation,
-        gap: gap,
-        teaFromTna: teaFromTna,
         state: state,
+        dollarVariation: dollarVariation,
+        teaFromTna: teaFromTna,
 
         getDolares: function () { return get('dolares', []); },
         getUSDProviders: function () { return get('usd_providers', []); },
@@ -219,20 +320,26 @@
         getFCIDinero: function () { return get('fci_dinero', []); },
         getPlazoFijo: function () { return get('plazofijo', []); },
         getTasasAR: function () { return get('tasas_ar', []); },
+        getBCRATasas: function () { return get('bcra_tasas', {}); },
         getRiesgoPais: function () { return get('riesgo_pais', { serie: [] }); },
+        getRiesgoUltimo: function () { return get('riesgo_pais_ultimo', {}); },
         getInflacion: function () { return get('inflacion', []); },
         getUVA: function () { return get('uva', { serie: [] }); },
+        getReservas: function () { return get('reservas', { serie: [] }); },
         getStocks: function () { return get('stocks', []); },
         getBonds: function () { return get('bonds', []); },
         getNotes: function () { return get('notes', []); },
         getCedears: function () { return get('cedears', []); },
-        getNews: function () { return get('news', { articles: [] }).articles || []; },
+        getNews: function () { return get('news', []); },
         getDolarHist: function () { return get('dolar_hist', {}); },
         getImplied: function () {
+            var mep = get('mep', null);
+            var ccl = get('ccl', null);
+            var spread = (mep && ccl && mep.ask && ccl.ask) ? ((ccl.ask / mep.ask) - 1) * 100 : null;
             return {
-                mep: get('mep', null),
-                ccl: get('ccl', null),
-                brecha: get('brecha_impl', null)
+                mep: mep,
+                ccl: ccl,
+                brecha: spread == null ? null : { mep: mep.ask, ccl: ccl.ask, spread: +spread.toFixed(2) }
             };
         }
     };

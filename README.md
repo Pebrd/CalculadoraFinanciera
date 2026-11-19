@@ -1,6 +1,6 @@
 # Pampa Finance
 
-Terminal de datos del mercado argentino. PWA estática, sin backend ni framework: HTML, CSS y JavaScript vanilla, con un bundle de datos que GitHub Actions regenera solo.
+Terminal de datos del mercado argentino. PWA estática, sin backend ni framework: HTML, CSS y JavaScript vanilla que consultan las APIs públicas **directo desde el navegador**.
 
 **Sitio:** https://pebrd.github.io/CalculadoraFinanciera/
 
@@ -8,54 +8,44 @@ Terminal de datos del mercado argentino. PWA estática, sin backend ni framework
 
 | Archivo | Qué resuelve |
 | :--- | :--- |
-| `index.html` | Dólar oficial, blue, MEP y CCL; dólar bancario; USDT; indicadores |
-| `tasas.html` | Cuentas remuneradas, billeteras y FCI comparados en TNA y TEA |
+| `index.html` | Dólar oficial, blue, MEP y CCL; dólar bancario con logos; USDT; indicadores |
+| `tasas.html` | Ranking de TNA por producto, cuentas remuneradas, FCI y referencia BCRA |
 | `plazo-fijo.html` | Tasas de plazo fijo banco por banco y simulador |
 | `calculadoras.html` | Plazo fijo, arbitraje bancario, dólar cripto y liquidación de granos |
 | `Graficos historicos.html` | Series de dólar, riesgo país, inflación, UVA y reservas |
 | `Hacienda.html` | Pizarra Rosario y mercado de hacienda |
 | `ScreenerArgy.html` | Acciones, bonos, notas y CEDEARs del panel BYMA |
-| `noticias.html` | Titulares de economía, mercados y política |
+| `noticias.html` | Titulares de 12 fuentes, filtrables por categoría y texto |
 
 ## Arquitectura
 
-1. **Ingesta:** `.github/workflows/fetch-data.yml` ejecuta `scripts/fetch_data.js` según cron. Cada fuente falla de forma aislada y, si una API no responde, el bundle conserva el último valor bueno.
-2. **Bundle:** `data/finanzas.json` concentra todo (`{ last_updated, sources, data, counts }`). Cada fuente mantiene además su archivo individual en `data/`.
-3. **Capa de datos:** `api-service.js` lee el bundle; si no está, cae a las APIs en vivo; si tampoco, el Service Worker responde con la última copia cacheada.
-4. **PWA:** `sw.js` usa network-first para HTML, JS, CSS y datos, con fallback offline.
+No hay archivos de datos en el repositorio. Cada visita pide las fuentes a las APIs públicas, las normaliza en el navegador y las guarda en el cache del dispositivo.
 
-## Comandos
+1. **`data-sources.js`** define cada fuente: URL, TTL, transformación y fecha real del dato. Incluye un `fetch` propio para noticias (RSS agregado) y proxy para la única fuente sin CORS.
+2. **`api-service.js`** orquesta: cache fresco → usa; cache vencido → pinta y refresca en segundo plano; sin cache → pide con timeout de 15 s. Usa Cache API con fallback a `localStorage`.
+3. **`app.js`** aporta `window.PF`: formateo es-AR, navegación, `renderTable`, `chart` (SVG propio), `reveal` y `withData(fuentes, render)`.
+4. **`sw.js`** cachea el shell (HTML, CSS, JS) con network-first. Los datos no pasan por el Service Worker.
 
-```bash
-# servidor local
-python3 -m http.server 8000
-
-# datos (Node 20+)
-node scripts/fetch_data.js --all      # todo
-node scripts/fetch_data.js --quotes   # dólar, dólar bancario, USDT
-node scripts/fetch_data.js --rates    # FCI, plazo fijo, billeteras
-node scripts/fetch_data.js --agro     # pizarra y hacienda
-node scripts/fetch_data.js --market   # panel BYMA (data912)
-node scripts/fetch_data.js --series   # series históricas + noticias
-node scripts/fetch_data.js --news     # solo noticias
-```
+Consecuencias: no hay commits automáticos ni bundle que envejezca; el dato es tan fresco como la fuente. Si una API no responde, se muestra la última copia local y se marca la fuente caída en la franja de sincronización.
 
 ## Fuentes
 
-| Dato | Endpoint | Frecuencia |
+| Dato | Endpoint | TTL |
 | :--- | :--- | :--- |
-| Dólares | `https://dolarapi.com/v1/dolares` | 5 min |
-| Dólar bancario | `https://api.comparadolar.ar/usd` | 5 min |
-| USDT | `https://criptoya.com/api/usdt/ars/0.1` | 5 min |
-| Plazo fijo | `https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo` | 3 h |
-| FCI | `https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/ultimo` · `/fci/otros/ultimo/` | 3 h |
-| Billeteras | `https://space.tasas.ar/api/bancos-digitales` | 3 h |
-| Granos | `https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase` | 30 min |
-| Hacienda | `https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo` | 30 min |
-| Panel BYMA | `https://data912.com/live/arg_stocks` · `arg_bonds` · `arg_notes` · `arg_cedears` · `mep` · `ccl` | 30 min |
-| Riesgo país, inflación, UVA, dólar histórico | `https://api.argentinadatos.com/v1/finanzas/indices/*` · `/v1/cotizaciones/dolares` | 6 h |
-| Reservas | `https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1` | 6 h |
-| Noticias | RSS de Ámbito, La Nación, Clarín, iProfesional, El Economista, Investing | 6 h |
+| Dólares | `https://dolarapi.com/v1/dolares` | 60 s |
+| Dólar bancario | `https://api.comparadolar.ar/usd` | 60 s |
+| USDT | `https://criptoya.com/api/usdt/ars/0.1` | 60 s |
+| MEP / CCL implícito | `https://data912.com/live/mep` · `/ccl` | 2 min |
+| Plazo fijo | `https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo` | 30 min |
+| FCI | `https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/ultimo` · `/fci/otros/ultimo/` | 30 min |
+| Billeteras | `https://space.tasas.ar/api/bancos-digitales` | 30 min |
+| Referencia BCRA | `https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/12` · `/7` | 30 min |
+| Granos | `https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase` | 10 min |
+| Hacienda | `https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo` (vía proxy) | 15 min |
+| Panel BYMA | `https://data912.com/live/arg_stocks` · `arg_bonds` · `arg_notes` · `arg_cedears` | 2 min |
+| Riesgo país, inflación, dólar histórico | `https://api.argentinadatos.com/v1/finanzas/indices/*` · `/v1/cotizaciones/dolares` | 1–6 h |
+| UVA y reservas | `https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/31` · `/1` | 1–3 h |
+| Noticias | RSS de Ámbito, iProfesional, El Economista, La Nación, Clarín, Infobae, Investing, Perfil | 15 min |
 
 ## Fórmulas
 
@@ -69,17 +59,13 @@ node scripts/fetch_data.js --news     # solo noticias
 
 Canvas AMOLED `#000`, estructura de hairlines `rgba(255,255,255,.13)`, radios de 2 px, IBM Plex Sans para texto e IBM Plex Mono con numerales tabulares para cifras. Sin gradientes en superficies ni iconografía decorativa. Tokens en `styles.css` (`:root`).
 
-## Verificación
-
-No hay test runner. Para revisar cambios:
+## Desarrollo
 
 ```bash
-python3 -m http.server 8765
-# en otra terminal, con Chromium headless:
-chromium --headless --dump-dom --virtual-time-budget=6000 http://127.0.0.1:8765/index.html
+python3 -m http.server 8000
 ```
 
-Revisar consola del navegador, que `data/finanzas.json` tenga `last_updated` reciente y que `sources` no acumule fuentes en `ok: false`.
+No hay build ni dependencias. Para revisar: consola sin errores, tablas con filas reales y franja de sincronización con hora reciente.
 
 ## Licencia
 
