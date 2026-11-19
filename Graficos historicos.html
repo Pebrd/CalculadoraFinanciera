@@ -128,7 +128,7 @@
 (function () {
     var Fmt = PF.Fmt;
 
-    PF.withData(['dolar_hist', 'riesgo_pais', 'inflacion', 'uva', 'reservas', 'mep', 'ccl'], function (api) {
+    PF.withData(['dolar_hist', 'riesgo_pais', 'inflacion', 'uva', 'reservas', 'mep', 'ccl', 'dolar_bonos'], function (api) {
         var hist = api.getDolarHist();
         var rp = api.getRiesgoPais();
         var inf = api.getInflacion();
@@ -220,7 +220,13 @@
             if (blue.length && oficial.length) {
                 var b = blue[blue.length - 1].venta;
                 var o = oficial[oficial.length - 1].venta;
-                var extra = implied.brecha ? ' Spread CCL/MEP implícito: <b>' + Fmt.pct(implied.brecha.spread, 2) + '</b>.' : '';
+                var bonos = api.getDolarBonos();
+                var extra = '';
+                if (bonos.mep && bonos.ccl) {
+                    extra = ' Spread CCL/MEP por bonos: <b>' + Fmt.pct(((bonos.ccl.valor / bonos.mep.valor) - 1) * 100, 2) + '</b>.';
+                } else if (implied.brecha) {
+                    extra = ' Spread CCL/MEP implícito: <b>' + Fmt.pct(implied.brecha.spread, 2) + '</b>.';
+                }
                 document.getElementById('note-dolar').innerHTML =
                     'Blue <b>' + Fmt.money(b, 0) + '</b> contra oficial <b>' + Fmt.money(o, 0) + '</b>: brecha de <b>' +
                     Fmt.pct(((b / o) - 1) * 100, 1) + '</b>. Variación del blue en el período: ' +

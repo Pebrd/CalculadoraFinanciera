@@ -177,6 +177,12 @@
             toggle.classList.toggle('is-open', open);
             toggle.setAttribute('aria-expanded', String(open));
             document.body.style.overflow = open ? 'hidden' : '';
+            if (open) {
+                var first = menu.querySelector('a');
+                if (first) setTimeout(function () { first.focus(); }, 60);
+            } else {
+                toggle.focus();
+            }
         }
         toggle.addEventListener('click', function () {
             setMenu(!menu.classList.contains('is-open'));
@@ -186,6 +192,13 @@
         });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') setMenu(false);
+            if (e.key !== 'Tab' || !menu.classList.contains('is-open')) return;
+            var links = Array.prototype.slice.call(menu.querySelectorAll('a'));
+            if (!links.length) return;
+            var first = links[0];
+            var last = links[links.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         });
     }
 
@@ -406,6 +419,58 @@
         nodes.forEach(function (n) { io.observe(n); });
     }
 
+    /* ---------------- Variación diaria con memoria local ---------------- */
+
+    /**
+     * Guarda el último valor de cada día en el dispositivo y devuelve la
+     * variación contra el cierre anterior. Primera visita: null.
+     */
+    function dailyVariation(key, value) {
+        if (!isNum(value)) return null;
+        var store = {};
+        try { store = JSON.parse(localStorage.getItem('pf:daily') || '{}') || {}; } catch (e) { store = {}; }
+        var today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Argentina/Buenos_Aires' });
+        var prev = store[key];
+        var pct = null;
+        if (prev && isNum(prev.last) && prev.last > 0) {
+            pct = prev.day === today ? null : ((value / prev.last) - 1) * 100;
+        }
+        if (!prev || prev.day !== today) store[key] = { day: today, last: value };
+        else store[key].last = value;
+        try { localStorage.setItem('pf:daily', JSON.stringify(store)); } catch (e) { /* sin persistencia */ }
+        return pct;
+    }
+
+    /* ---------------- Aviso de conexión ---------------- */
+
+    function offlineBar() {
+        var bar = document.getElementById('pf-offline');
+        if (!bar) {
+            var main = document.querySelector('.main');
+            if (!main) return null;
+            bar = document.createElement('div');
+            bar.id = 'pf-offline';
+            bar.className = 'notice';
+            main.insertBefore(bar, main.firstChild);
+        }
+        return bar;
+    }
+
+    function syncOfflineBar(h) {
+        var bar = offlineBar();
+        if (!bar) return;
+        var offline = (typeof navigator !== 'undefined' && navigator.onLine === false);
+        var allFailed = h && h.status === 'error';
+        if (offline || allFailed) {
+            bar.hidden = false;
+            bar.textContent = offline
+                ? 'Sin conexión · mostrando la última copia guardada' + (h && h.updatedAt ? ' (' + Fmt.ago(h.updatedAt) + ')' : '')
+                : 'No pudimos leer las fuentes · reintentá con el botón actualizar';
+        } else {
+            bar.hidden = true;
+        }
+    }
+
     /* ---------------- UI helpers ---------------- */
 
     var toastEl = null;
@@ -436,10 +501,21 @@
         }
         document.querySelectorAll('[data-sync]').forEach(function (el) {
             el.textContent = label;
+            el.setAttribute('aria-live', 'polite');
+            if (h.failed.length) {
+                el.title = 'Sin respuesta: ' + h.failed.join(', ');
+                el.classList.add('is-clickable');
+                el.onclick = function () { toast('Sin respuesta: ' + h.failed.join(', ')); };
+            } else {
+                el.removeAttribute('title');
+                el.classList.remove('is-clickable');
+                el.onclick = null;
+            }
         });
         document.querySelectorAll('[data-sync-dot]').forEach(function (el) {
             el.className = 'dot' + (h.status === 'ready' && !h.failed.length ? '' : ' is-down');
         });
+        syncOfflineBar(h);
         ensureRefreshButton();
     }
 
@@ -514,6 +590,12 @@
             document.addEventListener('visibilitychange', function () {
                 if (document.visibilityState === 'visible') window.ApiService.load(null);
             });
+            window.addEventListener('online', function () {
+                syncBadges();
+                window.ApiService.load(null);
+            });
+            window.addEventListener('offline', function () { syncBadges(); });
+            syncBadges();
         }
     }
 
@@ -525,7 +607,8 @@
         reveal: reveal,
         toast: toast,
         syncBadges: syncBadges,
-        withData: withData
+        withData: withData,
+        dailyVariation: dailyVariation
     };
 
     if (document.readyState === 'loading') {

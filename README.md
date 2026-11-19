@@ -35,7 +35,8 @@ Consecuencias: no hay commits automáticos ni bundle que envejezca; el dato es t
 | Dólares | `https://dolarapi.com/v1/dolares` | 60 s |
 | Dólar bancario | `https://api.comparadolar.ar/usd` | 60 s |
 | USDT | `https://criptoya.com/api/usdt/ars/0.1` | 60 s |
-| MEP / CCL implícito | `https://data912.com/live/mep` · `/ccl` | 2 min |
+| Variación diaria del dólar | `https://criptoya.com/api/dolar` | 5 min |
+| MEP / CCL implícito | `https://data912.com/live/mep` · `/ccl` · `/arg_bonds` (AL30/AL30D, GD30/GD30D) | 2 min |
 | Plazo fijo | `https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo` | 30 min |
 | FCI | `https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/ultimo` · `/fci/otros/ultimo/` | 30 min |
 | Billeteras | `https://space.tasas.ar/api/bancos-digitales` | 30 min |
@@ -45,7 +46,7 @@ Consecuencias: no hay commits automáticos ni bundle que envejezca; el dato es t
 | Panel BYMA | `https://data912.com/live/arg_stocks` · `arg_bonds` · `arg_notes` · `arg_cedears` | 2 min |
 | Riesgo país, inflación, dólar histórico | `https://api.argentinadatos.com/v1/finanzas/indices/*` · `/v1/cotizaciones/dolares` | 1–6 h |
 | UVA y reservas | `https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/31` · `/1` | 1–3 h |
-| Noticias | RSS de Ámbito, iProfesional, El Economista, La Nación, Clarín, Infobae, Investing, Perfil | 15 min |
+| Noticias | RSS de Ámbito, iProfesional, El Economista, La Nación, Clarín, Infobae, Cronista, BAE (vía `r.jina.ai`) | 15 min |
 
 ## Fórmulas
 
@@ -54,6 +55,8 @@ Consecuencias: no hay commits automáticos ni bundle que envejezca; el dato es t
 - **Arbitraje:** `capital / compra × venta − capital`
 - **Granos:** `toneladas × precio × (1 − retenciones / 100)`
 - **Dólar blend:** `oficial × 0,8 + CCL × 0,2`
+- **MEP por bonos:** `AL30 (ARS) / AL30D (USD)`; **CCL:** `GD30 / GD30D`
+- **Tasa real:** `(1 + TEA) / (1 + inflación 12 m) − 1`
 
 ## Diseño
 

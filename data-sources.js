@@ -295,22 +295,24 @@
     };
 
     /* ------------------------------------------------------------------
-       Noticias (RSS vía rss2json, que sí expone CORS)
+       Noticias: RSS pedido por r.jina.ai en texto plano (CORS ok),
+       parseado en el navegador. Sin intermediarios con cuota compartida.
        ------------------------------------------------------------------ */
 
-    var FEEDS = [
+    var FEEDS_PRIORITY = [
         { source: 'Ámbito', category: 'Economía', url: 'https://www.ambito.com/rss/pages/economia.xml' },
         { source: 'Ámbito', category: 'Mercados', url: 'https://www.ambito.com/rss/pages/finanzas.xml' },
-        { source: 'Ámbito', category: 'Negocios', url: 'https://www.ambito.com/rss/pages/negocios.xml' },
-        { source: 'Ámbito', category: 'Política', url: 'https://www.ambito.com/rss/pages/politica.xml' },
-        { source: 'iProfesional', category: 'Economía', url: 'https://www.iprofesional.com/rss/economia.xml' },
         { source: 'iProfesional', category: 'Mercados', url: 'https://www.iprofesional.com/rss/finanzas.xml' },
         { source: 'El Economista', category: 'Economía', url: 'https://eleconomista.com.ar/economia/feed/' },
-        { source: 'La Nación', category: 'Economía', url: 'https://www.lanacion.com.ar/arc/outboundfeeds/rss/category/economia/?outputType=xml' },
+        { source: 'La Nación', category: 'Economía', url: 'https://www.lanacion.com.ar/arc/outboundfeeds/rss/category/economia/?outputType=xml' }
+    ];
+
+    var FEEDS_EXTRA = [
         { source: 'Clarín', category: 'Economía', url: 'https://www.clarin.com/rss/economia/' },
         { source: 'Infobae', category: 'Economía', url: 'https://www.infobae.com/arc/outboundfeeds/rss/category/economia/?outputType=xml' },
-        { source: 'Investing.com', category: 'Mercados', url: 'https://es.investing.com/rss/news_25.rss' },
-        { source: 'Perfil', category: 'Política', url: 'https://www.perfil.com/feed' }
+        { source: 'Cronista', category: 'Economía', url: 'https://www.cronista.com/arc/outboundfeeds/rss/' },
+        { source: 'BAE Negocios', category: 'Negocios', url: 'https://www.baenegocios.com/feed/' },
+        { source: 'Ámbito', category: 'Negocios', url: 'https://www.ambito.com/rss/pages/negocios.xml' }
     ];
 
     var ENTITIES = {
@@ -338,22 +340,104 @@
 
     function toISO(pubDate) {
         if (!pubDate) return null;
-        var iso = String(pubDate).trim().replace(' ', 'T');
-        if (!/[zZ]|[+-]\d{2}:?\d{2}$/.test(iso)) iso += 'Z';
-        var ts = Date.parse(iso);
+        var s = String(pubDate).trim();
+        // "2026-11-19 16:28:00" necesita la T; "Thu, 19 Nov 2026 16:28:00 GMT" ya es válido.
+        if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(s)) s = s.replace(' ', 'T');
+        if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?$/.test(s)) s += 'Z';
+        var ts = Date.parse(s);
         return Number.isFinite(ts) ? new Date(ts).toISOString() : null;
     }
 
-    function parseRss2Json(payload) {
-        return (payload.items || []).map(function (it) {
+    function xmlTag(block, name) {
+        var re = new RegExp('<' + name + '(?:\\s[^>]*)?>([\\s\\S]*?)<\\/' + name + '>', 'i');
+        var m = block.match(re);
+        if (!m) return '';
+        return m[1].replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/, '$1').trim();
+    }
+
+    /** Parsea RSS 2.0 y Atom sin dependencias. */
+    function parseRssXml(xml, feed) {
+        var blocks = xml.match(/<(item|entry)[\s>][\s\S]*?<\/(?:item|entry)>/gi) || [];
+        return blocks.map(function (block) {
+            var title = cleanText(xmlTag(block, 'title'));
+            var href = (block.match(/<link[^>]*href="([^"]+)"/i) || [])[1];
+            var link = href || cleanText(xmlTag(block, 'link')) || cleanText(xmlTag(block, 'guid'));
+            var dateRaw = xmlTag(block, 'pubDate') || xmlTag(block, 'published') || xmlTag(block, 'updated') || xmlTag(block, 'dc:date');
+            var desc = cleanText(xmlTag(block, 'description') || xmlTag(block, 'summary') || xmlTag(block, 'content'));
             return {
-                source: payload.feed && payload.feed.title ? payload.feed.title.replace(/\s*\|.*$/, '') : '',
-                title: cleanText(it.title),
-                link: it.link,
-                date: toISO(it.pubDate),
-                description: cleanText(it.description || it.content || '').slice(0, 240)
+                source: feed.source,
+                category: feed.category,
+                title: title,
+                link: link,
+                date: toISO(dateRaw),
+                description: desc.slice(0, 240)
             };
         }).filter(function (a) { return a.title && /^https?:\/\//.test(a.link || ''); });
+    }
+
+    /** Baja el XML del feed por r.jina.ai, que sí manda CORS. */
+    async function fetchFeedXml(url) {
+        var res = await fetch('https://r.jina.ai/' + url, {
+            headers: { 'x-return-format': 'text' },
+            signal: AbortSignal.timeout(25000)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var text = await res.text();
+        if (text.indexOf('<') === -1) throw new Error('respuesta no XML');
+        return text;
+    }
+
+    /**
+     * Fuente de noticias a partir de un grupo de feeds.
+     * Se piden de a dos en paralelo para no castigar el proxy.
+     */
+    function makeNewsSource(feeds) {
+        return {
+            ttl: 15 * 60 * 1000,
+            fetch: async function () {
+                var articles = [];
+                var failures = 0;
+
+                for (var i = 0; i < feeds.length; i += 2) {
+                    var batch = feeds.slice(i, i + 2);
+                    var results = await Promise.all(batch.map(function (feed) {
+                        return fetchFeedXml(feed.url).then(function (xml) {
+                            return parseRssXml(xml, feed);
+                        }).catch(function () { return null; });
+                    }));
+
+                    results.forEach(function (items, idx) {
+                        if (items && items.length) articles = articles.concat(items);
+                        else failures++;
+                    });
+                }
+
+                if (!articles.length) throw new Error('sin artículos');
+
+                articles.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+
+                var seen = {};
+                var perSource = {};
+                var out = [];
+                for (var j = 0; j < articles.length && out.length < 70; j++) {
+                    var item = articles[j];
+                    var key = (item.title || '').toLowerCase().replace(/\s+/g, ' ').trim();
+                    if (!key || seen[key]) continue;
+                    var src = item.source || '—';
+                    if ((perSource[src] || 0) >= 10) continue;
+                    seen[key] = 1;
+                    perSource[src] = (perSource[src] || 0) + 1;
+                    out.push(item);
+                }
+
+                return { articles: out, failedFeeds: failures, totalFeeds: feeds.length };
+            },
+            transform: function (raw) { return raw.articles; },
+            dateOf: function (raw, data) {
+                var dates = (data || []).map(function (a) { return a.date; }).filter(Boolean).sort();
+                return dates.length ? dates[dates.length - 1] : null;
+            }
+        };
     }
 
     /* ------------------------------------------------------------------
@@ -380,6 +464,46 @@
             group: 'quotes', ttl: 60 * 1000,
             url: 'https://criptoya.com/api/usdt/ars/0.1',
             transform: T.usdt
+        },
+        /** Variación diaria de las casas que publica CriptoYa. */
+        dolar_variation: {
+            group: 'quotes', ttl: 5 * 60 * 1000,
+            url: 'https://criptoya.com/api/dolar',
+            transform: function (raw) {
+                var out = {};
+                ['oficial', 'blue', 'tarjeta', 'mayorista'].forEach(function (k) {
+                    var item = raw && raw[k];
+                    if (!item) return;
+                    var price = Number(item.price);
+                    var variation = Number(item.variation);
+                    if (price > 0 || Number.isFinite(variation)) {
+                        out[k] = {
+                            precio: price > 0 ? round(price, 2) : null,
+                            variacion: Number.isFinite(variation) ? round(variation, 2) : null
+                        };
+                    }
+                });
+                return out;
+            }
+        },
+        /** Dólar implícito por bonos: AL30/AL30D (MEP) y GD30/GD30D (CCL). */
+        dolar_bonos: {
+            group: 'market', ttl: 2 * 60 * 1000,
+            fetch: function (json) {
+                return json('https://data912.com/live/arg_bonds').then(function (rows) {
+                    var by = {};
+                    (rows || []).forEach(function (r) { if (r && r.symbol) by[r.symbol] = r.c; });
+                    function ratio(ars, usd) {
+                        if (!by[ars] || !by[usd]) return null;
+                        return { ars: round(by[ars], 2), usd: round(by[usd], 2), valor: round(by[ars] / by[usd], 2) };
+                    }
+                    var mep = ratio('AL30', 'AL30D');
+                    var ccl = ratio('GD30', 'GD30D');
+                    if (!mep && !ccl) throw new Error('sin pares AL30/GD30');
+                    return { mep: mep, ccl: ccl };
+                });
+            },
+            transform: function (raw) { return raw; }
         },
         mep: {
             group: 'market', ttl: 2 * 60 * 1000,
@@ -518,64 +642,9 @@
             }
         },
 
-        /* --- noticias --- */
-        news: {
-            group: 'news', ttl: 15 * 60 * 1000,
-            fetch: async function (json) {
-                // rss2json limita por ráfaga: se pide de a una con pausa.
-                var articles = [];
-                var failures = 0;
-                for (var i = 0; i < FEEDS.length; i++) {
-                    var feed = FEEDS[i];
-                    var api = 'https://api.rss2json.com/v1/api.json?count=15&rss_url=' + encodeURIComponent(feed.url);
-                    try {
-                        var payload = await json(api);
-                        if (payload.status && payload.status !== 'ok') throw new Error(payload.status);
-                        articles = articles.concat(parseRss2Json(payload).map(function (item) {
-                            item.source = feed.source;
-                            item.category = feed.category;
-                            return item;
-                        }));
-                    } catch (err) {
-                        failures++;
-                        if (/429/.test(String(err && err.message))) {
-                            await new Promise(function (r) { setTimeout(r, 1500); });
-                            try {
-                                var retry = await json(api);
-                                if (retry.status === 'ok') {
-                                    articles = articles.concat(parseRss2Json(retry).map(function (item) {
-                                        item.source = feed.source;
-                                        item.category = feed.category;
-                                        return item;
-                                    }));
-                                    failures--;
-                                }
-                            } catch (e2) { /* se descarta esta fuente */ }
-                        }
-                    }
-                    await new Promise(function (r) { setTimeout(r, 300); });
-                }
-
-                if (!articles.length) throw new Error('sin artículos');
-
-                articles.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
-                var seen = {};
-                var out = [];
-                for (var j = 0; j < articles.length && out.length < 80; j++) {
-                    var key = (articles[j].title || '').toLowerCase().replace(/\s+/g, ' ').trim();
-                    if (!key || seen[key]) continue;
-                    seen[key] = 1;
-                    out.push(articles[j]);
-                }
-                out.failedFeeds = failures;
-                return { articles: out, failedFeeds: failures, totalFeeds: FEEDS.length };
-            },
-            transform: function (raw) { return raw.articles; },
-            dateOf: function (raw, data) {
-                var dates = (data || []).map(function (a) { return a.date; }).filter(Boolean).sort();
-                return dates.length ? dates[dates.length - 1] : null;
-            }
-        }
+        /* --- noticias: dos tandas, la primera pinta antes --- */
+        news: makeNewsSource(FEEDS_PRIORITY),
+        news_extra: makeNewsSource(FEEDS_EXTRA)
     };
 
     window.DATA_SOURCES = SOURCES;

@@ -6,7 +6,7 @@
  *   - No hay archivos de datos: cada API se pide desde el navegador y se
  *     guarda en el cache del dispositivo (Cache API, ver api-service.js).
  */
-const CACHE = 'pampa-v5';
+const CACHE = 'pampa-v6';
 const SHELL = [
     './',
     'index.html',

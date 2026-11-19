@@ -97,11 +97,16 @@
 (function () {
     var Fmt = PF.Fmt;
 
-    PF.withData(['plazofijo', 'bcra_tasas'], function (api) {
+    PF.withData(['plazofijo', 'bcra_tasas', 'inflacion'], function (api) {
         var pf = api.getPlazoFijo();
         var bcra = api.getBCRATasas();
         var best = pf[0];
         var bestTna = best ? (best.tnaClientes || best.tnaNoClientes) : null;
+
+        var infl = api.getInflacion().slice(-12);
+        var infl12 = infl.length === 12 ? (infl.reduce(function (a, p) { return a * (1 + p.valor / 100); }, 1) - 1) * 100 : null;
+        var bestTea = bestTna ? api.teaFromTna(bestTna) : null;
+        var real = (bestTea != null && infl12) ? ((1 + bestTea / 100) / (1 + infl12 / 100) - 1) * 100 : null;
 
         var conClientes = pf.filter(function (b) { return b.tnaClientes > 0; });
         var sinClientes = pf.filter(function (b) { return b.tnaNoClientes > 0; });
@@ -127,6 +132,12 @@
                 value: bcra.depositos30 ? Fmt.pct(bcra.depositos30.valor, 2) : '—',
                 name: bcra.depositos30 ? 'depósitos a 30 días' : 'sin dato',
                 foot: bcra.depositos30 ? Fmt.date(bcra.depositos30.fecha) : '—'
+            },
+            {
+                label: 'Tasa real',
+                value: real != null ? (real >= 0 ? '+' : '−') + Fmt.pct(Math.abs(real), 2) : '—',
+                name: infl12 ? 'vs. inflación ' + Fmt.pct(infl12, 1) : 'sin inflación',
+                foot: real == null ? '—' : (real >= 0 ? 'le gana a los precios' : 'pierde contra los precios')
             }
         ].map(function (s) {
             return '<div class="stat">' +
@@ -143,6 +154,7 @@
                 'La mejor TNA del mercado es <b>' + Fmt.pct(tna, 2) + '</b> en ' + Fmt.esc(best.entidad) +
                 ', que equivale a <b>' + Fmt.pct(api.teaFromTna(tna), 2) + '</b> de TEA si renovás todos los meses.' +
                 (ref ? ' El promedio del sistema que publica el BCRA es <b>' + Fmt.pct(ref, 2) + '</b>.' : '') +
+                (real != null ? ' Con una inflación de ' + Fmt.pct(infl12, 1) + ' en 12 meses, la tasa real es <b>' + Fmt.pct(real, 2) + '</b>.' : '') +
                 ' Un millón de pesos a 30 días rinde <b>' + Fmt.money(1000000 * (tna / 100) * 30 / 365, 0) + '</b>.';
         }
 

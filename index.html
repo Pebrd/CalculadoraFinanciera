@@ -125,7 +125,7 @@
             'onerror="this.style.display=\'none\'">';
     }
 
-    PF.withData(['dolares', 'usd_providers', 'usdt', 'mep', 'ccl', 'riesgo_pais_ultimo', 'inflacion', 'uva', 'plazofijo', 'tasas_ar', 'granos'], function (api) {
+    PF.withData(['dolares', 'usd_providers', 'usdt', 'dolar_variation', 'dolar_bonos', 'mep', 'ccl', 'riesgo_pais_ultimo', 'inflacion', 'uva', 'plazofijo', 'tasas_ar', 'granos'], function (api) {
         var dolares = api.getDolares();
         var by = {};
         dolares.forEach(function (d) { by[d.casa] = d; });
@@ -137,15 +137,28 @@
             { label: 'CCL', casa: 'contadoconliqui' }
         ];
 
-        // --- Héroe: venta, compra y hora de la fuente ---
+        // --- Héroe: venta, compra y variación del día ---
+        var varia = api.getDolarVariation();
+        var VAR_KEY = { oficial: 'oficial', blue: 'blue', bolsa: null, contadoconliqui: null };
+
         document.getElementById('stats').innerHTML = primary.map(function (item) {
             var row = by[item.casa] || {};
+            var pct = null;
+            if (VAR_KEY[item.casa] && varia[VAR_KEY[item.casa]]) {
+                pct = varia[VAR_KEY[item.casa]].variacion;
+            } else if (row.venta) {
+                pct = PF.dailyVariation('dolar:' + item.casa, row.venta);
+            }
+            var delta = Fmt.delta(pct, 2);
+            var foot = (pct == null && row.fecha)
+                ? '<span title="La variación se calcula desde la próxima rueda">' + Fmt.time(row.fecha) + '</span>'
+                : '<span class="' + delta.cls + '">' + delta.text + '</span>';
             return '<div class="stat">' +
                 '<span class="stat__label">' + item.label + '<span class="tag">venta</span></span>' +
                 '<span class="stat__value">' + (row.venta ? Fmt.money(row.venta, 0) : '—') + '</span>' +
                 '<span class="stat__foot">' +
                     '<span>compra ' + (row.compra ? Fmt.money(row.compra, 0) : '—') + '</span>' +
-                    '<span>' + (row.fecha ? Fmt.time(row.fecha) : '—') + '</span>' +
+                    foot +
                 '</span>' +
             '</div>';
         }).join('');
@@ -216,23 +229,32 @@
             empty: 'Sin datos de exchanges'
         });
 
-        // --- Dólar implícito ---
+        // --- Dólar implícito: bonos primero, CEDEARs como referencia ---
+        var bonos = api.getDolarBonos();
         var implied = api.getImplied();
         var rows = [];
-        if (implied.mep) {
-            rows.push(['MEP implícito (CEDEARs)', Fmt.money(implied.mep.bid, 2) + ' / ' + Fmt.money(implied.mep.ask, 2), implied.mep.operaciones + ' puntas']);
+
+        if (bonos.mep) {
+            rows.push(['MEP · AL30 / AL30D', Fmt.money(bonos.mep.valor, 2), 'AL30 $' + Fmt.num(bonos.mep.ars, 0) + ' / AL30D US$ ' + Fmt.num(bonos.mep.usd, 2)]);
         }
-        if (implied.ccl) {
-            rows.push(['CCL implícito (ADRs)', Fmt.money(implied.ccl.bid, 2) + ' / ' + Fmt.money(implied.ccl.ask, 2), implied.ccl.operaciones + ' puntas']);
+        if (bonos.ccl) {
+            rows.push(['CCL · GD30 / GD30D', Fmt.money(bonos.ccl.valor, 2), 'GD30 $' + Fmt.num(bonos.ccl.ars, 0) + ' / GD30D US$ ' + Fmt.num(bonos.ccl.usd, 2)]);
         }
-        if (implied.brecha) {
-            var sp = Fmt.delta(implied.brecha.spread, 2);
-            rows.push(['Spread CCL / MEP', '<span class="' + sp.cls + '">' + sp.text + '</span>', 'mismo momento de mercado']);
+        if (bonos.mep && bonos.ccl) {
+            var sp = Fmt.delta(((bonos.ccl.valor / bonos.mep.valor) - 1) * 100, 2);
+            rows.push(['Spread CCL / MEP', '<span class="' + sp.cls + '">' + sp.text + '</span>', 'bonos, mismo momento']);
         }
+        if (implied.mep || implied.ccl) {
+            var ced = [];
+            if (implied.mep) ced.push('MEP ' + Fmt.money(implied.mep.ask, 2));
+            if (implied.ccl) ced.push('CCL ' + Fmt.money(implied.ccl.ask, 2));
+            rows.push(['Referencia CEDEARs', ced.join(' · '), 'mediana de las 15 puntas más operadas']);
+        }
+
         document.getElementById('implied').innerHTML = rows.length ? rows.map(function (r) {
             return '<div class="kpi"><span class="kpi__label">' + r[0] + '</span>' +
                 '<span class="kpi__value">' + r[1] + '<div class="kpi__sub">' + r[2] + '</div></span></div>';
-        }).join('') : '<div class="empty">Sin datos de CEDEARs</div>';
+        }).join('') : '<div class="empty">Sin datos de bonos ni CEDEARs</div>';
 
         // --- Indicadores ---
         var rp = api.getRiesgoUltimo();

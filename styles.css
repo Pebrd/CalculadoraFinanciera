@@ -574,6 +574,22 @@ table.tbl {
 .sync-refresh:hover { color: var(--fg); border-color: var(--line-strong); }
 .sync-refresh:disabled { color: var(--fg-4); cursor: default; }
 
+[data-sync].is-clickable { cursor: pointer; border-bottom: 1px dotted var(--line-strong); }
+
+.notice {
+  margin-bottom: 22px;
+  padding: 11px 14px;
+  border: 1px solid rgba(224, 189, 114, 0.35);
+  border-radius: var(--r);
+  background: rgba(224, 189, 114, 0.06);
+  color: var(--warn);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.notice[hidden] { display: none; }
+
 .up { color: var(--up); }
 .down { color: var(--down); }
 .flat { color: var(--fg-3); }

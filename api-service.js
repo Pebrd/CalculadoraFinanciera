@@ -314,6 +314,8 @@
         getDolares: function () { return get('dolares', []); },
         getUSDProviders: function () { return get('usd_providers', []); },
         getUSDT: function () { return get('usdt', {}); },
+        getDolarVariation: function () { return get('dolar_variation', {}); },
+        getDolarBonos: function () { return get('dolar_bonos', {}); },
         getGranos: function () { return get('granos', []); },
         getHacienda: function () { return get('hacienda', { categorias: [] }); },
         getFCI: function () { return get('fci_otros', []); },
@@ -331,6 +333,7 @@
         getNotes: function () { return get('notes', []); },
         getCedears: function () { return get('cedears', []); },
         getNews: function () { return get('news', []); },
+        getNewsExtra: function () { return get('news_extra', []); },
         getDolarHist: function () { return get('dolar_hist', {}); },
         getImplied: function () {
             var mep = get('mep', null);

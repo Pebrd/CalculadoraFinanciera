@@ -61,17 +61,34 @@
     var Fmt = PF.Fmt;
     var PAGE = 12;
 
-    PF.withData(['news'], function (api) {
-        var articles = api.getNews().slice().sort(function (a, b) { return b.date - a.date; });
+    PF.withData(['news', 'news_extra'], function (api) {
+        var seenTitles = {};
+        var perSource = {};
+        var articles = api.getNews().concat(api.getNewsExtra())
+            .filter(function (a) {
+                var key = (a.title || '').toLowerCase().replace(/\s+/g, ' ').trim();
+                if (!key || seenTitles[key]) return false;
+                seenTitles[key] = 1;
+                return true;
+            })
+            .sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); })
+            .filter(function (a) {
+                // Máximo 8 por medio: si no, un portal que publica todo el día
+                // llena la primera página y desaparecen las demás fuentes.
+                var src = a.source || '—';
+                perSource[src] = (perSource[src] || 0) + 1;
+                return perSource[src] <= 8;
+            });
         var cat = 'all';
         var query = '';
         var shown = PAGE;
 
         if (articles.length) {
             var latest = articles[0];
+            var fuentes = Object.keys(articles.reduce(function (m, a) { m[a.source] = 1; return m; }, {})).length;
             document.getElementById('answer').innerHTML =
                 'Último titular: <b>' + Fmt.esc(latest.title) + '</b> · ' + Fmt.esc(latest.source) + ' (' + Fmt.ago(latest.date) + '). ' +
-                'Hay ' + articles.length + ' notas de las últimas horas.';
+                'Hay ' + articles.length + ' notas de ' + fuentes + (fuentes === 1 ? ' fuente' : ' fuentes') + '.';
         }
 
         function filtered() {

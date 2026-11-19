@@ -15,7 +15,7 @@ PWA estática del mercado argentino. Sin framework, sin backend y **sin datos en
 - Cada página declara las fuentes que usa en `PF.withData([...], fn)`. No pedir series pesadas en páginas que no las muestran (`dolar_hist` son ~3 MB).
 - Una fuente nueva necesita: endpoint con CORS verificado, `ttl` acorde a su frecuencia real y `dateOf` si publica fecha. Sin `dateOf` se usa la hora de descarga.
 - Fuente sin CORS: agregar `proxy: 'jina'` y aceptar que puede fallar; la página debe degradar con mensaje, no romperse.
-- Noticias: los RSS no exponen CORS, se leen vía `api.rss2json.com` de a una con pausa (hay rate limit 429).
+- Noticias: los RSS no exponen CORS; se piden por `r.jina.ai` con `x-return-format: text` y se parsean en el navegador. No usar agregadores con cuota compartida (rss2json devuelve `status: error` después del primer request).
 - Si una API cambia de contrato, verificar la respuesta cruda antes de tocar la transformación.
 
 ## Diseño (reglas fijas)
