@@ -6,7 +6,7 @@
  *   - No hay archivos de datos: cada API se pide desde el navegador y se
  *     guarda en el cache del dispositivo (Cache API, ver api-service.js).
  */
-const CACHE = 'pampa-v4';
+const CACHE = 'pampa-v5';
 const SHELL = [
     './',
     'index.html',
@@ -86,6 +86,12 @@ self.addEventListener('fetch', (event) => {
     }
 
     if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
+        event.respondWith(cacheFirst(request).catch(() => fetch(request)));
+        return;
+    }
+
+    // Logos e íconos de terceros: se cachean para no repedirlos en cada visita.
+    if (/\.(?:png|jpe?g|svg|webp|ico)$/i.test(url.pathname)) {
         event.respondWith(cacheFirst(request).catch(() => fetch(request)));
     }
 });
