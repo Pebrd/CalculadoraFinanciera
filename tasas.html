@@ -67,8 +67,8 @@
 
     <section class="section">
         <div class="section__head">
-            <h2 class="section__title">Fondos con tasa publicada</h2>
-            <span class="section__note">ordenados por TNA</span>
+            <h2 class="section__title">Tasas de fintech con tope</h2>
+            <span class="section__note">cada tasa rige hasta el monto indicado</span>
         </div>
         <div class="panel reveal">
             <div class="panel__in">
@@ -122,16 +122,17 @@
         var bestFci = fci[0];
         var bestPf = pf[0];
 
-        // --- Ranking honesto: se comparan productos distintos por TNA ---
+        // --- Ranking por TNA publicada, siempre con su tope a la vista ---
         var ranking = [];
-        wallets.forEach(function (t) { ranking.push({ name: t.nombre, tna: t.tna, kind: 'Cuenta remunerada' }); });
-        fci.forEach(function (f) { ranking.push({ name: f.fondo, tna: f.tna, kind: 'Fondo' }); });
-        pf.forEach(function (b) {
-            var r = b.tnaClientes || b.tnaNoClientes;
-            if (r > 0) ranking.push({ name: b.entidad, tna: r, kind: 'Plazo fijo' });
-        });
+        wallets.forEach(function (t) { ranking.push({ name: t.nombre, tna: t.tna, kind: 'Cuenta', tope: t.tope }); });
+        fci.forEach(function (f) { ranking.push({ name: f.fondo, tna: f.tna, kind: 'FCI fintech', tope: f.tope }); });
         ranking.sort(function (a, b) { return b.tna - a.tna; });
         var best = ranking[0];
+        var bestUncapped = ranking.filter(function (r) { return !r.tope; })[0];
+
+        function topeLabel(tope) {
+            return tope ? 'hasta ' + Fmt.compact(tope) : 'sin tope';
+        }
 
         // --- Fecha real de la fuente de tasas ---
         var meta = api.meta().tasas_ar;
@@ -142,10 +143,10 @@
 
         document.getElementById('stats').innerHTML = [
             {
-                label: 'Mejor TNA del mercado',
+                label: 'Mejor TNA publicada',
                 value: best ? Fmt.pct(best.tna, 2) : '—',
                 name: best ? best.name : '—',
-                foot: best ? best.kind : '—'
+                foot: best ? topeLabel(best.tope) : '—'
             },
             {
                 label: 'Mejor cuenta remunerada',
@@ -170,10 +171,10 @@
         // --- Línea de respuesta ---
         if (best && bestWallet) {
             document.getElementById('answer').innerHTML =
-                'La TNA más alta del mercado es <b>' + Fmt.pct(best.tna, 2) + '</b> (' + Fmt.esc(best.name) +
-                ', ' + Fmt.esc(best.kind.toLowerCase()) + '), equivalente a <b>' + Fmt.pct(api.teaFromTna(best.tna), 1) + '</b> de TEA. ' +
-                'Entre cuentas remuneradas, la mejor base es <b>' + Fmt.pct(bestWallet.tna, 2) + '</b> (' + Fmt.esc(bestWallet.nombre) + ')' +
-                (conBeneficio ? ', y con promoción ' + Fmt.esc(conBeneficio.nombre) + ' llega a ' + Fmt.pct(conBeneficio.tnaBonif, 2) + ' bajo condición' : '') + '.';
+                'La TNA más alta publicada es <b>' + Fmt.pct(best.tna, 2) + '</b> (' + Fmt.esc(best.name) + ', ' +
+                topeLabel(best.tope) + '), que equivale a <b>' + Fmt.pct(api.teaFromTna(best.tna), 1) + '</b> de TEA. ' +
+                (bestUncapped ? 'La mejor sin tope es <b>' + Fmt.pct(bestUncapped.tna, 2) + '</b> (' + Fmt.esc(bestUncapped.name) + '). ' : '') +
+                (conBeneficio ? 'Con promoción, ' + Fmt.esc(conBeneficio.nombre) + ' publica ' + Fmt.pct(conBeneficio.tnaBonif, 2) + ' bajo condición.' : '');
         }
 
         // --- Tabla billeteras con filtros ---
