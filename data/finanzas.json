@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-19T10:49:09.497Z",
+  "last_updated": "2026-11-19T10:52:09.552Z",
   "data": {
     "dolares": [
       {
@@ -55,163 +55,163 @@
     "usdt": {
       "ripio": {
         "ask": 1734.76,
-        "bid": 1693.5,
-        "time": 1795085322
+        "bid": 1693.53,
+        "time": 1795085502
       },
       "ripioexchange": {
         "ask": 1715.8,
         "bid": 1710.7,
-        "time": 1795085295
+        "time": 1795085475
       },
       "satoshitango": {
-        "ask": 1720.57,
-        "bid": 1689.83,
-        "time": 1795085345
+        "ask": 1720.5,
+        "bid": 1689.76,
+        "time": 1795085524
       },
       "universalcoins": {
         "ask": 1710,
         "bid": 1620,
-        "time": 1795085345
+        "time": 1795085525
       },
       "decrypto": {
         "ask": 1728.55,
         "bid": 1672.35,
-        "time": 1795085340
+        "time": 1795085520
       },
       "letsbit": {
         "ask": 1719.83,
         "bid": 1668.13,
-        "time": 1795085322
+        "time": 1795085502
       },
       "binancep2p": {
-        "ask": 1716.67,
-        "bid": 1706.4,
-        "time": 1795085309
+        "ask": 1716.68,
+        "bid": 1706.42,
+        "time": 1795085472
       },
       "fiwind": {
         "ask": 1722,
         "bid": 1705,
-        "time": 1795085339
+        "time": 1795085518
       },
       "lemoncash": {
-        "ask": 1738.68,
-        "bid": 1663.73,
-        "time": 1795085339
+        "ask": 1738.65,
+        "bid": 1663.71,
+        "time": 1795085519
       },
       "okexp2p": {
         "ask": 1713.99,
         "bid": 1705.55,
-        "time": 1795085319
+        "time": 1795085503
       },
       "vitawallet": {
         "ask": 1735.52,
         "bid": 1692.45,
-        "time": 1795085344
+        "time": 1795085524
       },
       "belo": {
         "ask": 1720,
         "bid": 1700,
-        "time": 1795085335
+        "time": 1795085515
       },
       "tiendacrypto": {
         "ask": 1740.02,
         "bid": 1698.67,
-        "time": 1795085344
+        "time": 1795085523
       },
       "bybitp2p": {
         "ask": 1713,
         "bid": 1708,
-        "time": 1795085345
+        "time": 1795085483
       },
       "kucoinp2p": {
         "ask": 1719.99,
         "bid": 1697,
-        "time": 1795085291
+        "time": 1795085471
       },
       "saldo": {
-        "ask": 1710.34,
+        "ask": 1710.37,
         "bid": 1679.61,
-        "time": 1795085345
+        "time": 1795085526
       },
       "astropay": {
         "ask": 1763.04,
         "bid": 1689.79,
-        "time": 1795085335
+        "time": 1795085515
       },
       "bitgetp2p": {
         "ask": 1726.69,
         "bid": 1706.3,
-        "time": 1795085326
+        "time": 1795085503
       },
       "bybit": {
         "ask": 1761.2,
         "bid": 1683.57,
-        "time": 1795085258
+        "time": 1795085456
       },
       "binance": {
-        "ask": 1722.3,
-        "bid": 1716.5,
-        "time": 1795085271
+        "ask": 1722.6,
+        "bid": 1716.4,
+        "time": 1795085410
       },
       "eldoradop2p": {
         "ask": 1749.99,
         "bid": 1725,
-        "time": 1795085321
+        "time": 1795085471
       },
       "bingxp2p": {
         "ask": 1716,
         "bid": 1704.59,
-        "time": 1795085277
+        "time": 1795085457
       },
       "bitsoalpha": {
-        "ask": 1714.95,
-        "bid": 1714.94,
-        "time": 1795085341
+        "ask": 1715.99,
+        "bid": 1714.95,
+        "time": 1795085520
       },
       "lemoncashp2p": {
         "ask": 1700,
         "bid": 1695,
-        "time": 1795085281
+        "time": 1795085460
       },
       "cocoscrypto": {
         "ask": 1726,
         "bid": 1700,
-        "time": 1795085338
+        "time": 1795085518
       },
       "cryptomktpro": {
         "ask": 1721.99,
         "bid": 1709.01,
-        "time": 1795085339
+        "time": 1795085519
       },
       "takenos": {
         "ask": 1750.46,
         "bid": 1698.67,
-        "time": 1795085343
+        "time": 1795085523
       },
       "wallbit": {
         "ask": 1734.54,
-        "bid": 1693.36,
-        "time": 1795085345
+        "bid": 1693.41,
+        "time": 1795085525
       },
       "mexcp2p": {
         "ask": 1720,
         "bid": 1701,
-        "time": 1795085321
+        "time": 1795085525
       },
       "mexc": {
         "ask": 1667.22,
         "bid": 1661.41,
-        "time": 1795085341
+        "time": 1795085521
       },
       "peanut": {
         "ask": 1750.46,
         "bid": 1688.48,
-        "time": 1795085342
+        "time": 1795085522
       },
       "nexo": {
         "ask": 1718.54,
         "bid": 1705.17,
-        "time": 1795085341
+        "time": 1795085520
       }
     },
     "plazofijo": [
@@ -10736,7 +10736,7 @@
           "description": "La presidenta de la entidad, Alejandra García, cuestionó la decisión del Gobierno nacional de no acompañar una resolución que recibió el respaldo de 175 países. Argentina fue el único Estado latinoamericano que se abstuvo."
         }
       ],
-      "fetchedAt": "2026-11-19T10:49:09.496Z"
+      "fetchedAt": "2026-11-19T10:52:09.551Z"
     },
     "brecha_impl": {
       "mep": 1635.9,
@@ -12354,106 +12354,106 @@
   "sources": {
     "dolares": {
       "url": "https://dolarapi.com/v1/dolares",
-      "fetchedAt": "2026-11-19T10:49:08.207Z",
+      "fetchedAt": "2026-11-19T10:52:06.783Z",
       "ok": true
     },
     "hacienda": {
       "url": "https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo",
-      "fetchedAt": "2026-11-19T10:49:08.992Z",
+      "fetchedAt": "2026-11-19T10:52:08.224Z",
       "ok": true
     },
     "tasas_ar": {
       "url": "https://space.tasas.ar/api/bancos-digitales",
-      "fetchedAt": "2026-11-19T10:49:08.768Z",
+      "fetchedAt": "2026-11-19T10:52:07.449Z",
       "ok": true
     },
     "fci_otros": {
       "url": "https://api.argentinadatos.com/v1/finanzas/fci/otros/ultimo/",
-      "fetchedAt": "2026-11-19T10:49:08.573Z",
+      "fetchedAt": "2026-11-19T10:52:07.299Z",
       "ok": true
     },
     "stocks": {
       "url": "https://data912.com/live/arg_stocks",
-      "fetchedAt": "2026-11-19T10:49:08.452Z",
+      "fetchedAt": "2026-11-19T10:52:07.711Z",
       "ok": true
     },
     "notes": {
       "url": "https://data912.com/live/arg_notes",
-      "fetchedAt": "2026-11-19T10:49:08.447Z",
+      "fetchedAt": "2026-11-19T10:52:07.685Z",
       "ok": true
     },
     "plazofijo": {
       "url": "https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo",
-      "fetchedAt": "2026-11-19T10:49:08.380Z",
+      "fetchedAt": "2026-11-19T10:52:07.309Z",
       "ok": true
     },
     "fci_dinero": {
       "url": "https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/ultimo",
-      "fetchedAt": "2026-11-19T10:49:08.568Z",
+      "fetchedAt": "2026-11-19T10:52:07.315Z",
       "ok": true
     },
     "inflacion": {
       "url": "https://api.argentinadatos.com/v1/finanzas/indices/inflacion",
-      "fetchedAt": "2026-11-19T10:49:08.571Z",
+      "fetchedAt": "2026-11-19T10:52:07.552Z",
       "ok": true
     },
     "bonds": {
       "url": "https://data912.com/live/arg_bonds",
-      "fetchedAt": "2026-11-19T10:49:08.459Z",
+      "fetchedAt": "2026-11-19T10:52:07.751Z",
       "ok": true
     },
     "riesgo_pais": {
       "url": "https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais",
-      "fetchedAt": "2026-11-19T10:49:08.588Z",
+      "fetchedAt": "2026-11-19T10:52:07.576Z",
       "ok": true
     },
     "uva": {
       "url": "https://api.argentinadatos.com/v1/finanzas/indices/uva",
-      "fetchedAt": "2026-11-19T10:49:08.755Z",
+      "fetchedAt": "2026-11-19T10:52:07.556Z",
       "ok": true
     },
     "dolar_hist": {
       "url": "https://api.argentinadatos.com/v1/cotizaciones/dolares",
-      "fetchedAt": "2026-11-19T10:49:09.070Z",
+      "fetchedAt": "2026-11-19T10:52:08.000Z",
       "ok": true
     },
     "cedears": {
       "url": "https://data912.com/live/arg_cedears",
-      "fetchedAt": "2026-11-19T10:49:08.463Z",
+      "fetchedAt": "2026-11-19T10:52:07.954Z",
       "ok": true
     },
     "usdt": {
       "url": "https://criptoya.com/api/usdt/ars/0.1",
-      "fetchedAt": "2026-11-19T10:49:08.340Z",
+      "fetchedAt": "2026-11-19T10:52:07.162Z",
       "ok": true
     },
     "granos": {
       "url": "https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase",
-      "fetchedAt": "2026-11-19T10:49:08.378Z",
+      "fetchedAt": "2026-11-19T10:52:07.141Z",
       "ok": true
     },
     "usd_providers": {
       "url": "https://api.comparadolar.ar/usd",
-      "fetchedAt": "2026-11-19T10:49:08.615Z",
+      "fetchedAt": "2026-11-19T10:52:07.350Z",
       "ok": true
     },
     "ccl": {
       "url": "https://data912.com/live/ccl",
-      "fetchedAt": "2026-11-19T10:49:08.912Z",
+      "fetchedAt": "2026-11-19T10:52:07.778Z",
       "ok": true
     },
     "mep": {
       "url": "https://data912.com/live/mep",
-      "fetchedAt": "2026-11-19T10:49:08.999Z",
+      "fetchedAt": "2026-11-19T10:52:07.950Z",
       "ok": true
     },
     "reservas": {
       "url": "https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1?limit=400",
-      "fetchedAt": "2026-11-19T10:49:08.791Z",
+      "fetchedAt": "2026-11-19T10:52:08.168Z",
       "ok": true
     }
   },
-  "build_ms": 1414,
+  "build_ms": 2962,
   "counts": {
     "dolares": 7,
     "usdt": 32,
