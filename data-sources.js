@@ -20,6 +20,21 @@
         return Number.isFinite(+n) ? +(+n).toFixed(d == null ? 2 : d) : null;
     }
 
+    /**
+     * Logos del BCRA: se sirven por http (bloqueado en una página https) y
+     * alguno apunta a un archivo que ya no existe. Se reescribe el esquema y
+     * se reemplaza el 404 conocido por el logo equivalente que sí responde.
+     */
+    var LOGO_FIX = {
+        'https://icons.com.ar/icons/bancos-apps/uala.svg': 'https://api.argentinadatos.com/static/logos/uala.png'
+    };
+
+    function fixLogo(url) {
+        if (!url) return null;
+        var u = String(url).replace(/^http:/, 'https:');
+        return LOGO_FIX[u] || u;
+    }
+
     function sortDesc(arr, pick) {
         return arr.slice().sort(function (a, b) { return (pick(b) || 0) - (pick(a) || 0); });
     }
@@ -150,7 +165,7 @@
                 return {
                     entidad: b.entidad,
                     // El BCRA publica los logos por http; en https quedan bloqueados.
-                    logo: b.logo ? String(b.logo).replace(/^http:/, 'https:') : null,
+                    logo: fixLogo(b.logo),
                     tnaClientes: b.tnaClientes != null ? round(Number(b.tnaClientes) * 100, 2) : null,
                     tnaNoClientes: b.tnaNoClientes != null ? round(Number(b.tnaNoClientes) * 100, 2) : null,
                     enlace: b.enlace || null
