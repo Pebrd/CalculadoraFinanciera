@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<meta name="description" content="Screener del panel argentino: acciones, bonos, notas del Tesoro y CEDEARs con precios, variación y volumen.">
+<meta name="description" content="Panel de acciones argentinas con precios, variación y volumen de TradingView, ordenado por lo que se mueve hoy.">
 <title>Screener — Pampa Finance</title>
 <link rel="icon" href="icono.png">
 <link rel="manifest" href="manifest.json">
@@ -17,39 +17,47 @@
 
     <header class="page-head">
         <span class="eyebrow">Panel argentino</span>
-        <h1 class="title">El mercado, <strong>ordenado</strong>.</h1>
-        <p class="lede" id="answer">Cargando panel…</p>
+        <h1 class="title">La rueda, <strong>ordenada</strong>.</h1>
+        <p class="lede">Acciones de BYMA con precio, variación y volumen, ordenables y filtrables. Los datos son los de TradingView, con la demora de 20 minutos que tiene la vista pública.</p>
         <div class="meta-row">
             <span class="dot" data-sync-dot></span>
-            <span data-sync>cargando datos</span>
-            <span>data912 · BYMA</span>
+            <span data-sync>Panel TradingView</span>
+            <span>demora 20 min</span>
         </div>
     </header>
 
-    <section class="stats reveal" id="stats">
-        <div class="stat"><span class="stat__label">Cargando</span></div>
+    <section class="stats reveal">
+        <div class="stat"><span class="stat__label">Mercado</span><span class="stat__value">BYMA</span><span class="stat__note">acciones líderes y generales</span></div>
+        <div class="stat"><span class="stat__label">Demora del dato</span><span class="stat__value">20 min</span><span class="stat__note">tiempo real requiere cuenta paga</span></div>
+        <div class="stat"><span class="stat__label">Rueda</span><span class="stat__value">11–17</span><span class="stat__note">lunes a viernes, hora argentina</span></div>
     </section>
 
     <section class="section">
-        <div class="section__head" style="align-items:center">
-            <div class="chips" id="tabs">
-                <button class="chip is-active" data-set="stocks" type="button">Acciones</button>
-                <button class="chip" data-set="bonds" type="button">Bonos</button>
-                <button class="chip" data-set="notes" type="button">Notas</button>
-                <button class="chip" data-set="cedears" type="button">CEDEARs</button>
-            </div>
-            <label class="field__label" style="gap:0;width:200px;max-width:100%">
-                <input id="search" type="search" placeholder="Filtrar símbolo" style="text-align:left;font-family:var(--mono);font-size:12.5px;padding:9px 12px;background:var(--bg-1);border:1px solid var(--line);border-radius:2px;color:var(--fg)">
-            </label>
-        </div>
-
         <div class="panel reveal">
             <div class="panel__in">
                 <div class="panel__head">
-                    <span class="panel__title" id="set-title">Acciones</span>
-                    <span class="panel__hint" id="set-note">—</span>
+                    <span class="panel__title">Panel de acciones</span>
+                    <span class="panel__hint">TradingView · en vivo</span>
                 </div>
-                <div id="tabla" data-error><span class="skeleton" style="width:100%"></span></div>
+                <div class="tv-wrap">
+                    <div class="tradingview-widget-container" id="tv">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                        {
+                            "width": "100%",
+                            "height": "100%",
+                            "defaultColumn": "overview",
+                            "defaultScreen": "general",
+                            "market": "argentina",
+                            "showToolbar": true,
+                            "colorTheme": "dark",
+                            "isTransparent": true,
+                            "locale": "es"
+                        }
+                        </script>
+                    </div>
+                </div>
+                <p class="result__note" style="margin:14px 0 0">Sin el panel a la vista (bloqueador de contenido o red restringida), abrí el listado directo en <a href="https://www.tradingview.com/markets/stocks-argentina/market-movers-all-stocks/" target="_blank" rel="noopener">TradingView</a>. Para operar hace falta un agente matriculado: esto es información, no una orden.</p>
             </div>
         </div>
     </section>
@@ -57,19 +65,24 @@
     <section class="section">
         <div class="panel reveal">
             <div class="panel__in">
-                <p class="result__note" style="margin:0">
-                    Datos del panel BYMA con la última rueda disponible. La variación es contra el cierre anterior y el volumen
-                    se informa en la unidad que publica la fuente (nominales). Las notas del Tesoro cotizan por lámina de 100.
-                    Este panel es informativo: no hay recomendación de compra ni de venta.
-                </p>
+                <div class="panel__head">
+                    <span class="panel__title">Cómo leerlo</span>
+                    <span class="panel__hint">tres columnas que importan</span>
+                </div>
+                <div class="kpi-list">
+                    <div class="kpi"><span class="kpi__label">Variación</span><span class="kpi__value">contra el cierre anterior, en la rueda de hoy</span></div>
+                    <div class="kpi"><span class="kpi__label">Volumen</span><span class="kpi__value">pesos operados; menos de $50 M es poca liquidez</span></div>
+                    <div class="kpi"><span class="kpi__label">Capitalización</span><span class="kpi__value">valor de la empresa a precio de hoy</span></div>
+                </div>
             </div>
         </div>
     </section>
 
     <footer class="foot">
-        <span>Pampa Finance · panel BYMA vía data912</span>
-        <span><a href="index.html">Cotizaciones</a> · <a href="Graficos historicos.html">Series</a></span>
+        <span>Pampa Finance · datos de TradingView con demora de 20 minutos</span>
+        <span><a href="index.html">Dólar</a> · <a href="Hacienda.html">Pizarra del agro</a></span>
     </footer>
+
 </main>
 
 <script src="data-sources.js"></script>
@@ -77,99 +90,9 @@
 <script src="app.js"></script>
 <script>
 (function () {
-    var Fmt = PF.Fmt;
-
-    PF.withData(['stocks', 'bonds', 'notes', 'cedears'], function (api) {
-        var sets = {
-            stocks: { label: 'Acciones', rows: api.getStocks(), decimals: 2 },
-            bonds: { label: 'Bonos', rows: api.getBonds(), decimals: 2 },
-            notes: { label: 'Notas del Tesoro', rows: api.getNotes(), decimals: 3 },
-            cedears: { label: 'CEDEARs', rows: api.getCedears(), decimals: 2 }
-        };
-
-        var allStocks = sets.stocks.rows.concat(sets.bonds.rows, sets.cedears.rows);
-        var gainers = allStocks.filter(function (r) { return typeof r.variacion === 'number'; })
-            .sort(function (a, b) { return b.variacion - a.variacion; });
-        var losers = gainers.slice().sort(function (a, b) { return a.variacion - b.variacion; });
-        var top = gainers[0];
-        var bottom = losers[0];
-
-        document.getElementById('stats').innerHTML = [
-            { label: 'Mejor suba', value: top ? Fmt.pct(top.variacion, 2) : '—', left: top ? top.simbolo : '—', right: 'acciones, bonos y CEDEARs' },
-            { label: 'Peor baja', value: bottom ? Fmt.pct(bottom.variacion, 2) : '—', left: bottom ? bottom.simbolo : '—', right: 'rueda en curso' },
-            { label: 'Papeles en panel', value: Fmt.num(allStocks.length, 0), left: sets.stocks.rows.length + ' acciones · ' + sets.bonds.rows.length + ' bonos', right: sets.cedears.rows.length + ' CEDEARs' }
-        ].map(function (s) {
-            return '<div class="stat">' +
-                '<span class="stat__label">' + s.label + '</span>' +
-                '<span class="stat__value">' + s.value + '</span>' +
-                '<span class="stat__foot"><span>' + s.left + '</span><span>' + s.right + '</span></span>' +
-            '</div>';
-        }).join('');
-
-        if (top) {
-            document.getElementById('answer').innerHTML =
-                'La mejor suba del panel es <b>' + Fmt.esc(top.simbolo) + '</b> con <b>' + Fmt.pct(top.variacion, 2) +
-                '</b>. La peor es <b>' + Fmt.esc(bottom.simbolo) + '</b> con <b>' + Fmt.pct(bottom.variacion, 2) +
-                '</b>. Ordená las tablas haciendo clic en las columnas.';
-        }
-
-        var current = 'stocks';
-        var query = '';
-
-        function draw() {
-            var set = sets[current];
-            var rows = set.rows.filter(function (r) {
-                return !query || String(r.simbolo).toLowerCase().indexOf(query) !== -1;
-            });
-
-            document.getElementById('set-title').textContent = set.label;
-            document.getElementById('set-note').textContent = rows.length + ' papeles · ordenado por variación';
-
-            PF.renderTable(document.getElementById('tabla'), [
-                { key: 'simbolo', label: 'Símbolo', render: function (r) {
-                    return '<span class="name">' + Fmt.esc(r.simbolo) + '</span>';
-                } },
-                { key: 'precio', label: 'Último', align: 'right', render: function (r) {
-                    return '<strong>' + Fmt.money(r.precio, set.decimals) + '</strong>';
-                } },
-                { key: 'variacion', label: 'Variación', align: 'right', render: function (r) {
-                    var d = Fmt.delta(r.variacion, 2);
-                    return '<span class="' + d.cls + '">' + d.text + '</span>';
-                } },
-                { key: 'volumen', label: 'Volumen', align: 'right', render: function (r) {
-                    return '<span class="muted">' + Fmt.qty(r.volumen) + '</span>';
-                } }
-            ], rows, {
-                sortKey: 'variacion',
-                sortDir: 'desc',
-                maxHeight: 560,
-                empty: 'Sin papeles para este filtro'
-            });
-        }
-
-        document.getElementById('tabs').addEventListener('click', function (e) {
-            var btn = e.target.closest('.chip');
-            if (!btn) return;
-            current = btn.getAttribute('data-set');
-            Array.prototype.forEach.call(document.querySelectorAll('#tabs .chip'), function (c) {
-                c.classList.toggle('is-active', c === btn);
-            });
-            draw();
-        });
-
-        var searchEl = document.getElementById('search');
-        var t;
-        searchEl.addEventListener('input', function () {
-            clearTimeout(t);
-            t = setTimeout(function () {
-                query = searchEl.value.trim().toLowerCase();
-                draw();
-            }, 140);
-        });
-
-        draw();
-        PF.reveal();
-    });
+    'use strict';
+    // El panel es un iframe de TradingView: no hay fuente propia que contar.
+    PF.syncLabel = function () { return 'Panel TradingView · demora 20 min'; };
 })();
 </script>
 </body>

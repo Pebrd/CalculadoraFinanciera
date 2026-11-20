@@ -149,7 +149,8 @@
             return (raw || []).map(function (b) {
                 return {
                     entidad: b.entidad,
-                    logo: b.logo || null,
+                    // El BCRA publica los logos por http; en https quedan bloqueados.
+                    logo: b.logo ? String(b.logo).replace(/^http:/, 'https:') : null,
                     tnaClientes: b.tnaClientes != null ? round(Number(b.tnaClientes) * 100, 2) : null,
                     tnaNoClientes: b.tnaNoClientes != null ? round(Number(b.tnaNoClientes) * 100, 2) : null,
                     enlace: b.enlace || null
@@ -248,29 +249,6 @@
                 anterior: serie.length > 1 ? serie[serie.length - 2].valor : null,
                 serie: serie
             };
-        },
-
-        panel: function (raw) {
-            return (raw || []).map(function (s) {
-                return {
-                    simbolo: s.symbol,
-                    precio: round(s.c, 2),
-                    variacion: round(s.pct_change, 2),
-                    volumen: round(s.v, 0)
-                };
-            }).filter(function (s) { return s.simbolo && s.precio > 0; })
-                .sort(function (a, b) { return (b.volumen || 0) - (a.volumen || 0); });
-        },
-
-        cedears: function (raw) {
-            return sortDesc(raw || [], function (s) { return Number(s.v); }).slice(0, 40).map(function (s) {
-                return {
-                    simbolo: s.symbol,
-                    precio: round(s.c, 2),
-                    variacion: round(s.pct_change, 2),
-                    volumen: round(s.v, 0)
-                };
-            }).filter(function (s) { return s.simbolo; });
         },
 
         implied: function (raw, bidKey, askKey) {
@@ -584,11 +562,7 @@
             transform: T.hacienda
         },
 
-        /* --- panel BYMA --- */
-        stocks: { group: 'market', ttl: 2 * 60 * 1000, url: 'https://data912.com/live/arg_stocks', transform: T.panel },
-        bonds: { group: 'market', ttl: 2 * 60 * 1000, url: 'https://data912.com/live/arg_bonds', transform: T.panel },
-        notes: { group: 'market', ttl: 2 * 60 * 1000, url: 'https://data912.com/live/arg_notes', transform: T.panel },
-        cedears: { group: 'market', ttl: 2 * 60 * 1000, url: 'https://data912.com/live/arg_cedears', transform: T.cedears },
+        /* --- panel BYMA: el screener usa el widget de TradingView, no hay fuente propia --- */
 
         /* --- series --- */
         riesgo_pais_ultimo: {
@@ -649,4 +623,27 @@
 
     window.DATA_SOURCES = SOURCES;
     window.DATA_MAX_AGE_MS = 12 * 60 * MIN;
+
+    /**
+     * Fondo que necesita cada logo para verse sobre negro, medido sobre el
+     * archivo real: 'light' para logos oscuros, 'dark' para los casi blancos.
+     */
+    window.LOGO_BG = {
+        '00015.png': 'light', '00017.png': 'light', '00020.png': 'light', '00029.png': 'light',
+        '00034.png': 'light', '00072.png': 'light', '00147.png': 'light', '00254.png': 'light',
+        '00268.png': 'light', '00285.png': 'light', '00299.png': 'light', '00305.png': 'light',
+        '00319.png': 'light', '00341.png': 'light', '65203.png': 'light',
+        'astropay.png': 'dark', 'balanz.png': 'light', 'banco-bica.svg': 'light',
+        'banco-ciudad.png': 'dark', 'banco-icbc.png': 'dark', 'banco-supervielle.png': 'dark',
+        'banco-voii.jpg': 'light', 'bancor.svg': 'light', 'fiwind.png': 'light',
+        'grabr.svg': 'light', 'nexo.png': 'light', 'plus.png': 'light', 'ripio.png': 'light',
+        'tiendadolar.png': 'dark', 'uala.png': 'light', 'wallbit.png': 'light',
+        '01JMD4H3HY0EZ9AQHPRRPKH5RP.webp': 'dark', '01JMD4NVDETSQ1CK0TQR0NFRSM.webp': 'dark',
+        '01JMD4PSA4PNEJ03HW69QBGP08.webp': 'dark', '01JMD4R6MGQ9RYQZ013CHEBHBH.webp': 'light',
+        '01JMD4TC8KBC5YPMKDHYA2XAJ8.webp': 'light', '01JMD4XAC17DSAHHH8M4N07KSV.webp': 'dark',
+        '01JQ4KK36VKVM4FY6NKWEAG5FY.webp': 'light', '01JSHV50ETXHDC6SPH4TCT0WP2.webp': 'dark',
+        '01JTGP5PW4JQ3P24F8SJD329JC.webp': 'dark', '01K0YRCBKC2GNKER34EW7D20ZZ.webp': 'light',
+        '01K7WH2WCWB72K2C6077GVVT94.webp': 'dark', '01K8BZCVBCH66RDPBVWDVAAR92.webp': 'light',
+        '01KR4APY1TW7GGX0QEY2MJDGGT.webp': 'light'
+    };
 })();

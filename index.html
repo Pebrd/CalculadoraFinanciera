@@ -120,9 +120,7 @@
     var Fmt = PF.Fmt;
 
     function entidadLogo(row) {
-        if (!row.logo) return '';
-        return '<img class="entidad-logo" src="' + Fmt.esc(row.logo) + '" alt="" width="20" height="20" loading="lazy" ' +
-            'onerror="this.style.display=\'none\'">';
+        return PF.logo(row.logo, row.nombre);
     }
 
     PF.withData(['dolares', 'usd_providers', 'usdt', 'dolar_variation', 'dolar_bonos', 'mep', 'ccl', 'riesgo_pais_ultimo', 'inflacion', 'uva', 'plazofijo', 'tasas_ar', 'granos'], function (api) {

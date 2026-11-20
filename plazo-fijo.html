@@ -162,8 +162,7 @@
         document.getElementById('count').textContent = pf.length + ' entidades';
         PF.renderTable(document.getElementById('tabla'), [
             { key: 'entidad', label: 'Entidad', render: function (r) {
-                var logo = r.logo ? '<img src="' + Fmt.esc(r.logo) + '" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px;border-radius:2px;opacity:.9" loading="lazy">' : '';
-                return logo + '<span class="name">' + Fmt.esc(r.entidad) + '</span>';
+                return PF.logo(r.logo, r.entidad) + '<span class="name">' + Fmt.esc(r.entidad) + '</span>';
             } },
             { key: 'tnaClientes', label: 'Clientes', align: 'right', render: function (r) {
                 return r.tnaClientes ? '<strong>' + Fmt.pct(r.tnaClientes, 2) + '</strong>' : '<span class="muted">—</span>';

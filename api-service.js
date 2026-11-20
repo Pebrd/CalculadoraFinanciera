@@ -248,7 +248,11 @@
         };
     }
 
-    /** Edad del dato más viejo entre las fuentes de alta frecuencia. */
+    /**
+     * Edad del dato entre las fuentes de alta frecuencia.
+     * Se usa la mediana y no el mínimo: una lista diaria (tasas.ar) no debe
+     * arrastrar el badge de todo el tablero, pero sí quedar marcada aparte.
+     */
     function health() {
         var names = Object.keys(state.meta);
         var fast = names.filter(function (n) { return ttlOf(n) <= 30 * 60 * 1000; });
@@ -262,16 +266,20 @@
             var m = state.meta[n];
             if (!m) return;
             var stamp = m.sourceDate || m.at;
-            if (typeof stamp === 'number') stamps.push(stamp);
-            else if (stamp) stamps.push(Date.parse(stamp));
+            var t = typeof stamp === 'number' ? stamp : Date.parse(stamp);
+            if (Number.isFinite(t)) stamps.push({ name: n, t: t });
         });
-        stamps = stamps.filter(function (t) { return Number.isFinite(t); });
-        var oldest = stamps.length ? new Date(Math.min.apply(null, stamps)).toISOString() : null;
+        stamps.sort(function (a, b) { return a.t - b.t; });
+        var median = stamps.length ? stamps[Math.floor(stamps.length / 2)].t : null;
+        var stale = median ? stamps.filter(function (s) {
+            return median - s.t > 24 * 60 * 60 * 1000;
+        }).map(function (s) { return s.name; }) : [];
         return {
             status: state.status,
-            updatedAt: oldest,
+            updatedAt: median ? new Date(median).toISOString() : null,
             total: names.length,
             failed: failed,
+            stale: stale,
             error: state.error ? String(state.error.message || state.error) : null,
             ok: state.status === 'ready'
         };
@@ -329,9 +337,7 @@
         getUVA: function () { return get('uva', { serie: [] }); },
         getReservas: function () { return get('reservas', { serie: [] }); },
         getStocks: function () { return get('stocks', []); },
-        getBonds: function () { return get('bonds', []); },
         getNotes: function () { return get('notes', []); },
-        getCedears: function () { return get('cedears', []); },
         getNews: function () { return get('news', []); },
         getNewsExtra: function () { return get('news_extra', []); },
         getDolarHist: function () { return get('dolar_hist', {}); },

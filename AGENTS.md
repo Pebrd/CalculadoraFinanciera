@@ -17,6 +17,8 @@ PWA estática del mercado argentino. Sin framework, sin backend y **sin datos en
 - Fuente sin CORS: agregar `proxy: 'jina'` y aceptar que puede fallar; la página debe degradar con mensaje, no romperse.
 - Noticias: los RSS no exponen CORS; se piden por `r.jina.ai` con `x-return-format: text` y se parsean en el navegador. No usar agregadores con cuota compartida (rss2json devuelve `status: error` después del primer request).
 - Si una API cambia de contrato, verificar la respuesta cruda antes de tocar la transformación.
+- Screener: es el widget de TradingView (`market: argentina`, demora 20 min). No reemplazarlo por `data912.com/live/arg_stocks`: sus precios son parecidos pero el `pct_change` no coincide con la rueda (medido: GGAL −1,15% contra −5,02% de TradingView).
+- Logos de entidades: el BCRA los publica por `http` y en una página `https` se bloquean; reescribir el esquema. Sobre fondo AMOLED un logo oscuro desaparece, así que `window.LOGO_BG` marca qué fondo necesita cada archivo (medido sobre el logo real) y `PF.logo()` lo aplica.
 
 ## Diseño (reglas fijas)
 

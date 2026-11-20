@@ -471,6 +471,23 @@
         }
     }
 
+    /* ---------------- Logos ---------------- */
+
+    /**
+     * Logo de entidad con el fondo que necesita para verse sobre negro.
+     * El mapa LOGO_BG sale de medir la luminancia real de cada archivo.
+     */
+    function logo(url, name, size) {
+        if (!url) return '';
+        var base = String(url).split('/').pop().split('?')[0];
+        var bg = (window.LOGO_BG && window.LOGO_BG[base]) || null;
+        var px = size || 20;
+        return '<img class="entidad-logo" src="' + Fmt.esc(url) + '" alt="' + Fmt.esc(name || '') + '"' +
+            ' width="' + px + '" height="' + px + '" loading="lazy"' +
+            (bg ? ' data-bg="' + bg + '"' : '') +
+            ' onerror="this.style.visibility=\'hidden\'">';
+    }
+
     /* ---------------- UI helpers ---------------- */
 
     var toastEl = null;
@@ -494,6 +511,7 @@
         if (h.status === 'ready') {
             label = 'Datos ' + Fmt.ago(h.updatedAt) + ' · ' + h.total + (h.total === 1 ? ' fuente' : ' fuentes');
             if (h.failed.length) label += ' · ' + h.failed.length + ' sin respuesta';
+            if (h.stale && h.stale.length) label += ' · ' + h.stale.length + ' con datos viejos';
         } else if (h.status === 'error') {
             label = 'No pudimos leer los datos';
         } else {
@@ -509,10 +527,13 @@
         document.querySelectorAll('[data-sync]').forEach(function (el) {
             el.textContent = label;
             el.setAttribute('aria-live', 'polite');
-            if (h.failed.length) {
-                el.title = 'Sin respuesta: ' + h.failed.join(', ');
+            var notes = [];
+            if (h.failed.length) notes.push('Sin respuesta: ' + h.failed.join(', '));
+            if (h.stale && h.stale.length) notes.push('Datos de más de un día: ' + h.stale.join(', '));
+            if (notes.length) {
+                el.title = notes.join(' · ');
                 el.classList.add('is-clickable');
-                el.onclick = function () { toast('Sin respuesta: ' + h.failed.join(', ')); };
+                el.onclick = function () { toast(notes.join(' · ')); };
             } else {
                 el.removeAttribute('title');
                 el.classList.remove('is-clickable');
@@ -615,7 +636,8 @@
         toast: toast,
         syncBadges: syncBadges,
         withData: withData,
-        dailyVariation: dailyVariation
+        dailyVariation: dailyVariation,
+        logo: logo
     };
 
     if (document.readyState === 'loading') {

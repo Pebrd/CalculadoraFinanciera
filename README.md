@@ -11,11 +11,11 @@ Terminal de datos del mercado argentino. PWA estática, sin backend ni framework
 | `index.html` | Dólar oficial, blue, MEP y CCL; dólar bancario con logos; USDT; indicadores |
 | `tasas.html` | Ranking de TNA por producto, cuentas remuneradas, FCI y referencia BCRA |
 | `plazo-fijo.html` | Tasas de plazo fijo banco por banco y simulador |
-| `calculadoras.html` | Plazo fijo, arbitraje bancario, dólar cripto y liquidación de granos |
+| `calculadoras.html` | Plazo fijo, arbitraje bancario y dólar cripto |
 | `Graficos historicos.html` | Series de dólar, riesgo país, inflación, UVA y reservas |
 | `Hacienda.html` | Pizarra Rosario y mercado de hacienda |
-| `ScreenerArgy.html` | Acciones, bonos, notas y CEDEARs del panel BYMA |
-| `noticias.html` | Titulares de 12 fuentes, filtrables por categoría y texto |
+| `ScreenerArgy.html` | Panel de acciones de BYMA con el screener de TradingView (demora 20 min) |
+| `noticias.html` | Titulares de 9 feeds (8 medios), filtrables por categoría y texto |
 
 ## Arquitectura
 
@@ -43,7 +43,7 @@ Consecuencias: no hay commits automáticos ni bundle que envejezca; el dato es t
 | Referencia BCRA | `https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/12` · `/7` | 30 min |
 | Granos | `https://s1.dekagb.com/dkmserver.services/html/acabaseservice.aspx?mt=GetPizarras&appname=acabase` | 10 min |
 | Hacienda | `https://www.decampoacampo.com/gh_funciones.php?function=getListadoPreciosGordo` (vía proxy) | 15 min |
-| Panel BYMA | `https://data912.com/live/arg_stocks` · `arg_bonds` · `arg_notes` · `arg_cedears` | 2 min |
+| Panel BYMA | Widget de TradingView (`embed-widget-screener`), mercado `argentina`; sin fuente propia | — |
 | Riesgo país, inflación, dólar histórico | `https://api.argentinadatos.com/v1/finanzas/indices/*` · `/v1/cotizaciones/dolares` | 1–6 h |
 | UVA y reservas | `https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/31` · `/1` | 1–3 h |
 | Noticias | RSS de Ámbito, iProfesional, El Economista, La Nación, Clarín, Infobae, Cronista, BAE (vía `r.jina.ai`) | 15 min |

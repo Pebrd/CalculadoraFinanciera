@@ -263,7 +263,7 @@
 
             PF.renderTable(document.getElementById('tabla'), [
                 { key: 'nombre', label: 'Entidad', render: function (r) {
-                    var logo = r.logo ? '<img class="entidad-logo" src="' + Fmt.esc(r.logo) + '" alt="" width="20" height="20" loading="lazy" onerror="this.style.display=\'none\'">' : '';
+                    var logo = PF.logo(r.logo, r.nombre);
                     var cond = r.condicion || '';
                     var short = cond.length > 90 ? cond.slice(0, 90) + '…' : cond;
                     var sub = cond ? '<span class="muted" style="display:block;font-size:11px;line-height:1.4;margin-top:3px;white-space:normal;max-width:36ch" title="' + Fmt.esc(cond) + '">' + Fmt.esc(short) + '</span>' : '';

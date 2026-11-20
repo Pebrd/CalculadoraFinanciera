@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<meta name="description" content="Calculadoras de plazo fijo, arbitraje de dólar, USDT y liquidación de granos con datos de mercado del día.">
+<meta name="description" content="Calculadoras de plazo fijo, arbitraje de dólar y USDT con datos de mercado del día.">
 <title>Calculadoras — Pampa Finance</title>
 <link rel="icon" href="icono.png">
 <link rel="manifest" href="manifest.json">
@@ -18,7 +18,7 @@
     <header class="page-head">
         <span class="eyebrow">Herramientas</span>
         <h1 class="title">Números que <strong>cierran</strong>.</h1>
-        <p class="lede">Cuatro cálculos con las tasas, puntas y precios de hoy. Todo se recalcula mientras escribís y no sale de tu navegador.</p>
+        <p class="lede">Tres cálculos con las tasas y puntas de hoy. Todo se recalcula mientras escribís y no sale de tu navegador.</p>
         <div class="meta-row">
             <span class="dot" data-sync-dot></span>
             <span data-sync>cargando datos</span>
@@ -26,7 +26,7 @@
         </div>
     </header>
 
-    <section class="calc-grid">
+    <section class="calc-grid calc-grid--3">
 
         <!-- 1. Plazo fijo -->
         <div class="panel reveal">
@@ -109,40 +109,6 @@
             </div>
         </div>
 
-        <!-- 4. Granos -->
-        <div class="panel reveal">
-            <div class="panel__in" style="display:flex;flex-direction:column;height:100%">
-                <div class="panel__head">
-                    <span class="panel__title">04 · Liquidación de granos</span>
-                    <span class="panel__hint">pizarra Rosario</span>
-                </div>
-                <div class="field">
-                    <label class="field__label" for="gr-producto">Producto</label>
-                    <select id="gr-producto">
-                        <option value="">Cargando pizarra…</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label class="field__label" for="gr-toneladas">Toneladas</label>
-                    <input id="gr-toneladas" type="number" inputmode="decimal" value="30" min="0" step="1">
-                </div>
-                <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-                    <div>
-                        <label class="field__label" for="gr-precio">Precio por tonelada</label>
-                        <input id="gr-precio" type="number" inputmode="decimal" value="0" min="0" step="1000">
-                    </div>
-                    <div>
-                        <label class="field__label" for="gr-dex">Retenciones (%)</label>
-                        <input id="gr-dex" type="number" inputmode="decimal" value="0" min="0" max="100" step="0.5">
-                    </div>
-                </div>
-                <div class="result">
-                    <div class="result__label">Neto después de retenciones</div>
-                    <div class="result__value" id="gr-result">—</div>
-                    <div class="result__note" id="gr-note"></div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="section">
@@ -156,7 +122,6 @@
                     <div class="kpi"><span class="kpi__label">TEA</span><span class="kpi__value">(1 + TNA × 30 / 365)<sup>365/30</sup> − 1</span></div>
                     <div class="kpi"><span class="kpi__label">Plazo fijo</span><span class="kpi__value">capital × TNA × días / 365</span></div>
                     <div class="kpi"><span class="kpi__label">Arbitraje</span><span class="kpi__value">capital / compra × venta − capital</span></div>
-                    <div class="kpi"><span class="kpi__label">Granos</span><span class="kpi__value">toneladas × precio × (1 − retenciones / 100)</span></div>
                 </div>
             </div>
         </div>
@@ -178,7 +143,7 @@
     var num = function (id) { return parseFloat($(id).value) || 0; };
     var put = function (id, text) { $(id).textContent = text; };
 
-    PF.withData(['plazofijo', 'usd_providers', 'dolares', 'usdt', 'granos', 'mep'], function (api) {
+    PF.withData(['plazofijo', 'usd_providers', 'dolares', 'usdt', 'mep'], function (api) {
         /* ---------- 01 Plazo fijo ---------- */
         var pf = api.getPlazoFijo();
         var bestPf = pf[0];
@@ -284,48 +249,6 @@
             $(id).addEventListener('input', calcUsdt);
         });
         applyUsdtPreset();
-
-        /* ---------- 04 Granos ---------- */
-        var granos = api.getGranos();
-        var select = $('gr-producto');
-        if (granos.length) {
-            select.innerHTML = granos.map(function (g) {
-                return '<option value="' + Fmt.esc(g.producto) + '">' + Fmt.esc(Fmt.title(g.nombre)) + ' · ' + Fmt.money(g.precio, 0) + '</option>';
-            }).join('');
-            var first = granos[0];
-            $('gr-precio').value = first.precio;
-        } else {
-            select.innerHTML = '<option value="">Sin pizarra disponible</option>';
-        }
-
-        select.addEventListener('change', function () {
-            var g = granos.filter(function (x) { return x.producto === select.value; })[0];
-            if (g) {
-                $('gr-precio').value = g.precio;
-                calcGrano();
-            }
-        });
-
-        var ccl = (api.getDolares().filter(function (d) { return d.casa === 'contadoconliqui'; })[0] || api.getDolares().filter(function (d) { return d.casa === 'bolsa'; })[0] || {});
-        var blend = (official.venta && ccl.venta) ? (official.venta * 0.8 + ccl.venta * 0.2) : (official.venta || null);
-
-        function calcGrano() {
-            var tons = num('gr-toneladas');
-            var precio = num('gr-precio');
-            var dex = num('gr-dex');
-            var bruto = tons * precio;
-            var neto = bruto * (1 - dex / 100);
-            put('gr-result', Fmt.money(neto, 0));
-            var usd = blend ? neto / blend : null;
-            $('gr-note').innerHTML = 'Bruto ' + Fmt.money(bruto, 0) + ' · retenciones ' + Fmt.money(bruto - neto, 0) +
-                (usd ? ' · <b>US$ ' + Fmt.num(usd, 0) + '</b> al blend ' + Fmt.money(blend, 2) : '') +
-                '<br>El blend se calcula 80% oficial + 20% CCL con las cotizaciones de hoy.';
-        }
-
-        ['gr-toneladas', 'gr-precio', 'gr-dex'].forEach(function (id) {
-            $(id).addEventListener('input', calcGrano);
-        });
-        calcGrano();
 
         PF.reveal();
     });
